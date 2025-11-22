@@ -146,8 +146,8 @@
   // ============ SPLASH ============
   const splash = document.querySelector('.splash');
   const splashMoreBtn = document.querySelector('.text .splash-more-btn');
-
   const textElement = document.querySelector('.text');
+  const watermark = document.querySelector('.splash-watermark');
   
   if (splash && splashMoreBtn) {
     body.classList.add('splash-active');
@@ -158,11 +158,17 @@
       if (textElement) {
         textElement.classList.add('text-hidden');
       }
+      if (watermark) {
+        watermark.classList.add('watermark-hidden');
+      }
 
       setTimeout(() => {
         splash.style.display = 'none';
         if (textElement) {
           textElement.style.display = 'none';
+        }
+        if (watermark) {
+          watermark.style.display = 'none';
         }
         
         // Désactiver le scroll bloqué APRÈS la disparition du splash

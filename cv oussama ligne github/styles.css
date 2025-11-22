@@ -4454,3 +4454,36 @@ button[disabled] {
     animation-duration: 20s; /* Faster on mobile or adjust as needed */
   }
 }
+/* Splash Watermark */
+.splash-watermark {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(60px, 18vw, 300px);
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.04);
+  z-index: 2005; /* Behind .text (2007) */
+  pointer-events: none;
+  white-space: nowrap;
+  opacity: 0;
+  letter-spacing: 0.1em;
+  animation: splash-on 1s ease-in-out 1.8s forwards;
+  user-select: none;
+}
+
+/* Hide watermark on splash dismissal */
+.splash-watermark.watermark-hidden {
+  animation: splash-off 0.6s ease-in-out forwards;
+}
+
+/* Responsive Watermark */
+@media (max-width: 768px) {
+  .splash-watermark {
+    font-size: 15vw;
+    writing-mode: vertical-rl; /* Vertical text on mobile for style */
+    text-orientation: mixed;
+    letter-spacing: 0.3em;
+  }
+}
