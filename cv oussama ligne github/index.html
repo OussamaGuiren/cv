@@ -486,31 +486,32 @@
       </div>
     </div>
   </div>
-  <div id="projectModal"
-       class="project-modal"
-       aria-hidden="true"
-       role="dialog"
-       aria-modal="true"
-       aria-labelledby="projectModalTitle">
-    <div class="project-modal-inner" role="document">
-      <button class="modal-close panel-close" id="closeProjectModal" aria-label="Fermer">Retour</button>
-      <div class="modal-body">
-        <div class="modal-media">
-          <img id="modalImage" src="" alt="" />
-        </div>
-        <div class="modal-content">
-          <h3 id="projectModalTitle"></h3>
-          <p id="projectModalDescription"></p>
-          <div class="modal-tech">
-            <strong>Technologies : </strong>
-            <span id="projectModalTech"></span>
+  <!-- Project Popup (Style "about-popup") -->
+  <div class="about-popup" id="projectModal" aria-hidden="true" role="dialog" aria-labelledby="projectModalTitle" aria-modal="true">
+    <div class="about-popup-overlay"></div>
+    <div class="about-popup-content project-popup-content">
+      <button class="about-popup-close" id="closeProjectModal" aria-label="Fermer la popup">
+        <i class="fa-solid fa-times"></i>
+      </button>
+      <div class="about-popup-inner">
+        <div class="project-details-grid">
+          <div class="project-media-wrapper">
+            <img id="modalImage" src="" alt="" class="project-popup-image" />
           </div>
-          <div class="modal-actions">
-            <a id="projectModalLink"
-               class="card-link"
-               href="#"
-               target="_blank"
-               rel="noopener noreferrer">Voir le site →</a>
+          <div class="project-info-wrapper">
+            <h2 class="about-popup-title" id="projectModalTitle"></h2>
+            <div class="about-popup-text-content">
+              <p class="about-popup-text" id="projectModalDescription"></p>
+              <div class="project-tech-stack">
+                <strong>Technologies :</strong>
+                <span id="projectModalTech"></span>
+              </div>
+            </div>
+            <div class="project-popup-actions">
+              <a id="projectModalLink" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                Voir le site <i class="fa-solid fa-external-link-alt"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>

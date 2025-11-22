@@ -1376,3 +1376,109 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+// =========== MODAL PROJET (NOUVEAU STYLE) ===========
+(function() {
+  const projectModal = document.getElementById('projectModal');
+  const closeProjectModalBtn = document.getElementById('closeProjectModal');
+  const modalTitleEl = document.getElementById('projectModalTitle');
+  const modalDescEl = document.getElementById('projectModalDescription');
+  const modalTechEl = document.getElementById('projectModalTech');
+  const modalLinkEl = document.getElementById('projectModalLink');
+  const modalImageEl = document.getElementById('modalImage');
+  const body = document.body;
+
+  // Keep original parent for restoration
+  let projectModalOriginalParent = null;
+  let projectModalNextSibling = null;
+
+  function ensureProjectModalInBody() {
+    if (!projectModal) return;
+    if (projectModal.parentNode !== document.body) {
+      projectModalOriginalParent = projectModal.parentNode;
+      projectModalNextSibling = projectModal.nextSibling;
+      document.body.appendChild(projectModal);
+    }
+  }
+
+  function restoreProjectModalOriginalPosition() {
+    if (!projectModal || !projectModalOriginalParent) return;
+    if (projectModalNextSibling) {
+      projectModalOriginalParent.insertBefore(projectModal, projectModalNextSibling);
+    } else {
+      projectModalOriginalParent.appendChild(projectModal);
+    }
+    projectModalOriginalParent = null;
+    projectModalNextSibling = null;
+  }
+
+  function openProjectModalFromCard(card) {
+    if (!card) return;
+    const title = card.dataset.title || card.querySelector('h3')?.textContent || '';
+    const description = card.dataset.description || '';
+    const tech = card.dataset.tech || '';
+    const link = card.dataset.link || '#';
+    const img = card.querySelector('.card-image img')?.getAttribute('src') || '';
+
+    modalTitleEl.textContent = title;
+    modalDescEl.textContent = description;
+    modalTechEl.textContent = tech;
+    modalLinkEl.href = link;
+    
+    if (link === '#') {
+      modalLinkEl.classList.add('disabled');
+      modalLinkEl.removeAttribute('target');
+    } else {
+      modalLinkEl.classList.remove('disabled');
+      modalLinkEl.setAttribute('target', '_blank');
+    }
+
+    if (img) {
+      modalImageEl.src = img;
+      modalImageEl.alt = title;
+      modalImageEl.style.display = 'block';
+    } else {
+      modalImageEl.style.display = 'none';
+    }
+
+    ensureProjectModalInBody();
+    projectModal?.setAttribute('aria-hidden', 'false');
+    body.classList.add('modal-open');
+    body.style.overflow = 'hidden';
+    
+    setTimeout(() => closeProjectModalBtn?.focus(), 100);
+  }
+
+  function closeProjectModal() {
+    if (projectModal) {
+      projectModal.setAttribute('aria-hidden', 'true');
+      body.classList.remove('modal-open');
+      body.style.overflow = '';
+      
+      setTimeout(() => {
+        restoreProjectModalOriginalPosition();
+      }, 300);
+    }
+  }
+
+  document.querySelectorAll('.card-open').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const card = e.currentTarget.closest('.project-card');
+      openProjectModalFromCard(card);
+    });
+  });
+
+  closeProjectModalBtn?.addEventListener('click', closeProjectModal);
+
+  projectModal?.addEventListener('click', (e) => {
+    if (e.target === projectModal || e.target.classList.contains('about-popup-overlay')) {
+      closeProjectModal();
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && projectModal && projectModal.getAttribute('aria-hidden') === 'false') {
+      closeProjectModal();
+    }
+  });
+})();
