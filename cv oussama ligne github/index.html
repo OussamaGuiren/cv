@@ -304,46 +304,54 @@
             <h2>Travaillons ensemble</h2>
             <p class="slide-intro">
               Vous avez une mission freelance, un besoin ponctuel ou un poste à pourvoir
-              autour de .NET ou de la Power Platform ?
+              autour de .NET ou de la Power Platform ? Choisissez le canal qui vous convient.
             </p>
           </div>
 
-          <div class="contact-layout">
-            <div class="contact-info">
-              <p>Vous pouvez me joindre&nbsp;:</p>
-              <ul>
-                <li><strong>Email :</strong> en cliquant sur le bouton ci-dessous</li>
-                <li>
-                  <strong>Téléphone :</strong>
-                  <a href="#" id="phoneBtn" class="btn-secondary">Afficher le numéro</a>
-                </li>
-                <li>
-                  <strong>LinkedIn :</strong>
-                  <a href="https://www.linkedin.com/in/oussama-guiren"
-                     target="_blank"
-                     rel="noopener noreferrer">
-                    Mon profil LinkedIn
-                  </a>
-                </li>
-              </ul>
-              <noscript>
-                <p>Activez JavaScript pour afficher le numéro de téléphone.</p>
-              </noscript>
-              <p class="contact-note">
-                Réponse rapide, possibilité d’échange en visio ou par téléphone.
-              </p>
-            </div>
-
-            <div class="contact-buttons-container">
-              <p class="contact-intro-text">Discutons de votre projet !</p>
-              <div class="contact-actions">
-                <button type="button" class="btn-primary" id="btnContactMail">
-                  <i class="fa-solid fa-envelope"></i> Me contacter par mail
+          <div class="contact-container">
+            <div class="contact-grid">
+              <!-- Email Card -->
+              <div class="contact-card">
+                <div class="contact-icon-wrapper">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <h3>Par Email</h3>
+                <p>Décrivez votre projet via le formulaire dédié.</p>
+                <button type="button" class="contact-card-btn" id="btnContactMail">
+                  Me contacter
                 </button>
-                <a href="#" id="btnContactPhone" class="btn-secondary">
-                  <i class="fa-solid fa-phone"></i> Appeler
+              </div>
+
+              <!-- Phone Card -->
+              <div class="contact-card">
+                <div class="contact-icon-wrapper">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <h3>Par Téléphone</h3>
+                <p>Échange direct pour vos besoins urgents.</p>
+                <a href="#" class="contact-card-btn secondary" id="phoneBtn">
+                  Afficher le numéro
                 </a>
               </div>
+
+              <!-- LinkedIn Card -->
+              <div class="contact-card">
+                <div class="contact-icon-wrapper">
+                  <i class="fa-brands fa-linkedin-in"></i>
+                </div>
+                <h3>Sur LinkedIn</h3>
+                <p>Consultez mon parcours complet.</p>
+                <a href="https://www.linkedin.com/in/oussama-guiren" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="contact-card-btn secondary">
+                  Voir mon profil
+                </a>
+              </div>
+            </div>
+            
+            <div class="contact-footer">
+              <p>Réponse généralement sous 24h. Disponible pour des missions Freelance, CDD ou CDI.</p>
             </div>
           </div>
         </div>
