@@ -2462,43 +2462,66 @@ body.hero-title-typed .blockquote.hero-quote-container h4 {
   flex: 1 1 320px;
 }
 
-/* Form styles */
+/* Form styles - Theme Clair pour Popup */
 #contactForm {
-  padding: 20px;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  background: rgba(25, 25, 25, 0.9);
-  border-radius: 12px;
-  border: 1px solid rgba(148, 163, 184, 0.4);
+  gap: 20px;
+  background: transparent;
+  border-radius: 0;
+  border: none;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 .form-group label {
-  font-size: 13px;
+  font-size: 0.95rem;
   font-weight: 700;
-  color: #a7c5f5;
+  color: #002A4A; /* Dark blue text */
+  margin-left: 4px;
 }
 .form-group input,
 .form-group select,
 .form-group textarea {
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 6px;
-  padding: 12px;
-  font-size: 15px;
-  color: #fff;
+  background: #f8faff; /* Light bg */
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 1rem;
+  color: #1e293b; /* Dark text */
   font-family: inherit;
+  transition: all 0.2s ease;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  background: #ffffff;
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 120, 212, 0.15);
+  transform: translateY(-1px);
 }
 .form-group textarea {
-  min-height: 100px;
+  min-height: 120px;
   resize: vertical;
 }
+/* Dropdown arrow styling */
+.form-group select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230078D4'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 16px;
+}
 #missionType {
-  background-color: var(--splash-bg);
+  background-color: #f8faff;
 }
 
 /* Upload fichier */
@@ -2506,74 +2529,102 @@ body.hero-title-typed .blockquote.hero-quote-container h4 {
   position: relative;
 }
 #fileName {
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px dashed rgba(255, 255, 255, 0.4);
-  border-radius: 6px;
-  padding: 12px;
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
+  background: #f8faff;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 24px;
+  font-size: 0.95rem;
+  color: #64748b;
   text-align: center;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 #jobDescriptionFile {
   display: none;
 }
-.file-upload-wrapper.drag-over #fileName {
-  border-color: var(--accent-2);
-  background: rgba(43, 136, 216, 0.12);
-  color: #e6f0ff;
+.file-upload-wrapper.drag-over #fileName,
+#fileName:hover {
+  border-color: var(--accent);
+  background: rgba(0, 120, 212, 0.05);
+  color: var(--accent);
 }
 #fileName:focus-visible {
-  outline: 2px solid var(--accent-2);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 #fileName .file-chip {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  background: #e0f2fe;
+  padding: 6px 16px;
+  border-radius: 50px;
+  color: #004E8C;
+  font-weight: 600;
 }
 #fileName .file-chip .file-meta {
-  opacity: .85;
-  font-size: 13px;
+  opacity: 0.9;
+  font-size: 0.9rem;
 }
 #fileName .file-chip .remove-file {
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #fff;
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 14px;
-  padding: 4px 8px;
-  font-size: 12px;
+  border: none;
+  color: #004E8C;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
   cursor: pointer;
+  margin-left: 4px;
+  transition: background 0.2s;
 }
 #fileName .file-chip .remove-file:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: #ffffff;
 }
 
 /* Submit */
 #submitBtn {
-  margin-top: 8px;
-  padding: 14px;
-  background: var(--accent);
+  margin-top: 12px;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
   border: none;
-  border-radius: 6px;
+  border-radius: 50px;
   color: #fff;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 120, 212, 0.3);
 }
 #submitBtn:hover {
-  background: var(--accent-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 120, 212, 0.4);
 }
+#submitBtn:disabled {
+  background: #94a3b8;
+  transform: none;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
 .hint {
-  color: #cbd5e1;
-  font-size: .85rem;
-  margin-top: 4px;
+  color: #64748b;
+  font-size: 0.85rem;
+  margin-top: 6px;
+  margin-left: 4px;
 }
 .error {
-  color: #ff8a80;
-  font-size: .9rem;
-  margin-top: 4px;
+  color: #ef4444;
+  font-size: 0.85rem;
+  margin-top: 6px;
+  margin-left: 4px;
   min-height: 1.2em;
+  font-weight: 600;
 }
 .form-group.touched input:invalid,
 .form-group.touched select:invalid,
@@ -2581,8 +2632,8 @@ body.hero-title-typed .blockquote.hero-quote-container h4 {
 form.was-validated .form-group input:invalid,
 form.was-validated .form-group select:invalid,
 form.was-validated .form-group textarea:invalid {
-  border-color: #ff8a80;
-  background: rgba(255, 138, 128, 0.08);
+  border-color: #ef4444;
+  background: #fef2f2;
 }
 .form-group.touched input:valid,
 .form-group.touched select:valid,
@@ -2590,7 +2641,7 @@ form.was-validated .form-group textarea:invalid {
 form.was-validated .form-group input:valid,
 form.was-validated .form-group select:valid,
 form.was-validated .form-group textarea:valid {
-  border-color: var(--splash-lines);
+  border-color: #22c55e;
 }
 button[disabled] {
   opacity: .6;
