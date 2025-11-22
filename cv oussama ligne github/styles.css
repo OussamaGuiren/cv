@@ -4275,3 +4275,97 @@ button[disabled] {
   color: #ffffff !important; /* Pure white for tech list */
   font-weight: 500 !important;
 }
+/* Power Platform Modern Styling */
+#tab-power {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+#tab-power .slide-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 40px;
+}
+
+#tab-power .section-header {
+  text-align: center;
+  margin-bottom: 20px;
+  max-width: 800px;
+}
+
+#tab-power .two-columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  width: 100%;
+}
+
+/* Power Platform Cards (Replacing list) */
+.check-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.check-list li {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 20px 24px;
+  border-radius: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backdrop-filter: blur(5px);
+  color: #e0e0e0;
+  position: relative;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.check-list li::before {
+  content: '\f00c'; /* FontAwesome check */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  color: var(--accent);
+  font-size: 1.1rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+  position: static; /* Reset absolute positioning from old style */
+}
+
+.check-list li:hover {
+  transform: translateY(-5px) scale(1.02);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(0, 120, 212, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+}
+
+/* Mobile adjustments for Power Platform */
+@media (max-width: 768px) {
+  #tab-power .two-columns {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  #tab-power .slide-inner {
+    padding: 0 15px;
+  }
+  
+  .check-list li {
+    padding: 16px;
+    font-size: 0.95rem;
+  }
+}
