@@ -1645,7 +1645,9 @@ body.hero-title-typed .blockquote.hero-quote-container h4 {
 }
 
 .glitch-stack:hover .glitch-clone {
-  opacity: 0; /* Hide glitch layers on hover */
+  opacity: 0;
+  animation: none; /* Force stop animation immediately */
+  display: none; /* Ensure removal from flow/paint */
 }
 
 /* Default: Glitch Active */
