@@ -117,11 +117,19 @@
           <div class="about-content-wrapper">
             <!-- Image container avec bouton en mobile -->
             <div class="about-image-container">
-              <div class="glitch-stack">
-                <img src="./assets/moiNoirEtBlanc.png" alt="Oussama Guiren" class="glitch-img">
-                <img src="./assets/moiNoirEtBlanc.png" alt="" class="glitch-img glitch-clone" aria-hidden="true">
-                <img src="./assets/moiNoirEtBlanc.png" alt="" class="glitch-img glitch-clone" aria-hidden="true">
-                <img src="./assets/moiNoirEtBlanc.png" alt="" class="glitch-img glitch-clone" aria-hidden="true">
+              <div class="mirror-container">
+                <div class="mirror-items">
+                  <div class="mirror-item mirror-item--forest">
+                    <div class="mirror-screen mirror-screen--full" style="background-image: url('./assets/moiNoirEtBlanc.png')"></div>
+                    <div class="mirror-screen mirror-screen--clip"></div>
+                  </div>
+
+                  <div class="mirror-item mirror-item--girl">
+                    <div class="mirror-screen mirror-screen--full" style="background-image: url('./assets/moiNoirEtBlanc.png')"></div>
+                    <div class="mirror-screen mirror-screen--clip"></div>
+                  </div>
+                </div>
+                <img class="mirror-frame" src="https://images2.imgbox.com/f5/2e/gzBTKoLY_o.png" alt="Mirror Frame"/>
               </div>
               <h2 class="credit">Oussama Guiren<br><em>Développeur .NET &amp; Power Platform</em></h2>
               <button class="about-learn-more-btn" id="aboutLearnMoreBtn">En savoir plus</button>
