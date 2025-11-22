@@ -1,32 +1,186 @@
 // =========== IIFE n°1 : Splash, toasts, téléphone, upload, formulaire, modal projet ===========
 (function () {
   const body = document.body;
+  // Add CSS class when fonts are loaded to reduce layout shift (avoid large-to-small flash for h1)
+  try {
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => document.documentElement.classList.add('fonts-ready'));
+    } else {
+      document.documentElement.classList.add('fonts-ready');
+    }
+  } catch (e) { document.documentElement.classList.add('fonts-ready'); }
 
-  // Ensure we add a class when the hero becomes visible so CSS animations trigger
+  // ============ TYPEWRITER EFFECT ============
+  function typewriter(element, text, speed = 50, callback) {
+    if (!element || !text) return Promise.resolve();
+    
+    element.innerHTML = '';
+    element.classList.add('typing');
+    let index = 0;
+    
+    return new Promise((resolve) => {
+      function type() {
+        if (index < text.length) {
+          const char = text[index];
+          
+          // Gérer les retours à la ligne pour les citations
+          if (char === '\n' || (char === ' ' && element.textContent.length > 0 && element.textContent.length % 70 === 0)) {
+            // Insertion d'un <br> pour les retours à la ligne dans les citations
+            if (element.closest('.hero-quote')) {
+              element.innerHTML += '<br>';
+            } else {
+              element.textContent += ' ';
+            }
+          } else {
+            element.textContent += char;
+          }
+          
+          index++;
+          
+          // Variable speed pour un effet plus réaliste :
+          // - Plus rapide pour les espaces
+          // - Plus lent pour la ponctuation (comme si on réfléchissait)
+          // - Légèrement variable pour simuler la frappe humaine
+          let delay = speed;
+          if (char === ' ') {
+            delay = speed * 0.3;
+          } else if (char.match(/[.,;:!?]/)) {
+            delay = speed * 2;
+          } else if (char.match(/[A-Z]/)) {
+            delay = speed * 1.1; // Légèrement plus lent pour les majuscules
+          }
+          
+          // Ajouter une petite variation aléatoire pour simuler la frappe humaine (±20%)
+          const variation = 1 + (Math.random() - 0.5) * 0.4;
+          delay = delay * variation;
+          
+          setTimeout(type, Math.max(10, delay));
+        } else {
+          element.classList.remove('typing');
+          element.classList.add('typed');
+          if (callback) callback();
+          resolve();
+        }
+      }
+      type();
+    });
+  }
+
+  function startTypewriterSequence() {
+    // Désactiver le typewriter en mobile
+    if (window.innerWidth <= 767) {
+      const kicker = document.querySelector('.hero-kicker[data-typewriter]');
+      const title = document.querySelector('.et-hero-tabs h1[data-typewriter]');
+      
+      // Ne pas remplir le texte via JavaScript en mobile car il est affiché via ::before
+      // Juste ajouter les classes nécessaires
+      if (kicker) {
+        // Assurer l'affichage en mobile : n'injecte le texte qu'après la police chargée
+        const setKicker = () => {
+          const text = kicker.dataset.typewriter;
+          if (text && !kicker.textContent.trim()) kicker.textContent = text;
+          kicker.classList.add('typed');
+          kicker.classList.add('has-content');
+        };
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(setKicker).catch(() => setKicker());
+        } else setKicker();
+      }
+      
+      if (title) {
+        // For mobile, do not inject the h1 DOM text: rely on ::before fallback
+        // Only add the classes to trigger visual state and avoid duplication
+        const setTitleClasses = () => {
+          title.classList.add('typed');
+          document.body.classList.add('hero-title-typed');
+        };
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(setTitleClasses).catch(() => setTitleClasses());
+        } else setTitleClasses();
+      }
+      
+      document.body.classList.add('hero-typed');
+      return;
+    }
+    
+    const kicker = document.querySelector('.hero-kicker[data-typewriter]');
+    const title = document.querySelector('.et-hero-tabs h1[data-typewriter]');
+    const subtitle = document.querySelector('.hero-subtitle[data-typewriter]');
+    
+    if (!kicker && !title && !subtitle) return;
+    
+    const sequence = async () => {
+      if (kicker) {
+        await typewriter(kicker, kicker.dataset.typewriter, 40);
+        await new Promise(resolve => setTimeout(resolve, 300));
+      }
+      
+      if (title) {
+        await typewriter(title, title.dataset.typewriter, 60);
+        // Déclencher l'animation de la citation une fois le h1 terminé
+        document.body.classList.add('hero-title-typed');
+        await new Promise(resolve => setTimeout(resolve, 400));
+      }
+      
+      if (subtitle) {
+        await typewriter(subtitle, subtitle.dataset.typewriter, 35);
+      }
+      
+      // Mark as fully typed after a short delay
+      setTimeout(() => {
+        document.body.classList.add('hero-typed');
+      }, 300);
+    };
+    
+    sequence();
+  }
+
+  // Ensure we add a class when the hero becomes visible so typewriter starts
   window.addEventListener('hero-visible', () => {
-    try { document.body.classList.add('hero-visible'); } catch (e) { /* ignore */ }
+    try { 
+      document.body.classList.add('hero-visible');
+      // Start typewriter effect after a short delay
+      setTimeout(startTypewriterSequence, 200);
+    } catch (e) { /* ignore */ }
   });
   // ============ SPLASH ============
   const splash = document.querySelector('.splash');
-  const splashMoreBtn = document.querySelector('.splash-more-btn');
+  const splashMoreBtn = document.querySelector('.text .splash-more-btn');
 
+  const textElement = document.querySelector('.text');
+  
   if (splash && splashMoreBtn) {
     body.classList.add('splash-active');
 
     splashMoreBtn.addEventListener('click', () => {
+      // Ajouter les classes pour l'animation de disparition
       splash.classList.add('splash-hidden');
-      body.classList.remove('splash-active');
+      if (textElement) {
+        textElement.classList.add('text-hidden');
+      }
 
       setTimeout(() => {
         splash.style.display = 'none';
+        if (textElement) {
+          textElement.style.display = 'none';
+        }
+        
+        // Désactiver le scroll bloqué APRÈS la disparition du splash
+        body.classList.remove('splash-active');
+        body.style.overflow = '';
+        
+        // Déclencher l'événement pour le typewriter
         window.dispatchEvent(new Event('hero-visible'));
-        // After the hero visible event, mark typed after the typewriter animation finishes
-        setTimeout(() => document.body.classList.add('hero-typed'), 2600);
+        
+        // Rafraîchir ScrollTrigger si nécessaire
+        if (typeof ScrollTrigger !== 'undefined') {
+          ScrollTrigger.refresh();
+        }
       }, 700);
     });
   } else {
     window.dispatchEvent(new Event('hero-visible'));
-    setTimeout(() => document.body.classList.add('hero-typed'), 2600);
+    // Typewriter will handle marking as typed when complete
   }
 
   // ============ TOASTS ============
@@ -582,9 +736,17 @@
     if (!section) return;
 
     const tabContainer = document.querySelector('.et-hero-tabs-container');
-    const tabH = tabContainer ? (tabContainer.offsetHeight || 64) : 64;
-    const top = section.offsetTop - tabH - 8;
-    window.scrollTo({ top, behavior: 'smooth' });
+    if (!tabContainer) return;
+    const tabH = tabContainer.offsetHeight || 72;
+    const isSticky = tabContainer.classList.contains('et-hero-tabs-container--top');
+    
+    // Calcul correct de la position
+    const sectionRect = section.getBoundingClientRect();
+    const absoluteTop = sectionRect.top + window.scrollY;
+    const offset = isSticky ? tabH + 12 : tabH + 12;
+    const top = absoluteTop - offset;
+    
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
   }
 
   heroContactBtn?.addEventListener('click', (e) => {
@@ -606,7 +768,20 @@
   const tabs = Array.from(tabContainer.querySelectorAll('.et-hero-tab'));
   const slider = tabContainer.querySelector('.et-hero-tab-slider');
   const hero = document.querySelector('.et-hero-tabs');
-  const tabContainerHeight = tabContainer.offsetHeight || 64;
+  const tabContainerHeight = tabContainer.offsetHeight || 72;
+  
+  // Gestionnaire pour le logo OG - scroll vers hero (tout en haut)
+  const heroLogo = document.querySelector('.et-hero-logo');
+  if (heroLogo) {
+    heroLogo.style.cursor = 'pointer';
+    heroLogo.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ 
+        top: 0, 
+        behavior: 'smooth' 
+      });
+    });
+  }
 
   function onTabClick(e) {
     e.preventDefault();
@@ -615,8 +790,23 @@
     const target = document.querySelector(href);
     if (!target) return;
 
-    const top = target.offsetTop - tabContainerHeight - 8;
-    window.scrollTo({ top, behavior: 'smooth' });
+    // Calcul correct de la position en tenant compte de la navbar sticky
+    const targetRect = target.getBoundingClientRect();
+    const absoluteTop = targetRect.top + window.scrollY;
+    const isSticky = tabContainer.classList.contains('et-hero-tabs-container--top');
+    const offset = isSticky ? tabContainerHeight + 12 : tabContainerHeight + 12;
+    const top = Math.max(0, absoluteTop - offset);
+    
+    // Utiliser Locomotive Scroll si disponible, sinon window.scrollTo
+    if (window.locomotiveScroller) {
+      window.locomotiveScroller.scrollTo(target, {
+        offset: -offset,
+        duration: 1200,
+        easing: [0.25, 0.0, 0.35, 1.0]
+      });
+    } else {
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }
   }
 
   tabs.forEach(tab => tab.addEventListener('click', onTabClick));
@@ -640,6 +830,8 @@
 
   function findCurrentTab() {
     const scrollY = window.scrollY;
+    const isSticky = tabContainer.classList.contains('et-hero-tabs-container--top');
+    const offset = isSticky ? tabContainerHeight + 12 : tabContainerHeight + 12;
     let newCurrentId = null;
     let newCurrentTab = null;
 
@@ -648,13 +840,39 @@
       if (!href || !href.startsWith('#')) return;
       const section = document.querySelector(href);
       if (!section) return;
-      const top = section.offsetTop - tabContainerHeight - 20;
+      
+      // Calcul correct de la position - support pour les conteneurs
+      const sectionRect = section.getBoundingClientRect();
+      const absoluteTop = sectionRect.top + scrollY;
+      const top = absoluteTop - offset;
       const bottom = top + section.offsetHeight;
+      
+      // Vérifier si on est dans la section (y compris les conteneurs comme .container-quisuisje)
       if (scrollY >= top && scrollY < bottom) {
         newCurrentId = href;
         newCurrentTab = tab;
       }
     });
+
+    // Gestion spéciale pour #tab-quisuisje (conteneur avec sous-sections)
+    // Si aucune section normale n'est active, vérifier le conteneur #tab-quisuisje
+    if (!newCurrentId) {
+      const quisuisjeContainer = document.querySelector('#tab-quisuisje');
+      if (quisuisjeContainer) {
+        const containerRect = quisuisjeContainer.getBoundingClientRect();
+        const containerAbsoluteTop = containerRect.top + scrollY;
+        const containerTop = containerAbsoluteTop - offset;
+        const containerBottom = containerTop + quisuisjeContainer.offsetHeight;
+        
+        if (scrollY >= containerTop && scrollY < containerBottom) {
+          const quisuisjeTab = tabs.find(tab => tab.getAttribute('href') === '#tab-quisuisje');
+          if (quisuisjeTab) {
+            newCurrentId = '#tab-quisuisje';
+            newCurrentTab = quisuisjeTab;
+          }
+        }
+      }
+    }
 
     if (newCurrentId !== currentId) {
       currentId = newCurrentId;
@@ -666,7 +884,7 @@
   function checkTabContainerPosition() {
     if (!hero) return;
     const heroOffsetBottom = hero.offsetTop + hero.offsetHeight - tabContainerHeight;
-    if (window.scrollY > heroOffsetBottom) {
+    if (scrollY > heroOffsetBottom) {
       tabContainer.classList.add('et-hero-tabs-container--top');
     } else {
       tabContainer.classList.remove('et-hero-tabs-container--top');
@@ -693,4 +911,346 @@
   // Init
   checkTabContainerPosition();
   findCurrentTab();
+})();
+
+// =========== IIFE n°3 : MENU HAMBURGER MOBILE ===========
+(function () {
+  const menuToggle = document.querySelector('.mobile-menu-toggle');
+  const mobileMenu = document.querySelector('.mobile-menu');
+  const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+  const mobileMenuClose = document.querySelector('.mobile-menu-close');
+  const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+  const body = document.body;
+
+  if (!menuToggle || !mobileMenu || !mobileMenuOverlay) return;
+
+  function openMenu() {
+    menuToggle.setAttribute('aria-expanded', 'true');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+    mobileMenuOverlay.setAttribute('aria-hidden', 'false');
+    body.classList.add('menu-open');
+  }
+
+  function closeMenu() {
+    menuToggle.setAttribute('aria-expanded', 'false');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    mobileMenuOverlay.setAttribute('aria-hidden', 'true');
+    body.classList.remove('menu-open');
+  }
+
+  function scrollToSection(href) {
+    const target = document.querySelector(href);
+    if (!target) return;
+
+    const targetRect = target.getBoundingClientRect();
+    const absoluteTop = targetRect.top + window.scrollY;
+    const mobileNavbar = document.querySelector('.mobile-navbar');
+    const navbarHeight = mobileNavbar ? mobileNavbar.offsetHeight : 60;
+    const offset = navbarHeight; // Arriver exactement en haut de la section (sous la navbar)
+    const top = Math.max(0, absoluteTop - offset);
+
+    // Utiliser Locomotive Scroll si disponible, sinon window.scrollTo
+    if (window.locomotiveScroller) {
+      window.locomotiveScroller.scrollTo(target, {
+        offset: -offset,
+        duration: 1200,
+        easing: [0.25, 0.0, 0.35, 1.0]
+      });
+    } else {
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+    closeMenu();
+  }
+
+  menuToggle.addEventListener('click', () => {
+    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+    if (isExpanded) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  mobileMenuClose?.addEventListener('click', closeMenu);
+
+  mobileMenuOverlay.addEventListener('click', closeMenu);
+
+  mobileMenuLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        scrollToSection(href);
+      }
+    });
+  });
+
+  // Fermer le menu avec Escape
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenu.getAttribute('aria-hidden') === 'false') {
+      closeMenu();
+    }
+  });
+
+  // Fermer le menu si on resize vers desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 767) {
+      closeMenu();
+    }
+  });
+})();
+
+// Le code de scroll horizontal a été supprimé car la section des cartes n'existe plus
+
+// =========== POPUP "EN SAVOIR PLUS" - QUI SUIS-JE ===========
+(function () {
+  const aboutPopup = document.getElementById('aboutPopup');
+  const aboutPopupBtn = document.getElementById('aboutLearnMoreBtn');
+  const aboutPopupClose = document.getElementById('aboutPopupClose');
+  const body = document.body;
+
+  // Keep original parent so we can restore after close (to avoid stacking context issues)
+  let aboutPopupOriginalParent = null;
+  let aboutPopupNextSibling = null;
+  function ensureAboutPopupInBody() {
+    if (!aboutPopup) return;
+    if (aboutPopup.parentNode !== document.body) {
+      aboutPopupOriginalParent = aboutPopup.parentNode;
+      aboutPopupNextSibling = aboutPopup.nextSibling;
+      document.body.appendChild(aboutPopup);
+    }
+  }
+
+  function restoreAboutPopupOriginalPosition() {
+    if (!aboutPopup || !aboutPopupOriginalParent) return;
+    if (aboutPopupNextSibling) {
+      aboutPopupOriginalParent.insertBefore(aboutPopup, aboutPopupNextSibling);
+    } else {
+      aboutPopupOriginalParent.appendChild(aboutPopup);
+    }
+    aboutPopupOriginalParent = null;
+    aboutPopupNextSibling = null;
+  }
+
+  function openAboutPopup() {
+    if (aboutPopup) {
+      ensureAboutPopupInBody();
+      aboutPopup.setAttribute('aria-hidden', 'false');
+      body.style.overflow = 'hidden';
+      setTimeout(() => {
+        aboutPopupClose?.focus();
+      }, 100);
+    }
+  }
+
+  function closeAboutPopup() {
+    if (aboutPopup) {
+      aboutPopup.setAttribute('aria-hidden', 'true');
+      body.style.overflow = '';
+      // restore original DOM position after hiding, to keep the DOM structure predictable
+      setTimeout(() => {
+        restoreAboutPopupOriginalPosition();
+        aboutPopupBtn?.focus();
+      }, 300);
+    }
+  }
+
+  aboutPopupBtn?.addEventListener('click', openAboutPopup);
+  aboutPopupClose?.addEventListener('click', closeAboutPopup);
+
+  aboutPopup?.addEventListener('click', (e) => {
+    if (e.target === aboutPopup || e.target.classList.contains('about-popup-overlay')) {
+      closeAboutPopup();
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && aboutPopup && aboutPopup.getAttribute('aria-hidden') === 'false') {
+      closeAboutPopup();
+    }
+  });
+})();
+
+// =========== SECTION EXPÉRIENCE - TIMELINE SLIDER ===========
+(function () {
+  const timelineData = [
+    {
+      year: 2020,
+      company: "Début de carrière",
+      description: "Mes premières expériences dans le développement, découverte des technologies web et des bases du développement logiciel.",
+      icon: "fa-code",
+      era: "era-early-web"
+    },
+    {
+      year: 2021,
+      company: "Développeur .NET",
+      description: "Spécialisation dans le développement .NET, création d'applications backend robustes et scalables.",
+      icon: "fa-server",
+      era: "era-dot-com"
+    },
+    {
+      year: 2022,
+      company: "Développeur Fullstack",
+      description: "Évolution vers le développement fullstack, maîtrise du frontend avec Vue.js et approfondissement des compétences backend.",
+      icon: "fa-laptop-code",
+      era: "era-social-media"
+    },
+    {
+      year: 2023,
+      company: "Développeur .NET & Power Platform",
+      description: "Expertise dans le développement .NET et la Power Platform, création de solutions d'automatisation et de modernisation pour les entreprises.",
+      icon: "fa-rocket",
+      era: "era-mobile"
+    }
+  ];
+
+  const slider = document.getElementById("timelineSlider");
+  const eventIcon = document.getElementById("eventIcon");
+  const eventYear = document.getElementById("eventYear");
+  const eventCompany = document.getElementById("eventCompany");
+  const eventDescription = document.getElementById("eventDescription");
+  const progressFill = document.getElementById("progressFill");
+  const timelineContainer = document.getElementById("timelineContainer");
+  const content = document.getElementById("timelineContent");
+  const sliderTrack = document.getElementById("sliderTrack");
+  const yearLabelsContainer = document.getElementById("yearLabels");
+
+  if (!slider || !eventIcon || !eventYear || !eventCompany || !eventDescription) {
+    return;
+  }
+
+  // Mettre à jour le max du slider
+  slider.max = timelineData.length - 1;
+
+  let currentIndex = 0;
+  let autoPlayInterval;
+  let ticks = [];
+  let yearLabels = [];
+
+  // Create tick marks along slider track
+  function createTicks() {
+    timelineData.forEach((event, index) => {
+      const tick = document.createElement("div");
+      tick.classList.add("tick");
+      const percent = (index / (timelineData.length - 1)) * 100;
+      tick.style.left = `calc(${percent}%)`;
+      sliderTrack.appendChild(tick);
+      ticks.push(tick);
+    });
+  }
+
+  // Create year labels under slider with precise positioning
+  function createYearLabels() {
+    yearLabelsContainer.style.position = "relative";
+
+    timelineData.forEach((event, index) => {
+      const span = document.createElement("span");
+      span.classList.add("year-label");
+      span.textContent = event.year;
+
+      // Calculate exact position to align with ticks and slider positions
+      const percent = (index / (timelineData.length - 1)) * 100;
+      span.style.position = "absolute";
+      span.style.left = `${percent}%`;
+      span.style.transform = "translateX(-50%)";
+
+      yearLabelsContainer.appendChild(span);
+      yearLabels.push(span);
+    });
+  }
+
+  function updateTimeline(index) {
+    if (index === currentIndex) return;
+
+    // Add fade out animation to current content
+    content.classList.remove("fade-in");
+    content.classList.add("fade-transition");
+
+    eventIcon.classList.add("fade-out");
+    eventYear.classList.add("fade-out");
+    eventCompany.classList.add("fade-out");
+    eventDescription.classList.add("fade-out");
+
+    ticks.forEach((tick, i) => {
+      tick.classList.toggle("active", i === index);
+    });
+
+    yearLabels.forEach((label, i) => {
+      label.classList.toggle("active", i === index);
+    });
+
+    // Wait for fade-out animation to finish before updating content
+    content.addEventListener("animationend", function onFadeOutEnd() {
+      content.removeEventListener("animationend", onFadeOutEnd);
+
+      const event = timelineData[index];
+
+      // Update content
+      eventIcon.innerHTML = `<i class="fa-solid ${event.icon}"></i>`;
+      eventYear.textContent = event.year;
+      eventCompany.textContent = event.company;
+      eventDescription.textContent = event.description;
+
+      timelineContainer.className = `timeline-container ${event.era}`;
+
+      const progress = (index / (timelineData.length - 1)) * 100;
+      progressFill.style.width = `${progress}%`;
+
+      // Reset and animate in
+      content.classList.remove("fade-transition");
+      eventIcon.classList.remove("fade-out");
+      eventYear.classList.remove("fade-out");
+      eventCompany.classList.remove("fade-out");
+      eventDescription.classList.remove("fade-out");
+
+      content.classList.add("fade-in");
+
+      currentIndex = index;
+    }, { once: true });
+  }
+
+  slider.addEventListener("input", function () {
+    const index = parseInt(this.value);
+    updateTimeline(index);
+  });
+
+  // Auto-play functionality
+  function startAutoPlay() {
+    autoPlayInterval = setInterval(() => {
+      let nextIndex = currentIndex + 1;
+      if (nextIndex >= timelineData.length) {
+        nextIndex = 0;
+      }
+      slider.value = nextIndex;
+      updateTimeline(nextIndex);
+    }, 4000);
+  }
+
+  function stopAutoPlay() {
+    clearInterval(autoPlayInterval);
+  }
+
+  // Initialize
+  createTicks();
+  createYearLabels();
+  updateTimeline(0);
+
+  // Start auto-play after initial load
+  setTimeout(startAutoPlay, 2000);
+
+  // Stop auto-play on user interaction
+  slider.addEventListener("mousedown", stopAutoPlay);
+  slider.addEventListener("touchstart", stopAutoPlay);
+
+  // Optional: restart auto-play after user stops interacting
+  let userInteractionTimeout;
+  slider.addEventListener("mouseup", () => {
+    clearTimeout(userInteractionTimeout);
+    userInteractionTimeout = setTimeout(startAutoPlay, 5000);
+  });
+
+  slider.addEventListener("touchend", () => {
+    clearTimeout(userInteractionTimeout);
+    userInteractionTimeout = setTimeout(startAutoPlay, 5000);
+  });
 })();

@@ -3,11 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Oussama Guiren - Développeur .NET & Power Platform</title>
+  <title>Oussama Guiren - Développeur .NET &amp; Power Platform</title>
   <meta name="description" content="Portfolio de Oussama Guiren, développeur .NET et Power Platform" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Barlow+Condensed:wght@400&display=swap" rel="stylesheet" />
+  <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="splash-active">
@@ -28,37 +33,67 @@
         <rect width="100%" height="100%"></rect>
       </svg>
     </div>
+  </div>
 
-    <div class="splash-text">
-      <p>Dev .NET</p>
-      <p>Power Platform</p>
-      <p>Automatisation</p>
-      <p>Autres</p>
-      <button type="button" class="splash-more-btn">Entrer</button>
-    </div>
+  <div class="text">
+    <p>Dev .NET</p>
+    <p>Power Platform</p>
+    <p>Automatisation</p>
+    <p>Autres</p>
+    <button type="button" class="splash-more-btn">Entrer</button>
   </div>
 
   <div class="stage">
     <!-- HERO + NAV TABS -->
+    <!-- Navbar mobile fixe en haut -->
+    <nav class="mobile-navbar">
+      <div class="mobile-navbar-logo">OG</div>
+      <button class="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </nav>
+    
+    <nav class="mobile-menu" aria-hidden="true">
+      <div class="mobile-menu-header">
+        <div class="mobile-menu-logo">OG</div>
+        <button class="mobile-menu-close" aria-label="Fermer le menu">×</button>
+      </div>
+      <div class="mobile-menu-links">
+        <a class="mobile-menu-link" href="#tab-quisuisje">Qui suis-je ?</a>
+        <a class="mobile-menu-link" href="#tab-experience">Expérience</a>
+        <a class="mobile-menu-link" href="#tab-projects">Projets web</a>
+        <a class="mobile-menu-link" href="#tab-power">Power Platform</a>
+        <a class="mobile-menu-link" href="#tab-contact">Contact mail</a>
+      </div>
+    </nav>
+    <div class="mobile-menu-overlay" aria-hidden="true"></div>
+
     <section class="et-hero-tabs" id="hero">
+      
+      
       <div class="hero-intro">
-        <div class="status-badge">
-          🚧 Site en construction
+        <p class="hero-kicker" data-typewriter="Développeur .NET &amp; Power Platform"><!-- Le texte sera ajouté par JavaScript --></p>
+        <h1 data-typewriter="Oussama Guiren"><!-- Le texte sera ajouté par JavaScript --></h1>
+        <div class="blockquote-wrapper">
+          <div class="blockquote hero-quote-container">
+            <h1>
+              Je conçois des solutions<span class="text-white"> web, Power Platform</span> et d'<span class="text-white">automatisation</span> pour <span class="text-white">simplifier</span> vos processus métier et <span class="text-white">moderniser</span> vos <span class="text-white">applications</span> existantes.
+            </h1>
+            <h4>&mdash;MOI <i class="em em-sweat_smile" aria-role="presentation" aria-label="SMILING FACE WITH OPEN MOUTH AND COLD SWEAT"></i></h4>
+          </div>
         </div>
-
-        <p class="hero-kicker">Développeur .NET & Power Platform</p>
-        <h1>Oussama Guiren</h1>
-        <p class="hero-subtitle">
-          Je conçois des solutions web, Power Platform et d’automatisation pour simplifier
-          vos processus métier et moderniser vos applications existantes.
-        </p>
-
+        <div>
+          <button type="button" class="btnMeContacter">Me contacter</button>
+        </div>
       </div>
 
       <!-- Navbar sticky style "ET hero tabs" -->
       <div class="et-hero-tabs-container">
         <div class="et-hero-logo">OG</div>
         <a class="et-hero-tab" href="#tab-quisuisje">Qui suis-je ?</a>
+        <a class="et-hero-tab" href="#tab-experience">Expérience</a>
         <a class="et-hero-tab" href="#tab-projects">Projets web</a>
         <a class="et-hero-tab" href="#tab-power">Power Platform</a>
         <a class="et-hero-tab" href="#tab-contact">Contact mail</a>
@@ -69,62 +104,101 @@
     <!-- SECTIONS -->
     <main class="et-main">
       <!-- Qui suis-je -->
-      <section class="et-slide" id="tab-quisuisje">
-        <div class="slide-inner">
-          <div class="section-header">
-            <p class="eyebrow">Profil</p>
-            <h2>Qui suis-je ?</h2>
+      <div class="container-quisuisje" id="tab-quisuisje">
+        <!-- Section unique avec photo et texte -->
+        <section class="about-photo-section">
+          <div class="about-content-wrapper">
+            <!-- Image container avec bouton en mobile -->
+            <div class="about-image-container">
+              <img src="./assets/moiNoirEtBlanc.png" alt="Oussama Guiren">
+              <h2 class="credit">Oussama Guiren<br><em>Développeur .NET &amp; Power Platform</em></h2>
+              <button class="about-learn-more-btn" id="aboutLearnMoreBtn">En savoir plus</button>
+            </div>
+            <!-- Version desktop : texte à côté -->
+            <div class="about-text-container about-text-desktop">
+              <h2 class="about-title">Qui suis-je ?</h2>
+              <div class="about-text-content">
+                <p class="about-text">
+                  Je suis <strong>Oussama Guiren</strong>, développeur passionné spécialisé en <strong>.NET</strong> et <strong>Power Platform</strong>. 
+                  Mon parcours m'a permis de maîtriser l'art de concevoir des solutions web modernes et performantes, 
+                  ainsi que d'exploiter la puissance de la Power Platform pour automatiser et moderniser les processus métier.
+                </p>
+                <p class="about-text">
+                  Fort de mon expérience en développement <strong>fullstack</strong>, je crée des applications robustes 
+                  alliant la puissance du backend <strong>.NET</strong> avec des interfaces utilisateur modernes développées 
+                  en <strong>Vue.js</strong>, <strong>HTML</strong> et <strong>CSS</strong>. Mon expertise s'étend également 
+                  aux outils <strong>no-code/low-code</strong>, offrant ainsi des solutions rapides et flexibles 
+                  adaptées à tous les besoins professionnels.
+                </p>
+                <p class="about-text">
+                  Mon approche se base sur la compréhension approfondie des enjeux métier, permettant de transformer 
+                  des défis complexes en solutions élégantes et efficaces. Que ce soit pour automatiser des processus, 
+                  moderniser des applications existantes ou créer de nouvelles solutions, je m'engage à livrer des 
+                  résultats qui dépassent les attentes.
+                </p>
+              </div>
+            </div>
           </div>
-          <p class="slide-intro">
-            Je suis Oussama Guiren, développeur .NET / Power Platform, avec des expériences
-            dans le secteur bancaire sur des projets de TMA, de migration et d’évolutions
-            applicatives. Ces expériences m’ont appris à maintenir la continuité des
-            applications tout en les faisant évoluer de manière concrète et adaptée aux
-            besoins métier.
-          </p>
-          <p class="slide-intro">
-            J’ai de bonnes connaissances en développement fullstack, avec .NET pour le backend
-            et Vue.js, HTML, CSS pour le frontend, ce qui me permet de comprendre l’ensemble
-            du cycle de création d’une application. Je me suis également formé aux outils
-            no-code/low-code comme FlutterFlow et WordPress, qui offrent des alternatives
-            rapides et flexibles pour répondre à certains besoins métiers.
-          </p>
-          <p class="slide-intro">
-            Je m’investis pleinement dans ma spécialisation sur la Power Platform
-            (Power Apps, Power BI, Dataverse/SharePoint et Power Automate), avec la volonté
-            de devenir un référent capable de concevoir des solutions connectées, efficaces
-            et adaptées aux environnements professionnels.
-          </p>
-          <p class="slide-intro">
-            Je m’intéresse aussi de très près à l’automatisation avec n8n et à l’IA via
-            Copilot dans Microsoft 365, qui ouvrent de nouvelles perspectives pour améliorer
-            la productivité et faciliter la collaboration au quotidien.
-          </p>
-          <p class="slide-intro">
-            Mon objectif est d’aider les entreprises à faire évoluer leurs systèmes existants,
-            automatiser leurs processus et concevoir des solutions fiables, modernes et
-            évolutives au service de leur transformation digitale.
-          </p>
+        </section>
+      </div>
 
-          <div class="pill-groups">
-            <div>
-              <h3>Stack technique</h3>
-              <ul class="pill-list">
-                <li>.NET, C#, API REST</li>
-                <li>Vue.js, HTML, CSS</li>
-                <li>SQL Server, MySQL/MariaDB</li>
-                <li>Architecture hexagonale, clean code</li>
-              </ul>
+      <!-- Popup "En savoir plus" -->
+      <div class="about-popup" id="aboutPopup" aria-hidden="true" role="dialog" aria-labelledby="aboutPopupTitle" aria-modal="true">
+        <div class="about-popup-overlay"></div>
+        <div class="about-popup-content">
+          <button class="about-popup-close" id="aboutPopupClose" aria-label="Fermer la popup">
+            <i class="fa-solid fa-times"></i>
+          </button>
+          <div class="about-popup-inner">
+            <h2 class="about-popup-title" id="aboutPopupTitle">Qui suis-je ?</h2>
+            <div class="about-popup-text-content">
+              <p class="about-popup-text">
+                Je suis <strong>Oussama Guiren</strong>, développeur passionné spécialisé en <strong>.NET</strong> et <strong>Power Platform</strong>. 
+                Mon parcours m'a permis de maîtriser l'art de concevoir des solutions web modernes et performantes, 
+                ainsi que d'exploiter la puissance de la Power Platform pour automatiser et moderniser les processus métier.
+              </p>
+              <p class="about-popup-text">
+                Fort de mon expérience en développement <strong>fullstack</strong>, je crée des applications robustes 
+                alliant la puissance du backend <strong>.NET</strong> avec des interfaces utilisateur modernes développées 
+                en <strong>Vue.js</strong>, <strong>HTML</strong> et <strong>CSS</strong>. Mon expertise s'étend également 
+                aux outils <strong>no-code/low-code</strong>, offrant ainsi des solutions rapides et flexibles 
+                adaptées à tous les besoins professionnels.
+              </p>
+              <p class="about-popup-text">
+                Mon approche se base sur la compréhension approfondie des enjeux métier, permettant de transformer 
+                des défis complexes en solutions élégantes et efficaces. Que ce soit pour automatiser des processus, 
+                moderniser des applications existantes ou créer de nouvelles solutions, je m'engage à livrer des 
+                résultats qui dépassent les attentes.
+              </p>
+              <p class="about-popup-text">
+                Ma passion pour le développement se traduit par une veille technologique constante et une volonté 
+                d'apprendre et de partager. Je crois fermement en l'importance de créer des solutions qui apportent 
+                une réelle valeur ajoutée aux utilisateurs finaux tout en respectant les meilleures pratiques du développement.
+              </p>
             </div>
-            <div>
-              <h3>No-code / Low-code</h3>
-              <ul class="pill-list">
-                <li>Power Apps (Canvas)</li>
-                <li>Power Automate</li>
-                <li>SharePoint / Dataverse</li>
-                <li>WordPress, FlutterFlow</li>
-              </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Expérience -->
+      <section class="experience-section" id="tab-experience">
+        <div class="timeline-container era-early-web" id="timelineContainer">
+          <div class="timeline-header">
+            <h1 class="timeline-title">Mon Parcours</h1>
+            <p class="timeline-subtitle">Une évolution à travers mes expériences professionnelles</p>
+          </div>
+          <div class="timeline-content" id="timelineContent">
+            <div class="event-icon" id="eventIcon"><i class="fa-solid fa-globe"></i></div>
+            <div class="event-year" id="eventYear">2020</div>
+            <div class="event-company" id="eventCompany">Début de carrière</div>
+            <div class="event-description" id="eventDescription">Mes premières expériences dans le développement...</div>
+          </div>
+          <div class="slider-container">
+            <div class="slider-track" id="sliderTrack">
+              <div class="progress-fill" id="progressFill"></div>
             </div>
+            <input type="range" min="0" max="3" value="0" class="timeline-slider" id="timelineSlider" step="1" aria-label="Timeline slider" />
+            <div class="year-labels" id="yearLabels"></div>
           </div>
         </div>
       </section>
@@ -400,6 +474,10 @@
     </div>
   </div>
 
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
