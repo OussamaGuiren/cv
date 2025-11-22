@@ -334,7 +334,38 @@
               </p>
             </div>
 
-            <div class="contact-form-wrapper">
+            <div class="contact-buttons-container">
+              <p class="contact-intro-text">Discutons de votre projet !</p>
+              <div class="contact-actions">
+                <button type="button" class="btn-primary" id="btnContactMail">
+                  <i class="fa-solid fa-envelope"></i> Me contacter par mail
+                </button>
+                <a href="#" id="btnContactPhone" class="btn-secondary">
+                  <i class="fa-solid fa-phone"></i> Appeler
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Toast notifications root -->
+  <div id="toast-root" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Modal Contact -->
+  <div id="contactModal"
+       class="project-modal"
+       aria-hidden="true"
+       role="dialog"
+       aria-modal="true"
+       aria-labelledby="contactModalTitle">
+    <div class="project-modal-inner" role="document">
+      <button class="modal-close panel-close" id="closeContactModal" aria-label="Fermer">Retour</button>
+      <div class="modal-body" style="display: block;">
+        <h3 id="contactModalTitle" style="margin-bottom: 20px; text-align: center;">Contactez-moi</h3>
+        <div class="contact-form-wrapper">
               <form id="contactForm" novalidate autocomplete="off">
                 <div class="form-group">
                   <label for="companyName">Nom de la société*</label>
@@ -432,17 +463,10 @@
                 <button type="submit" id="submitBtn">Envoyer</button>
                 <div id="formStatus" role="status" aria-live="polite" class="hint"></div>
               </form>
-            </div>
-          </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </div>
   </div>
-
-  <!-- Toast notifications root -->
-  <div id="toast-root" class="toast-container" aria-live="polite" aria-atomic="true"></div>
-
-  <!-- Modal projet -->
   <div id="projectModal"
        class="project-modal"
        aria-hidden="true"

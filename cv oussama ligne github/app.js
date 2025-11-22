@@ -722,6 +722,59 @@
     }
   });
 
+  // ============ MODAL CONTACT (NOUVEAU) ============
+  const contactModal = document.getElementById('contactModal');
+  const btnContactMail = document.getElementById('btnContactMail');
+  const closeContactModalBtn = document.getElementById('closeContactModal');
+
+  function openContactModal() {
+    if (contactModal) {
+      contactModal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+      setTimeout(() => {
+        const firstInput = contactModal.querySelector('input');
+        if (firstInput) firstInput.focus();
+        else closeContactModalBtn?.focus();
+      }, 100);
+    }
+  }
+
+  function closeContactModal() {
+    if (contactModal) {
+      contactModal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+      btnContactMail?.focus();
+    }
+  }
+
+  btnContactMail?.addEventListener('click', openContactModal);
+  closeContactModalBtn?.addEventListener('click', closeContactModal);
+
+  contactModal?.addEventListener('click', (e) => {
+    if (e.target === contactModal) closeContactModal();
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && contactModal && contactModal.getAttribute('aria-hidden') === 'false') {
+      closeContactModal();
+    }
+  });
+
+  // Logic pour le bouton "Appeler" (si on veut l'obfuscation aussi)
+  const btnContactPhone = document.getElementById('btnContactPhone');
+  if (btnContactPhone) {
+    const codes = [43, 51, 51, 54, 56, 51, 48, 50, 51, 52, 52, 52];
+    const e164 = String.fromCharCode.apply(null, codes);
+    btnContactPhone.addEventListener('click', (e) => {
+      // On laisse le comportement par défaut (href="tel:...") ou on le met à jour dynamiquement
+      // Si le href est "#", on le met à jour
+      if (btnContactPhone.getAttribute('href') === '#') {
+        e.preventDefault();
+        window.location.href = 'tel:' + e164;
+      }
+    });
+  }
+
   // ============ BOUTONS DU HERO -> SECTIONS ============
   const heroContactBtn = document.getElementById('heroContactBtn');
   const heroAboutBtn = document.getElementById('heroAboutBtn');

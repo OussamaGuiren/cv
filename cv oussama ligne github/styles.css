@@ -217,11 +217,13 @@ body.hero-typed .et-hero-tabs [data-typewriter],
 }
 
 /* Citation hero - Style exact du modèle */
-/* center the blockquote in the page 
 .blockquote-wrapper {
   display: flex;
   padding: 0 20px;
-}*/
+  width: 100%;
+  justify-content: center;
+  margin-top: 40px; /* Give it some space from the title */
+}
 
 /* Blockquote main style */
 .blockquote {
@@ -376,6 +378,10 @@ body.hero-title-typed .blockquote.hero-quote-container h4 {
 
 /* ===================== RESPONSIVE - TABLETTE (768px - 1024px) ===================== */
 @media (min-width: 768px) and (max-width: 1024px) {
+  .btnMeContacter {
+    display: none;
+  }
+
   .blockquote-wrapper {
     padding: 0 15px;
   }
@@ -3429,7 +3435,23 @@ button[disabled] {
     flex-direction: column;
   }
   .gallery {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
     width: 100%;
+    padding: 20px 10px;
+    gap: 16px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+  
+  .project-card {
+    min-width: 85vw;
+    max-width: 85vw;
+    flex-shrink: 0;
+    margin: 0;
   }
   .modal-body {
     grid-template-columns: 1fr;
@@ -3628,6 +3650,10 @@ button[disabled] {
 
 /* Avoid flash of unstyled fonts: hide h1 until fonts loaded on desktop */
 @media (min-width: 768px) {
+  .btnMeContacter {
+    display: none;
+  }
+
   .et-hero-tabs h1 {
     visibility: hidden; /* hidden until fonts are ready */
     opacity: 0;
