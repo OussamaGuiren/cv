@@ -1616,19 +1616,89 @@ body.hero-title-typed .blockquote.hero-quote-container h4 {
   justify-content: center;
 }
 
-.about-photo-section img {
+/* GLITCH STACK (Remplacement du style img direct) */
+.glitch-stack {
+  position: relative;
+  display: block;
+  width: 100%;
   max-width: 500px;
-  object-fit: contain;
   border-radius: 16px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   border: 3px solid rgba(0, 120, 212, 0.3);
   transition: all 0.4s ease;
+  overflow: hidden; /* Empêche le glitch de dépasser si nécessaire, ou visible pour effet */
 }
 
-.about-photo-section img:hover {
+.glitch-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 16px; /* Match container */
+}
+
+/* Hover effect sur le container */
+.glitch-stack:hover {
   transform: translateY(-10px) scale(1.02);
   box-shadow: 0 30px 80px rgba(0, 120, 212, 0.4);
   border-color: rgba(0, 120, 212, 0.5);
+}
+
+/* Clones invisibles par défaut */
+.glitch-clone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: hard-light;
+}
+
+/* Animation au survol */
+.glitch-stack:hover .glitch-clone:nth-child(2) {
+  opacity: 1;
+  animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
+}
+
+.glitch-stack:hover .glitch-clone:nth-child(3) {
+  opacity: 1;
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.glitch-stack:hover .glitch-clone:nth-child(4) {
+  opacity: 1;
+  animation: glitch-anim-flash 2s infinite linear;
+}
+
+@keyframes glitch-anim-1 {
+  0% { clip-path: inset(20% 0 80% 0); transform: translate(-2px, 1px); }
+  5% { clip-path: inset(10% 0 40% 0); transform: translate(2px, -1px); }
+  10% { clip-path: inset(80% 0 5% 0); transform: translate(-2px, 2px); }
+  15% { clip-path: inset(40% 0 20% 0); transform: translate(2px, -2px); }
+  20% { clip-path: inset(10% 0 60% 0); transform: translate(-1px, 1px); }
+  25% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
+  100% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip-path: inset(60% 0 10% 0); transform: translate(2px, -1px); }
+  5% { clip-path: inset(20% 0 50% 0); transform: translate(-2px, 1px); }
+  10% { clip-path: inset(10% 0 80% 0); transform: translate(2px, 2px); }
+  15% { clip-path: inset(50% 0 30% 0); transform: translate(-2px, -2px); }
+  20% { clip-path: inset(80% 0 5% 0); transform: translate(1px, -1px); }
+  25% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
+  100% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
+}
+
+@keyframes glitch-anim-flash {
+  0%, 90% { opacity: 0; transform: translate(0); }
+  92% { opacity: 0.5; transform: translate(2px, 2px); filter: hue-rotate(90deg); }
+  94% { opacity: 0; transform: translate(0); }
+  96% { opacity: 0.5; transform: translate(-2px, -2px); filter: hue-rotate(180deg); }
+  100% { opacity: 0; transform: translate(0); }
 }
 
 .about-photo-section h2.credit {
