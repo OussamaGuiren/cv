@@ -3537,6 +3537,7 @@ button[disabled] {
   .status-badge .status-icon {
     font-size: clamp(12px, 3vw, 14px);
   }
+}
 
 /* ===================== TABLETTE - Même principe que desktop ===================== */
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -3623,7 +3624,6 @@ button[disabled] {
       scroll-behavior: auto !important;
     }
   }
-}
 
 /* Avoid flash of unstyled fonts: hide h1 until fonts loaded on desktop */
 @media (min-width: 768px) {
