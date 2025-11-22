@@ -2433,33 +2433,199 @@ body.hero-title-typed .blockquote.hero-quote-container h4 {
 /* ===================== CONTACT SECTION (FORM + INFO) ===================== */
 
 .contact-layout {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(30px, 5vw, 60px);
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  background: rgba(25, 25, 25, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: clamp(30px, 5vw, 60px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
 .contact-info {
-  flex: 1 1 260px;
-  font-size: 1rem;
+  font-size: 1.05rem;
   line-height: 1.8;
-}
-.contact-info ul {
-  list-style: none;
-  padding-left: 0;
-  margin-top: 10px;
-}
-.contact-info li {
-  margin-bottom: 8px;
-}
-.contact-info a {
-  text-decoration: underline;
-  text-decoration-thickness: 0.08em;
-  text-underline-offset: 0.2em;
+  color: rgba(255, 255, 255, 0.9);
 }
 
-.contact-form-wrapper {
-  flex: 1 1 320px;
+.contact-info > p:first-child {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.contact-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-info li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.contact-info strong {
+  color: #fff;
+  font-weight: 600;
+  min-width: 100px;
+}
+
+.contact-info a {
+  color: #a7c5f5;
+  text-decoration: none;
+  transition: color 0.2s;
+  position: relative;
+  display: inline-block;
+}
+
+.contact-info a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.contact-info a:hover {
+  color: #fff;
+}
+
+.contact-info a:hover::after {
+  width: 100%;
+}
+
+.contact-buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 30px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.contact-buttons-container:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-5px);
+}
+
+.contact-intro-text {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 28px;
+  color: #ffffff;
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(135deg, #ffffff 0%, #a7c5f5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.contact-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.contact-actions .btn-primary,
+.contact-actions .btn-secondary {
+  width: 100%;
+  justify-content: center;
+  padding: 16px 24px;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 12px;
+}
+
+.contact-actions .btn-primary i,
+.contact-actions .btn-secondary i {
+  font-size: 1.1em;
+}
+
+.contact-note {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+  margin-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+  width: 100%;
+}
+
+/* .contact-form-wrapper is used in the popup, do not hide globally */
+
+
+/* Responsive pour Contact */
+@media (max-width: 900px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 30px 24px;
+  }
+
+  .contact-info {
+    text-align: center;
+  }
+
+  .contact-info ul {
+    align-items: center;
+  }
+  
+  .contact-info li {
+    justify-content: center;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  
+  .contact-info strong {
+    min-width: auto;
+    color: var(--accent);
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-layout {
+    padding: 20px 16px;
+    background: rgba(25, 25, 25, 0.6);
+    backdrop-filter: none;
+    box-shadow: none;
+    border: none;
+  }
+  
+  .contact-buttons-container {
+    padding: 24px 20px;
+    width: 100%;
+  }
+
+  .contact-intro-text {
+    font-size: 1.2rem;
+  }
 }
 
 /* Form styles - Theme Clair pour Popup */
