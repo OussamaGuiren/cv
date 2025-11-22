@@ -40,7 +40,7 @@ body {
 }
 
 body {
-  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Rajdhani', 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background: var(--splash-bg);
   background-color: var(--splash-bg);
   background-attachment: fixed;
@@ -180,7 +180,7 @@ body.hero-typed .et-hero-tabs [data-typewriter],
 }
 
 .et-hero-tabs h1 {
-  font-family: 'Orbitron', monospace;
+  font-family: 'Orbitron', 'Share Tech Mono', monospace;
   font-size: clamp(72px, 14vw, 120px);
   font-weight: 900;
   line-height: 1.05;
