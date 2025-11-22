@@ -940,26 +940,26 @@ body.hero-title-typed .blockquote.hero-quote-container h4 {
   
   /* Chaque section fait 100vh en mobile */
   .et-slide {
-    min-height: 100vh;
-    height: 100vh;
+    min-height: auto;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   .experience-section {
-    min-height: 100vh;
-    height: 100vh;
+    min-height: auto;
+    height: auto;
   }
 
   .container-quisuisje {
-    min-height: 100vh;
-    height: 100vh;
+    min-height: auto;
+    height: auto;
   }
 
   .about-photo-section {
-    min-height: 100vh;
-    height: 100vh;
+    min-height: auto;
+    height: auto;
   }
 }
 
@@ -978,26 +978,26 @@ body.hero-title-typed .blockquote.hero-quote-container h4 {
   
   /* Chaque section fait 100vh en tablette */
   .et-slide {
-    min-height: 100vh;
-    height: 100vh;
+    min-height: auto;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   .experience-section {
-    min-height: 100vh;
-    height: 100vh;
+    min-height: auto;
+    height: auto;
   }
 
   .container-quisuisje {
-    min-height: 100vh;
-    height: 100vh;
+    min-height: auto;
+    height: auto;
   }
 
   .about-photo-section {
-    min-height: 100vh;
-    height: 100vh;
+    min-height: auto;
+    height: auto;
   }
 }
 
@@ -1051,11 +1051,11 @@ body.hero-title-typed .blockquote.hero-quote-container h4 {
 }
 
 .et-slide {
-  min-height: 100vh;
+  min-height: auto;
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 96px clamp(24px, 7vw, 80px) 64px;
+  padding: 60px clamp(24px, 7vw, 80px);
   text-align: left;
 }
 
@@ -1096,6 +1096,7 @@ body.hero-title-typed .blockquote.hero-quote-container h4 {
 .container-quisuisje {
   position: relative;
   width: 100%;
+  min-height: auto;
 }
 
 /* Conteneur Qui suis-je */
@@ -1106,7 +1107,7 @@ body.hero-title-typed .blockquote.hero-quote-container h4 {
 
 /* Section d'introduction */
 .about-intro-section {
-  min-height: 100vh;
+  min-height: auto;
   width: 100%;
   position: relative;
   padding: 50px 10vw;
@@ -1449,7 +1450,7 @@ body.hero-title-typed .blockquote.hero-quote-container h4 {
 
 /* Section Qui suis-je - Photo et texte */
 .about-photo-section {
-  min-height: 100vh;
+  min-height: auto;
   width: 100%;
   position: relative;
   padding: clamp(40px, 5vh, 80px) clamp(20px, 5vw, 120px);
@@ -1704,7 +1705,7 @@ body.hero-title-typed .blockquote.hero-quote-container h4 {
 .experience-section {
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  min-height: auto;
   background: var(--splash-bg);
   display: flex;
   align-items: center;
@@ -3377,7 +3378,7 @@ button[disabled] {
   }
 
   .et-slide {
-    min-height: 100vh !important;
+    min-height: auto !important;
     height: auto !important;
     max-height: none !important;
     padding-inline: clamp(12px, 3vw, 18px);
@@ -3391,7 +3392,7 @@ button[disabled] {
   }
 
   .experience-section {
-    min-height: 100vh !important;
+    min-height: auto !important;
     height: auto !important;
     max-height: none !important;
     margin: 0;
@@ -3401,7 +3402,7 @@ button[disabled] {
   }
 
   .container-quisuisje {
-    min-height: 100vh !important;
+    min-height: auto !important;
     height: auto !important;
     max-height: none !important;
     margin: 0;
@@ -3411,7 +3412,7 @@ button[disabled] {
   }
 
   .about-photo-section {
-    min-height: 100vh !important;
+    min-height: auto !important;
     height: auto !important;
     max-height: none !important;
     margin: 0;
@@ -3597,7 +3598,7 @@ button[disabled] {
 
   /* Chaque section fait 100vh en tablette */
   .et-slide {
-    min-height: 100vh;
+    min-height: auto;
     height: auto;
     display: flex;
     align-items: center;
@@ -3654,11 +3655,11 @@ button[disabled] {
     display: none;
   }
 
-  .et-hero-tabs h1 {
-    visibility: hidden; /* hidden until fonts are ready */
+  /* .et-hero-tabs h1 {
+    visibility: hidden; 
     opacity: 0;
     transition: opacity 220ms ease;
-  }
+  } */
   .fonts-ready .et-hero-tabs h1 {
     visibility: visible;
     opacity: 1;

@@ -722,41 +722,74 @@
     }
   });
 
-  // ============ MODAL CONTACT (NOUVEAU) ============
-  const contactModal = document.getElementById('contactModal');
+  // ============ MODAL CONTACT (NOUVEAU - STYLE ABOUT-POPUP) ============
+  const contactPopup = document.getElementById('contactPopup');
   const btnContactMail = document.getElementById('btnContactMail');
-  const closeContactModalBtn = document.getElementById('closeContactModal');
+  const closeContactPopupBtn = document.getElementById('closeContactPopup');
+  
+  // Keep original parent so we can restore after close (to avoid stacking context issues)
+  let contactPopupOriginalParent = null;
+  let contactPopupNextSibling = null;
+  function ensureContactPopupInBody() {
+    if (!contactPopup) return;
+    if (contactPopup.parentNode !== document.body) {
+      contactPopupOriginalParent = contactPopup.parentNode;
+      contactPopupNextSibling = contactPopup.nextSibling;
+      document.body.appendChild(contactPopup);
+    }
+  }
 
-  function openContactModal() {
-    if (contactModal) {
-      contactModal.setAttribute('aria-hidden', 'false');
+  function restoreContactPopupOriginalPosition() {
+    if (!contactPopup || !contactPopupOriginalParent) return;
+    if (contactPopupNextSibling) {
+      contactPopupOriginalParent.insertBefore(contactPopup, contactPopupNextSibling);
+    } else {
+      contactPopupOriginalParent.appendChild(contactPopup);
+    }
+    contactPopupOriginalParent = null;
+    contactPopupNextSibling = null;
+  }
+
+  function openContactPopup() {
+    if (contactPopup) {
+      ensureContactPopupInBody();
+      contactPopup.setAttribute('aria-hidden', 'false');
       document.body.classList.add('modal-open');
+      document.body.style.overflow = 'hidden';
+      
       setTimeout(() => {
-        const firstInput = contactModal.querySelector('input');
+        const firstInput = contactPopup.querySelector('input');
         if (firstInput) firstInput.focus();
-        else closeContactModalBtn?.focus();
+        else closeContactPopupBtn?.focus();
       }, 100);
     }
   }
 
-  function closeContactModal() {
-    if (contactModal) {
-      contactModal.setAttribute('aria-hidden', 'true');
+  function closeContactPopup() {
+    if (contactPopup) {
+      contactPopup.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('modal-open');
-      btnContactMail?.focus();
+      document.body.style.overflow = '';
+      
+      setTimeout(() => {
+        restoreContactPopupOriginalPosition();
+        btnContactMail?.focus();
+      }, 300);
     }
   }
 
-  btnContactMail?.addEventListener('click', openContactModal);
-  closeContactModalBtn?.addEventListener('click', closeContactModal);
+  btnContactMail?.addEventListener('click', openContactPopup);
+  closeContactPopupBtn?.addEventListener('click', closeContactPopup);
 
-  contactModal?.addEventListener('click', (e) => {
-    if (e.target === contactModal) closeContactModal();
+  contactPopup?.addEventListener('click', (e) => {
+    if (e.target === contactPopup || e.target.classList.contains('about-popup-overlay')) {
+      closeContactPopup();
+    }
   });
 
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && contactModal && contactModal.getAttribute('aria-hidden') === 'false') {
-      closeContactModal();
+    if (e.key === 'Escape' && contactPopup && contactPopup.getAttribute('aria-hidden') === 'false') {
+      closeContactPopup();
     }
   });
 

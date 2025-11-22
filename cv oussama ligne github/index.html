@@ -354,115 +354,113 @@
   <!-- Toast notifications root -->
   <div id="toast-root" class="toast-container" aria-live="polite" aria-atomic="true"></div>
 
-  <!-- Modal Contact -->
-  <div id="contactModal"
-       class="project-modal"
-       aria-hidden="true"
-       role="dialog"
-       aria-modal="true"
-       aria-labelledby="contactModalTitle">
-    <div class="project-modal-inner" role="document">
-      <button class="modal-close panel-close" id="closeContactModal" aria-label="Fermer">Retour</button>
-      <div class="modal-body" style="display: block;">
-        <h3 id="contactModalTitle" style="margin-bottom: 20px; text-align: center;">Contactez-moi</h3>
-        <div class="contact-form-wrapper">
-              <form id="contactForm" novalidate autocomplete="off">
-                <div class="form-group">
-                  <label for="companyName">Nom de la société*</label>
-                  <input
-                    type="text"
-                    id="companyName"
-                    name="companyName"
-                    required
-                    minlength="2"
-                    maxlength="120"
-                    autocomplete="organization"
-                    aria-describedby="companyName-error"
-                    pattern="^[A-Za-zÀ-ÖØ-öø-ÿ0-9][A-Za-zÀ-ÖØ-öø-ÿ0-9 .'’&()\\-]{1,}$"
-                    placeholder="Ex: Entreprise Dupont SAS">
-                  <div class="error" id="companyName-error" aria-live="polite"></div>
-                </div>
+  <!-- Contact Popup (Style "about-popup") -->
+  <div class="about-popup" id="contactPopup" aria-hidden="true" role="dialog" aria-labelledby="contactPopupTitle" aria-modal="true">
+    <div class="about-popup-overlay"></div>
+    <div class="about-popup-content">
+      <button class="about-popup-close" id="closeContactPopup" aria-label="Fermer la popup">
+        <i class="fa-solid fa-times"></i>
+      </button>
+      <div class="about-popup-inner">
+        <h2 class="about-popup-title" id="contactPopupTitle">Contactez-moi</h2>
+        <div class="contact-form-wrapper" style="width: 100%;">
+          <form id="contactForm" novalidate autocomplete="off">
+            <div class="form-group">
+              <label for="companyName">Nom de la société*</label>
+              <input
+                type="text"
+                id="companyName"
+                name="companyName"
+                required
+                minlength="2"
+                maxlength="120"
+                autocomplete="organization"
+                aria-describedby="companyName-error"
+                pattern="^[A-Za-zÀ-ÖØ-öø-ÿ0-9][A-Za-zÀ-ÖØ-öø-ÿ0-9 .'’&()\\-]{1,}$"
+                placeholder="Ex: Entreprise Dupont SAS">
+              <div class="error" id="companyName-error" aria-live="polite"></div>
+            </div>
 
-                <div class="form-group">
-                  <label for="email">Email*</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    inputmode="email"
-                    autocomplete="email"
-                    autocapitalize="off"
-                    spellcheck="false"
-                    aria-describedby="email-error"
-                    placeholder="nom@domaine.fr"
-                    pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}$">
-                  <div class="hint">Format attendu : nom@domaine.tld</div>
-                  <div class="error" id="email-error" aria-live="polite"></div>
-                </div>
+            <div class="form-group">
+              <label for="email">Email*</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                inputmode="email"
+                autocomplete="email"
+                autocapitalize="off"
+                spellcheck="false"
+                aria-describedby="email-error"
+                placeholder="nom@domaine.fr"
+                pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}$">
+              <div class="hint">Format attendu : nom@domaine.tld</div>
+              <div class="error" id="email-error" aria-live="polite"></div>
+            </div>
 
-                <div class="form-group">
-                  <label for="phone">Téléphone (optionnel)</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    inputmode="tel"
-                    autocomplete="tel"
-                    aria-describedby="phone-error"
-                    placeholder="06 12 34 56 78 ou +33 6 12 34 56 78"
-                    title="Numéro FR: 0X XX XX XX XX, +33 X XX XX XX XX, ou 0033 X XX XX XX XX"
-                    pattern="^(?:0[1-9]|(?:\\+33|0033)[ .-]?[1-9])(?:[ .-]?\\d{2}){4}$"
-                    maxlength="20">
-                  <div class="error" id="phone-error" aria-live="polite"></div>
-                </div>
+            <div class="form-group">
+              <label for="phone">Téléphone (optionnel)</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                inputmode="tel"
+                autocomplete="tel"
+                aria-describedby="phone-error"
+                placeholder="06 12 34 56 78 ou +33 6 12 34 56 78"
+                title="Numéro FR: 0X XX XX XX XX, +33 X XX XX XX XX, ou 0033 X XX XX XX XX"
+                pattern="^(?:0[1-9]|(?:\\+33|0033)[ .-]?[1-9])(?:[ .-]?\\d{2}){4}$"
+                maxlength="20">
+              <div class="error" id="phone-error" aria-live="polite"></div>
+            </div>
 
-                <div class="form-group">
-                  <label for="missionType">Type de collaboration*</label>
-                  <select id="missionType" name="missionType" required aria-describedby="missionType-error">
-                    <option value="" disabled selected>— Sélectionner —</option>
-                    <option value="freelance">Mission Freelance</option>
-                    <option value="cdd_cdi">CDI / CDD</option>
-                    <option value="other">Autre</option>
-                  </select>
-                  <div class="error" id="missionType-error" aria-live="polite"></div>
-                </div>
+            <div class="form-group">
+              <label for="missionType">Type de collaboration*</label>
+              <select id="missionType" name="missionType" required aria-describedby="missionType-error">
+                <option value="" disabled selected>— Sélectionner —</option>
+                <option value="freelance">Mission Freelance</option>
+                <option value="cdd_cdi">CDI / CDD</option>
+                <option value="other">Autre</option>
+              </select>
+              <div class="error" id="missionType-error" aria-live="polite"></div>
+            </div>
 
-                <div class="form-group">
-                  <label for="message">Message*</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    minlength="10"
-                    maxlength="5000"
-                    rows="6"
-                    aria-describedby="message-error"
-                    placeholder="Décrivez votre besoin…"></textarea>
-                  <div class="error" id="message-error" aria-live="polite"></div>
-                </div>
+            <div class="form-group">
+              <label for="message">Message*</label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                minlength="10"
+                maxlength="5000"
+                rows="6"
+                aria-describedby="message-error"
+                placeholder="Décrivez votre besoin…"></textarea>
+              <div class="error" id="message-error" aria-live="polite"></div>
+            </div>
 
-                <div class="form-group">
-                  <label for="jobDescriptionFile">Fiche de poste (optionnel)</label>
-                  <div class="file-upload-wrapper">
-                    <input
-                      type="file"
-                      id="jobDescriptionFile"
-                      name="jobDescriptionFile"
-                      accept=".pdf,.doc,.docx,.txt,.md">
-                    <div id="fileName" role="button" tabindex="0" aria-label="Choisir ou déposer un fichier">
-                      Cliquer ou déposer un fichier (PDF, DOC/DOCX, TXT, MD)
-                    </div>
-                  </div>
-                  <div class="hint">
-                    Formats: PDF, DOC, DOCX, TXT, MD — Taille max: 10&nbsp;Mo
-                  </div>
-                  <div class="error" id="file-error" aria-live="polite"></div>
+            <div class="form-group">
+              <label for="jobDescriptionFile">Fiche de poste (optionnel)</label>
+              <div class="file-upload-wrapper">
+                <input
+                  type="file"
+                  id="jobDescriptionFile"
+                  name="jobDescriptionFile"
+                  accept=".pdf,.doc,.docx,.txt,.md">
+                <div id="fileName" role="button" tabindex="0" aria-label="Choisir ou déposer un fichier">
+                  Cliquer ou déposer un fichier (PDF, DOC/DOCX, TXT, MD)
                 </div>
+              </div>
+              <div class="hint">
+                Formats: PDF, DOC, DOCX, TXT, MD — Taille max: 10&nbsp;Mo
+              </div>
+              <div class="error" id="file-error" aria-live="polite"></div>
+            </div>
 
-                <button type="submit" id="submitBtn">Envoyer</button>
-                <div id="formStatus" role="status" aria-live="polite" class="hint"></div>
-              </form>
+            <button type="submit" id="submitBtn">Envoyer</button>
+            <div id="formStatus" role="status" aria-live="polite" class="hint"></div>
+          </form>
         </div>
       </div>
     </div>
