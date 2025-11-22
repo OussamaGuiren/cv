@@ -1209,6 +1209,8 @@
   slider.max = timelineData.length - 1;
 
   let currentIndex = 0;
+  let targetIndex = 0;
+  let isAnimating = false;
   let autoPlayInterval;
   let ticks = [];
   let yearLabels = [];
@@ -1246,7 +1248,7 @@
   }
 
   function updateTimeline(index) {
-    // Update progress immediately to fix lag
+    // Update progress and ticks immediately for responsiveness
     const progress = (index / (timelineData.length - 1)) * 100;
     progressFill.style.width = `${progress}%`;
 
@@ -1258,7 +1260,13 @@
       label.classList.toggle("active", i === index);
     });
 
-    if (index === currentIndex) return;
+    // Logic for smooth content transition
+    targetIndex = index;
+
+    if (targetIndex === currentIndex) return;
+    if (isAnimating) return;
+
+    isAnimating = true;
 
     // Add fade out animation to current content
     content.classList.remove("fade-in");
@@ -1270,10 +1278,14 @@
     eventDescription.classList.add("fade-out");
 
     // Wait for fade-out animation to finish before updating content
-    content.addEventListener("animationend", function onFadeOutEnd() {
+    content.addEventListener("animationend", function onFadeOutEnd(e) {
+      // Critical fix: ensure we only respond to the container's animation, 
+      // not bubbling events from children (eventIcon, etc.)
+      if (e.target !== content) return;
+      
       content.removeEventListener("animationend", onFadeOutEnd);
 
-      const event = timelineData[index];
+      const event = timelineData[targetIndex];
 
       // Update content
       eventIcon.innerHTML = `<i class="fa-solid ${event.icon}"></i>`;
@@ -1292,8 +1304,13 @@
 
       content.classList.add("fade-in");
 
-      currentIndex = index;
-    }, { once: true });
+      currentIndex = targetIndex;
+      isAnimating = false;
+      
+      // If the user moved the slider again while we were animating, 
+      // we could technically trigger another update here if needed.
+      // But updating to the latest targetIndex above covers most UX needs smoothly.
+    });
   }
 
   slider.addEventListener("input", function () {
