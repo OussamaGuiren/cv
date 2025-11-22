@@ -1061,7 +1061,7 @@ body.hero-title-typed .blockquote.hero-quote-container h4 {
 
 .slide-inner {
   width: 100%;
-  max-width: 1040px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -1791,7 +1791,7 @@ body.hero-title-typed .blockquote.hero-quote-container h4 {
   background: rgba(25, 25, 25, 0.95);
   border-radius: 20px;
   padding: 4rem 3rem;
-  max-width: 900px;
+  max-width: 1400px;
   width: 100%;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3),
     0 10px 10px -5px rgba(0, 0, 0, 0.1);
@@ -2508,7 +2508,7 @@ body.hero-title-typed .blockquote.hero-quote-container h4 {
 /* ===================== CONTACT SECTION (GRID CARDS) ===================== */
 .contact-container {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
