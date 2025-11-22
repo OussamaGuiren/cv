@@ -1362,3 +1362,17 @@
     userInteractionTimeout = setTimeout(startAutoPlay, 5000);
   });
 })();
+
+// Listener for Contact Button
+document.addEventListener('DOMContentLoaded', () => {
+  const btnMeContacter = document.querySelector('.btnMeContacter');
+  if (btnMeContacter) {
+    btnMeContacter.addEventListener('click', (e) => {
+      e.preventDefault();
+      const contactSection = document.querySelector('#tab-contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+});

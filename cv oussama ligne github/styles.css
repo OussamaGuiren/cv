@@ -172,7 +172,7 @@ body.hero-typed .et-hero-tabs [data-typewriter],
 }
 
 .hero-kicker {
-  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+  font-size: clamp(0.8rem, 1.2vw, 1rem);
   text-transform: uppercase;
   letter-spacing: 0.18em;
   color: #a7c5f5;
@@ -181,7 +181,7 @@ body.hero-typed .et-hero-tabs [data-typewriter],
 
 .et-hero-tabs h1 {
   font-family: 'Orbitron', monospace;
-  font-size: clamp(64px, 12vw, 100px);
+  font-size: clamp(72px, 14vw, 120px);
   font-weight: 900;
   line-height: 1.05;
   margin-bottom: 20px;
