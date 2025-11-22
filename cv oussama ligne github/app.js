@@ -722,6 +722,92 @@
     }
   });
 
+  // ============ MODAL CONTACT (NOUVEAU - STYLE ABOUT-POPUP) ============
+  const contactPopup = document.getElementById('contactPopup');
+  const btnContactMail = document.getElementById('btnContactMail');
+  const closeContactPopupBtn = document.getElementById('closeContactPopup');
+  
+  // Keep original parent so we can restore after close (to avoid stacking context issues)
+  let contactPopupOriginalParent = null;
+  let contactPopupNextSibling = null;
+  function ensureContactPopupInBody() {
+    if (!contactPopup) return;
+    if (contactPopup.parentNode !== document.body) {
+      contactPopupOriginalParent = contactPopup.parentNode;
+      contactPopupNextSibling = contactPopup.nextSibling;
+      document.body.appendChild(contactPopup);
+    }
+  }
+
+  function restoreContactPopupOriginalPosition() {
+    if (!contactPopup || !contactPopupOriginalParent) return;
+    if (contactPopupNextSibling) {
+      contactPopupOriginalParent.insertBefore(contactPopup, contactPopupNextSibling);
+    } else {
+      contactPopupOriginalParent.appendChild(contactPopup);
+    }
+    contactPopupOriginalParent = null;
+    contactPopupNextSibling = null;
+  }
+
+  function openContactPopup() {
+    if (contactPopup) {
+      ensureContactPopupInBody();
+      contactPopup.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+      document.body.style.overflow = 'hidden';
+      
+      setTimeout(() => {
+        const firstInput = contactPopup.querySelector('input');
+        if (firstInput) firstInput.focus();
+        else closeContactPopupBtn?.focus();
+      }, 100);
+    }
+  }
+
+  function closeContactPopup() {
+    if (contactPopup) {
+      contactPopup.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+      document.body.style.overflow = '';
+      
+      setTimeout(() => {
+        restoreContactPopupOriginalPosition();
+        btnContactMail?.focus();
+      }, 300);
+    }
+  }
+
+  btnContactMail?.addEventListener('click', openContactPopup);
+  closeContactPopupBtn?.addEventListener('click', closeContactPopup);
+
+  contactPopup?.addEventListener('click', (e) => {
+    if (e.target === contactPopup || e.target.classList.contains('about-popup-overlay')) {
+      closeContactPopup();
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && contactPopup && contactPopup.getAttribute('aria-hidden') === 'false') {
+      closeContactPopup();
+    }
+  });
+
+  // Logic pour le bouton "Appeler" (si on veut l'obfuscation aussi)
+  const btnContactPhone = document.getElementById('btnContactPhone');
+  if (btnContactPhone) {
+    const codes = [43, 51, 51, 54, 56, 51, 48, 50, 51, 52, 52, 52];
+    const e164 = String.fromCharCode.apply(null, codes);
+    btnContactPhone.addEventListener('click', (e) => {
+      // On laisse le comportement par défaut (href="tel:...") ou on le met à jour dynamiquement
+      // Si le href est "#", on le met à jour
+      if (btnContactPhone.getAttribute('href') === '#') {
+        e.preventDefault();
+        window.location.href = 'tel:' + e164;
+      }
+    });
+  }
+
   // ============ BOUTONS DU HERO -> SECTIONS ============
   const heroContactBtn = document.getElementById('heroContactBtn');
   const heroAboutBtn = document.getElementById('heroAboutBtn');
@@ -1123,6 +1209,8 @@
   slider.max = timelineData.length - 1;
 
   let currentIndex = 0;
+  let targetIndex = 0;
+  let isAnimating = false;
   let autoPlayInterval;
   let ticks = [];
   let yearLabels = [];
@@ -1160,7 +1248,25 @@
   }
 
   function updateTimeline(index) {
-    if (index === currentIndex) return;
+    // Update progress and ticks immediately for responsiveness
+    const progress = (index / (timelineData.length - 1)) * 100;
+    progressFill.style.width = `${progress}%`;
+
+    ticks.forEach((tick, i) => {
+      tick.classList.toggle("active", i === index);
+    });
+
+    yearLabels.forEach((label, i) => {
+      label.classList.toggle("active", i === index);
+    });
+
+    // Logic for smooth content transition
+    targetIndex = index;
+
+    if (targetIndex === currentIndex) return;
+    if (isAnimating) return;
+
+    isAnimating = true;
 
     // Add fade out animation to current content
     content.classList.remove("fade-in");
@@ -1171,19 +1277,15 @@
     eventCompany.classList.add("fade-out");
     eventDescription.classList.add("fade-out");
 
-    ticks.forEach((tick, i) => {
-      tick.classList.toggle("active", i === index);
-    });
-
-    yearLabels.forEach((label, i) => {
-      label.classList.toggle("active", i === index);
-    });
-
     // Wait for fade-out animation to finish before updating content
-    content.addEventListener("animationend", function onFadeOutEnd() {
+    content.addEventListener("animationend", function onFadeOutEnd(e) {
+      // Critical fix: ensure we only respond to the container's animation, 
+      // not bubbling events from children (eventIcon, etc.)
+      if (e.target !== content) return;
+      
       content.removeEventListener("animationend", onFadeOutEnd);
 
-      const event = timelineData[index];
+      const event = timelineData[targetIndex];
 
       // Update content
       eventIcon.innerHTML = `<i class="fa-solid ${event.icon}"></i>`;
@@ -1192,9 +1294,6 @@
       eventDescription.textContent = event.description;
 
       timelineContainer.className = `timeline-container ${event.era}`;
-
-      const progress = (index / (timelineData.length - 1)) * 100;
-      progressFill.style.width = `${progress}%`;
 
       // Reset and animate in
       content.classList.remove("fade-transition");
@@ -1205,12 +1304,21 @@
 
       content.classList.add("fade-in");
 
-      currentIndex = index;
-    }, { once: true });
+      currentIndex = targetIndex;
+      isAnimating = false;
+      
+      // If the user moved the slider again while we were animating, 
+      // we could technically trigger another update here if needed.
+      // But updating to the latest targetIndex above covers most UX needs smoothly.
+    });
   }
 
   slider.addEventListener("input", function () {
     const index = parseInt(this.value);
+    // Instant update on drag
+    const progress = (index / (timelineData.length - 1)) * 100;
+    progressFill.style.width = `${progress}%`;
+    
     updateTimeline(index);
   });
 
@@ -1252,5 +1360,125 @@
   slider.addEventListener("touchend", () => {
     clearTimeout(userInteractionTimeout);
     userInteractionTimeout = setTimeout(startAutoPlay, 5000);
+  });
+})();
+
+// Listener for Contact Button
+document.addEventListener('DOMContentLoaded', () => {
+  const btnMeContacter = document.querySelector('.btnMeContacter');
+  if (btnMeContacter) {
+    btnMeContacter.addEventListener('click', (e) => {
+      e.preventDefault();
+      const contactSection = document.querySelector('#tab-contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+});
+// =========== MODAL PROJET (NOUVEAU STYLE) ===========
+(function() {
+  const projectModal = document.getElementById('projectModal');
+  const closeProjectModalBtn = document.getElementById('closeProjectModal');
+  const modalTitleEl = document.getElementById('projectModalTitle');
+  const modalDescEl = document.getElementById('projectModalDescription');
+  const modalTechEl = document.getElementById('projectModalTech');
+  const modalLinkEl = document.getElementById('projectModalLink');
+  const modalImageEl = document.getElementById('modalImage');
+  const body = document.body;
+
+  // Keep original parent for restoration
+  let projectModalOriginalParent = null;
+  let projectModalNextSibling = null;
+
+  function ensureProjectModalInBody() {
+    if (!projectModal) return;
+    if (projectModal.parentNode !== document.body) {
+      projectModalOriginalParent = projectModal.parentNode;
+      projectModalNextSibling = projectModal.nextSibling;
+      document.body.appendChild(projectModal);
+    }
+  }
+
+  function restoreProjectModalOriginalPosition() {
+    if (!projectModal || !projectModalOriginalParent) return;
+    if (projectModalNextSibling) {
+      projectModalOriginalParent.insertBefore(projectModal, projectModalNextSibling);
+    } else {
+      projectModalOriginalParent.appendChild(projectModal);
+    }
+    projectModalOriginalParent = null;
+    projectModalNextSibling = null;
+  }
+
+  function openProjectModalFromCard(card) {
+    if (!card) return;
+    const title = card.dataset.title || card.querySelector('h3')?.textContent || '';
+    const description = card.dataset.description || '';
+    const tech = card.dataset.tech || '';
+    const link = card.dataset.link || '#';
+    const img = card.querySelector('.card-image img')?.getAttribute('src') || '';
+
+    modalTitleEl.textContent = title;
+    modalDescEl.textContent = description;
+    modalTechEl.textContent = tech;
+    modalLinkEl.href = link;
+    
+    if (link === '#') {
+      modalLinkEl.classList.add('disabled');
+      modalLinkEl.removeAttribute('target');
+    } else {
+      modalLinkEl.classList.remove('disabled');
+      modalLinkEl.setAttribute('target', '_blank');
+    }
+
+    if (img) {
+      modalImageEl.src = img;
+      modalImageEl.alt = title;
+      modalImageEl.style.display = 'block';
+    } else {
+      modalImageEl.style.display = 'none';
+    }
+
+    ensureProjectModalInBody();
+    projectModal?.setAttribute('aria-hidden', 'false');
+    body.classList.add('modal-open');
+    body.style.overflow = 'hidden';
+    
+    setTimeout(() => closeProjectModalBtn?.focus(), 100);
+  }
+
+  function closeProjectModal() {
+    if (projectModal) {
+      projectModal.setAttribute('aria-hidden', 'true');
+      body.classList.remove('modal-open');
+      body.style.overflow = '';
+      
+      setTimeout(() => {
+        restoreProjectModalOriginalPosition();
+      }, 300);
+    }
+  }
+
+  document.querySelectorAll('.card-open').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const card = e.currentTarget.closest('.project-card');
+      openProjectModalFromCard(card);
+    });
+  });
+
+  closeProjectModalBtn?.addEventListener('click', closeProjectModal);
+
+  projectModal?.addEventListener('click', (e) => {
+    if (e.target === projectModal || e.target.classList.contains('about-popup-overlay')) {
+      closeProjectModal();
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && projectModal && projectModal.getAttribute('aria-hidden') === 'false') {
+      closeProjectModal();
+    }
   });
 })();

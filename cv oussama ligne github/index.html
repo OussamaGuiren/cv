@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Barlow+Condensed:wght@400&display=swap" rel="stylesheet" />
   <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
@@ -62,10 +63,17 @@
       </div>
       <div class="mobile-menu-links">
         <a class="mobile-menu-link" href="#tab-quisuisje">Qui suis-je ?</a>
-        <a class="mobile-menu-link" href="#tab-experience">Expérience</a>
+        <a class="mobile-menu-link" href="#tab-experience">Expériences</a>
         <a class="mobile-menu-link" href="#tab-projects">Projets web</a>
         <a class="mobile-menu-link" href="#tab-power">Power Platform</a>
         <a class="mobile-menu-link" href="#tab-contact">Contact mail</a>
+      </div>
+      <div class="mobile-socials">
+        <div class="flex-center">
+          <!--<a href="https://github.com/" target="_blank" class="social-link" aria-label="GitHub"><i class="fa-brands fa-github fa-3x icon-3d"></i></a>-->
+          <a href="https://www.linkedin.com/in/oussama-guiren" target="_blank" class="social-link" aria-label="LinkedIn"><i class="fa-brands fa-linkedin fa-3x icon-3d"></i></a>
+          <!--<a href="#tab-contact" class="social-link" aria-label="Contact"><i class="fa-solid fa-envelope fa-3x icon-3d"></i></a>-->
+        </div>
       </div>
     </nav>
     <div class="mobile-menu-overlay" aria-hidden="true"></div>
@@ -93,7 +101,7 @@
       <div class="et-hero-tabs-container">
         <div class="et-hero-logo">OG</div>
         <a class="et-hero-tab" href="#tab-quisuisje">Qui suis-je ?</a>
-        <a class="et-hero-tab" href="#tab-experience">Expérience</a>
+        <a class="et-hero-tab" href="#tab-experience">Expériences</a>
         <a class="et-hero-tab" href="#tab-projects">Projets web</a>
         <a class="et-hero-tab" href="#tab-power">Power Platform</a>
         <a class="et-hero-tab" href="#tab-contact">Contact mail</a>
@@ -110,7 +118,12 @@
           <div class="about-content-wrapper">
             <!-- Image container avec bouton en mobile -->
             <div class="about-image-container">
-              <img src="./assets/moiNoirEtBlanc.png" alt="Oussama Guiren">
+              <div class="glitch-stack">
+                <img src="./assets/moiNoirEtBlanc.png" alt="Oussama Guiren" class="glitch-img">
+                <img src="./assets/moiNoirEtBlanc.png" alt="" class="glitch-img glitch-clone" aria-hidden="true">
+                <img src="./assets/moiNoirEtBlanc.png" alt="" class="glitch-img glitch-clone" aria-hidden="true">
+                <img src="./assets/moiNoirEtBlanc.png" alt="" class="glitch-img glitch-clone" aria-hidden="true">
+              </div>
               <h2 class="credit">Oussama Guiren<br><em>Développeur .NET &amp; Power Platform</em></h2>
               <button class="about-learn-more-btn" id="aboutLearnMoreBtn">En savoir plus</button>
             </div>
@@ -179,6 +192,38 @@
           </div>
         </div>
       </div>
+
+      <!-- Technologies Ticker -->
+      <section class="tech-ticker-section">
+        <div class="tech-ticker-wrapper">
+          <div class="tech-ticker-track">
+            <!-- Set 1 -->
+            <div class="tech-item"><i class="fa-brands fa-microsoft"></i> .NET / C#</div>
+            <div class="tech-item"><i class="fa-solid fa-bolt"></i> Power Platform</div>
+            <div class="tech-item"><i class="fa-solid fa-file-powerpoint"></i> Power Apps</div>
+            <div class="tech-item"><i class="fa-solid fa-robot"></i> Power Automate</div>
+            <div class="tech-item"><i class="fa-brands fa-vuejs"></i> Vue.js</div>
+            <div class="tech-item"><i class="fa-brands fa-js"></i> JavaScript</div>
+            <div class="tech-item"><i class="fa-solid fa-database"></i> SQL Server</div>
+            <div class="tech-item"><i class="fa-solid fa-cloud"></i> Azure</div>
+            <div class="tech-item"><i class="fa-brands fa-git-alt"></i> Git</div>
+            <div class="tech-item"><i class="fa-brands fa-html5"></i> HTML5</div>
+            <div class="tech-item"><i class="fa-brands fa-css3-alt"></i> CSS3</div>
+            <!-- Set 2 (Duplicate) -->
+            <div class="tech-item"><i class="fa-brands fa-microsoft"></i> .NET / C#</div>
+            <div class="tech-item"><i class="fa-solid fa-bolt"></i> Power Platform</div>
+            <div class="tech-item"><i class="fa-solid fa-file-powerpoint"></i> Power Apps</div>
+            <div class="tech-item"><i class="fa-solid fa-robot"></i> Power Automate</div>
+            <div class="tech-item"><i class="fa-brands fa-vuejs"></i> Vue.js</div>
+            <div class="tech-item"><i class="fa-brands fa-js"></i> JavaScript</div>
+            <div class="tech-item"><i class="fa-solid fa-database"></i> SQL Server</div>
+            <div class="tech-item"><i class="fa-solid fa-cloud"></i> Azure</div>
+            <div class="tech-item"><i class="fa-brands fa-git-alt"></i> Git</div>
+            <div class="tech-item"><i class="fa-brands fa-html5"></i> HTML5</div>
+            <div class="tech-item"><i class="fa-brands fa-css3-alt"></i> CSS3</div>
+          </div>
+        </div>
+      </section>
 
       <!-- Expérience -->
       <section class="experience-section" id="tab-experience">
@@ -304,134 +349,54 @@
             <h2>Travaillons ensemble</h2>
             <p class="slide-intro">
               Vous avez une mission freelance, un besoin ponctuel ou un poste à pourvoir
-              autour de .NET ou de la Power Platform ?
+              autour de .NET ou de la Power Platform ? Choisissez le canal qui vous convient.
             </p>
           </div>
 
-          <div class="contact-layout">
-            <div class="contact-info">
-              <p>Vous pouvez me joindre&nbsp;:</p>
-              <ul>
-                <li><strong>Email :</strong> via le formulaire ci-contre</li>
-                <li>
-                  <strong>Téléphone :</strong>
-                  <a href="#" id="phoneBtn" class="btn-secondary">Afficher le numéro</a>
-                </li>
-                <li>
-                  <strong>LinkedIn :</strong>
-                  <a href="https://www.linkedin.com/in/oussama-guiren"
-                     target="_blank"
-                     rel="noopener noreferrer">
-                    Mon profil LinkedIn
-                  </a>
-                </li>
-              </ul>
-              <noscript>
-                <p>Activez JavaScript pour afficher le numéro de téléphone.</p>
-              </noscript>
-              <p class="contact-note">
-                Réponse rapide, possibilité d’échange en visio ou par téléphone.
-              </p>
+          <div class="contact-container">
+            <div class="contact-grid">
+              <!-- Email Card -->
+              <div class="contact-card">
+                <div class="contact-icon-wrapper">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <h3>Par Email</h3>
+                <p>Décrivez votre projet via le formulaire dédié.</p>
+                <button type="button" class="contact-card-btn" id="btnContactMail">
+                  Me contacter
+                </button>
+              </div>
+
+              <!-- Phone Card -->
+              <div class="contact-card">
+                <div class="contact-icon-wrapper">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <h3>Par Téléphone</h3>
+                <p>Échange direct pour vos besoins urgents.</p>
+                <a href="#" class="contact-card-btn secondary" id="phoneBtn">
+                  Afficher le numéro
+                </a>
+              </div>
+
+              <!-- LinkedIn Card -->
+              <div class="contact-card">
+                <div class="contact-icon-wrapper">
+                  <i class="fa-brands fa-linkedin-in"></i>
+                </div>
+                <h3>Sur LinkedIn</h3>
+                <p>Consultez mon parcours complet.</p>
+                <a href="https://www.linkedin.com/in/oussama-guiren" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="contact-card-btn secondary">
+                  Voir mon profil
+                </a>
+              </div>
             </div>
-
-            <div class="contact-form-wrapper">
-              <form id="contactForm" novalidate autocomplete="off">
-                <div class="form-group">
-                  <label for="companyName">Nom de la société*</label>
-                  <input
-                    type="text"
-                    id="companyName"
-                    name="companyName"
-                    required
-                    minlength="2"
-                    maxlength="120"
-                    autocomplete="organization"
-                    aria-describedby="companyName-error"
-                    pattern="^[A-Za-zÀ-ÖØ-öø-ÿ0-9][A-Za-zÀ-ÖØ-öø-ÿ0-9 .'’&()\\-]{1,}$"
-                    placeholder="Ex: Entreprise Dupont SAS">
-                  <div class="error" id="companyName-error" aria-live="polite"></div>
-                </div>
-
-                <div class="form-group">
-                  <label for="email">Email*</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    inputmode="email"
-                    autocomplete="email"
-                    autocapitalize="off"
-                    spellcheck="false"
-                    aria-describedby="email-error"
-                    placeholder="nom@domaine.fr"
-                    pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}$">
-                  <div class="hint">Format attendu : nom@domaine.tld</div>
-                  <div class="error" id="email-error" aria-live="polite"></div>
-                </div>
-
-                <div class="form-group">
-                  <label for="phone">Téléphone (optionnel)</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    inputmode="tel"
-                    autocomplete="tel"
-                    aria-describedby="phone-error"
-                    placeholder="06 12 34 56 78 ou +33 6 12 34 56 78"
-                    title="Numéro FR: 0X XX XX XX XX, +33 X XX XX XX XX, ou 0033 X XX XX XX XX"
-                    pattern="^(?:0[1-9]|(?:\\+33|0033)[ .-]?[1-9])(?:[ .-]?\\d{2}){4}$"
-                    maxlength="20">
-                  <div class="error" id="phone-error" aria-live="polite"></div>
-                </div>
-
-                <div class="form-group">
-                  <label for="missionType">Type de collaboration*</label>
-                  <select id="missionType" name="missionType" required aria-describedby="missionType-error">
-                    <option value="" disabled selected>— Sélectionner —</option>
-                    <option value="freelance">Mission Freelance</option>
-                    <option value="cdd_cdi">CDI / CDD</option>
-                    <option value="other">Autre</option>
-                  </select>
-                  <div class="error" id="missionType-error" aria-live="polite"></div>
-                </div>
-
-                <div class="form-group">
-                  <label for="message">Message*</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    minlength="10"
-                    maxlength="5000"
-                    rows="6"
-                    aria-describedby="message-error"
-                    placeholder="Décrivez votre besoin…"></textarea>
-                  <div class="error" id="message-error" aria-live="polite"></div>
-                </div>
-
-                <div class="form-group">
-                  <label for="jobDescriptionFile">Fiche de poste (optionnel)</label>
-                  <div class="file-upload-wrapper">
-                    <input
-                      type="file"
-                      id="jobDescriptionFile"
-                      name="jobDescriptionFile"
-                      accept=".pdf,.doc,.docx,.txt,.md">
-                    <div id="fileName" role="button" tabindex="0" aria-label="Choisir ou déposer un fichier">
-                      Cliquer ou déposer un fichier (PDF, DOC/DOCX, TXT, MD)
-                    </div>
-                  </div>
-                  <div class="hint">
-                    Formats: PDF, DOC, DOCX, TXT, MD — Taille max: 10&nbsp;Mo
-                  </div>
-                  <div class="error" id="file-error" aria-live="polite"></div>
-                </div>
-
-                <button type="submit" id="submitBtn">Envoyer</button>
-                <div id="formStatus" role="status" aria-live="polite" class="hint"></div>
-              </form>
+            
+            <div class="contact-footer">
+              <p>Réponse généralement sous 24h. Disponible pour des missions Freelance, CDD ou CDI.</p>
             </div>
           </div>
         </div>
@@ -442,32 +407,143 @@
   <!-- Toast notifications root -->
   <div id="toast-root" class="toast-container" aria-live="polite" aria-atomic="true"></div>
 
-  <!-- Modal projet -->
-  <div id="projectModal"
-       class="project-modal"
-       aria-hidden="true"
-       role="dialog"
-       aria-modal="true"
-       aria-labelledby="projectModalTitle">
-    <div class="project-modal-inner" role="document">
-      <button class="modal-close panel-close" id="closeProjectModal" aria-label="Fermer">Retour</button>
-      <div class="modal-body">
-        <div class="modal-media">
-          <img id="modalImage" src="" alt="" />
+  <!-- Contact Popup (Style "about-popup") -->
+  <div class="about-popup" id="contactPopup" aria-hidden="true" role="dialog" aria-labelledby="contactPopupTitle" aria-modal="true">
+    <div class="about-popup-overlay"></div>
+    <div class="about-popup-content">
+      <button class="about-popup-close" id="closeContactPopup" aria-label="Fermer la popup">
+        <i class="fa-solid fa-times"></i>
+      </button>
+      <div class="about-popup-inner">
+        <h2 class="about-popup-title" id="contactPopupTitle">Contactez-moi</h2>
+        <div class="contact-form-wrapper" style="width: 100%;">
+          <form id="contactForm" novalidate autocomplete="off">
+            <div class="form-group">
+              <label for="companyName">Nom de la société*</label>
+              <input
+                type="text"
+                id="companyName"
+                name="companyName"
+                required
+                minlength="2"
+                maxlength="120"
+                autocomplete="organization"
+                aria-describedby="companyName-error"
+                pattern="^[A-Za-zÀ-ÖØ-öø-ÿ0-9][A-Za-zÀ-ÖØ-öø-ÿ0-9 .'’&()\\-]{1,}$"
+                placeholder="Ex: Entreprise Dupont SAS">
+              <div class="error" id="companyName-error" aria-live="polite"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email*</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                inputmode="email"
+                autocomplete="email"
+                autocapitalize="off"
+                spellcheck="false"
+                aria-describedby="email-error"
+                placeholder="nom@domaine.fr"
+                pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}$">
+              <div class="hint">Format attendu : nom@domaine.tld</div>
+              <div class="error" id="email-error" aria-live="polite"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Téléphone (optionnel)</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                inputmode="tel"
+                autocomplete="tel"
+                aria-describedby="phone-error"
+                placeholder="06 12 34 56 78 ou +33 6 12 34 56 78"
+                title="Numéro FR: 0X XX XX XX XX, +33 X XX XX XX XX, ou 0033 X XX XX XX XX"
+                pattern="^(?:0[1-9]|(?:\\+33|0033)[ .-]?[1-9])(?:[ .-]?\\d{2}){4}$"
+                maxlength="20">
+              <div class="error" id="phone-error" aria-live="polite"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="missionType">Type de collaboration*</label>
+              <select id="missionType" name="missionType" required aria-describedby="missionType-error">
+                <option value="" disabled selected>— Sélectionner —</option>
+                <option value="freelance">Mission Freelance</option>
+                <option value="cdd_cdi">CDI / CDD</option>
+                <option value="other">Autre</option>
+              </select>
+              <div class="error" id="missionType-error" aria-live="polite"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message*</label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                minlength="10"
+                maxlength="5000"
+                rows="6"
+                aria-describedby="message-error"
+                placeholder="Décrivez votre besoin…"></textarea>
+              <div class="error" id="message-error" aria-live="polite"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="jobDescriptionFile">Fiche de poste (optionnel)</label>
+              <div class="file-upload-wrapper">
+                <input
+                  type="file"
+                  id="jobDescriptionFile"
+                  name="jobDescriptionFile"
+                  accept=".pdf,.doc,.docx,.txt,.md">
+                <div id="fileName" role="button" tabindex="0" aria-label="Choisir ou déposer un fichier">
+                  Cliquer ou déposer un fichier (PDF, DOC/DOCX, TXT, MD)
+                </div>
+              </div>
+              <div class="hint">
+                Formats: PDF, DOC, DOCX, TXT, MD — Taille max: 10&nbsp;Mo
+              </div>
+              <div class="error" id="file-error" aria-live="polite"></div>
+            </div>
+
+            <button type="submit" id="submitBtn">Envoyer</button>
+            <div id="formStatus" role="status" aria-live="polite" class="hint"></div>
+          </form>
         </div>
-        <div class="modal-content">
-          <h3 id="projectModalTitle"></h3>
-          <p id="projectModalDescription"></p>
-          <div class="modal-tech">
-            <strong>Technologies : </strong>
-            <span id="projectModalTech"></span>
+      </div>
+    </div>
+  </div>
+  <!-- Project Popup (Style "about-popup") -->
+  <div class="about-popup" id="projectModal" aria-hidden="true" role="dialog" aria-labelledby="projectModalTitle" aria-modal="true">
+    <div class="about-popup-overlay"></div>
+    <div class="about-popup-content project-popup-content">
+      <button class="about-popup-close" id="closeProjectModal" aria-label="Fermer la popup">
+        <i class="fa-solid fa-times"></i>
+      </button>
+      <div class="about-popup-inner">
+        <div class="project-details-grid">
+          <div class="project-media-wrapper">
+            <img id="modalImage" src="" alt="" class="project-popup-image" />
           </div>
-          <div class="modal-actions">
-            <a id="projectModalLink"
-               class="card-link"
-               href="#"
-               target="_blank"
-               rel="noopener noreferrer">Voir le site →</a>
+          <div class="project-info-wrapper">
+            <h2 class="about-popup-title" id="projectModalTitle"></h2>
+            <div class="about-popup-text-content">
+              <p class="about-popup-text" id="projectModalDescription"></p>
+              <div class="project-tech-stack">
+                <strong>Technologies :</strong>
+                <span id="projectModalTech"></span>
+              </div>
+            </div>
+            <div class="project-popup-actions">
+              <a id="projectModalLink" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                Voir le site <i class="fa-solid fa-external-link-alt"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
