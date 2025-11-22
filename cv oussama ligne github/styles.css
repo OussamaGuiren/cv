@@ -1892,29 +1892,30 @@ body.hero-title-typed .blockquote.hero-quote-container h4 {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 6px;
+  height: 40px; /* Larger touch target */
   background: transparent;
   outline: none;
   position: absolute;
-  top: 4px;
+  top: -13px; /* Center vertically over the track (track top:0, height:6px) */
   left: 0;
   margin: 0;
   cursor: pointer;
   z-index: 10;
+  touch-action: none; /* Prevent scrolling while dragging */
 }
 
 .timeline-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 22px;
-  height: 22px;
+  width: 28px; /* Larger thumb */
+  height: 28px;
   border-radius: 50%;
   background: white;
   border: 3px solid var(--accent);
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 120, 212, 0.4);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  margin-top: -8px;
+  transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.1s ease; /* Faster transition */
+  margin-top: -11px; /* Center relative to track (if track were standardized) - adjusted for appearance */
   position: relative;
   z-index: 2;
 }
@@ -1933,16 +1934,18 @@ body.hero-title-typed .blockquote.hero-quote-container h4 {
 }
 
 .timeline-slider::-moz-range-thumb {
-  width: 22px;
-  height: 22px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: white;
   border: 3px solid var(--accent);
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 120, 212, 0.4);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.1s ease;
   position: relative;
   z-index: 2;
+  border: none; /* Reset for firefox */
+  border: 3px solid var(--accent);
 }
 
 .timeline-slider::-moz-range-thumb:hover {

@@ -1246,6 +1246,18 @@
   }
 
   function updateTimeline(index) {
+    // Update progress immediately to fix lag
+    const progress = (index / (timelineData.length - 1)) * 100;
+    progressFill.style.width = `${progress}%`;
+
+    ticks.forEach((tick, i) => {
+      tick.classList.toggle("active", i === index);
+    });
+
+    yearLabels.forEach((label, i) => {
+      label.classList.toggle("active", i === index);
+    });
+
     if (index === currentIndex) return;
 
     // Add fade out animation to current content
@@ -1256,14 +1268,6 @@
     eventYear.classList.add("fade-out");
     eventCompany.classList.add("fade-out");
     eventDescription.classList.add("fade-out");
-
-    ticks.forEach((tick, i) => {
-      tick.classList.toggle("active", i === index);
-    });
-
-    yearLabels.forEach((label, i) => {
-      label.classList.toggle("active", i === index);
-    });
 
     // Wait for fade-out animation to finish before updating content
     content.addEventListener("animationend", function onFadeOutEnd() {
@@ -1278,9 +1282,6 @@
       eventDescription.textContent = event.description;
 
       timelineContainer.className = `timeline-container ${event.era}`;
-
-      const progress = (index / (timelineData.length - 1)) * 100;
-      progressFill.style.width = `${progress}%`;
 
       // Reset and animate in
       content.classList.remove("fade-transition");
@@ -1297,6 +1298,10 @@
 
   slider.addEventListener("input", function () {
     const index = parseInt(this.value);
+    // Instant update on drag
+    const progress = (index / (timelineData.length - 1)) * 100;
+    progressFill.style.width = `${progress}%`;
+    
     updateTimeline(index);
   });
 
