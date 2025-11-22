@@ -2819,7 +2819,7 @@ button[disabled] {
   color: #ffffff;
   opacity: 1;
   will-change: opacity;
-  animation: splash-logo-color 0.3s ease-in 1.5s forwards, splash-off 0.6s ease-in-out 3.2s forwards;
+  animation: splash-logo-color 0.3s ease-in 0.8s forwards, splash-off 0.5s ease-in-out 1.8s forwards;
 }
 
 .splash_logo::before {
@@ -2944,7 +2944,7 @@ button[disabled] {
   stroke: 0;
   -webkit-clip-path: polygon(45vw 40vh, 55vw 40vh, 55vw 60vh, 45vw 60vh);
   clip-path: polygon(45vw 40vh, 55vw 40vh, 55vw 60vh, 45vw 60vh);
-  animation: splash-expand 0.7s ease-in forwards 2.7s;
+  animation: splash-expand 0.8s cubic-bezier(0.7, 0, 0.3, 1) forwards 1.1s;
 }
 
 .splash_minimize {
@@ -2969,7 +2969,7 @@ button[disabled] {
   height: 100%;
   -webkit-clip-path: polygon(0vw 0vh, 100vw 0vh, 100vw 100vh, 0vw 100vh);
   clip-path: polygon(0vw 0vh, 100vw 0vh, 100vw 100vh, 0vw 100vh);
-  animation: splash-scale 0.2s ease-out forwards 1s, splash-hide 1.3s ease-out forwards 1.2s;
+  animation: splash-scale 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.2s, splash-hide 0.4s ease-out forwards 0.7s;
 }
 
 /* Texte + bouton - comme le modèle */
@@ -2988,7 +2988,7 @@ button[disabled] {
   font-weight: 700;
   color: #ffffff;
   font-family: 'Nunito', sans-serif;
-  animation: splash-on 0.6s ease-in-out 3.7s forwards;
+  animation: splash-on 0.6s ease-in-out 2.0s forwards;
   box-sizing: border-box;
 }
 
@@ -2997,11 +2997,11 @@ button[disabled] {
   white-space: nowrap;
   overflow: hidden;
   width: 100%;
-  animation: splash-type 0.3s steps(60, end) 3.7s;
+  animation: splash-type 0.3s steps(60, end) 2.0s;
 }
 
 .text p:nth-child(2) {
-  animation: splash-type2 0.5s steps(60, end) 3.7s;
+  animation: splash-type2 0.5s steps(60, end) 2.0s;
 }
 
 .text button.splash-more-btn {
@@ -3018,7 +3018,7 @@ button[disabled] {
   cursor: pointer;
   margin-top: 12px;
   transition: color 0.5s, background-color 0.5s;
-  animation: splash-on 0.6s ease-in-out 4s forwards;
+  animation: splash-on 0.6s ease-in-out 2.3s forwards;
 }
 
 .text button.splash-more-btn:hover {
@@ -3058,13 +3058,13 @@ button[disabled] {
   .splash_svg rect {
     -webkit-clip-path: polygon(calc(50vw - 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh + 80px), calc(50vw - 80px) calc(50vh + 80px));
     clip-path: polygon(calc(50vw - 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh + 80px), calc(50vw - 80px) calc(50vh + 80px));
-    animation: splash-expand-tablet 0.7s ease-in forwards 2.7s;
+    animation: splash-expand-tablet 0.8s cubic-bezier(0.7, 0, 0.3, 1) forwards 1.1s;
   }
 
   .splash_minimize rect {
     -webkit-clip-path: polygon(calc(50vw - 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh + 80px), calc(50vw - 80px) calc(50vh + 80px));
     clip-path: polygon(calc(50vw - 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh + 80px), calc(50vw - 80px) calc(50vh + 80px));
-    animation: splash-scale-tablet 0.2s ease-out forwards 1s, splash-hide 1.3s ease-out forwards 1.2s;
+    animation: splash-scale-tablet 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.2s, splash-hide 0.4s ease-out forwards 0.7s;
   }
 
   .text {
@@ -3118,13 +3118,13 @@ button[disabled] {
   .splash_svg rect {
     -webkit-clip-path: polygon(calc(50vw - 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh + 60px), calc(50vw - 60px) calc(50vh + 60px));
     clip-path: polygon(calc(50vw - 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh + 60px), calc(50vw - 60px) calc(50vh + 60px));
-    animation: splash-expand-mobile 0.7s ease-in forwards 2.7s;
+    animation: splash-expand-mobile 0.8s cubic-bezier(0.7, 0, 0.3, 1) forwards 1.1s;
   }
 
   .splash_minimize rect {
     -webkit-clip-path: polygon(calc(50vw - 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh + 60px), calc(50vw - 60px) calc(50vh + 60px));
     clip-path: polygon(calc(50vw - 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh + 60px), calc(50vw - 60px) calc(50vh + 60px));
-    animation: splash-scale-mobile 0.2s ease-out forwards 1s, splash-hide 1.3s ease-out forwards 1.2s;
+    animation: splash-scale-mobile 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.2s, splash-hide 0.4s ease-out forwards 0.7s;
   }
 
   .text {
