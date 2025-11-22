@@ -3372,8 +3372,8 @@ button[disabled] {
 
   .et-slide {
     min-height: 100vh !important;
-    height: 100vh !important;
-    max-height: 100vh !important;
+    height: auto !important;
+    max-height: none !important;
     padding-inline: clamp(12px, 3vw, 18px);
     padding-block: clamp(10px, 1.5vh, 15px);
     align-items: center;
@@ -3386,8 +3386,8 @@ button[disabled] {
 
   .experience-section {
     min-height: 100vh !important;
-    height: 100vh !important;
-    max-height: 100vh !important;
+    height: auto !important;
+    max-height: none !important;
     margin: 0;
     padding: clamp(10px, 1.5vh, 15px) clamp(12px, 3vw, 18px);
     position: relative !important;
@@ -3396,8 +3396,8 @@ button[disabled] {
 
   .container-quisuisje {
     min-height: 100vh !important;
-    height: 100vh !important;
-    max-height: 100vh !important;
+    height: auto !important;
+    max-height: none !important;
     margin: 0;
     padding: 0;
     position: relative !important;
@@ -3406,8 +3406,8 @@ button[disabled] {
 
   .about-photo-section {
     min-height: 100vh !important;
-    height: 100vh !important;
-    max-height: 100vh !important;
+    height: auto !important;
+    max-height: none !important;
     margin: 0;
     padding: clamp(10px, 1.5vh, 15px) clamp(12px, 3vw, 18px);
     position: relative !important;
@@ -3576,6 +3576,7 @@ button[disabled] {
   /* Chaque section fait 100vh en tablette */
   .et-slide {
     min-height: 100vh;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
