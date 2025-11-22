@@ -1161,32 +1161,40 @@
 (function () {
   const timelineData = [
     {
-      year: 2020,
-      company: "Début de carrière",
+      year: 2018,
+      duree:"Novembre 2018 - Février 2019",
+      company: "DEVELOPPEUR WEB STAGIAIRE",
       description: "Mes premières expériences dans le développement, découverte des technologies web et des bases du développement logiciel.",
+      techs: "PHP, HTML5, CSS3, CodeIgniter, VS Code, PhpMyAdmin",
       icon: "fa-code",
       era: "era-early-web"
     },
     {
-      year: 2021,
-      company: "Développeur .NET",
-      description: "Spécialisation dans le développement .NET, création d'applications backend robustes et scalables.",
+      year: 2019,
+      duree:"Août 2019 - Décembre 2019",
+      company: "ANALYSTE PROGRAMMEUR .NET chez MyRsi à Meudon",
+      description: "Spécialisation dans le développement .NET. Assurer la maintenance évolutive et corrective d’une application métier en corrigeant les anomalies et exceptions imprévues, en estimant les charges des nouvelles fonctionnalités, en concevant/optimisant les fonctionnalités existantes et en supervisant les livraisons en environnement de recette.",
+      techs: "C#, ASP.NET, WPF (MVVM), LINQ, Angular, HTML/CSS, SQL Server, Git, Jenkins, XLDeploy, Visual Studio, VS Code",
       icon: "fa-server",
       era: "era-dot-com"
     },
     {
-      year: 2022,
-      company: "Développeur Fullstack",
-      description: "Évolution vers le développement fullstack, maîtrise du frontend avec Vue.js et approfondissement des compétences backend.",
+      year: 2021 + "(stage)",
+      duree:"Avril 2021 - Juillet 2021",
+      company: "CONCEPTEUR DEVELOPPEUR .NET STAGIAIRE chez Partner talent à Lille",
+      description: "Intégration d'OAuth2 via Gmail pour sécuriser les connexions utilisateur dans l'ERP, accompagnée d'une TMA incluant la modification des champs \"From\" et \"Sender\" des emails, l'amélioration de la page de configuration des paramètres de messagerie et l'ajustement de la base de données et des procédures stockées pour la journalisation des emails.",
+      techs:"C#, ASP.NET MVC, T-SQL, Visual Studio, SSMS, jQuery, AJAX ",
       icon: "fa-laptop-code",
       era: "era-social-media"
     },
     {
-      year: 2023,
-      company: "Développeur .NET & Power Platform",
-      description: "Expertise dans le développement .NET et la Power Platform, création de solutions d'automatisation et de modernisation pour les entreprises.",
-      icon: "fa-rocket",
-      era: "era-mobile"
+      year: 2021,
+      duree:"Septembre 2021 - Mars 2024",
+      company: "DEVELOPPEUR .NET chez IBM à Lille",
+      description: "Migration de scripts VBScript vers Devbooster 4 (.NET Framework), création de pages intranet dynamiques avec formulaires complexes, conception de batches automatisés pour le traitement de fichiers CSV, optimisation des opérations CRUD en SQL (T-SQL et parfois EF Core) et maintenance applicative incluant correction de bugs et évolution des fonctionnalités.",
+      techs:"C#, LINQ, XAML, T-SQL, Visual Studio, EF Core, Devbooster 4  ",
+      icon: "fa-laptop-code",
+      era: "era-social-media"
     }
   ];
 
@@ -1195,13 +1203,14 @@
   const eventYear = document.getElementById("eventYear");
   const eventCompany = document.getElementById("eventCompany");
   const eventDescription = document.getElementById("eventDescription");
+  const eventDuree = document.getElementById("eventDuree");
   const progressFill = document.getElementById("progressFill");
   const timelineContainer = document.getElementById("timelineContainer");
   const content = document.getElementById("timelineContent");
   const sliderTrack = document.getElementById("sliderTrack");
   const yearLabelsContainer = document.getElementById("yearLabels");
 
-  if (!slider || !eventIcon || !eventYear || !eventCompany || !eventDescription) {
+  if (!slider || !eventIcon || !eventYear || !eventCompany || !eventDescription || !eventDuree) {
     return;
   }
 
@@ -1276,7 +1285,7 @@
     eventYear.classList.add("fade-out");
     eventCompany.classList.add("fade-out");
     eventDescription.classList.add("fade-out");
-
+    eventDuree.classList.add("fade-out");
     // Wait for fade-out animation to finish before updating content
     content.addEventListener("animationend", function onFadeOutEnd(e) {
       // Critical fix: ensure we only respond to the container's animation, 
@@ -1301,7 +1310,7 @@
       eventYear.classList.remove("fade-out");
       eventCompany.classList.remove("fade-out");
       eventDescription.classList.remove("fade-out");
-
+      eventDuree.classList.remove("fade-out");
       content.classList.add("fade-in");
 
       currentIndex = targetIndex;
@@ -1376,109 +1385,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-// =========== MODAL PROJET (NOUVEAU STYLE) ===========
-(function() {
-  const projectModal = document.getElementById('projectModal');
-  const closeProjectModalBtn = document.getElementById('closeProjectModal');
-  const modalTitleEl = document.getElementById('projectModalTitle');
-  const modalDescEl = document.getElementById('projectModalDescription');
-  const modalTechEl = document.getElementById('projectModalTech');
-  const modalLinkEl = document.getElementById('projectModalLink');
-  const modalImageEl = document.getElementById('modalImage');
-  const body = document.body;
 
-  // Keep original parent for restoration
-  let projectModalOriginalParent = null;
-  let projectModalNextSibling = null;
-
-  function ensureProjectModalInBody() {
-    if (!projectModal) return;
-    if (projectModal.parentNode !== document.body) {
-      projectModalOriginalParent = projectModal.parentNode;
-      projectModalNextSibling = projectModal.nextSibling;
-      document.body.appendChild(projectModal);
-    }
-  }
-
-  function restoreProjectModalOriginalPosition() {
-    if (!projectModal || !projectModalOriginalParent) return;
-    if (projectModalNextSibling) {
-      projectModalOriginalParent.insertBefore(projectModal, projectModalNextSibling);
-    } else {
-      projectModalOriginalParent.appendChild(projectModal);
-    }
-    projectModalOriginalParent = null;
-    projectModalNextSibling = null;
-  }
-
-  function openProjectModalFromCard(card) {
-    if (!card) return;
-    const title = card.dataset.title || card.querySelector('h3')?.textContent || '';
-    const description = card.dataset.description || '';
-    const tech = card.dataset.tech || '';
-    const link = card.dataset.link || '#';
-    const img = card.querySelector('.card-image img')?.getAttribute('src') || '';
-
-    modalTitleEl.textContent = title;
-    modalDescEl.textContent = description;
-    modalTechEl.textContent = tech;
-    modalLinkEl.href = link;
-    
-    if (link === '#') {
-      modalLinkEl.classList.add('disabled');
-      modalLinkEl.removeAttribute('target');
-    } else {
-      modalLinkEl.classList.remove('disabled');
-      modalLinkEl.setAttribute('target', '_blank');
-    }
-
-    if (img) {
-      modalImageEl.src = img;
-      modalImageEl.alt = title;
-      modalImageEl.style.display = 'block';
-    } else {
-      modalImageEl.style.display = 'none';
-    }
-
-    ensureProjectModalInBody();
-    projectModal?.setAttribute('aria-hidden', 'false');
-    body.classList.add('modal-open');
-    body.style.overflow = 'hidden';
-    
-    setTimeout(() => closeProjectModalBtn?.focus(), 100);
-  }
-
-  function closeProjectModal() {
-    if (projectModal) {
-      projectModal.setAttribute('aria-hidden', 'true');
-      body.classList.remove('modal-open');
-      body.style.overflow = '';
-      
-      setTimeout(() => {
-        restoreProjectModalOriginalPosition();
-      }, 300);
-    }
-  }
-
-  document.querySelectorAll('.card-open').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const card = e.currentTarget.closest('.project-card');
-      openProjectModalFromCard(card);
-    });
-  });
-
-  closeProjectModalBtn?.addEventListener('click', closeProjectModal);
-
-  projectModal?.addEventListener('click', (e) => {
-    if (e.target === projectModal || e.target.classList.contains('about-popup-overlay')) {
-      closeProjectModal();
-    }
-  });
-
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && projectModal && projectModal.getAttribute('aria-hidden') === 'false') {
-      closeProjectModal();
-    }
-  });
-})();
