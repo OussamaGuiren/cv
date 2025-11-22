@@ -3054,7 +3054,18 @@ button[disabled] {
     width: clamp(18px, 1.8vw, 20px) !important;
   }
 
-  /* L'animation splash-expand fonctionnera avec les valeurs de base, pas besoin de modifier ici */
+  /* Carré parfait pour tablette (160px => 80px radius) */
+  .splash_svg rect {
+    -webkit-clip-path: polygon(calc(50vw - 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh + 80px), calc(50vw - 80px) calc(50vh + 80px));
+    clip-path: polygon(calc(50vw - 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh + 80px), calc(50vw - 80px) calc(50vh + 80px));
+    animation: splash-expand-tablet 0.7s ease-in forwards 2.7s;
+  }
+
+  .splash_minimize rect {
+    -webkit-clip-path: polygon(calc(50vw - 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh + 80px), calc(50vw - 80px) calc(50vh + 80px));
+    clip-path: polygon(calc(50vw - 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh + 80px), calc(50vw - 80px) calc(50vh + 80px));
+    animation: splash-scale-tablet 0.2s ease-out forwards 1s, splash-hide 1.3s ease-out forwards 1.2s;
+  }
 
   .text {
     margin: calc(-50px * 0.85) 0 0 calc(-150px * 0.85) !important;
@@ -3103,14 +3114,16 @@ button[disabled] {
     top: calc(-5px * 0.7) !important;
   }
 
-  /* Ajuster le clip-path initial pour mobile tout en préservant l'animation */
+  /* Ajuster le clip-path initial pour mobile (Carré parfait 120px => 60px radius) */
   .splash_svg rect {
-    -webkit-clip-path: polygon(40vw 35vh, 60vw 35vh, 60vw 65vh, 40vw 65vh);
-    clip-path: polygon(40vw 35vh, 60vw 35vh, 60vw 65vh, 40vw 65vh);
+    -webkit-clip-path: polygon(calc(50vw - 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh + 60px), calc(50vw - 60px) calc(50vh + 60px));
+    clip-path: polygon(calc(50vw - 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh + 60px), calc(50vw - 60px) calc(50vh + 60px));
     animation: splash-expand-mobile 0.7s ease-in forwards 2.7s;
   }
 
   .splash_minimize rect {
+    -webkit-clip-path: polygon(calc(50vw - 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh + 60px), calc(50vw - 60px) calc(50vh + 60px));
+    clip-path: polygon(calc(50vw - 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh + 60px), calc(50vw - 60px) calc(50vh + 60px));
     animation: splash-scale-mobile 0.2s ease-out forwards 1s, splash-hide 1.3s ease-out forwards 1.2s;
   }
 
@@ -3216,31 +3229,71 @@ button[disabled] {
 @media (max-width: 767px) {
   @keyframes splash-scale-mobile {
     100% {
-      -webkit-clip-path: polygon(40vw 35vh, 60vw 35vh, 60vw 65vh, 40vw 65vh);
-      clip-path: polygon(40vw 35vh, 60vw 35vh, 60vw 65vh, 40vw 65vh);
+      -webkit-clip-path: polygon(calc(50vw - 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh + 60px), calc(50vw - 60px) calc(50vh + 60px));
+      clip-path: polygon(calc(50vw - 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh + 60px), calc(50vw - 60px) calc(50vh + 60px));
     }
   }
 
   @keyframes splash-expand-mobile {
-    0% {}
+    0% {
+      -webkit-clip-path: polygon(calc(50vw - 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh + 60px), calc(50vw - 60px) calc(50vh + 60px));
+      clip-path: polygon(calc(50vw - 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh + 60px), calc(50vw - 60px) calc(50vh + 60px));
+    }
     25% {
-      -webkit-clip-path: polygon(0vw 0vh, 60vw 35vh, 60vw 65vh, 40vw 65vh);
-      clip-path: polygon(0vw 0vh, 60vw 35vh, 60vw 65vh, 40vw 65vh);
+      -webkit-clip-path: polygon(0 0, calc(50vw + 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh + 60px), calc(50vw - 60px) calc(50vh + 60px));
+      clip-path: polygon(0 0, calc(50vw + 60px) calc(50vh - 60px), calc(50vw + 60px) calc(50vh + 60px), calc(50vw - 60px) calc(50vh + 60px));
       fill: #ffffff;
     }
     50% {
-      -webkit-clip-path: polygon(0vw 0vh, 100vw 0vh, 60vw 65vh, 40vw 65vh);
-      clip-path: polygon(0vw 0vh, 100vw 0vh, 60vw 65vh, 40vw 65vh);
+      -webkit-clip-path: polygon(0 0, 100vw 0, calc(50vw + 60px) calc(50vh + 60px), calc(50vw - 60px) calc(50vh + 60px));
+      clip-path: polygon(0 0, 100vw 0, calc(50vw + 60px) calc(50vh + 60px), calc(50vw - 60px) calc(50vh + 60px));
       fill: var(--accent);
     }
     75% {
-      -webkit-clip-path: polygon(0vw 0vh, 100vw 0vh, 60vw 65vh, 0vw 100vh);
-      clip-path: polygon(0vw 0vh, 100vw 0vh, 60vw 65vh, 0vw 100vh);
+      -webkit-clip-path: polygon(0 0, 100vw 0, 100vw 100vh, calc(50vw - 60px) calc(50vh + 60px));
+      clip-path: polygon(0 0, 100vw 0, 100vw 100vh, calc(50vw - 60px) calc(50vh + 60px));
       fill: #ffffff;
     }
     100% {
-      -webkit-clip-path: polygon(0vw 0vh, 100vw 0vh, 100vw 100vh, 0vw 100vh);
-      clip-path: polygon(0vw 0vh, 100vw 0vh, 100vw 100vh, 0vw 100vh);
+      -webkit-clip-path: polygon(0 0, 100vw 0, 100vw 100vh, 0 100vh);
+      clip-path: polygon(0 0, 100vw 0, 100vw 100vh, 0 100vh);
+      fill: var(--accent);
+    }
+  }
+}
+
+/* Keyframes responsive pour tablette */
+@media (min-width: 768px) and (max-width: 1024px) {
+  @keyframes splash-scale-tablet {
+    100% {
+      -webkit-clip-path: polygon(calc(50vw - 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh + 80px), calc(50vw - 80px) calc(50vh + 80px));
+      clip-path: polygon(calc(50vw - 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh + 80px), calc(50vw - 80px) calc(50vh + 80px));
+    }
+  }
+
+  @keyframes splash-expand-tablet {
+    0% {
+      -webkit-clip-path: polygon(calc(50vw - 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh + 80px), calc(50vw - 80px) calc(50vh + 80px));
+      clip-path: polygon(calc(50vw - 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh + 80px), calc(50vw - 80px) calc(50vh + 80px));
+    }
+    25% {
+      -webkit-clip-path: polygon(0 0, calc(50vw + 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh + 80px), calc(50vw - 80px) calc(50vh + 80px));
+      clip-path: polygon(0 0, calc(50vw + 80px) calc(50vh - 80px), calc(50vw + 80px) calc(50vh + 80px), calc(50vw - 80px) calc(50vh + 80px));
+      fill: #ffffff;
+    }
+    50% {
+      -webkit-clip-path: polygon(0 0, 100vw 0, calc(50vw + 80px) calc(50vh + 80px), calc(50vw - 80px) calc(50vh + 80px));
+      clip-path: polygon(0 0, 100vw 0, calc(50vw + 80px) calc(50vh + 80px), calc(50vw - 80px) calc(50vh + 80px));
+      fill: var(--accent);
+    }
+    75% {
+      -webkit-clip-path: polygon(0 0, 100vw 0, 100vw 100vh, calc(50vw - 80px) calc(50vh + 80px));
+      clip-path: polygon(0 0, 100vw 0, 100vw 100vh, calc(50vw - 80px) calc(50vh + 80px));
+      fill: #ffffff;
+    }
+    100% {
+      -webkit-clip-path: polygon(0 0, 100vw 0, 100vw 100vh, 0 100vh);
+      clip-path: polygon(0 0, 100vw 0, 100vw 100vh, 0 100vh);
       fill: var(--accent);
     }
   }
