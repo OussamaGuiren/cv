@@ -3780,10 +3780,13 @@ button[disabled] {
     margin: 0;
     padding: 0;
     gap: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Ajout d'une marge légère entre les sections */
   }
 
   
-
+  
   /* S'assurer que chaque section est dans le flux normal sans chevauchement */
   .et-slide,
   .experience-section,
@@ -3794,6 +3797,8 @@ button[disabled] {
     position: relative !important;
     z-index: auto !important;
     isolation: isolate !important;
+    padding-top: 20px !important; /* Marge interne haut */
+    padding-bottom: 20px !important; /* Marge interne bas */
   }
 
   .et-slide {
@@ -3838,6 +3843,8 @@ button[disabled] {
     padding: clamp(10px, 1.5vh, 15px) clamp(12px, 3vw, 18px);
     position: relative !important;
     z-index: 1 !important;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
   }
 
   /* S'assurer que le main et les sections sont dans le flux normal */
