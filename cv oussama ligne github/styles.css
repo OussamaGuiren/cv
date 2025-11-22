@@ -4369,3 +4369,88 @@ button[disabled] {
     font-size: 0.95rem;
   }
 }
+/* Tech Ticker Section */
+.tech-ticker-section {
+  width: 100%;
+  padding: 20px 0;
+  background: rgba(0, 120, 212, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  position: relative;
+  margin: 0 !important; /* Override potential default margins */
+  display: block !important; /* Ensure it is visible */
+  z-index: 10;
+}
+
+.tech-ticker-wrapper {
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.tech-ticker-track {
+  display: flex;
+  gap: 40px;
+  width: max-content;
+  animation: ticker-scroll 30s linear infinite;
+}
+
+.tech-ticker-track:hover {
+  animation-play-state: paused;
+}
+
+.tech-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.8);
+  white-space: nowrap;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.tech-item i {
+  color: var(--accent);
+}
+
+.tech-item:hover {
+  background: rgba(0, 120, 212, 0.1);
+  border-color: rgba(0, 120, 212, 0.3);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* Moves half the width (since we doubled the content) */
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .tech-ticker-section {
+    padding: 15px 0;
+  }
+  
+  .tech-item {
+    font-size: 1rem;
+    padding: 6px 12px;
+  }
+  
+  .tech-ticker-track {
+    gap: 20px;
+    animation-duration: 20s; /* Faster on mobile or adjust as needed */
+  }
+}
