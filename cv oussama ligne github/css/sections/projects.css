@@ -34,7 +34,7 @@
   padding-bottom: 20px;
 }
 
-/* CARTES */
+/* CARTES PROJETS */
 .project-card {
   background: #FFFFFF; /* Fond blanc éclatant */
   border: none;
@@ -73,98 +73,67 @@
   transform: scale(1.05);
 }
 
-/* Contenu de la carte */
+/* CONTENU DE LA CARTE */
 .card-content {
   padding: 24px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background: #FFFFFF; /* Assurer fond blanc */
+  background: #FFFFFF;
+  color: #323130; /* Couleur par défaut */
 }
 
-/* Titre */
+/* Titre (H3) */
 .card-content h3 {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   margin: 0 0 12px 0;
-  color: #004578; /* Bleu sombre lisible sur blanc */
+  color: #004578 !important; /* Bleu Microsoft foncé FORCE */
   font-family: 'Segoe UI', sans-serif;
   font-weight: 700;
   line-height: 1.3;
 }
 
-/* Description */
-.card-description {
-  font-size: 0.95rem;
-  color: #484644; /* Gris foncé lisible */
-  margin-bottom: 20px;
-  line-height: 1.6;
-  flex-grow: 1; /* Pousse les actions vers le bas */
-  display: -webkit-box;
-  -webkit-line-clamp: 3; /* Limite à 3 lignes pour uniformité */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* Tech Pills */
-.card-tech {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+/* Description (Correction sélecteur .card-excerpt) */
+.card-excerpt {
+  font-size: 1rem;
+  color: #484644 !important; /* Gris foncé FORCE */
   margin-bottom: 24px;
+  line-height: 1.6;
+  flex-grow: 1;
 }
 
-.tech-pill {
-  font-size: 0.75rem;
-  padding: 6px 12px;
-  border-radius: 100px;
-  background: #EFF6FC; /* Fond bleu très pâle */
-  color: #005A9E; /* Texte bleu */
-  font-weight: 600;
-  font-family: 'Segoe UI', sans-serif;
-  border: 1px solid rgba(0, 120, 212, 0.1);
-}
-
-/* Actions / Boutons */
-.card-actions {
-  display: flex;
-  gap: 12px;
-  margin-top: auto; /* Colle au bas */
-}
-
-/* Bouton générique */
-.card-btn {
-  flex: 1;
-  padding: 10px 16px; /* Padding explicite */
-  border-radius: 4px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-align: center;
-  text-decoration: none;
-  display: inline-flex; /* Flex pour centrer icône/texte */
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-weight: 600;
-  line-height: 1.2;
-  min-height: 44px; /* Hauteur touch-friendly */
-  box-sizing: border-box; /* Important pour padding */
-}
-
-/* Bouton Principal (En savoir plus) */
+/* BOUTON (Correction sélecteur .card-open) */
 .card-open {
+  width: 100%;
+  padding: 14px 20px; /* Padding explicite */
   background: #0078D4; /* Bleu Microsoft */
-  color: #ffffff;
-  border: 1px solid #0078D4;
+  color: #ffffff !important;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: auto; /* Pousse en bas */
+  display: block;
 }
 
 .card-open:hover {
-  background: #005A9E;
-  border-color: #005A9E;
-  box-shadow: 0 2px 8px rgba(0, 120, 212, 0.25);
+  background: #106EBE; /* Bleu plus foncé au survol */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Modal Styles (Déjà corrigés précédemment, conservés ici pour intégrité) */
+/* Placeholders (si utilisés) */
+.project-card.is-placeholder {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* MODAL PROJET (Déjà corrigé, styles conservés pour intégrité) */
 .project-popup-content {
   width: 90% !important;
   max-width: 1000px !important;
@@ -184,11 +153,7 @@
   color: #FFFFFF !important;
   width: 100%;
   height: 100%;
-  max-width: none !important;
-  max-height: none !important;
-  border-radius: 0 !important;
   padding: 0 !important;
-  box-shadow: none !important;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -212,8 +177,6 @@
   text-align: left !important;
   color: #ffffff !important;
   font-weight: 600 !important;
-  border: none !important;
-  padding: 0 !important;
 }
 
 .project-popup-content .about-popup-close {
@@ -225,11 +188,6 @@
   color: #ffffff !important;
   font-size: 1.5rem !important;
   margin-left: 20px;
-}
-
-.project-popup-content .about-popup-close:hover {
-  background: rgba(255, 255, 255, 0.1) !important;
-  transform: none !important;
 }
 
 .project-details-grid {
@@ -290,14 +248,12 @@
   margin-bottom: 8px;
   font-size: 0.9rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
 .project-tech-stack span {
   color: #ffffff !important;
   font-family: 'Segoe UI Mono', monospace;
   font-size: 0.95rem;
-  line-height: 1.5;
 }
 
 .project-popup-actions {
@@ -323,7 +279,6 @@
   background: #106EBE;
 }
 
-/* Responsive Mobile */
 @media (max-width: 900px) {
   .project-details-grid {
     grid-template-columns: 1fr;
