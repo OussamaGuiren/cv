@@ -6,29 +6,44 @@
   padding: 80px 20px;
   color: #ffffff;
   border-top: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrage global */
+}
+
+/* Header de section identique à Project Section */
+.contact-header {
+  text-align: center;
+  max-width: 800px;
+  margin-bottom: 60px;
 }
 
 .contact-container h2 {
   color: #ffffff !important;
-  text-align: center;
   font-size: 3rem;
   margin-bottom: 15px;
   font-weight: 700;
+  text-align: center;
 }
 
-.contact-container > p {
+.contact-container > p,
+.contact-header p {
   color: #C8C6C4 !important; 
   text-align: center;
-  margin-bottom: 50px;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
+/* Grille Contact */
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 30px;
   max-width: 1200px;
-  margin: 0 auto 60px auto;
+  width: 100%;
+  margin-bottom: 60px;
 }
 
 /* Cartes Contact Sombres */
@@ -127,6 +142,7 @@
   margin-top: 60px;
   padding-top: 40px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
 }
 
 .contact-footer p {
@@ -150,27 +166,22 @@
 }
 
 /* === FORMULAIRE CONTACT (STYLES GLOBAUX / MODAL) === */
-/* Ciblage large pour garantir l'application des styles */
-
-/* Conteneur des champs */
 .form-group {
   margin-bottom: 24px;
   position: relative;
-  display: block; /* Force display */
+  display: block;
 }
 
-/* Labels */
 .form-group label,
 label[for] {
   display: block;
   margin-bottom: 8px;
-  color: #F3F2F1 !important; /* Force texte blanc */
+  color: #F3F2F1 !important;
   font-size: 0.95rem;
   font-weight: 600;
   font-family: 'Segoe UI', sans-serif;
 }
 
-/* Champs de saisie (Input, Textarea, Select) */
 #contactForm input,
 #contactForm textarea,
 #contactForm select,
@@ -179,19 +190,18 @@ label[for] {
 .form-group select {
   width: 100%;
   padding: 12px 16px;
-  background: #323130 !important; /* Fond Gris Foncé */
+  background: #323130 !important;
   border: 1px solid #484644 !important;
   border-radius: 4px;
-  color: #ffffff !important; /* Texte Blanc */
+  color: #ffffff !important;
   font-family: 'Segoe UI', sans-serif !important;
   font-size: 1rem !important;
   transition: all 0.3s ease;
-  box-sizing: border-box; /* Important pour la largeur */
-  appearance: none; /* Reset natif */
+  box-sizing: border-box;
+  appearance: none;
   -webkit-appearance: none;
 }
 
-/* Placeholders */
 #contactForm input::placeholder,
 #contactForm textarea::placeholder,
 .form-group input::placeholder,
@@ -200,7 +210,6 @@ label[for] {
   opacity: 1;
 }
 
-/* État Focus */
 #contactForm input:focus,
 #contactForm textarea:focus,
 #contactForm select:focus,
@@ -208,12 +217,11 @@ label[for] {
 .form-group textarea:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #0078D4 !important; /* Bleu Microsoft */
-  background: #3B3A39 !important; /* Légèrement plus clair */
+  border-color: #0078D4 !important;
+  background: #3B3A39 !important;
   box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.25);
 }
 
-/* Erreurs */
 .form-group .error {
   color: #FF5A5A !important;
   font-size: 0.85rem;
@@ -229,7 +237,6 @@ label[for] {
   display: block;
 }
 
-/* File Upload Custom */
 .file-upload-wrapper {
   border: 2px dashed #484644 !important;
   padding: 20px;
@@ -253,7 +260,6 @@ label[for] {
   display: block;
 }
 
-/* Bouton Submit */
 #submitBtn,
 button[type="submit"] {
   width: 100%;
