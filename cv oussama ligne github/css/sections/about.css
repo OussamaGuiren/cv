@@ -424,3 +424,251 @@
   color: #0078D4; /* Rôle en bleu */
   -webkit-text-fill-color: unset;
 }
+
+.about-text-container {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3vh, 40px);
+  max-width: 100%;
+}
+
+.about-text-content {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 2.5vh, 32px);
+}
+
+/* Bouton "En savoir plus" */
+.about-learn-more-btn {
+  display: none; /* Caché sur desktop */
+}
+
+/* Popup "En savoir plus" */
+.about-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 99999; /* ensure overlay sits above all other contexts */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  color: #201F1E !important; /* Forcer texte noir */
+}
+
+.about-popup[aria-hidden="false"] {
+  opacity: 1;
+  visibility: visible;
+}
+
+.about-popup-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+}
+
+.about-popup-content {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(60px, 8vh, 80px) clamp(20px, 4vw, 40px) clamp(40px, 6vh, 60px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  pointer-events: none; /* ensure overlay receives clicks; inner content can override with pointer-events:auto */
+  color: #201F1E; /* Texte noir */
+}
+
+.about-popup-close {
+  position: absolute; /* relative to .about-popup-content -> will position it inside */
+  top: clamp(12px, 2.0vh, 20px);
+  right: clamp(12px, 3vw, 20px);
+  width: clamp(40px, 5.5vw, 50px);
+  height: clamp(40px, 5.5vw, 50px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 1px solid rgba(0, 120, 212, 0.12);
+  border-radius: 8px;
+  color: #002A4A; /* dark-blue icon */
+  font-size: clamp(18px, 2.5vw, 22px);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  z-index: 100001;
+  pointer-events: auto;
+}
+
+.about-popup-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: rotate(90deg);
+}
+
+.about-popup-inner {
+  width: 100%;
+  max-width: 900px;
+  max-height: calc(100vh - clamp(100px, 14vh, 140px));
+  background: #ffffff; /* white background */
+  border: 1px solid rgba(0, 120, 212, 0.12); /* light blue border */
+  border-radius: 12px;
+  padding: clamp(20px, 4vh, 40px) clamp(20px, 4vw, 40px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  animation: popupFadeIn 0.4s ease forwards;
+  margin: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  color: #201F1E; /* black text */
+  pointer-events: auto; /* allow interactions inside the modal */
+}
+
+@keyframes popupFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.about-popup-title {
+  font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+  font-weight: 800;
+  margin-bottom: clamp(14px, 3vh, 26px);
+  text-align: center;
+  color: #0078D4; /* dark blue title */
+}
+
+.about-popup-text-content {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(18px, 2.5vh, 28px);
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.about-popup-text {
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  line-height: 1.6;
+  color: #201F1E; /* black text */
+  text-align: left;
+}
+
+.about-popup-text strong {
+  color: #0078D4; /* blue strong */
+  font-weight: 700;
+}
+
+.about-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(20px, 3vh, 40px);
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+/* GLITCH STACK (Inverse: Glitch default, Clean on Hover) */
+.glitch-stack {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2); /* Ombre ajustée thème clair */
+  border: 3px solid rgba(0, 120, 212, 0.3);
+  transition: all 0.4s ease;
+  overflow: hidden;
+  background: #000000; /* Fond noir EXPLICITE requis pour l'effet glitch */
+}
+
+.glitch-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 16px;
+  /* Pas de background sur l'image elle-même */
+}
+
+/* Hover: Clean state */
+.glitch-stack:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 30px 80px rgba(0, 120, 212, 0.3);
+  border-color: rgba(0, 120, 212, 0.5);
+}
+
+.glitch-stack:hover .glitch-clone {
+  opacity: 0;
+  animation: none; /* Force stop animation immediately */
+  display: none; /* Ensure removal from flow/paint */
+}
+
+/* Default: Glitch Active */
+.glitch-clone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1; /* Visible by default */
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: hard-light;
+  transition: opacity 0.3s ease;
+}
+
+.glitch-clone:nth-child(2) {
+  animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
+}
+
+.glitch-clone:nth-child(3) {
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.glitch-clone:nth-child(4) {
+  animation: glitch-anim-flash 2s infinite linear;
+}
+
+@keyframes glitch-anim-1 {
+  0% { clip-path: inset(20% 0 80% 0); transform: translate(-10px, 5px); filter: hue-rotate(90deg) saturate(200%); }
+  5% { clip-path: inset(10% 0 40% 0); transform: translate(10px, -5px); filter: invert(0.3); }
+  10% { clip-path: inset(80% 0 5% 0); transform: translate(-15px, 5px); filter: none; }
+  15% { clip-path: inset(40% 0 20% 0); transform: translate(15px, -10px); filter: hue-rotate(180deg); }
+  20% { clip-path: inset(10% 0 60% 0); transform: translate(-10px, 10px); filter: none; }
+  25% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
+  100% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip-path: inset(60% 0 10% 0); transform: translate(10px, -5px); filter: none; }
+  5% { clip-path: inset(20% 0 50% 0); transform: translate(-10px, 5px); filter: hue-rotate(45deg) contrast(2); }
+  10% { clip-path: inset(10% 0 80% 0); transform: translate(15px, 15px); filter: none; }
+  15% { clip-path: inset(50% 0 30% 0); transform: translate(-15px, -5px); filter: sepia(1) saturate(300%); }
+  20% { clip-path: inset(80% 0 5% 0); transform: translate(10px, -10px); filter: none; }
+  25% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
+  100% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
+}
+
+@keyframes glitch-anim-flash {
+  0%, 90% { opacity: 0; transform: translate(0); filter: none; }
+  92% { opacity: 1; transform: translate(5px, 5px); filter: hue-rotate(90deg) saturate(400%) brightness(1.2); }
+  94% { opacity: 0.5; transform: translate(-5px, -5px); filter: invert(1); }
+  96% { opacity: 1; transform: translate(5px, -5px); filter: hue-rotate(270deg) blur(1px); }
+  100% { opacity: 0; transform: translate(0); filter: none; }
+}
