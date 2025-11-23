@@ -8,7 +8,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #F3F2F1; /* Gris clair Microsoft Surface */
+  background: #F3F2F1;
   overflow: hidden;
   z-index: 1;
 }
@@ -107,7 +107,7 @@ canvas#hero-canvas {
   content: '“';
   font-family: 'Georgia', serif;
   font-size: 6rem;
-  color: rgba(0, 120, 212, 0.15); /* Bleu très pâle */
+  color: rgba(0, 120, 212, 0.15);
   position: absolute;
   top: -40px;
   left: 0;
@@ -115,27 +115,31 @@ canvas#hero-canvas {
 }
 
 .blockquote-wrapper h1 {
-  font-family: 'Georgia', 'Times New Roman', serif !important; /* Police "Sagesse" */
+  font-family: 'Georgia', 'Times New Roman', serif !important;
   font-style: italic;
   font-size: clamp(1.4rem, 2.5vw, 2rem) !important;
   font-weight: 400 !important;
   line-height: 1.6 !important;
-  color: #323130 !important; /* Gris anthracite élégant */
+  color: #323130 !important;
   text-transform: none !important;
   letter-spacing: normal !important;
   background: none !important;
   -webkit-text-fill-color: initial !important;
-  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8); /* Légère aura blanche pour détacher du fond */
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
 }
 
-/* Mots clés dans la citation */
 .blockquote-wrapper .text-white {
-  color: #005A9E !important; /* Bleu Microsoft Profond mais doux */
+  color: #005A9E !important;
   font-weight: 600;
-  font-style: normal; /* Redresser les mots clés pour l'emphase */
+  font-style: normal;
   text-decoration: underline;
   text-decoration-color: rgba(0, 120, 212, 0.3);
   text-underline-offset: 4px;
+}
+
+/* Cible le H4 (Signature MOI) */
+.blockquote-wrapper h4 {
+  display: block;
 }
 
 /* --- BOUTON D'ACTION --- */
@@ -242,6 +246,11 @@ canvas#hero-canvas {
   
   .blockquote-wrapper h1 {
     font-size: 1.2rem !important;
+  }
+  
+  /* MASQUER LA SIGNATURE SUR MOBILE */
+  .blockquote-wrapper h4 {
+    display: none !important;
   }
   
   .hero-section::before,
