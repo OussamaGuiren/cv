@@ -1,4 +1,4 @@
-/* ===================== HERO SECTION (MICROSOFT FLUENT DESIGN) ===================== */
+/* ===================== HERO SECTION (MICROSOFT FLUENT DESIGN CLEAN) ===================== */
 
 .et-hero-tabs {
   position: relative;
@@ -8,46 +8,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #F3F2F1;
+  background: #F3F2F1; /* Gris clair Microsoft Surface uni */
   overflow: hidden;
   z-index: 1;
   margin: 0;
   padding: 0;
 }
 
-/* --- BACKGROUND AURORA ANIMATION --- */
+/* SUPPRESSION DES EFFETS AURORA FLOUX */
 .et-hero-tabs::before,
 .et-hero-tabs::after {
-  content: '';
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.6;
-  z-index: -1;
-  animation: auroraMove 10s infinite alternate;
-}
-
-.et-hero-tabs::before {
-  background: #0078D4; /* Bleu Microsoft */
-  width: 50vw;
-  height: 50vw;
-  top: -10%;
-  left: -10%;
-  animation-delay: 0s;
-}
-
-.et-hero-tabs::after {
-  background: #5C2D91; /* Mauve Power Platform */
-  width: 40vw;
-  height: 40vw;
-  bottom: 10%;
-  right: -5%;
-  animation-delay: -5s;
-}
-
-@keyframes auroraMove {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(50px, 30px) scale(1.1); }
+  display: none !important;
+  content: none;
 }
 
 canvas#hero-canvas {
@@ -64,7 +36,7 @@ canvas#hero-canvas {
   margin-bottom: 60px; 
 }
 
-/* Kicker (Typewriter JS gère l'affichage) */
+/* Kicker */
 .hero-kicker {
   font-family: 'Segoe UI', sans-serif;
   font-size: clamp(1rem, 2vw, 1.2rem);
@@ -74,11 +46,10 @@ canvas#hero-canvas {
   color: #0078D4;
   margin-bottom: 20px;
   display: block;
-  /* PAS D'ANIMATION CSS D'OPACITÉ ICI POUR EVITER LE CLIGNOTEMENT AVEC LE JS */
   opacity: 1; 
 }
 
-/* Titre Principal H1 (Typewriter JS gère l'affichage) */
+/* Titre Principal H1 */
 .et-hero-tabs h1 {
   font-family: 'Segoe UI', sans-serif;
   font-size: clamp(3.5rem, 8vw, 6rem);
@@ -87,7 +58,6 @@ canvas#hero-canvas {
   margin-bottom: 40px;
   color: #201F1E;
   letter-spacing: -0.03em;
-  /* PAS D'ANIMATION CSS D'OPACITÉ ICI */
   opacity: 1;
 }
 
@@ -95,7 +65,7 @@ canvas#hero-canvas {
   display: inline-block;
 }
 
-/* --- BLOCKQUOTE "SAGE" STYLE (Lui peut garder l'anim CSS car statique) --- */
+/* --- BLOCKQUOTE "SAGE" STYLE --- */
 .blockquote-wrapper {
   margin: 0 auto 60px auto;
   max-width: 900px;
@@ -180,9 +150,60 @@ canvas#hero-canvas {
   box-shadow: 0 8px 20px rgba(0, 120, 212, 0.4);
 }
 
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: fadeIn 1s ease 1.5s forwards;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: #0078D4;
+}
+
+.scroll-indicator span {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.scroll-mouse {
+  width: 26px;
+  height: 40px;
+  border: 2px solid #0078D4;
+  border-radius: 20px;
+  position: relative;
+}
+
+.scroll-wheel {
+  width: 4px;
+  height: 8px;
+  background: #0078D4;
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollWheel 2s infinite;
+}
+
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scrollWheel {
+  0% { top: 6px; opacity: 1; }
+  100% { top: 20px; opacity: 0; }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
 }
 
 /* RESPONSIVE MOBILE */
@@ -207,7 +228,6 @@ canvas#hero-canvas {
     font-size: 1.2rem !important;
   }
   
-  /* --- SUPPRESSION RADICALE DU "MOI" --- */
   .blockquote-wrapper h4,
   .hero-quote-container h4,
   h4:has(.em-sweat_smile) {
@@ -217,11 +237,5 @@ canvas#hero-canvas {
     height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
-  }
-  
-  .et-hero-tabs::before,
-  .et-hero-tabs::after {
-    filter: blur(60px);
-    opacity: 0.5;
   }
 }
