@@ -106,54 +106,62 @@ export function initTimeline() {
 
     targetIndex = index;
 
-    if (targetIndex === currentIndex) return;
+    // Sécurité anti-spam clic
     if (isAnimating) return;
-
     isAnimating = true;
 
-    // Utilisation directe des styles pour la transition définie dans le CSS (.timeline-content transition: all 0.5s)
+    // 1. Masquer le contenu
     content.style.opacity = "0";
     content.style.transform = "translateY(10px) scale(0.95)";
 
-    // On attend la fin de la transition (0.5s définie dans le CSS)
+    // 2. Attendre que la transition CSS de masquage se termine (500ms)
     setTimeout(() => {
-      const event = timelineData[targetIndex];
+      try {
+        const event = timelineData[targetIndex];
 
-      // Mise à jour du contenu
-      eventIcon.innerHTML = `<i class="fa-solid ${event.icon}"></i>`;
-      
-      eventYear.innerHTML = `
-        <span style="display:block; line-height:1;">${event.year}</span>
-        <span class="event-duration" style="display:block; font-size:0.4em; opacity:0.7; margin-top:8px; font-weight:400; letter-spacing:1px; text-transform:uppercase;">
-          ${event.duree}
-        </span>
-      `;
-      
-      eventCompany.textContent = event.company;
-      
-      eventDescription.innerHTML = `
-        <p style="margin-bottom:15px;">${event.description}</p>
-        <div class="event-techs" style="font-size:0.9em; color:rgba(255,255,255,0.9); border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
-          <strong style="color:var(--accent-2); text-transform:uppercase; font-size:0.8em; letter-spacing:1px;">Stack technique :</strong><br>
-          ${event.techs}
-        </div>
-      `;
+        if (event) {
+          // Mise à jour des icônes et textes
+          eventIcon.innerHTML = `<i class="fa-solid ${event.icon}"></i>`;
+          
+          eventYear.innerHTML = `
+            <span style="display:block; line-height:1;">${event.year}</span>
+            <span class="event-duration" style="display:block; font-size:0.4em; opacity:0.7; margin-top:8px; font-weight:400; letter-spacing:1px; text-transform:uppercase;">
+              ${event.duree}
+            </span>
+          `;
+          
+          eventCompany.textContent = event.company;
+          
+          eventDescription.innerHTML = `
+            <p style="margin-bottom:15px;">${event.description}</p>
+            <div class="event-techs" style="font-size:0.9em; color:rgba(255,255,255,0.9); border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
+              <strong style="color:var(--accent-2); text-transform:uppercase; font-size:0.8em; letter-spacing:1px;">Stack technique :</strong><br>
+              ${event.techs}
+            </div>
+          `;
 
-      // Mise à jour de l'ère (background)
-      timelineContainer.className = `timeline-container ${event.era}`;
-
-      // Fade In
-      content.style.opacity = "1";
-      content.style.transform = "translateY(0) scale(1)";
-
-      currentIndex = targetIndex;
-      
-      // On débloque après la fin de l'animation de retour
-      setTimeout(() => {
-        isAnimating = false;
-      }, 500);
-
-    }, 500); // Correspond aux 0.5s de transition CSS
+          // Mise à jour du thème (era)
+          // On retire toutes les classes era possibles pour être sûr
+          timelineContainer.classList.remove("era-early-web", "era-dot-com", "era-social-media", "era-mobile");
+          timelineContainer.classList.add(event.era);
+        }
+      } catch (error) {
+        console.error("Erreur lors de la mise à jour de la timeline :", error);
+      } finally {
+        // 3. Réafficher le contenu quoi qu'il arrive
+        // Petit délai pour s'assurer que le DOM est prêt
+        requestAnimationFrame(() => {
+          content.style.opacity = "1";
+          content.style.transform = "translateY(0) scale(1)";
+          
+          // On libère le verrou d'animation après la fin de la transition d'apparition
+          setTimeout(() => {
+            isAnimating = false;
+            currentIndex = targetIndex;
+          }, 500);
+        });
+      }
+    }, 500); 
   }
 
   slider.addEventListener("input", function () {
