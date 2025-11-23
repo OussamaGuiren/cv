@@ -1,47 +1,77 @@
 /* ===================== SECTION CONTACT (THEME MICROSOFT SURFACE DARK) ===================== */
 
-.contact-container {
-  width: 100%;
-  background-color: #201F1E; 
+/* Application du fond sombre sur la SECTION ENTIÈRE */
+#tab-contact {
+  background-color: #201F1E; /* Surface Dark */
+  position: relative;
   padding: 80px 20px;
   color: #ffffff;
   border-top: 1px solid rgba(255,255,255,0.05);
   display: flex;
-  flex-direction: column;
-  align-items: center; /* Centrage global */
+  justify-content: center; /* Centrage horizontal */
 }
 
-/* Header de section identique à Project Section */
-.contact-header {
+/* Centrage du contenu interne */
+#tab-contact .slide-inner {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header de Section (Eyebrow, H2, Intro) */
+#tab-contact .section-header {
   text-align: center;
   max-width: 800px;
-  margin-bottom: 60px;
+  margin: 0 auto 60px auto;
+  width: 100%;
 }
 
-.contact-container h2 {
+/* Eyebrow (Petit titre au dessus) */
+#tab-contact .eyebrow {
+  color: #50E6FF !important; /* Cyan lumineux */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  display: block;
+  font-size: 0.9rem;
+}
+
+/* Titre Principal */
+#tab-contact h2 {
   color: #ffffff !important;
   font-size: 3rem;
   margin-bottom: 15px;
   font-weight: 700;
-  text-align: center;
+  line-height: 1.1;
 }
 
-.contact-container > p,
-.contact-header p {
-  color: #C8C6C4 !important; 
-  text-align: center;
+/* Intro Paragraphe */
+#tab-contact p.slide-intro {
+  color: #C8C6C4 !important; /* Gris clair lisible */
   font-size: 1.2rem;
   line-height: 1.6;
-  max-width: 800px;
   margin: 0 auto;
+}
+
+/* Le conteneur des cartes (Reset des styles précédents erronés) */
+.contact-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent !important; /* Plus de fond ici, c'est la section qui l'a */
+  padding: 0 !important;
+  border: none !important;
 }
 
 /* Grille Contact */
 .contact-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
-  max-width: 1200px;
   width: 100%;
   margin-bottom: 60px;
 }
@@ -102,6 +132,7 @@
   line-height: 1.5;
 }
 
+/* Boutons Cards */
 .contact-card-btn {
   padding: 12px 24px;
   border-radius: 4px;
@@ -150,8 +181,12 @@
   font-size: 0.9rem;
 }
 
+/* Mobile Socials */
 .mobile-socials {
   margin-top: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .icon-3d {
@@ -302,7 +337,7 @@ button[type="submit"]:hover {
 }
 
 @media (max-width: 768px) {
-  .contact-container {
+  #tab-contact {
     padding: 40px 15px;
   }
 }
