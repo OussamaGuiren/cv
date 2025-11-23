@@ -1,290 +1,236 @@
-/* ===================== SECTION HERO INTRO ===================== */
+/* ===================== HERO SECTION (MICROSOFT FLUENT DESIGN) ===================== */
 
-/* Typewriter caret animation */
-@keyframes hero-caret {
-  0%, 49% { border-color: rgba(255,255,255,0.9); opacity: 1; }
-  50%, 99% { border-color: rgba(255,255,255,0.9); opacity: 0; }
-  100% { border-color: rgba(255,255,255,0.9); opacity: 1; }
+.hero-section {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #F3F2F1; /* Gris clair Microsoft Surface */
+  overflow: hidden;
+  z-index: 1;
 }
 
-/* S'assurer que le texte est visible sur desktop/tablette */
-@media (min-width: 768px) {
-  /* Désactiver les ::before de mobile sur desktop/tablette */
-  .et-hero-tabs .hero-kicker[data-typewriter]::before,
-  .et-hero-tabs h1[data-typewriter]::before {
-    content: none !important;
-    display: none !important;
-    font-size: inherit !important;
-  }
-
-  /* S'assurer que le contenu est visible après le typewriter */
-  .et-hero-tabs [data-typewriter].typing,
-  .et-hero-tabs [data-typewriter].typed,
-  body.hero-typed .et-hero-tabs [data-typewriter],
-  body.hero-visible .et-hero-tabs [data-typewriter] {
-    opacity: 1 !important;
-    color: var(--splash-text) !important; /* Utiliser la couleur de texte sombre du thème clair */
-  }
+/* --- BACKGROUND AURORA ANIMATION --- */
+/* Création de l'effet de fond mouvant sans Canvas JS lourd */
+.hero-section::before,
+.hero-section::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.6;
+  z-index: -1;
+  animation: auroraMove 10s infinite alternate;
 }
 
-/* Special handling for quote subtitle - allow wrapping */
-.hero-quote .hero-subtitle[data-typewriter] {
-  display: inline;
-  white-space: normal;
-  word-wrap: break-word;
-  color: var(--splash-text);
+.hero-section::before {
+  background: #0078D4; /* Bleu Microsoft */
+  width: 50vw;
+  height: 50vw;
+  top: -10%;
+  left: -10%;
+  animation-delay: 0s;
 }
 
-/* Show elements when visible */
-body.hero-visible .et-hero-tabs [data-typewriter],
-.et-hero-tabs [data-typewriter].typing,
-.et-hero-tabs [data-typewriter].typed {
-  opacity: 1;
+.hero-section::after {
+  background: #5C2D91; /* Mauve Power Platform */
+  width: 40vw;
+  height: 40vw;
+  bottom: 10%;
+  right: -5%;
+  animation-delay: -5s;
 }
 
-/* When typing is active, show the caret blinking */
-.et-hero-tabs [data-typewriter].typing {
-  border-right: 3px solid var(--accent); /* Caret en bleu Microsoft */
-  animation: hero-caret 800ms step-end infinite;
+@keyframes auroraMove {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(50px, 30px) scale(1.1); }
 }
 
+/* Masquer le canvas JS s'il existe encore pour éviter les conflits visuels */
+canvas#hero-canvas {
+  display: none !important;
+}
+
+/* --- CONTENU HERO --- */
+.hero-content {
+  text-align: center;
+  z-index: 10;
+  padding: 0 20px;
+  max-width: 1200px;
+  margin-top: -50px; /* Léger décalage vers le haut pour l'équilibre */
+}
+
+/* Kicker (Petit texte au dessus) */
 .hero-kicker {
-  font-size: clamp(0.8rem, 1.2vw, 1rem);
+  font-family: 'Segoe UI', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 600;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--accent-2); /* Bleu Microsoft foncé */
-  margin-bottom: 16px;
+  color: #0078D4; /* Bleu Microsoft */
+  margin-bottom: 20px;
+  display: block;
+  opacity: 0;
+  animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s forwards;
+}
+
+/* Titre Principal H1 */
+.et-hero-tabs h1 {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: clamp(3.5rem, 8vw, 6rem); /* Grand et Impactant */
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 30px;
+  color: #201F1E; /* Gris sombre quasi noir */
+  letter-spacing: -0.03em;
+  opacity: 0;
+  animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s forwards;
+}
+
+/* Effet subtil sur le nom */
+.et-hero-tabs h1 span {
+  display: inline-block;
+}
+
+/* Blockquote / Slogan */
+.blockquote-wrapper {
+  margin: 0 auto 50px auto;
+  max-width: 800px;
+  opacity: 0;
+  animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s forwards;
+}
+
+.blockquote-wrapper h1 {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem) !important; /* Taille raisonnable pour un sous-titre */
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  color: #605E5C !important; /* Gris moyen pour hiérarchie */
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+}
+
+/* Mots clés en couleur */
+.blockquote-wrapper .text-white {
+  color: #0078D4 !important; /* Bleu au lieu de blanc */
   font-weight: 600;
 }
 
-.et-hero-tabs h1 {
-  font-family: 'Segoe UI', 'Orbitron', sans-serif; /* Segoe UI pour le titre */
-  font-size: clamp(72px, 14vw, 120px);
-  font-weight: 900;
-  line-height: 1.05;
-  margin-bottom: 20px;
-  letter-spacing: 0.05em; /* Espacement plus standard */
-  text-transform: uppercase;
-  /* Gradient Microsoft Blue plus subtil */
-  background: linear-gradient(135deg, #0078D4 0%, #005A9E 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  /* Suppression des animations Matrix trop "hacker" pour un style Microsoft propre */
-  animation: none; 
-  position: relative;
-  filter: none;
-  text-shadow: none;
-}
-
-@keyframes matrix-glow {
-  0%, 100% {
-    filter: drop-shadow(0 0 15px rgba(0, 120, 212, 0.6)) brightness(1);
-  }
-  50% {
-    filter: drop-shadow(0 0 30px rgba(0, 120, 212, 1)) brightness(1.4);
-  }
-}
-
-@keyframes matrix-gradient {
-  0%, 100% {
-    background-position: 0% center;
-  }
-  50% {
-    background-position: 100% center;
-  }
-}
-
-/* Citation hero - Style exact du modèle */
-.blockquote-wrapper {
-  display: flex;
-  padding: 0 20px;
-  width: 100%;
-  justify-content: center;
-  margin-top: 40px; /* Give it some space from the title */
-}
-
-/* Blockquote main style */
-.blockquote {
-  position: relative;
-  font-family: 'Barlow Condensed', sans-serif;
-  max-width: 620px;
-  margin: 80px auto;
-  align-self: center;
-  
-  /* Animation initiale - cachée au départ */
+/* --- BOUTON D'ACTION (Me Contacter) --- */
+.hero-cta-wrapper {
+  margin-top: 20px;
   opacity: 0;
-  transform: translateY(30px) scale(0.95);
-  filter: blur(10px);
+  animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.8s forwards;
 }
 
-/* Animation douce et moderne au chargement - se déclenche après le h1 */
-body.hero-title-typed .blockquote.hero-quote-container {
-  animation: quote-container-reveal 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
-}
-
-@keyframes quote-container-reveal {
-  0% {
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
-    filter: blur(10px);
-  }
-  50% {
-    opacity: 0.8;
-    transform: translateY(-5px) scale(1.02);
-    filter: blur(2px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
-}
-
-/* Blockquote header */
-.blockquote h1,
-.blockquote-wrapper .blockquote h1 {
-  font-family: 'Abril Fatface', cursive !important;
-  position: relative; /* for pseudos */
-  color: #e74848 !important;
-  font-size: 2.8rem !important;
-  font-weight: normal !important;
-  line-height: 1 !important;
-  margin: 0 !important;
-  border: 2px solid #fff !important;
-  border: solid 2px !important;
-  border-radius: 20px !important;
-  padding: 25px !important;
-  /* Réinitialiser les styles du h1 principal */
-  letter-spacing: normal !important;
-  text-transform: none !important;
-  background: none !important;
-  -webkit-background-clip: unset !important;
-  -webkit-text-fill-color: #e74848 !important;
-  background-clip: unset !important;
-  animation: none !important;
-  filter: none !important;
-  text-shadow: none !important;
-  margin-bottom: 0 !important;
-}
-
-/* Mettre en blanc les spans avec classe text-white - spécificité élevée */
-.blockquote h1 .text-white,
-.blockquote-wrapper .blockquote h1 .text-white,
-.blockquote.hero-quote-container h1 .text-white {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  background: none !important;
-  -webkit-background-clip: unset !important;
-  background-clip: unset !important;
-}
-
-
-/* Blockquote right double quotes */
-.blockquote h1:after {
-  content: "";
-  position: absolute;
-  border: 2px solid #e74848;
-  border-radius: 0 100% 0 0;
-  width: 60px;
-  height: 60px;
-  bottom: -62px;
-  left: 50px;
-  border-bottom: none;
-  border-left: none;
-  z-index: 3;
-}
-
-.blockquote h1:before {
-  content: "";
-  position: absolute;
-  width: 80px;
-  border: 6px solid #292a2b;
-  bottom: -3px;
-  left: 50px;
-  z-index: 2;
-}
-
-/* increase header size after 600px */
-@media all and (min-width: 600px) {
-  .blockquote h1 {
-    font-size: 3rem;
-    line-height: 1.2;
-  }
-}
-
-/* Blockquote subheader */
-.blockquote h4 {
-  position: relative;
+.btnMeContacter {
+  background: #0078D4;
   color: #ffffff;
-  font-size: 1.3rem;
-  font-weight: 400;
-  line-height: 1.2;
-  margin: 0;
-  padding-top: 15px;
-  z-index: 1;
-  margin-left: 150px;
-  padding-left: 12px;
+  border: none;
+  padding: 16px 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 4px; /* Coins légèrement arrondis style Windows 11 */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 120, 212, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-block; /* Visible par défaut */
+}
+
+.btnMeContacter:hover {
+  background: #106EBE;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 120, 212, 0.4);
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
   opacity: 0;
-  transition: opacity 0.6s ease;
-}
-
-body.hero-title-typed .blockquote.hero-quote-container h4 {
-  animation: quote-author-reveal 0.8s ease 0.9s forwards;
-}
-
-@keyframes quote-author-reveal {
-  0% {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.blockquote h4:first-letter {
-  margin-left: -12px;
-}
-
-.blockquote h4 i.em {
-  font-style: normal;
-  font-size: 1.2em;
-  margin-left: 4px;
-}
-
-.hero-tags {
+  animation: fadeIn 1s ease 1.5s forwards;
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 22px;
-}
-.hero-tags span {
-  font-size: 0.8rem;
-  padding: 5px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.5);
-  background: rgba(25, 25, 25, 0.8);
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
   gap: 10px;
+  color: #0078D4;
 }
 
-  /* Disable typewriter animations on small screens for better wrapping */
-  .et-hero-tabs .hero-kicker,
-  .et-hero-tabs h1,
-  .et-hero-tabs .hero-subtitle {
-    animation: none !important;
-    opacity: 1 !important;
-    white-space: normal !important;
-    max-width: 100% !important;
-    /* Use the system font on mobile to avoid a large swap when Orbitron loads */
-    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
-    font-weight: 800 !important;
-    font-size: clamp(28px, 8vw, 46px) !important;
-    border-right: none !important;
+.scroll-indicator span {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.scroll-mouse {
+  width: 26px;
+  height: 40px;
+  border: 2px solid #0078D4;
+  border-radius: 20px;
+  position: relative;
+}
+
+.scroll-wheel {
+  width: 4px;
+  height: 8px;
+  background: #0078D4;
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollWheel 2s infinite;
+}
+
+/* --- ANIMATIONS GLOBALES --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scrollWheel {
+  0% { top: 6px; opacity: 1; }
+  100% { top: 20px; opacity: 0; }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .et-hero-tabs h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .blockquote-wrapper h1 {
+    font-size: 1.1rem !important;
+  }
+  
+  .hero-section::before,
+  .hero-section::after {
+    filter: blur(60px);
+    opacity: 0.5;
+  }
+
+  /* Le bouton "Me contacter" spécifique au mobile demandé précédemment */
+  /* Mais ici on stylise le bouton générique. S'il y a un bouton spécifique mobile dans le HTML, */
+  /* Assurez-vous qu'il utilise ces classes ou adaptez ici. */
+}
