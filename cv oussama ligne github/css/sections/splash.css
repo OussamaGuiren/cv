@@ -552,3 +552,47 @@
     transform: translateY(0);
   }
 }
+
+/* Photo de profil Splash Screen */
+.splash-portrait-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 30px rgba(0, 120, 212, 0.4);
+  z-index: 2007;
+  opacity: 0;
+  /* Positionnement au-dessus du texte : translate(-50%, -50%) centre, on décale vers le haut */
+  transform: translate(-50%, -160%);
+  animation: splash-on 0.6s ease-in-out 1.8s forwards; /* Apparaît un peu avant le texte */
+}
+
+.splash-portrait-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(1.2);
+  transition: transform 0.5s ease;
+}
+
+.splash-portrait-container:hover img {
+  transform: scale(1.1);
+}
+
+/* Hide portrait on dismissal */
+.splash-portrait-container.portrait-hidden {
+  animation: splash-off 0.6s ease-in-out forwards;
+}
+
+/* Responsive Splash Portrait */
+@media (max-width: 768px) {
+  .splash-portrait-container {
+    width: 100px;
+    height: 100px;
+    transform: translate(-50%, -190%);
+  }
+}

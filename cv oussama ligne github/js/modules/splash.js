@@ -3,6 +3,7 @@ export function initSplash() {
   const splashMoreBtn = document.querySelector('.text .splash-more-btn');
   const textElement = document.querySelector('.text');
   const watermark = document.querySelector('.splash-watermark');
+  const portrait = document.querySelector('.splash-portrait-container');
   const body = document.body;
   
   if (splash && splashMoreBtn) {
@@ -17,6 +18,9 @@ export function initSplash() {
       if (watermark) {
         watermark.classList.add('watermark-hidden');
       }
+      if (portrait) {
+        portrait.classList.add('portrait-hidden');
+      }
 
       setTimeout(() => {
         splash.style.display = 'none';
@@ -25,6 +29,9 @@ export function initSplash() {
         }
         if (watermark) {
           watermark.style.display = 'none';
+        }
+        if (portrait) {
+          portrait.style.display = 'none';
         }
         
         // Désactiver le scroll bloqué APRÈS la disparition du splash
