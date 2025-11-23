@@ -5,39 +5,55 @@
  */
 
 export function initScrollAnimations() {
-  // Vérification de la taille d'écran (min-width: 769px)
+  // Vérification stricte de la taille d'écran (min-width: 769px)
   const isDesktopOrTablet = window.matchMedia('(min-width: 769px)').matches;
 
-  if (!isDesktopOrTablet) return;
+  if (!isDesktopOrTablet) {
+    // Si on est sur mobile, on s'assure que tout est visible par défaut
+    // au cas où des classes resteraient
+    document.querySelectorAll('.fluent-section-hidden').forEach(el => {
+      el.classList.remove('fluent-section-hidden');
+      el.classList.add('fluent-section-visible');
+    });
+    return;
+  }
 
   // Sélection des sections à animer
-  // On cible les sections principales définies par leur ID ou classe
-  const sections = document.querySelectorAll(
-    '#tab-experience, #tab-projects, #tab-power, #tab-contact, .about-intro-section, .about-photo-section'
-  );
+  const selectors = [
+    '#tab-experience',
+    '#tab-projects',
+    '#tab-power',
+    '#tab-contact',
+    '.about-intro-section',
+    '.about-photo-section'
+  ];
+  
+  const sections = document.querySelectorAll(selectors.join(', '));
+
+  if (sections.length === 0) return;
 
   const observerOptions = {
     root: null, // Viewport
-    rootMargin: '0px',
-    threshold: 0.15 // Déclencher quand 15% de la section est visible
+    rootMargin: '0px 0px -100px 0px', // Déclencher un peu avant que le bas n'arrive, ou quand le haut entre bien
+    threshold: 0.1 // 10% de visibilité suffit
   };
 
-  const observer = new IntersectionObserver((entries, observer) => {
+  const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // Ajouter la classe visible pour lancer l'animation
-        entry.target.classList.add('fluent-section-visible');
-        
-        // On arrête d'observer une fois animé (animation one-shot)
-        observer.unobserve(entry.target);
+        // Petit délai pour l'effet "cascade" si plusieurs éléments arrivent en même temps
+        requestAnimationFrame(() => {
+          entry.target.classList.add('fluent-section-visible');
+          entry.target.classList.remove('fluent-section-hidden');
+        });
+        obs.unobserve(entry.target);
       }
     });
   }, observerOptions);
 
   sections.forEach(section => {
-    // Ajouter la classe initiale cachée
+    // Force l'état initial caché
     section.classList.add('fluent-section-hidden');
-    // Démarrer l'observation
     observer.observe(section);
   });
 }
