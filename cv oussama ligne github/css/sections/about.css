@@ -429,7 +429,9 @@
 
 .about-learn-more-btn { display: none; }
 
-/* ===================== MODAL GÉNÉRIQUE (CLEAN & PRO) ===================== */
+/* ===================== MODAL GÉNÉRIQUE UNIFIÉ (STYLE PROJET) ===================== */
+/* Structure et Style identiques au modal Projet pour cohérence totale */
+
 .about-popup {
   position: fixed;
   inset: 0;
@@ -438,9 +440,9 @@
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
   overflow: hidden;
-  display: grid;
-  place-items: center;
-  color: #201F1E;
+  display: flex; /* Flex pour centrage parfait */
+  align-items: center;
+  justify-content: center;
 }
 
 .about-popup[aria-hidden="false"] {
@@ -451,44 +453,49 @@
 .about-popup-overlay {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6); /* Fond plus sombre */
+  background: rgba(0, 0, 0, 0.7); /* Fond sombre unifié */
   backdrop-filter: blur(8px);
 }
 
+/* Conteneur principal du contenu du modal (similaire à .project-popup-content) */
 .about-popup-content {
   position: relative;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px; /* Padding simplifié */
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.about-popup-inner {
-  width: 100%;
-  max-width: 800px; /* Largeur contrôlée pour la lecture */
-  max-height: 85vh;
-  background: #ffffff;
-  border-radius: 8px; /* Microsoft style */
-  padding: 40px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  animation: popupFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* Animation plus douce */
+  width: 90%;
+  max-width: 1000px; /* Même largeur max que Projet */
+  height: auto;
+  max-height: 90vh;
   margin: auto;
-  overflow-y: auto;
-  overflow-x: hidden;
+  padding: 0;
+  border-radius: 12px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  color: #201F1E;
   pointer-events: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: popupFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Intérieur scrollable */
+.about-popup-inner {
+  background: #201F1E; /* Theme Sombre Microsoft */
+  border: 1px solid #323130;
+  color: #FFFFFF;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* Scroll vertical si contenu long */
+  padding: 40px;
   position: relative;
 }
 
-/* Bouton fermer standard */
+/* Animation */
+@keyframes popupFadeIn {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Bouton fermer harmonisé (Style Header ou Absolu selon besoin, ici Absolu cohérent) */
 .about-popup-close {
   position: absolute;
   top: 20px;
@@ -498,54 +505,52 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #F3F2F1;
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
-  color: #605E5C;
+  color: #ffffff;
   font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  z-index: 10;
+  z-index: 100;
   border: none;
 }
 
 .about-popup-close:hover {
-  background: #E1DFDD;
-  color: #201F1E;
+  background: #0078D4;
   transform: rotate(90deg);
+  color: white;
 }
 
-@keyframes popupFadeIn {
-  from { opacity: 0; transform: scale(0.95) translateY(10px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
-
+/* Titres et Textes */
 .about-popup-title {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 700;
-  margin-bottom: 24px;
-  text-align: center;
-  color: #0078D4;
+  margin-bottom: 30px;
+  text-align: left;
+  color: #0078D4; /* Bleu Microsoft */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 15px;
 }
 
 .about-popup-text-content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
 .about-popup-text {
   font-size: 1rem;
-  line-height: 1.6;
-  color: #323130;
+  line-height: 1.7;
+  color: #E1DFDD; /* Gris clair lisible */
   text-align: left;
 }
 
 .about-popup-text strong {
-  color: #0078D4;
+  color: #ffffff;
   font-weight: 600;
 }
 
-/* GLITCH STACK (Inverse: Glitch default, Clean on Hover) */
+/* GLITCH STACK (Conserved but wrapped appropriately if used inside modal) */
 .glitch-stack {
   position: relative;
   display: block;
@@ -622,4 +627,20 @@
   94% { opacity: 0.5; transform: translate(-5px, -5px); filter: invert(1); }
   96% { opacity: 1; transform: translate(5px, -5px); filter: hue-rotate(270deg) blur(1px); }
   100% { opacity: 0; transform: translate(0); filter: none; }
+}
+
+/* Responsive pour le modal */
+@media (max-width: 768px) {
+  .about-popup-content {
+    width: 95%;
+    max-height: 95vh;
+  }
+  
+  .about-popup-inner {
+    padding: 30px 20px;
+  }
+  
+  .about-popup-title {
+    font-size: 1.8rem;
+  }
 }

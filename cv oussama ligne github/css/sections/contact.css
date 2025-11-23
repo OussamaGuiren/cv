@@ -2,11 +2,9 @@
 
 .contact-container {
   width: 100%;
-  /* Fond Gris Sombre Microsoft (Surface Dark) */
   background-color: #201F1E; 
   padding: 80px 20px;
   color: #ffffff;
-  /* Séparateur */
   border-top: 1px solid rgba(255,255,255,0.05);
 }
 
@@ -19,7 +17,7 @@
 }
 
 .contact-container > p {
-  color: #C8C6C4 !important; /* Gris clair pour sous-titre */
+  color: #C8C6C4 !important; 
   text-align: center;
   margin-bottom: 50px;
   font-size: 1.1rem;
@@ -35,7 +33,7 @@
 
 /* Cartes Contact Sombres */
 .contact-card {
-  background: #323130; /* Gris plus clair que le fond (Elevation) */
+  background: #323130;
   border: 1px solid #484644;
   border-radius: 8px;
   padding: 40px 30px;
@@ -50,7 +48,7 @@
 .contact-card:hover {
   transform: translateY(-5px);
   background: #3B3A39;
-  border-color: #0078D4; /* Accent Bleu au survol */
+  border-color: #0078D4;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
 }
 
@@ -59,14 +57,14 @@
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  background: #201F1E; /* Fond sombre cercle */
+  background: #201F1E;
   border: 1px solid #0078D4;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 24px;
   font-size: 1.8rem;
-  color: #0078D4; /* Icone Bleue */
+  color: #0078D4;
   transition: all 0.3s ease;
 }
 
@@ -155,52 +153,125 @@
   color: #0078D4;
 }
 
-/* === FORMULAIRE CONTACT (MODAL) === */
-/* Le style du modal est géré dans modals.js / contact-form.js qui injecte le HTML */
-/* Ici on style les inputs pour le thème sombre ou clair selon le contexte du modal */
-
-/* On garde le style du formulaire "Clean" (Fond Blanc, Inputs gris) car c'est dans une popup */
-/* Si le modal est thème sombre (comme Projet), on adapte. */
-/* Pour Contact Form Popup, on reste sur du classique lisible (Fond Blanc Popup) */
+/* === FORMULAIRE CONTACT (DANS MODAL SOMBRE) === */
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  position: relative;
 }
 
-.form-label {
+.form-group label {
   display: block;
   margin-bottom: 8px;
-  color: #323130;
+  color: #F3F2F1; /* Label Blanc */
+  font-size: 0.95rem;
   font-weight: 600;
 }
 
-.form-input,
-.form-textarea {
+/* Inputs adaptés au thème sombre */
+.form-group input,
+.form-group textarea,
+.form-group select {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #8A8886;
+  padding: 12px 16px;
+  background: #323130; /* Gris foncé input */
+  border: 1px solid #484644;
   border-radius: 4px;
+  color: #ffffff; /* Texte blanc */
   font-family: inherit;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
-.form-input:focus,
-.form-textarea:focus {
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #A19F9D;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
   border-color: #0078D4;
-  outline: 2px solid rgba(0, 120, 212, 0.2);
+  background: #3B3A39; /* Légèrement plus clair au focus */
+  box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.25);
 }
 
-.form-submit-btn {
+/* Erreurs */
+.form-group .error {
+  color: #FF5A5A; /* Rouge clair lisible sur sombre */
+  font-size: 0.85rem;
+  margin-top: 6px;
+  min-height: 20px;
+}
+
+.form-group .hint {
+  color: #A19F9D;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+/* File Upload */
+.file-upload-wrapper {
+  border: 2px dashed #484644;
+  padding: 20px;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 0.3s ease;
+}
+
+.file-upload-wrapper:hover {
+  border-color: #8A8886;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.file-upload-wrapper.drag-over {
+  border-color: #0078D4;
+  background: rgba(0, 120, 212, 0.1);
+}
+
+.file-upload-label {
+  color: #C8C6C4;
+  font-size: 0.9rem;
+}
+
+/* Bouton Submit */
+#submitBtn {
+  width: 100%;
+  padding: 14px;
   background: #0078D4;
-  color: white;
-  padding: 12px 30px;
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: uppercase;
   border: none;
   border-radius: 4px;
-  font-weight: 600;
   cursor: pointer;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  margin-top: 10px;
 }
 
-.form-submit-btn:hover {
+#submitBtn:hover {
   background: #106EBE;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+#submitBtn:disabled {
+  background: #484644;
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.7;
+}
+
+#formStatus {
+  text-align: center;
+  margin-top: 15px;
+  min-height: 24px;
+  font-weight: 500;
 }
 
 @media (max-width: 768px) {
