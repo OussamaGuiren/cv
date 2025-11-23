@@ -1,0 +1,81 @@
+/* ===================== VARIABLES & BASE ===================== */
+:root {
+  --ease-push: cubic-bezier(.25, .8, .25, 1);
+  --dur-open: 900ms;
+  --dur-close: 700ms;
+
+  /* Couleurs du splash screen */
+  --bg-a: #191919;
+  --bg-b: #252525;
+  --bg-c: #2a2a2a;
+  --accent: #0078D4;
+  --accent-2: #2B88D8;
+  --accent-dark: #004E8C;
+  --accent-foreground: #ffffff;
+  --accent-gradient: linear-gradient(120deg, var(--accent-2) 0%, var(--accent) 100%);
+  
+  /* Couleurs additionnelles du splash */
+  --splash-bg: #191919;
+  --splash-text: #ffffff;
+  --splash-lines: #757474;
+  --splash-dark: #292929;
+
+  --stage-overlay: rgba(255,255,255,0.06);
+  --stage-overlay-2: rgba(255,255,255,0.03);
+
+  --ui-letter-spacing: 2px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Rajdhani', 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--splash-bg);
+  background-color: var(--splash-bg);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: var(--splash-text);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1, h2, h3, .panel-title, .card-open, .panel-close,  .status-badge {
+  text-transform: uppercase;
+  letter-spacing: var(--ui-letter-spacing);
+  font-weight: 700;
+}
+
+body.splash-active,
+body.modal-open,
+body.menu-open {
+  overflow: hidden;
+}
+
+/* ===================== STAGE CONTAINER ===================== */
+
+.stage {
+  position: relative;
+  width: 100%;
+  isolation: isolate;
+}
+
+.stage > * {
+  position: relative;
+  z-index: auto;
+}

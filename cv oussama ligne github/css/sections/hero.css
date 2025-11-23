@@ -1,0 +1,286 @@
+/* ===================== SECTION HERO INTRO ===================== */
+
+/* Typewriter caret animation */
+@keyframes hero-caret {
+  0%, 49% { border-color: rgba(255,255,255,0.9); opacity: 1; }
+  50%, 99% { border-color: rgba(255,255,255,0.9); opacity: 0; }
+  100% { border-color: rgba(255,255,255,0.9); opacity: 1; }
+}
+
+/* S'assurer que le texte est visible sur desktop/tablette */
+@media (min-width: 768px) {
+  /* Désactiver les ::before de mobile sur desktop/tablette */
+  .et-hero-tabs .hero-kicker[data-typewriter]::before,
+  .et-hero-tabs h1[data-typewriter]::before {
+    content: none !important;
+    display: none !important;
+    font-size: inherit !important;
+  }
+
+  /* S'assurer que le contenu est visible après le typewriter */
+  .et-hero-tabs [data-typewriter].typing,
+  .et-hero-tabs [data-typewriter].typed,
+  body.hero-typed .et-hero-tabs [data-typewriter],
+  body.hero-visible .et-hero-tabs [data-typewriter] {
+    opacity: 1 !important;
+  }
+}
+
+/* Special handling for quote subtitle - allow wrapping */
+.hero-quote .hero-subtitle[data-typewriter] {
+  display: inline;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+/* Show elements when visible */
+body.hero-visible .et-hero-tabs [data-typewriter],
+.et-hero-tabs [data-typewriter].typing,
+.et-hero-tabs [data-typewriter].typed {
+  opacity: 1;
+}
+
+/* When typing is active, show the caret blinking */
+.et-hero-tabs [data-typewriter].typing {
+  border-right: 3px solid rgba(255,255,255,0.9);
+  animation: hero-caret 800ms step-end infinite;
+}
+
+.hero-kicker {
+  font-size: clamp(0.8rem, 1.2vw, 1rem);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #a7c5f5;
+  margin-bottom: 16px;
+}
+
+.et-hero-tabs h1 {
+  font-family: 'Orbitron', 'Share Tech Mono', monospace;
+  font-size: clamp(72px, 14vw, 120px);
+  font-weight: 900;
+  line-height: 1.05;
+  margin-bottom: 20px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 30%, var(--accent) 60%, var(--accent-2) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: matrix-glow 3s ease-in-out infinite, matrix-gradient 4s ease-in-out infinite;
+  position: relative;
+  filter: drop-shadow(0 0 15px rgba(0, 120, 212, 0.6));
+  text-shadow: 0 0 20px rgba(0, 120, 212, 0.5);
+}
+
+@keyframes matrix-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 15px rgba(0, 120, 212, 0.6)) brightness(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 30px rgba(0, 120, 212, 1)) brightness(1.4);
+  }
+}
+
+@keyframes matrix-gradient {
+  0%, 100% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+}
+
+/* Citation hero - Style exact du modèle */
+.blockquote-wrapper {
+  display: flex;
+  padding: 0 20px;
+  width: 100%;
+  justify-content: center;
+  margin-top: 40px; /* Give it some space from the title */
+}
+
+/* Blockquote main style */
+.blockquote {
+  position: relative;
+  font-family: 'Barlow Condensed', sans-serif;
+  max-width: 620px;
+  margin: 80px auto;
+  align-self: center;
+  
+  /* Animation initiale - cachée au départ */
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  filter: blur(10px);
+}
+
+/* Animation douce et moderne au chargement - se déclenche après le h1 */
+body.hero-title-typed .blockquote.hero-quote-container {
+  animation: quote-container-reveal 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
+}
+
+@keyframes quote-container-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    filter: blur(10px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(-5px) scale(1.02);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Blockquote header */
+.blockquote h1,
+.blockquote-wrapper .blockquote h1 {
+  font-family: 'Abril Fatface', cursive !important;
+  position: relative; /* for pseudos */
+  color: #e74848 !important;
+  font-size: 2.8rem !important;
+  font-weight: normal !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  border: 2px solid #fff !important;
+  border: solid 2px !important;
+  border-radius: 20px !important;
+  padding: 25px !important;
+  /* Réinitialiser les styles du h1 principal */
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: #e74848 !important;
+  background-clip: unset !important;
+  animation: none !important;
+  filter: none !important;
+  text-shadow: none !important;
+  margin-bottom: 0 !important;
+}
+
+/* Mettre en blanc les spans avec classe text-white - spécificité élevée */
+.blockquote h1 .text-white,
+.blockquote-wrapper .blockquote h1 .text-white,
+.blockquote.hero-quote-container h1 .text-white {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+}
+
+
+/* Blockquote right double quotes */
+.blockquote h1:after {
+  content: "";
+  position: absolute;
+  border: 2px solid #e74848;
+  border-radius: 0 100% 0 0;
+  width: 60px;
+  height: 60px;
+  bottom: -62px;
+  left: 50px;
+  border-bottom: none;
+  border-left: none;
+  z-index: 3;
+}
+
+.blockquote h1:before {
+  content: "";
+  position: absolute;
+  width: 80px;
+  border: 6px solid #292a2b;
+  bottom: -3px;
+  left: 50px;
+  z-index: 2;
+}
+
+/* increase header size after 600px */
+@media all and (min-width: 600px) {
+  .blockquote h1 {
+    font-size: 3rem;
+    line-height: 1.2;
+  }
+}
+
+/* Blockquote subheader */
+.blockquote h4 {
+  position: relative;
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0;
+  padding-top: 15px;
+  z-index: 1;
+  margin-left: 150px;
+  padding-left: 12px;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+body.hero-title-typed .blockquote.hero-quote-container h4 {
+  animation: quote-author-reveal 0.8s ease 0.9s forwards;
+}
+
+@keyframes quote-author-reveal {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.blockquote h4:first-letter {
+  margin-left: -12px;
+}
+
+.blockquote h4 i.em {
+  font-style: normal;
+  font-size: 1.2em;
+  margin-left: 4px;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+.hero-tags span {
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: rgba(25, 25, 25, 0.8);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+  /* Disable typewriter animations on small screens for better wrapping */
+  .et-hero-tabs .hero-kicker,
+  .et-hero-tabs h1,
+  .et-hero-tabs .hero-subtitle {
+    animation: none !important;
+    opacity: 1 !important;
+    white-space: normal !important;
+    max-width: 100% !important;
+    /* Use the system font on mobile to avoid a large swap when Orbitron loads */
+    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    font-weight: 800 !important;
+    font-size: clamp(28px, 8vw, 46px) !important;
+    border-right: none !important;
+  }
