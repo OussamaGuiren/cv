@@ -1,6 +1,5 @@
 /* ===================== HERO SECTION (MICROSOFT FLUENT DESIGN) ===================== */
 
-/* CORRECTION : Utilisation de la classe réelle du HTML (.et-hero-tabs) */
 .et-hero-tabs {
   position: relative;
   height: 100vh;
@@ -62,11 +61,10 @@ canvas#hero-canvas {
   z-index: 10;
   padding: 0 20px;
   max-width: 1200px;
-  /* Correction marge négative pour compenser la navbar en bas */
   margin-bottom: 60px; 
 }
 
-/* Kicker */
+/* Kicker (Typewriter JS gère l'affichage) */
 .hero-kicker {
   font-family: 'Segoe UI', sans-serif;
   font-size: clamp(1rem, 2vw, 1.2rem);
@@ -76,11 +74,11 @@ canvas#hero-canvas {
   color: #0078D4;
   margin-bottom: 20px;
   display: block;
-  opacity: 0;
-  animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s forwards;
+  /* PAS D'ANIMATION CSS D'OPACITÉ ICI POUR EVITER LE CLIGNOTEMENT AVEC LE JS */
+  opacity: 1; 
 }
 
-/* Titre Principal H1 */
+/* Titre Principal H1 (Typewriter JS gère l'affichage) */
 .et-hero-tabs h1 {
   font-family: 'Segoe UI', sans-serif;
   font-size: clamp(3.5rem, 8vw, 6rem);
@@ -89,15 +87,15 @@ canvas#hero-canvas {
   margin-bottom: 40px;
   color: #201F1E;
   letter-spacing: -0.03em;
-  opacity: 0;
-  animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s forwards;
+  /* PAS D'ANIMATION CSS D'OPACITÉ ICI */
+  opacity: 1;
 }
 
 .et-hero-tabs h1 span {
   display: inline-block;
 }
 
-/* --- BLOCKQUOTE "SAGE" STYLE --- */
+/* --- BLOCKQUOTE "SAGE" STYLE (Lui peut garder l'anim CSS car statique) --- */
 .blockquote-wrapper {
   margin: 0 auto 60px auto;
   max-width: 900px;
@@ -142,7 +140,7 @@ canvas#hero-canvas {
   text-underline-offset: 4px;
 }
 
-/* Cible le H4 (Signature MOI) - Visible par défaut sur Desktop */
+/* Cible le H4 (Signature MOI) */
 .blockquote-wrapper h4 {
   display: block;
   font-size: 1rem;
