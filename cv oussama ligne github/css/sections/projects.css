@@ -7,6 +7,7 @@
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Titre de section */
 #tab-projects h2 {
   color: #ffffff !important;
   text-align: center;
@@ -15,7 +16,9 @@
   font-weight: 700;
 }
 
-#tab-projects p {
+/* Description de section (Intro) */
+/* J'utilise > p pour ne cibler que le paragraphe direct et pas ceux des cartes */
+#tab-projects > p {
   color: rgba(255, 255, 255, 0.8) !important;
   text-align: center;
   margin-bottom: 60px;
@@ -23,6 +26,12 @@
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+  display: block;
+}
+
+/* Si le HTML n'est pas direct child, on garde la règle générale mais on la surcharge ensuite */
+#tab-projects p {
+  color: rgba(255, 255, 255, 0.8); 
 }
 
 .gallery {
@@ -79,27 +88,32 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background: #FFFFFF !important; /* Assurer fond blanc */
-  color: #323130 !important; /* Texte sombre par défaut */
+  background: #FFFFFF !important;
+  color: #323130 !important;
 }
 
-/* Titre (H3) */
-.card-content h3 {
+/* Titre (H3) - Surcharge avec haute spécificité */
+#tab-projects .project-card .card-content h3,
+.project-card h3 {
   font-size: 1.5rem;
   margin: 0 0 12px 0;
-  color: #004578 !important; /* Bleu Microsoft foncé FORCE pour être visible sur blanc */
+  color: #004578 !important; /* Bleu Microsoft foncé FORCE */
   font-family: 'Segoe UI', sans-serif;
   font-weight: 700;
   line-height: 1.3;
+  text-shadow: none !important;
 }
 
-/* Description (card-excerpt) */
-.card-excerpt {
+/* Description (card-excerpt) - Surcharge avec haute spécificité pour battre le #tab-projects p */
+#tab-projects .project-card .card-content p.card-excerpt,
+.project-card .card-excerpt {
   font-size: 1rem;
-  color: #484644 !important; /* Gris foncé FORCE pour être visible sur blanc */
+  color: #484644 !important; /* Gris foncé FORCE */
   margin-bottom: 24px;
   line-height: 1.6;
   flex-grow: 1;
+  text-shadow: none !important;
+  opacity: 1 !important;
 }
 
 /* BOUTON (card-open) */
@@ -138,7 +152,7 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.8); /* Texte clair sur fond de section bleu foncé */
+  color: rgba(255, 255, 255, 0.8);
   animation: fadeIn 1s ease-out;
 }
 
@@ -304,7 +318,6 @@
   background: #106EBE;
 }
 
-/* Responsive Mobile */
 @media (max-width: 900px) {
   .project-details-grid {
     grid-template-columns: 1fr;
@@ -344,6 +357,6 @@
   }
   
   .mobile-scroll-indicator {
-    display: flex; /* Affiché UNIQUEMENT ici */
+    display: flex;
   }
 }
