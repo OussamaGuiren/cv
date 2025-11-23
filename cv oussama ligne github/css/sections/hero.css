@@ -1,6 +1,7 @@
 /* ===================== HERO SECTION (MICROSOFT FLUENT DESIGN) ===================== */
 
-.hero-section {
+/* CORRECTION : Utilisation de la classe réelle du HTML (.et-hero-tabs) */
+.et-hero-tabs {
   position: relative;
   height: 100vh;
   width: 100%;
@@ -11,11 +12,13 @@
   background: #F3F2F1;
   overflow: hidden;
   z-index: 1;
+  margin: 0;
+  padding: 0;
 }
 
 /* --- BACKGROUND AURORA ANIMATION --- */
-.hero-section::before,
-.hero-section::after {
+.et-hero-tabs::before,
+.et-hero-tabs::after {
   content: '';
   position: absolute;
   border-radius: 50%;
@@ -25,7 +28,7 @@
   animation: auroraMove 10s infinite alternate;
 }
 
-.hero-section::before {
+.et-hero-tabs::before {
   background: #0078D4; /* Bleu Microsoft */
   width: 50vw;
   height: 50vw;
@@ -34,7 +37,7 @@
   animation-delay: 0s;
 }
 
-.hero-section::after {
+.et-hero-tabs::after {
   background: #5C2D91; /* Mauve Power Platform */
   width: 40vw;
   height: 40vw;
@@ -53,12 +56,14 @@ canvas#hero-canvas {
 }
 
 /* --- CONTENU HERO --- */
-.hero-content {
+.hero-content, 
+.hero-intro {
   text-align: center;
   z-index: 10;
   padding: 0 20px;
   max-width: 1200px;
-  margin-top: -50px;
+  /* Correction marge négative pour compenser la navbar en bas */
+  margin-bottom: 60px; 
 }
 
 /* Kicker */
@@ -137,13 +142,19 @@ canvas#hero-canvas {
   text-underline-offset: 4px;
 }
 
-/* Cible le H4 (Signature MOI) */
+/* Cible le H4 (Signature MOI) - Visible par défaut sur Desktop */
 .blockquote-wrapper h4 {
   display: block;
+  font-size: 1rem;
+  margin-top: 20px;
+  color: #605E5C;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
 /* --- BOUTON D'ACTION --- */
-.hero-cta-wrapper {
+.hero-cta-wrapper, 
+.hero-intro div:last-child {
   margin-top: 20px;
   opacity: 0;
   animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.8s forwards;
@@ -171,62 +182,12 @@ canvas#hero-canvas {
   box-shadow: 0 8px 20px rgba(0, 120, 212, 0.4);
 }
 
-/* Scroll Indicator */
-.scroll-indicator {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
-  animation: fadeIn 1s ease 1.5s forwards;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  color: #0078D4;
-}
-
-.scroll-indicator span {
-  font-size: 0.8rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-
-.scroll-mouse {
-  width: 26px;
-  height: 40px;
-  border: 2px solid #0078D4;
-  border-radius: 20px;
-  position: relative;
-}
-
-.scroll-wheel {
-  width: 4px;
-  height: 8px;
-  background: #0078D4;
-  border-radius: 2px;
-  position: absolute;
-  top: 6px;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: scrollWheel 2s infinite;
-}
-
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes scrollWheel {
-  0% { top: 6px; opacity: 1; }
-  100% { top: 20px; opacity: 0; }
-}
-
-@keyframes fadeIn {
-  to { opacity: 1; }
-}
-
+/* RESPONSIVE MOBILE */
 @media (max-width: 768px) {
   .et-hero-tabs h1 {
     font-size: 3rem;
@@ -248,13 +209,20 @@ canvas#hero-canvas {
     font-size: 1.2rem !important;
   }
   
-  /* MASQUER LA SIGNATURE SUR MOBILE */
-  .blockquote-wrapper h4 {
+  /* --- SUPPRESSION RADICALE DU "MOI" --- */
+  .blockquote-wrapper h4,
+  .hero-quote-container h4,
+  h4:has(.em-sweat_smile) {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
   
-  .hero-section::before,
-  .hero-section::after {
+  .et-hero-tabs::before,
+  .et-hero-tabs::after {
     filter: blur(60px);
     opacity: 0.5;
   }
