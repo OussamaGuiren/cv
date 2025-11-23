@@ -526,7 +526,7 @@
       overflow-x: auto;
       width: 100%;
       padding: 20px 0;
-      gap: 0;
+      /* gap: 0; */
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
       align-items: stretch;
