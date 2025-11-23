@@ -51,29 +51,8 @@ function typewriter(element, text, speed = 50, callback) {
   }
   
   export function startTypewriterSequence() {
-    // Désactiver le typewriter en mobile
-    if (window.innerWidth <= 767) {
-      const kicker = document.querySelector('.hero-kicker[data-typewriter]');
-      const title = document.querySelector('.et-hero-tabs h1[data-typewriter]');
-      
-      // Injecter le texte immédiatement en mobile pour éviter le glitch avec le ::before CSS
-      if (kicker) {
-        const text = kicker.dataset.typewriter;
-        if (text) {
-          kicker.textContent = text;
-          kicker.classList.add('typed');
-          kicker.classList.add('has-content');
-        }
-      }
-      
-      if (title) {
-        title.classList.add('typed');
-        document.body.classList.add('hero-title-typed');
-      }
-      
-      document.body.classList.add('hero-typed');
-      return;
-    }
+    // Adaptation mobile : on garde l'animation mais on peut ajuster la vitesse si nécessaire
+    const isMobile = window.innerWidth <= 767;
     
     const kicker = document.querySelector('.hero-kicker[data-typewriter]');
     const title = document.querySelector('.et-hero-tabs h1[data-typewriter]');
@@ -83,18 +62,18 @@ function typewriter(element, text, speed = 50, callback) {
     
     const sequence = async () => {
       if (kicker) {
-        await typewriter(kicker, kicker.dataset.typewriter, 40);
+        await typewriter(kicker, kicker.dataset.typewriter, isMobile ? 30 : 40); // Un peu plus rapide en mobile
         await new Promise(resolve => setTimeout(resolve, 300));
       }
       
       if (title) {
-        await typewriter(title, title.dataset.typewriter, 60);
+        await typewriter(title, title.dataset.typewriter, isMobile ? 40 : 60);
         document.body.classList.add('hero-title-typed');
         await new Promise(resolve => setTimeout(resolve, 400));
       }
       
       if (subtitle) {
-        await typewriter(subtitle, subtitle.dataset.typewriter, 35);
+        await typewriter(subtitle, subtitle.dataset.typewriter, isMobile ? 25 : 35);
       }
       
       setTimeout(() => {
