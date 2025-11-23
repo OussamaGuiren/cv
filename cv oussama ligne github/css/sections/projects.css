@@ -1,5 +1,11 @@
 /* ===================== SECTION PROJETS WEB (GALLERY) ===================== */
 
+/* Fond blanc pur pour différencier de la section Expérience (qui est gris clair) */
+#tab-projects {
+  background-color: #FFFFFF;
+  position: relative;
+}
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -9,10 +15,11 @@
   padding-top: 20px;
 }
 
+/* Cartes Projets dans la grille (Restent claires pour s'intégrer au fond blanc) */
 .project-card {
-  background: #FFFFFF; /* Fond blanc pour les cartes */
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 8px; /* Coins moins arrondis pour un style plus "pro" */
+  background: #F3F2F1; /* Gris très léger pour ressortir sur le fond blanc */
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   position: relative;
@@ -20,14 +27,14 @@
   flex-direction: column;
   height: 100%;
   backdrop-filter: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Ombre douce */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .project-card:hover {
-  transform: translateY(-4px); /* Movement plus subtil */
+  transform: translateY(-4px);
   background: #FFFFFF;
   border-color: rgba(0, 120, 212, 0.4);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
 }
 
 .card-image {
@@ -51,7 +58,7 @@
 .card-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 120, 212, 0.1); /* Overlay bleu léger */
+  background: rgba(0, 120, 212, 0.1);
   opacity: 0;
   transition: opacity 0.3s ease;
   display: flex;
@@ -73,15 +80,15 @@
 .card-content h3 {
   font-size: 1.4rem;
   margin-bottom: 12px;
-  color: #201F1E; /* Titre sombre */
+  color: #201F1E;
   font-family: 'Segoe UI', sans-serif;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.02em;
 }
 
 .card-description {
   font-size: 0.95rem;
-  color: #605E5C; /* Description gris foncé */
+  color: #605E5C;
   margin-bottom: 20px;
   line-height: 1.6;
   flex-grow: 1;
@@ -97,8 +104,8 @@
 .tech-pill {
   font-size: 0.75rem;
   padding: 4px 10px;
-  border-radius: 4px; /* Plus carré */
-  background: #F3F2F1;
+  border-radius: 4px;
+  background: #ffffff;
   color: #0078D4;
   border: 1px solid #E1DFDD;
   font-family: 'Segoe UI Mono', monospace;
@@ -146,28 +153,49 @@
   border-color: #005A9E;
 }
 
-/* MODAL PROJET */
+/* ===================== MODAL PROJET (DARK THEME CLASSY) ===================== */
 
-/* Project Popup Modern Styles (Matching about-popup) */
 .project-popup-content {
-  max-width: 1000px !important;
-  width: 90vw !important;
+  max-width: 1100px !important;
+  width: 95vw !important;
+}
+
+.project-popup-content .about-popup-inner {
+  /* FOND SOMBRE CLASSE pour le modal */
+  background: #1B1A19 !important; /* Microsoft Neutral Dark */
+  border: 1px solid #323130 !important;
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.4) !important;
+  color: #F3F2F1 !important; /* Texte clair par défaut */
+}
+
+/* Bouton fermer adapté au thème sombre */
+.project-popup-content .about-popup-close {
+  background: #323130 !important;
+  border-color: #484644 !important;
+  color: #ffffff !important;
+}
+
+.project-popup-content .about-popup-close:hover {
+  background: #0078D4 !important;
+  border-color: #0078D4 !important;
 }
 
 .project-details-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 40px;
+  grid-template-columns: 1.3fr 1fr; /* Plus d'espace pour l'image */
+  gap: 50px;
   margin-top: 20px;
+  align-items: start;
 }
 
+/* Image container */
 .project-media-wrapper {
   width: 100%;
   border-radius: 8px;
   overflow: hidden;
-  background: #F3F2F1 !important;
-  border: 1px solid #E1DFDD !important;
-  box-shadow: none !important;
+  background: #000000 !important; /* Fond noir sous l'image */
+  border: 1px solid #323130 !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -176,17 +204,17 @@
 .project-popup-image {
   width: 100%;
   height: auto;
-  max-height: 500px;
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); /* Ombre ajustée */
+  max-height: 600px;
+  object-fit: contain; /* Contain pour voir toute l'image sans coupure */
+  border-radius: 4px;
   transition: transform 0.5s ease;
 }
 
 .project-media-wrapper:hover .project-popup-image {
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
+/* Info container */
 .project-info-wrapper {
   display: flex;
   flex-direction: column;
@@ -195,66 +223,92 @@
 
 .project-info-wrapper .about-popup-title {
   text-align: left;
-  margin-bottom: 0;
-  font-size: 2.5rem;
+  margin-bottom: 10px;
+  font-size: 2.8rem;
   background: none !important;
   -webkit-text-fill-color: unset !important;
-  color: #0078D4 !important; /* Titre bleu */
-  text-shadow: none;
+  /* Titre en bleu lumineux pour le contraste */
+  color: #50E6FF !important; 
+  text-shadow: 0 0 20px rgba(0, 120, 212, 0.4);
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 700;
 }
 
-.about-popup-text {
-  color: #201F1E !important; /* Texte noir */
+.project-popup-content .about-popup-text {
+  /* Texte de description blanc cassé très lisible */
+  color: #E1DFDD !important; 
   font-size: 1.1rem !important;
-  line-height: 1.7 !important;
+  line-height: 1.8 !important;
   font-weight: 400 !important;
 }
 
+/* Bloc Technologies */
 .project-tech-stack {
-  margin-top: 24px;
-  padding: 20px;
-  background: #F3F2F1 !important; /* Fond gris très clair */
-  border: 1px solid #E1DFDD !important;
+  margin-top: 20px;
+  padding: 24px;
+  /* Fond légèrement plus clair que le modal */
+  background: #252423 !important; 
+  border: 1px solid #484644 !important;
   border-radius: 8px;
+  position: relative;
+}
+
+.project-tech-stack::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #0078D4;
+  border-radius: 8px 0 0 8px;
 }
 
 .project-tech-stack strong {
   display: block;
-  color: #0078D4 !important; /* Titre stack en bleu */
+  color: #0078D4 !important; /* Bleu Microsoft */
   text-transform: uppercase;
-  font-size: 0.85rem;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
 }
 
 .project-tech-stack span {
-  color: #323130 !important; /* Texte stack en gris foncé */
+  color: #ffffff !important; /* Blanc pur */
   font-family: 'Segoe UI Mono', monospace;
   font-size: 1rem;
   line-height: 1.6;
   font-weight: 500 !important;
 }
 
+/* Actions */
 .project-popup-actions {
-  margin-top: auto;
+  margin-top: 20px;
   padding-top: 20px;
+  border-top: 1px solid #323130;
 }
 
 .project-popup-actions .btn-primary {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 28px;
-  font-size: 1rem;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 32px;
+  font-size: 1.1rem;
   text-decoration: none;
   background: #0078D4;
   color: white;
   border-radius: 4px;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  width: 100%;
 }
 
 .project-popup-actions .btn-primary:hover {
   background: #005A9E;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 120, 212, 0.4);
 }
 
 /* Indicateur de scroll mobile */
@@ -264,7 +318,7 @@
   align-items: center;
   gap: 10px;
   margin-top: 1rem;
-  color: #0078D4; /* Indicateur bleu */
+  color: #0078D4;
   font-family: 'Segoe UI', monospace;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -282,9 +336,47 @@
   50% { transform: translateX(5px); opacity: 1; }
 }
 
-/* Affichage en mobile */
+/* Responsive */
+@media (max-width: 900px) {
+  .project-details-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .project-info-wrapper .about-popup-title {
+    font-size: 2.2rem;
+  }
+
+  .project-popup-content {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+  }
+  
+  .project-popup-content .about-popup-inner {
+    height: 100%;
+    max-height: none;
+    border-radius: 0;
+    border: none;
+    padding: 80px 20px 40px 20px; /* Espace pour le bouton fermer en haut */
+  }
+  
+  .project-popup-content .about-popup-close {
+    top: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.5) !important;
+    backdrop-filter: blur(10px);
+  }
+}
+
 @media (max-width: 768px) {
   .mobile-scroll-indicator {
     display: flex;
+  }
+  
+  .project-info-wrapper .about-popup-title {
+    font-size: 1.8rem;
   }
 }
