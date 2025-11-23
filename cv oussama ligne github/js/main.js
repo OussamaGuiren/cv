@@ -3,7 +3,7 @@ import { initSplash } from './modules/splash.js';
 import { initNavigation } from './modules/navigation.js';
 import { initTimeline } from './modules/timeline.js';
 import { initModals } from './modules/modals.js';
-import { initForm } from './modules/forms.js';
+import { initForm } from './modules/contact-form.js';
 
 // Add CSS class when fonts are loaded
 try {
