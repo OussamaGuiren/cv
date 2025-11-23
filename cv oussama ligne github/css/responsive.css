@@ -456,9 +456,13 @@
     visibility: visible !important;
   }
 
+  /* Règle remplacée par la media query mobile principale */
+/*
   .et-hero-tabs-container {
     display: none !important;
   }
+*/
+
 
   .slide-inner {
     max-width: 100%;
