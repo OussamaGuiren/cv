@@ -36,7 +36,7 @@
 
 /* CARTES */
 .project-card {
-  background: #FFFFFF;
+  background: #FFFFFF; /* Fond blanc éclatant */
   border: none;
   border-radius: 8px;
   overflow: hidden;
@@ -59,6 +59,7 @@
   overflow: hidden;
   position: relative;
   background: #f3f2f1;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
 .card-image img {
@@ -72,29 +73,39 @@
   transform: scale(1.05);
 }
 
+/* Contenu de la carte */
 .card-content {
-  padding: 28px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  background: #FFFFFF; /* Assurer fond blanc */
 }
 
+/* Titre */
 .card-content h3 {
-  font-size: 1.5rem;
-  margin-bottom: 12px;
-  color: #004578;
+  font-size: 1.4rem;
+  margin: 0 0 12px 0;
+  color: #004578; /* Bleu sombre lisible sur blanc */
   font-family: 'Segoe UI', sans-serif;
   font-weight: 700;
+  line-height: 1.3;
 }
 
+/* Description */
 .card-description {
-  font-size: 1rem;
-  color: #484644;
-  margin-bottom: 24px;
+  font-size: 0.95rem;
+  color: #484644; /* Gris foncé lisible */
+  margin-bottom: 20px;
   line-height: 1.6;
-  flex-grow: 1;
+  flex-grow: 1; /* Pousse les actions vers le bas */
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limite à 3 lignes pour uniformité */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
+/* Tech Pills */
 .card-tech {
   display: flex;
   flex-wrap: wrap;
@@ -103,60 +114,60 @@
 }
 
 .tech-pill {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   padding: 6px 12px;
   border-radius: 100px;
-  background: #F3F2F1;
-  color: #004578;
+  background: #EFF6FC; /* Fond bleu très pâle */
+  color: #005A9E; /* Texte bleu */
   font-weight: 600;
   font-family: 'Segoe UI', sans-serif;
-  border: 1px solid transparent;
-  transition: all 0.2s;
+  border: 1px solid rgba(0, 120, 212, 0.1);
 }
 
-.project-card:hover .tech-pill {
-  background: #E1DFDD;
-}
-
+/* Actions / Boutons */
 .card-actions {
   display: flex;
-  gap: 16px;
-  margin-top: auto;
+  gap: 12px;
+  margin-top: auto; /* Colle au bas */
 }
 
+/* Bouton générique */
 .card-btn {
   flex: 1;
-  padding: 12px;
+  padding: 10px 16px; /* Padding explicite */
   border-radius: 4px;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: center;
   text-decoration: none;
-  display: flex;
+  display: inline-flex; /* Flex pour centrer icône/texte */
   align-items: center;
   justify-content: center;
   gap: 8px;
   font-weight: 600;
+  line-height: 1.2;
+  min-height: 44px; /* Hauteur touch-friendly */
+  box-sizing: border-box; /* Important pour padding */
 }
 
+/* Bouton Principal (En savoir plus) */
 .card-open {
-  background: #0078D4;
+  background: #0078D4; /* Bleu Microsoft */
   color: #ffffff;
-  border: none;
+  border: 1px solid #0078D4;
 }
 
 .card-open:hover {
   background: #005A9E;
-  box-shadow: 0 4px 8px rgba(0, 120, 212, 0.3);
+  border-color: #005A9E;
+  box-shadow: 0 2px 8px rgba(0, 120, 212, 0.25);
 }
 
-/* ===================== MODAL PROJET REFACTORISÉ (UX FRIENDLY) ===================== */
-
-/* Conteneur global du modal projet */
+/* Modal Styles (Déjà corrigés précédemment, conservés ici pour intégrité) */
 .project-popup-content {
   width: 90% !important;
-  max-width: 1000px !important; /* Limite la largeur pour ne pas être "immense" */
+  max-width: 1000px !important;
   margin: auto;
   height: auto !important;
   max-height: 90vh !important;
@@ -167,9 +178,8 @@
   flex-direction: column;
 }
 
-/* Intérieur du modal */
 .project-popup-content .about-popup-inner {
-  background: #201F1E !important; /* Fond sombre Microsoft */
+  background: #201F1E !important;
   border: 1px solid #323130 !important;
   color: #FFFFFF !important;
   width: 100%;
@@ -181,10 +191,9 @@
   box-shadow: none !important;
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Scroll géré par les enfants */
+  overflow: hidden;
 }
 
-/* Header du modal (Titre + Close) */
 .project-modal-header {
   padding: 20px 30px;
   background: #252423;
@@ -197,18 +206,18 @@
   z-index: 10;
 }
 
-/* Le titre est injecté via JS souvent, on cible l'élément existant */
 .project-popup-content .about-popup-title {
   font-size: 1.8rem !important;
   margin: 0 !important;
   text-align: left !important;
   color: #ffffff !important;
   font-weight: 600 !important;
+  border: none !important;
+  padding: 0 !important;
 }
 
-/* Bouton fermer repensé */
 .project-popup-content .about-popup-close {
-  position: static !important; /* Plus absolu, dans le header flex */
+  position: static !important;
   width: 36px !important;
   height: 36px !important;
   background: transparent !important;
@@ -223,16 +232,14 @@
   transform: none !important;
 }
 
-/* Corps du modal (Grid) */
 .project-details-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* 50/50 split Desktop */
-  gap: 0; /* Pas de gap global, géré par padding */
-  overflow-y: auto; /* Scroll ici */
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  overflow-y: auto;
   height: 100%;
 }
 
-/* Colonne Gauche : Image */
 .project-media-wrapper {
   background: #000000 !important;
   display: flex;
@@ -242,19 +249,18 @@
   position: sticky;
   top: 0;
   height: 100%;
-  min-height: 400px; /* Hauteur minimale pour l'image */
+  min-height: 400px;
 }
 
 .project-popup-image {
   width: 100%;
   height: 100%;
-  max-height: 400px; /* Empêche l'image de devenir immense */
-  object-fit: contain; /* Affiche l'image entière sans coupure */
+  max-height: 400px;
+  object-fit: contain;
   border-radius: 4px;
   box-shadow: 0 0 40px rgba(0,0,0,0.5);
 }
 
-/* Colonne Droite : Info */
 .project-info-wrapper {
   padding: 40px;
   display: flex;
@@ -263,7 +269,6 @@
   background: #201F1E;
 }
 
-/* Description */
 .project-popup-content .about-popup-text {
   color: #E1DFDD !important;
   font-size: 1rem !important;
@@ -271,7 +276,6 @@
   font-weight: 400 !important;
 }
 
-/* Stack Technique */
 .project-tech-stack {
   background: #2D2C2C !important;
   padding: 20px;
@@ -296,7 +300,6 @@
   line-height: 1.5;
 }
 
-/* Actions */
 .project-popup-actions {
   margin-top: auto;
   padding-top: 30px;
@@ -323,13 +326,13 @@
 /* Responsive Mobile */
 @media (max-width: 900px) {
   .project-details-grid {
-    grid-template-columns: 1fr; /* Stack vertical */
+    grid-template-columns: 1fr;
     height: auto;
     overflow-y: visible;
   }
 
   .project-media-wrapper {
-    height: 300px; /* Hauteur fixe image mobile */
+    height: 300px;
     min-height: auto;
     padding: 20px;
     position: relative;
@@ -348,7 +351,6 @@
     width: 95% !important;
   }
   
-  /* Scroll interne sur le content global en mobile */
   .project-popup-content .about-popup-inner {
     overflow-y: auto;
   }

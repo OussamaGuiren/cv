@@ -52,7 +52,6 @@
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
 }
 
-/* Icon Wrapper */
 .contact-icon-wrapper {
   width: 70px;
   height: 70px;
@@ -88,7 +87,6 @@
   line-height: 1.5;
 }
 
-/* Boutons Cards */
 .contact-card-btn {
   padding: 12px 24px;
   border-radius: 4px;
@@ -124,7 +122,6 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* Footer */
 .contact-footer {
   text-align: center;
   margin-top: 60px;
@@ -137,7 +134,6 @@
   font-size: 0.9rem;
 }
 
-/* Mobile Socials */
 .mobile-socials {
   margin-top: 40px;
 }
@@ -153,96 +149,117 @@
   color: #0078D4;
 }
 
-/* === FORMULAIRE CONTACT (DANS MODAL SOMBRE) === */
+/* === FORMULAIRE CONTACT (STYLES GLOBAUX / MODAL) === */
+/* Ciblage large pour garantir l'application des styles */
 
+/* Conteneur des champs */
 .form-group {
   margin-bottom: 24px;
   position: relative;
+  display: block; /* Force display */
 }
 
-.form-group label {
+/* Labels */
+.form-group label,
+label[for] {
   display: block;
   margin-bottom: 8px;
-  color: #F3F2F1; /* Label Blanc */
+  color: #F3F2F1 !important; /* Force texte blanc */
   font-size: 0.95rem;
   font-weight: 600;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-/* Inputs adaptés au thème sombre */
+/* Champs de saisie (Input, Textarea, Select) */
+#contactForm input,
+#contactForm textarea,
+#contactForm select,
 .form-group input,
 .form-group textarea,
 .form-group select {
   width: 100%;
   padding: 12px 16px;
-  background: #323130; /* Gris foncé input */
-  border: 1px solid #484644;
+  background: #323130 !important; /* Fond Gris Foncé */
+  border: 1px solid #484644 !important;
   border-radius: 4px;
-  color: #ffffff; /* Texte blanc */
-  font-family: inherit;
-  font-size: 1rem;
+  color: #ffffff !important; /* Texte Blanc */
+  font-family: 'Segoe UI', sans-serif !important;
+  font-size: 1rem !important;
   transition: all 0.3s ease;
+  box-sizing: border-box; /* Important pour la largeur */
+  appearance: none; /* Reset natif */
+  -webkit-appearance: none;
 }
 
+/* Placeholders */
+#contactForm input::placeholder,
+#contactForm textarea::placeholder,
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-  color: #A19F9D;
+  color: #A19F9D !important;
+  opacity: 1;
 }
 
+/* État Focus */
+#contactForm input:focus,
+#contactForm textarea:focus,
+#contactForm select:focus,
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #0078D4;
-  background: #3B3A39; /* Légèrement plus clair au focus */
+  border-color: #0078D4 !important; /* Bleu Microsoft */
+  background: #3B3A39 !important; /* Légèrement plus clair */
   box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.25);
 }
 
 /* Erreurs */
 .form-group .error {
-  color: #FF5A5A; /* Rouge clair lisible sur sombre */
+  color: #FF5A5A !important;
   font-size: 0.85rem;
   margin-top: 6px;
   min-height: 20px;
+  display: block;
 }
 
 .form-group .hint {
   color: #A19F9D;
   font-size: 0.85rem;
   margin-top: 4px;
+  display: block;
 }
 
-/* File Upload */
+/* File Upload Custom */
 .file-upload-wrapper {
-  border: 2px dashed #484644;
+  border: 2px dashed #484644 !important;
   padding: 20px;
   border-radius: 4px;
   text-align: center;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.02) !important;
   transition: all 0.3s ease;
+  display: block;
+  position: relative;
 }
 
 .file-upload-wrapper:hover {
-  border-color: #8A8886;
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.file-upload-wrapper.drag-over {
-  border-color: #0078D4;
-  background: rgba(0, 120, 212, 0.1);
+  border-color: #8A8886 !important;
+  background: rgba(255, 255, 255, 0.05) !important;
 }
 
 .file-upload-label {
-  color: #C8C6C4;
+  color: #C8C6C4 !important;
   font-size: 0.9rem;
+  display: block;
 }
 
 /* Bouton Submit */
-#submitBtn {
+#submitBtn,
+button[type="submit"] {
   width: 100%;
   padding: 14px;
-  background: #0078D4;
-  color: #ffffff;
+  background: #0078D4 !important;
+  color: #ffffff !important;
   font-weight: 700;
   text-transform: uppercase;
   border: none;
@@ -252,16 +269,18 @@
   letter-spacing: 1px;
   transition: all 0.3s ease;
   margin-top: 10px;
+  display: block;
 }
 
-#submitBtn:hover {
-  background: #106EBE;
+#submitBtn:hover,
+button[type="submit"]:hover {
+  background: #106EBE !important;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 #submitBtn:disabled {
-  background: #484644;
+  background: #484644 !important;
   cursor: not-allowed;
   transform: none;
   opacity: 0.7;
@@ -272,6 +291,8 @@
   margin-top: 15px;
   min-height: 24px;
   font-weight: 500;
+  color: #ffffff;
+  display: block;
 }
 
 @media (max-width: 768px) {
