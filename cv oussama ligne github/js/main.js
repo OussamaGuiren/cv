@@ -4,7 +4,7 @@ import { initNavigation } from './modules/navigation.js';
 import { initTimeline } from './modules/timeline.js';
 import { initModals } from './modules/modals.js';
 import { initForm } from './modules/contact-form.js';
-import { initScrollAnimations } from './modules/animations.js'; // Import des animations
+import { initScrollAnimations } from './modules/animations.js';
 
 // Add CSS class when fonts are loaded
 try {
@@ -23,8 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initModals();
   initForm();
   
-  // Lancer les animations de scroll (vérifie la taille d'écran en interne)
-  initScrollAnimations();
+  // Lancer les animations de scroll avec un léger délai pour garantir le rendu initial
+  setTimeout(() => {
+    initScrollAnimations();
+  }, 100);
   
   // Typewriter starts when hero is visible (event dispatched by splash)
   window.addEventListener('hero-visible', () => {
