@@ -111,24 +111,17 @@ export function initTimeline() {
 
     isAnimating = true;
 
-    content.classList.remove("fade-in");
-    content.classList.add("fade-transition");
+    // Utilisation directe des styles pour la transition définie dans le CSS (.timeline-content transition: all 0.5s)
+    content.style.opacity = "0";
+    content.style.transform = "translateY(10px) scale(0.95)";
 
-    eventIcon.classList.add("fade-out");
-    eventYear.classList.add("fade-out");
-    eventCompany.classList.add("fade-out");
-    eventDescription.classList.add("fade-out");
-
-    function onFadeOutEnd(e) {
-      if (e.target !== content) return;
-      
-      content.removeEventListener("animationend", onFadeOutEnd);
-
+    // On attend la fin de la transition (0.5s définie dans le CSS)
+    setTimeout(() => {
       const event = timelineData[targetIndex];
 
+      // Mise à jour du contenu
       eventIcon.innerHTML = `<i class="fa-solid ${event.icon}"></i>`;
       
-      // Mise à jour avec Durée
       eventYear.innerHTML = `
         <span style="display:block; line-height:1;">${event.year}</span>
         <span class="event-duration" style="display:block; font-size:0.4em; opacity:0.7; margin-top:8px; font-weight:400; letter-spacing:1px; text-transform:uppercase;">
@@ -138,7 +131,6 @@ export function initTimeline() {
       
       eventCompany.textContent = event.company;
       
-      // Mise à jour avec Techs
       eventDescription.innerHTML = `
         <p style="margin-bottom:15px;">${event.description}</p>
         <div class="event-techs" style="font-size:0.9em; color:rgba(255,255,255,0.9); border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
@@ -147,21 +139,21 @@ export function initTimeline() {
         </div>
       `;
 
+      // Mise à jour de l'ère (background)
       timelineContainer.className = `timeline-container ${event.era}`;
 
-      content.classList.remove("fade-transition");
-      eventIcon.classList.remove("fade-out");
-      eventYear.classList.remove("fade-out");
-      eventCompany.classList.remove("fade-out");
-      eventDescription.classList.remove("fade-out");
-
-      content.classList.add("fade-in");
+      // Fade In
+      content.style.opacity = "1";
+      content.style.transform = "translateY(0) scale(1)";
 
       currentIndex = targetIndex;
-      isAnimating = false;
-    }
+      
+      // On débloque après la fin de l'animation de retour
+      setTimeout(() => {
+        isAnimating = false;
+      }, 500);
 
-    content.addEventListener("animationend", onFadeOutEnd);
+    }, 500); // Correspond aux 0.5s de transition CSS
   }
 
   slider.addEventListener("input", function () {
