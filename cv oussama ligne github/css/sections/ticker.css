@@ -2,9 +2,9 @@
 .tech-ticker-section {
   width: 100%;
   padding: 20px 0;
-  background: rgba(0, 120, 212, 0.05);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: #5C2D91; /* Microsoft Purple (Mauve) */
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   overflow: hidden;
   position: relative;
   margin: 0 !important;
@@ -15,8 +15,9 @@
 .tech-ticker-wrapper {
   width: 100%;
   overflow: hidden;
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  /* Ajustement du masque pour le fond solide */
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
 }
 
 .tech-ticker-track {
@@ -34,28 +35,32 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: 'Rajdhani', sans-serif;
+  font-family: 'Segoe UI', 'Rajdhani', sans-serif; /* Segoe UI first */
   font-weight: 600;
   font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: #ffffff; /* Texte blanc pour contraste */
   white-space: nowrap;
   padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.15); /* Fond semi-transparent blanc */
+  border-radius: 4px; /* Style "carré" Microsoft */
+  border: 1px solid rgba(255, 255, 255, 0.3);
   transition: all 0.3s ease;
 }
 
 .tech-item i {
-  color: var(--accent);
+  color: #ffffff; /* Icônes blanches */
 }
 
 .tech-item:hover {
-  background: rgba(0, 120, 212, 0.1);
-  border-color: rgba(0, 120, 212, 0.3);
-  color: #ffffff;
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #5C2D91; /* Texte mauve au survol */
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.tech-item:hover i {
+  color: #5C2D91; /* Icônes mauves au survol */
 }
 
 @keyframes ticker-scroll {
