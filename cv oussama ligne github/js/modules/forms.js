@@ -1,4 +1,4 @@
-import { showToast } from '../utils.js';
+import { showToast } from './utils.js';
 
 export function initForm() {
   const form = document.getElementById('contactForm');
