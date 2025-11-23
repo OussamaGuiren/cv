@@ -5,6 +5,7 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 40px 20px;
+  background: var(--splash-bg); /* Fond clair */
 }
 
 .contact-grid {
@@ -15,25 +16,26 @@
 }
 
 .contact-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 24px;
+  background: #FFFFFF; /* Fond blanc */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px; /* Coins moins arrondis */
   padding: 40px 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  backdrop-filter: blur(10px);
+  backdrop-filter: none;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .contact-card:hover {
-  transform: translateY(-10px);
-  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-4px);
+  background: #FFFFFF;
   border-color: rgba(0, 120, 212, 0.4);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 .contact-card::before {
@@ -43,7 +45,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(0, 120, 212, 0.1) 0%, transparent 100%);
+  background: linear-gradient(135deg, rgba(0, 120, 212, 0.05) 0%, transparent 100%); /* Overlay bleu très léger */
   opacity: 0;
   transition: opacity 0.4s ease;
 }
@@ -56,34 +58,35 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(0, 120, 212, 0.2), rgba(0, 120, 212, 0.05));
+  background: rgba(0, 120, 212, 0.1); /* Bleu clair */
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 24px;
   font-size: 2rem;
-  color: #66b1f1;
-  border: 1px solid rgba(0, 120, 212, 0.3);
+  color: #0078D4; /* Icône bleue */
+  border: 1px solid rgba(0, 120, 212, 0.2);
   transition: transform 0.4s ease;
 }
 
 .contact-card:hover .contact-icon-wrapper {
   transform: scale(1.1) rotate(5deg);
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  background: #0078D4;
   color: #ffffff;
   border-color: transparent;
-  box-shadow: 0 10px 20px rgba(0, 120, 212, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 120, 212, 0.3);
 }
 
 .contact-card h3 {
   font-size: 1.5rem;
   margin-bottom: 12px;
-  color: #ffffff;
-  font-family: 'Orbitron', sans-serif;
+  color: #201F1E; /* Titre noir */
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 600;
 }
 
 .contact-card p {
-  color: rgba(255, 255, 255, 0.7);
+  color: #605E5C; /* Texte gris foncé */
   font-size: 1rem;
   line-height: 1.6;
   margin-bottom: 30px;
@@ -92,7 +95,7 @@
 
 .contact-card-btn {
   padding: 12px 28px;
-  border-radius: 50px;
+  border-radius: 4px; /* Bouton carré */
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -108,25 +111,25 @@
 }
 
 .contact-card-btn:not(.secondary) {
-  background: var(--accent-gradient);
+  background: #0078D4;
   color: #ffffff;
-  box-shadow: 0 4px 15px rgba(0, 120, 212, 0.3);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .contact-card-btn:not(.secondary):hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 120, 212, 0.5);
+  background: #005A9E;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .contact-card-btn.secondary {
   background: transparent;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  border: 1px solid #0078D4;
+  color: #0078D4;
 }
 
 .contact-card-btn.secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: #ffffff;
+  background: rgba(0, 120, 212, 0.1);
   transform: translateY(-2px);
 }
 
@@ -134,11 +137,11 @@
   text-align: center;
   margin-top: 40px;
   padding-top: 40px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .contact-footer p {
-  color: rgba(255, 255, 255, 0.5);
+  color: #605E5C;
   font-size: 0.9rem;
 }
 
@@ -158,23 +161,16 @@
 
 .icon-3d {
   padding: 10px;
-  animation: icon3d 200ms 10;
-  color: #fff;
+  /* animation: icon3d 200ms 10; -> Removed glitch/3d animation for cleaner look */
+  color: #0078D4; /* Blue icons */
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .icon-3d:hover {
-  animation: icon3d 200ms infinite;
+  transform: scale(1.2);
+  color: #005A9E;
 }
-
-@keyframes icon3d {
-  0% { text-shadow: 5px 4px rgba(244,67,54,1), -5px -6px rgba(33,150,243,1); }
-  25% { text-shadow: -5px -6px rgba(244,67,54,1), 5px 4px rgba(33,150,243,1); }
-  50% { text-shadow: 5px -4px rgba(244,67,54,1), -8px 4px rgba(33,150,243,1); }
-  75% { text-shadow: -8px -4px rgba(244,67,54,1), -5px -4px rgba(33,150,243,1); }
-  100% { text-shadow: -5px 0 rgba(244,67,54,1), 5px -4px rgba(33,150,243,1); }
-}
-
 
 /* Popup Formulaire Contact (Même style que About Popup) */
 .form-group {
@@ -185,7 +181,7 @@
 .form-label {
   display: block;
   margin-bottom: 8px;
-  color: #e2e8f0;
+  color: #323130; /* Label sombre */
   font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -196,10 +192,10 @@
 .form-select {
   width: 100%;
   padding: 12px 16px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  color: #ffffff;
+  background: #FFFFFF;
+  border: 1px solid #8A8886; /* Bordure grise */
+  border-radius: 4px;
+  color: #201F1E;
   font-family: inherit;
   font-size: 1rem;
   transition: all 0.3s ease;
@@ -209,9 +205,9 @@
 .form-textarea:focus,
 .form-select:focus {
   outline: none;
-  border-color: var(--accent);
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.2);
+  border-color: #0078D4; /* Focus bleu */
+  background: #FFFFFF;
+  box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.2);
 }
 
 .form-textarea {
@@ -220,7 +216,7 @@
 }
 
 .form-error {
-  color: #ff6b6b;
+  color: #A80000; /* Erreur rouge foncé */
   font-size: 0.85rem;
   margin-top: 6px;
   min-height: 20px;
@@ -234,55 +230,58 @@
 
 .form-submit-btn {
   padding: 14px 36px;
-  background: var(--accent-gradient);
+  background: #0078D4;
   color: #ffffff;
   border: none;
-  border-radius: 50px;
+  border-radius: 4px;
   font-size: 1rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 120, 212, 0.4);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .form-submit-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 120, 212, 0.6);
+  background: #005A9E;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .form-submit-btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
   transform: none;
+  background: #C8C6C4;
 }
 
 /* File upload styling */
 .file-upload-wrapper {
   position: relative;
   margin-bottom: 10px;
-  border: 2px dashed rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
+  border: 2px dashed #8A8886;
+  border-radius: 4px;
   padding: 20px;
   text-align: center;
   transition: all 0.3s ease;
   cursor: pointer;
+  background: #F3F2F1;
 }
 
 .file-upload-wrapper:hover {
-  border-color: var(--accent);
-  background: rgba(255, 255, 255, 0.05);
+  border-color: #0078D4;
+  background: #EDEBE9;
 }
 
 .file-upload-wrapper.drag-over {
-  border-color: var(--accent);
+  border-color: #0078D4;
   background: rgba(0, 120, 212, 0.1);
 }
 
 .file-upload-label {
   display: block;
-  color: rgba(255, 255, 255, 0.7);
+  color: #605E5C;
   font-size: 0.9rem;
   pointer-events: none;
 }
@@ -300,23 +299,24 @@
 .file-name-display {
   margin-top: 10px;
   font-size: 0.85rem;
-  color: var(--accent-2);
+  color: #0078D4;
 }
 
 .file-chip {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(0, 120, 212, 0.2);
+  background: #E1DFDD;
   padding: 6px 12px;
-  border-radius: 20px;
-  border: 1px solid rgba(0, 120, 212, 0.3);
+  border-radius: 16px;
+  border: 1px solid #C8C6C4;
+  color: #201F1E;
 }
 
 .remove-file {
   background: none;
   border: none;
-  color: #ff6b6b;
+  color: #A80000;
   font-weight: bold;
   cursor: pointer;
   padding: 0 4px;
@@ -325,7 +325,7 @@
 }
 
 .remove-file:hover {
-  color: #ff4c4c;
+  color: #D13438;
 }
 
 /* Responsive adjustments */

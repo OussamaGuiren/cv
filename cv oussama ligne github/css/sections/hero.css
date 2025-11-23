@@ -23,6 +23,7 @@
   body.hero-typed .et-hero-tabs [data-typewriter],
   body.hero-visible .et-hero-tabs [data-typewriter] {
     opacity: 1 !important;
+    color: var(--splash-text) !important; /* Utiliser la couleur de texte sombre du thème clair */
   }
 }
 
@@ -31,6 +32,7 @@
   display: inline;
   white-space: normal;
   word-wrap: break-word;
+  color: var(--splash-text);
 }
 
 /* Show elements when visible */
@@ -42,7 +44,7 @@ body.hero-visible .et-hero-tabs [data-typewriter],
 
 /* When typing is active, show the caret blinking */
 .et-hero-tabs [data-typewriter].typing {
-  border-right: 3px solid rgba(255,255,255,0.9);
+  border-right: 3px solid var(--accent); /* Caret en bleu Microsoft */
   animation: hero-caret 800ms step-end infinite;
 }
 
@@ -50,27 +52,29 @@ body.hero-visible .et-hero-tabs [data-typewriter],
   font-size: clamp(0.8rem, 1.2vw, 1rem);
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: #a7c5f5;
+  color: var(--accent-2); /* Bleu Microsoft foncé */
   margin-bottom: 16px;
+  font-weight: 600;
 }
 
 .et-hero-tabs h1 {
-  font-family: 'Orbitron', 'Share Tech Mono', monospace;
+  font-family: 'Segoe UI', 'Orbitron', sans-serif; /* Segoe UI pour le titre */
   font-size: clamp(72px, 14vw, 120px);
   font-weight: 900;
   line-height: 1.05;
   margin-bottom: 20px;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.05em; /* Espacement plus standard */
   text-transform: uppercase;
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 30%, var(--accent) 60%, var(--accent-2) 100%);
-  background-size: 200% auto;
+  /* Gradient Microsoft Blue plus subtil */
+  background: linear-gradient(135deg, #0078D4 0%, #005A9E 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: matrix-glow 3s ease-in-out infinite, matrix-gradient 4s ease-in-out infinite;
+  /* Suppression des animations Matrix trop "hacker" pour un style Microsoft propre */
+  animation: none; 
   position: relative;
-  filter: drop-shadow(0 0 15px rgba(0, 120, 212, 0.6));
-  text-shadow: 0 0 20px rgba(0, 120, 212, 0.5);
+  filter: none;
+  text-shadow: none;
 }
 
 @keyframes matrix-glow {

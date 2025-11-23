@@ -10,23 +10,24 @@
 }
 
 .project-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
+  background: #FFFFFF; /* Fond blanc pour les cartes */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px; /* Coins moins arrondis pour un style plus "pro" */
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
-  backdrop-filter: blur(10px);
+  backdrop-filter: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Ombre douce */
 }
 
 .project-card:hover {
-  transform: translateY(-8px);
-  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-4px); /* Movement plus subtil */
+  background: #FFFFFF;
   border-color: rgba(0, 120, 212, 0.4);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 .card-image {
@@ -50,7 +51,7 @@
 .card-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 120, 212, 0.1); /* Overlay bleu léger */
   opacity: 0;
   transition: opacity 0.3s ease;
   display: flex;
@@ -72,13 +73,15 @@
 .card-content h3 {
   font-size: 1.4rem;
   margin-bottom: 12px;
-  color: #ffffff;
-  font-family: 'Orbitron', sans-serif;
+  color: #201F1E; /* Titre sombre */
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .card-description {
   font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: #605E5C; /* Description gris foncé */
   margin-bottom: 20px;
   line-height: 1.6;
   flex-grow: 1;
@@ -94,11 +97,12 @@
 .tech-pill {
   font-size: 0.75rem;
   padding: 4px 10px;
-  border-radius: 12px;
-  background: rgba(0, 120, 212, 0.15);
-  color: #66b1f1;
-  border: 1px solid rgba(0, 120, 212, 0.3);
-  font-family: 'Share Tech Mono', monospace;
+  border-radius: 4px; /* Plus carré */
+  background: #F3F2F1;
+  color: #0078D4;
+  border: 1px solid #E1DFDD;
+  font-family: 'Segoe UI Mono', monospace;
+  font-weight: 600;
 }
 
 .card-actions {
@@ -110,10 +114,10 @@
 .card-btn {
   flex: 1;
   padding: 10px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  border: 1px solid #0078D4;
   background: transparent;
-  color: #ffffff;
+  color: #0078D4;
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -123,24 +127,26 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
+  font-weight: 600;
 }
 
 .card-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: #ffffff;
+  background: #0078D4;
+  color: #ffffff;
 }
 
 .card-open {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: #0078D4;
+  border-color: #0078D4;
+  color: #ffffff;
 }
 
 .card-open:hover {
-  background: var(--accent-2);
-  border-color: var(--accent-2);
+  background: #005A9E;
+  border-color: #005A9E;
 }
 
-/* MODAL PROJET (Ancien style remplacé par le nouveau - voir plus bas) */
+/* MODAL PROJET */
 
 /* Project Popup Modern Styles (Matching about-popup) */
 .project-popup-content {
@@ -157,11 +163,10 @@
 
 .project-media-wrapper {
   width: 100%;
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
-  /* Removed box-shadow, border, background: #000 */
-  background: transparent !important; /* Remove black background */
-  border: none !important;
+  background: #F3F2F1 !important;
+  border: 1px solid #E1DFDD !important;
   box-shadow: none !important;
   display: flex;
   align-items: center;
@@ -173,8 +178,8 @@
   height: auto;
   max-height: 500px;
   object-fit: cover;
-  border-radius: 12px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4); /* Shadow directly on image */
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); /* Ombre ajustée */
   transition: transform 0.5s ease;
 }
 
@@ -192,15 +197,14 @@
   text-align: left;
   margin-bottom: 0;
   font-size: 2.5rem;
-  /* Changed from background: linear-gradient..., -webkit-text-fill-color: transparent */
   background: none !important;
   -webkit-text-fill-color: unset !important;
-  color: #ffffff !important; /* Pure white for contrast */
-  text-shadow: 0 2px 10px rgba(0, 120, 212, 0.4);
+  color: #0078D4 !important; /* Titre bleu */
+  text-shadow: none;
 }
 
 .about-popup-text {
-  color: #e0e0e0 !important; /* Higher contrast */
+  color: #201F1E !important; /* Texte noir */
   font-size: 1.1rem !important;
   line-height: 1.7 !important;
   font-weight: 400 !important;
@@ -209,15 +213,14 @@
 .project-tech-stack {
   margin-top: 24px;
   padding: 20px;
-  /* Changed from rgba(255, 255, 255, 0.05), border: 1px solid rgba(255, 255, 255, 0.1) */
-  background: rgba(255, 255, 255, 0.08) !important; /* Slightly lighter background */
-  border: 1px solid rgba(255, 255, 255, 0.2) !important; /* More visible border */
-  border-radius: 12px;
+  background: #F3F2F1 !important; /* Fond gris très clair */
+  border: 1px solid #E1DFDD !important;
+  border-radius: 8px;
 }
 
 .project-tech-stack strong {
   display: block;
-  color: var(--accent-2) !important;
+  color: #0078D4 !important; /* Titre stack en bleu */
   text-transform: uppercase;
   font-size: 0.85rem;
   letter-spacing: 1px;
@@ -225,8 +228,8 @@
 }
 
 .project-tech-stack span {
-  color: #ffffff !important; /* Pure white */
-  font-family: 'Share Tech Mono', monospace;
+  color: #323130 !important; /* Texte stack en gris foncé */
+  font-family: 'Segoe UI Mono', monospace;
   font-size: 1rem;
   line-height: 1.6;
   font-weight: 500 !important;
@@ -244,48 +247,14 @@
   padding: 12px 28px;
   font-size: 1rem;
   text-decoration: none;
+  background: #0078D4;
+  color: white;
+  border-radius: 4px;
+  transition: background 0.2s;
 }
 
-/* Responsive adjustments for Project Popup */
-@media (max-width: 900px) {
-  .project-details-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  .project-info-wrapper .about-popup-title {
-    font-size: 2rem;
-  }
-
-  .project-popup-content {
-    width: 95vw !important;
-    max-height: 90vh;
-    overflow-y: auto;
-  }
-}
-
-@media (max-width: 767px) {
-  .project-popup-content {
-    padding: 20px !important;
-  }
-
-  .project-details-grid {
-    gap: 20px;
-    margin-top: 10px;
-  }
-
-  .project-info-wrapper .about-popup-title {
-    font-size: 1.8rem;
-    text-align: center;
-  }
-
-  .project-tech-stack {
-    padding: 15px;
-  }
-
-  .project-popup-actions {
-    text-align: center;
-  }
+.project-popup-actions .btn-primary:hover {
+  background: #005A9E;
 }
 
 /* Indicateur de scroll mobile */
@@ -295,8 +264,8 @@
   align-items: center;
   gap: 10px;
   margin-top: 1rem;
-  color: rgba(255, 255, 255, 0.5);
-  font-family: 'Share Tech Mono', monospace;
+  color: #0078D4; /* Indicateur bleu */
+  font-family: 'Segoe UI', monospace;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 0.85rem;

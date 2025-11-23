@@ -7,6 +7,7 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
+  background: var(--splash-bg); /* Fond clair */
 }
 
 #tab-power .slide-inner {
@@ -44,38 +45,39 @@
 }
 
 .check-list li {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #FFFFFF; /* Fond blanc pour les cartes */
+  border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 20px 24px;
-  border-radius: 12px;
+  border-radius: 8px; /* Coins moins arrondis */
   display: flex;
   align-items: flex-start;
   gap: 16px;
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  backdrop-filter: blur(5px);
-  color: #e0e0e0; /* Added for better initial contrast */
+  backdrop-filter: none;
+  color: #323130; /* Texte gris foncé */
   position: relative;
   line-height: 1.6;
   font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .check-list li::before {
   content: '\f00c'; /* FontAwesome check */
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
-  color: var(--accent);
+  color: #0078D4; /* Check bleu Microsoft */
   font-size: 1.1rem;
   margin-top: 2px;
   flex-shrink: 0;
-  position: static; /* Reset absolute positioning from old style */
+  position: static;
 }
 
 .check-list li:hover {
-  transform: translateY(-5px) scale(1.02);
-  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-2px); /* Mouvement subtil */
+  background: #FFFFFF;
   border-color: rgba(0, 120, 212, 0.4);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  color: #ffffff; /* Added for hover contrast */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  color: #201F1E; /* Texte plus sombre au survol */
 }
 
 /* Mobile adjustments for Power Platform */
