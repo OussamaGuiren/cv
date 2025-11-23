@@ -79,6 +79,21 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
+/* Activation en tablette et mobile (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .et-hero-tabs-container {
+    display: none !important; /* Cache la navbar desktop */
+  }
+  
+  .mobile-navbar {
+    display: flex !important; /* Affiche la navbar mobile (bleue) */
+  }
+  
+  .mobile-menu-toggle {
+    display: flex !important;
+  }
+}
+
 .mobile-navbar-logo {
   font-weight: 800;
   font-size: 1.1rem;
