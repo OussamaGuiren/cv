@@ -1,9 +1,27 @@
 /* ===================== SECTION PROJETS WEB (GALLERY) ===================== */
 
-/* Fond blanc pur pour différencier de la section Expérience (qui est gris clair) */
+/* FOND SOMBRE PROFOND pour une séparation nette avec la section Expérience (Claire) */
 #tab-projects {
-  background-color: #FFFFFF;
+  background-color: #11100f; /* Noir/Gris très profond */
   position: relative;
+  padding-top: 40px;
+  padding-bottom: 60px;
+  /* Bordure supérieure subtile pour marquer le début */
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Adaptation du titre de section pour le fond sombre */
+#tab-projects h2 {
+  color: #ffffff !important;
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+#tab-projects p {
+  color: #a19f9d !important;
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 .gallery {
@@ -12,13 +30,13 @@
   gap: 32px;
   width: 100%;
   perspective: 1000px;
-  padding-top: 20px;
+  padding: 0 20px;
 }
 
-/* Cartes Projets dans la grille (Restent claires pour s'intégrer au fond blanc) */
+/* Cartes Projets : THEME SOMBRE CLASSE */
 .project-card {
-  background: #F3F2F1; /* Gris très léger pour ressortir sur le fond blanc */
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: #1f1e1d; /* Gris anthracite "Premium" */
+  border: 1px solid #3d3c3b; /* Bordure subtile */
   border-radius: 8px;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -27,14 +45,14 @@
   flex-direction: column;
   height: 100%;
   backdrop-filter: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .project-card:hover {
-  transform: translateY(-4px);
-  background: #FFFFFF;
-  border-color: rgba(0, 120, 212, 0.4);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  transform: translateY(-6px);
+  background: #292827; /* Légèrement plus clair au survol */
+  border-color: #0078D4; /* Bordure bleue Microsoft */
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
 }
 
 .card-image {
@@ -42,6 +60,7 @@
   height: 200px;
   overflow: hidden;
   position: relative;
+  border-bottom: 1px solid #3d3c3b;
 }
 
 .card-image img {
@@ -58,7 +77,7 @@
 .card-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 120, 212, 0.1);
+  background: rgba(0, 120, 212, 0.2);
   opacity: 0;
   transition: opacity 0.3s ease;
   display: flex;
@@ -80,7 +99,7 @@
 .card-content h3 {
   font-size: 1.4rem;
   margin-bottom: 12px;
-  color: #201F1E;
+  color: #ffffff; /* Titre blanc éclatant */
   font-family: 'Segoe UI', sans-serif;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -88,7 +107,7 @@
 
 .card-description {
   font-size: 0.95rem;
-  color: #605E5C;
+  color: #c8c6c4; /* Texte gris clair lisible */
   margin-bottom: 20px;
   line-height: 1.6;
   flex-grow: 1;
@@ -105,9 +124,9 @@
   font-size: 0.75rem;
   padding: 4px 10px;
   border-radius: 4px;
-  background: #ffffff;
-  color: #0078D4;
-  border: 1px solid #E1DFDD;
+  background: rgba(255, 255, 255, 0.1); /* Fond translucide sombre */
+  color: #50E6FF; /* Cyan lumineux */
+  border: 1px solid rgba(255, 255, 255, 0.2);
   font-family: 'Segoe UI Mono', monospace;
   font-weight: 600;
 }
@@ -124,7 +143,7 @@
   border-radius: 4px;
   border: 1px solid #0078D4;
   background: transparent;
-  color: #0078D4;
+  color: #50E6FF; /* Texte cyan/bleu clair */
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -140,6 +159,7 @@
 .card-btn:hover {
   background: #0078D4;
   color: #ffffff;
+  border-color: #0078D4;
 }
 
 .card-open {
@@ -161,14 +181,13 @@
 }
 
 .project-popup-content .about-popup-inner {
-  /* FOND SOMBRE CLASSE pour le modal */
-  background: #1B1A19 !important; /* Microsoft Neutral Dark */
+  /* FOND SOMBRE LUXE */
+  background: #1B1A19 !important;
   border: 1px solid #323130 !important;
-  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.4) !important;
-  color: #F3F2F1 !important; /* Texte clair par défaut */
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.6) !important;
+  color: #F3F2F1 !important;
 }
 
-/* Bouton fermer adapté au thème sombre */
 .project-popup-content .about-popup-close {
   background: #323130 !important;
   border-color: #484644 !important;
@@ -182,7 +201,7 @@
 
 .project-details-grid {
   display: grid;
-  grid-template-columns: 1.3fr 1fr; /* Plus d'espace pour l'image */
+  grid-template-columns: 1.3fr 1fr;
   gap: 50px;
   margin-top: 20px;
   align-items: start;
@@ -193,7 +212,7 @@
   width: 100%;
   border-radius: 8px;
   overflow: hidden;
-  background: #000000 !important; /* Fond noir sous l'image */
+  background: #000000 !important;
   border: 1px solid #323130 !important;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
   display: flex;
@@ -205,7 +224,7 @@
   width: 100%;
   height: auto;
   max-height: 600px;
-  object-fit: contain; /* Contain pour voir toute l'image sans coupure */
+  object-fit: contain;
   border-radius: 4px;
   transition: transform 0.5s ease;
 }
@@ -227,16 +246,14 @@
   font-size: 2.8rem;
   background: none !important;
   -webkit-text-fill-color: unset !important;
-  /* Titre en bleu lumineux pour le contraste */
-  color: #50E6FF !important; 
+  color: #50E6FF !important;
   text-shadow: 0 0 20px rgba(0, 120, 212, 0.4);
   font-family: 'Segoe UI', sans-serif;
   font-weight: 700;
 }
 
 .project-popup-content .about-popup-text {
-  /* Texte de description blanc cassé très lisible */
-  color: #E1DFDD !important; 
+  color: #E1DFDD !important;
   font-size: 1.1rem !important;
   line-height: 1.8 !important;
   font-weight: 400 !important;
@@ -246,8 +263,7 @@
 .project-tech-stack {
   margin-top: 20px;
   padding: 24px;
-  /* Fond légèrement plus clair que le modal */
-  background: #252423 !important; 
+  background: #252423 !important;
   border: 1px solid #484644 !important;
   border-radius: 8px;
   position: relative;
@@ -266,7 +282,7 @@
 
 .project-tech-stack strong {
   display: block;
-  color: #0078D4 !important; /* Bleu Microsoft */
+  color: #0078D4 !important;
   text-transform: uppercase;
   font-size: 0.9rem;
   letter-spacing: 2px;
@@ -274,7 +290,7 @@
 }
 
 .project-tech-stack span {
-  color: #ffffff !important; /* Blanc pur */
+  color: #ffffff !important;
   font-family: 'Segoe UI Mono', monospace;
   font-size: 1rem;
   line-height: 1.6;
@@ -360,7 +376,7 @@
     max-height: none;
     border-radius: 0;
     border: none;
-    padding: 80px 20px 40px 20px; /* Espace pour le bouton fermer en haut */
+    padding: 80px 20px 40px 20px;
   }
   
   .project-popup-content .about-popup-close {
