@@ -76,6 +76,11 @@
 @media (max-width: 768px) {
   .tech-ticker-section {
     padding: 15px 0;
+    /* Suppression explicite des marges et ajout d'une marge négative pour coller au dessus */
+    margin-top: -1px !important; 
+    /* Parfois nécessaire si la section précédente a un padding-bottom */
+    position: relative;
+    top: -1px; 
   }
 
   .tech-item {

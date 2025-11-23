@@ -166,6 +166,11 @@
   .about-intro-image img {
     max-width: 100%;
   }
+  
+  /* Masquer le titre "MOI" (h4) sur mobile */
+  .about-photo-section h4 {
+    display: none !important;
+  }
 }
 
 /* Carte d'introduction mise en valeur */
@@ -627,20 +632,4 @@
   94% { opacity: 0.5; transform: translate(-5px, -5px); filter: invert(1); }
   96% { opacity: 1; transform: translate(5px, -5px); filter: hue-rotate(270deg) blur(1px); }
   100% { opacity: 0; transform: translate(0); filter: none; }
-}
-
-/* Responsive pour le modal */
-@media (max-width: 768px) {
-  .about-popup-content {
-    width: 95%;
-    max-height: 95vh;
-  }
-  
-  .about-popup-inner {
-    padding: 30px 20px;
-  }
-  
-  .about-popup-title {
-    font-size: 1.8rem;
-  }
 }
