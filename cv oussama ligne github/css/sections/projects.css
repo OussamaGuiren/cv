@@ -1,15 +1,12 @@
 /* ===================== SECTION PROJETS WEB (THEME MICROSOFT BLUE) ===================== */
 
 #tab-projects {
-  /* Gradient Microsoft Blue Profond */
   background: linear-gradient(135deg, #004578 0%, #003366 100%);
   position: relative;
   padding: 80px 20px;
-  /* Séparateur visuel */
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Titres en Blanc sur fond Bleu */
 #tab-projects h2 {
   color: #ffffff !important;
   text-align: center;
@@ -37,18 +34,18 @@
   padding-bottom: 20px;
 }
 
-/* CARTES : Blanc éclatant sur fond bleu (Style "Azure Portal") */
+/* CARTES */
 .project-card {
   background: #FFFFFF;
   border: none;
-  border-radius: 8px; /* Microsoft style radius */
+  border-radius: 8px;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Ombre plus marquée */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .project-card:hover {
@@ -85,20 +82,19 @@
 .card-content h3 {
   font-size: 1.5rem;
   margin-bottom: 12px;
-  color: #004578; /* Titre bleu sombre */
+  color: #004578;
   font-family: 'Segoe UI', sans-serif;
   font-weight: 700;
 }
 
 .card-description {
   font-size: 1rem;
-  color: #484644; /* Gris texte standard */
+  color: #484644;
   margin-bottom: 24px;
   line-height: 1.6;
   flex-grow: 1;
 }
 
-/* Tech Pills : Style "Badge" */
 .card-tech {
   display: flex;
   flex-wrap: wrap;
@@ -109,7 +105,7 @@
 .tech-pill {
   font-size: 0.8rem;
   padding: 6px 12px;
-  border-radius: 100px; /* Pill shape */
+  border-radius: 100px;
   background: #F3F2F1;
   color: #004578;
   font-weight: 600;
@@ -122,7 +118,6 @@
   background: #E1DFDD;
 }
 
-/* Boutons Cards */
 .card-actions {
   display: flex;
   gap: 16px;
@@ -146,7 +141,7 @@
 }
 
 .card-open {
-  background: #0078D4; /* Bleu Microsoft */
+  background: #0078D4;
   color: #ffffff;
   border: none;
 }
@@ -156,38 +151,216 @@
   box-shadow: 0 4px 8px rgba(0, 120, 212, 0.3);
 }
 
-/* === MODAL (Garder le Dark Mode pour l'immersion, mais ajusté aux tons bleus) === */
+/* ===================== MODAL PROJET REFACTORISÉ (UX FRIENDLY) ===================== */
+
+/* Conteneur global du modal projet */
+.project-popup-content {
+  width: 90% !important;
+  max-width: 1000px !important; /* Limite la largeur pour ne pas être "immense" */
+  margin: auto;
+  height: auto !important;
+  max-height: 90vh !important;
+  padding: 0 !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Intérieur du modal */
 .project-popup-content .about-popup-inner {
-  background: #201F1E !important; /* Dark Gray (Microsoft) */
+  background: #201F1E !important; /* Fond sombre Microsoft */
   border: 1px solid #323130 !important;
   color: #FFFFFF !important;
+  width: 100%;
+  height: 100%;
+  max-width: none !important;
+  max-height: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Scroll géré par les enfants */
 }
 
+/* Header du modal (Titre + Close) */
+.project-modal-header {
+  padding: 20px 30px;
+  background: #252423;
+  border-bottom: 1px solid #323130;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Le titre est injecté via JS souvent, on cible l'élément existant */
 .project-popup-content .about-popup-title {
-  color: #0078D4 !important; /* Titre bleu */
+  font-size: 1.8rem !important;
+  margin: 0 !important;
+  text-align: left !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
 }
 
+/* Bouton fermer repensé */
+.project-popup-content .about-popup-close {
+  position: static !important; /* Plus absolu, dans le header flex */
+  width: 36px !important;
+  height: 36px !important;
+  background: transparent !important;
+  border: none !important;
+  color: #ffffff !important;
+  font-size: 1.5rem !important;
+  margin-left: 20px;
+}
+
+.project-popup-content .about-popup-close:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  transform: none !important;
+}
+
+/* Corps du modal (Grid) */
+.project-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 50/50 split Desktop */
+  gap: 0; /* Pas de gap global, géré par padding */
+  overflow-y: auto; /* Scroll ici */
+  height: 100%;
+}
+
+/* Colonne Gauche : Image */
+.project-media-wrapper {
+  background: #000000 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: sticky;
+  top: 0;
+  height: 100%;
+  min-height: 400px; /* Hauteur minimale pour l'image */
+}
+
+.project-popup-image {
+  width: 100%;
+  height: 100%;
+  max-height: 400px; /* Empêche l'image de devenir immense */
+  object-fit: contain; /* Affiche l'image entière sans coupure */
+  border-radius: 4px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+
+/* Colonne Droite : Info */
+.project-info-wrapper {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background: #201F1E;
+}
+
+/* Description */
+.project-popup-content .about-popup-text {
+  color: #E1DFDD !important;
+  font-size: 1rem !important;
+  line-height: 1.6 !important;
+  font-weight: 400 !important;
+}
+
+/* Stack Technique */
 .project-tech-stack {
-  background: #323130 !important;
-  border-left-color: #0078D4 !important;
+  background: #2D2C2C !important;
+  padding: 20px;
+  border-radius: 4px;
+  border-left: 4px solid #0078D4 !important;
+  margin-top: 10px;
+}
+
+.project-tech-stack strong {
+  color: #0078D4 !important;
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .project-tech-stack span {
-  color: #F3F2F1 !important;
+  color: #ffffff !important;
+  font-family: 'Segoe UI Mono', monospace;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
-/* Responsive */
+/* Actions */
+.project-popup-actions {
+  margin-top: auto;
+  padding-top: 30px;
+}
+
+.project-popup-actions .btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 14px;
+  background: #0078D4;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.project-popup-actions .btn-primary:hover {
+  background: #106EBE;
+}
+
+/* Responsive Mobile */
+@media (max-width: 900px) {
+  .project-details-grid {
+    grid-template-columns: 1fr; /* Stack vertical */
+    height: auto;
+    overflow-y: visible;
+  }
+
+  .project-media-wrapper {
+    height: 300px; /* Hauteur fixe image mobile */
+    min-height: auto;
+    padding: 20px;
+    position: relative;
+  }
+
+  .project-popup-image {
+    max-height: 100%;
+  }
+
+  .project-info-wrapper {
+    padding: 30px 20px;
+  }
+  
+  .project-popup-content {
+    max-height: 95vh !important;
+    width: 95% !important;
+  }
+  
+  /* Scroll interne sur le content global en mobile */
+  .project-popup-content .about-popup-inner {
+    overflow-y: auto;
+  }
+}
+
 @media (max-width: 768px) {
   #tab-projects {
     padding: 60px 15px;
   }
   
   .mobile-scroll-indicator {
-    color: #ffffff; /* Blanc sur fond bleu */
-    opacity: 0.8;
-  }
-  
-  .mobile-scroll-indicator .animated-arrow {
     color: #ffffff;
+    opacity: 0.8;
   }
 }
