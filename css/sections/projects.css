@@ -1,0 +1,380 @@
+/* ===================== SECTION PROJETS WEB (THEME MICROSOFT BLUE) ===================== */
+
+#tab-projects {
+    background: linear-gradient(135deg, #004578 0%, #003366 100%);
+    position: relative;
+    padding: 80px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff; /* Couleur par défaut de la section : Blanc */
+  }
+  
+  /* Headers de section (Eyebrow, Title, Intro) */
+  #tab-projects .section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 60px auto;
+    color: #ffffff;
+  }
+  
+  #tab-projects .eyebrow {
+    color: #50E6FF !important; /* Cyan lumineux pour le petit sur-titre */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  #tab-projects h2 {
+    color: #ffffff !important;
+    font-size: 3rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+  
+  #tab-projects p.slide-intro, 
+  #tab-projects .section-header p {
+    color: rgba(255, 255, 255, 0.85) !important; /* Blanc cassé lisible */
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+  
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+  }
+  
+  /* CARTES PROJETS (Fond blanc, texte sombre) */
+  .project-card {
+    background: #FFFFFF !important;
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    color: #323130 !important; /* Force le texte gris foncé DANS la carte */
+  }
+  
+  .project-card:hover {
+    transform: none !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  }
+  
+  .card-image {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+    background: #f3f2f1;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  
+  .project-card:hover .card-image img {
+    transform: scale(1.02);
+  }
+  
+  /* CONTENU DE LA CARTE */
+  .card-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background: #FFFFFF !important;
+    color: #323130 !important; /* Texte sombre */
+  }
+  
+  /* Titre Carte (H3) */
+  .project-card h3,
+  .card-content h3 {
+    font-size: 1.5rem;
+    margin: 0 0 12px 0;
+    color: #004578 !important; /* Bleu foncé */
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 700;
+    line-height: 1.3;
+    text-shadow: none !important;
+  }
+  
+  /* Description Carte */
+  .project-card p,
+  .card-content p,
+  .card-excerpt {
+    font-size: 1rem;
+    color: #484644 !important; /* Gris foncé */
+    margin-bottom: 24px;
+    line-height: 1.6;
+    flex-grow: 1;
+    opacity: 1 !important;
+    text-shadow: none !important;
+  }
+  
+  /* Tech Pills */
+  .card-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  
+  .tech-pill {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    border-radius: 100px;
+    background: #EFF6FC;
+    color: #005A9E !important;
+    font-weight: 600;
+    border: 1px solid rgba(0, 120, 212, 0.1);
+  }
+  
+  /* Bouton Carte */
+  .card-open {
+    width: 100%;
+    padding: 14px 20px;
+    background: #0078D4;
+    color: #ffffff !important; /* Blanc sur bouton bleu */
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: auto;
+    display: block;
+    text-shadow: none !important;
+  }
+  
+  .card-open:hover {
+    background: #106EBE;
+  }
+  
+  /* INDICATEUR DE SCROLL MOBILE */
+  .mobile-scroll-indicator {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 2rem;
+    font-family: 'Segoe UI', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    animation: fadeIn 1s ease-out;
+  }
+  
+  .mobile-scroll-indicator .animated-arrow {
+    color: #ffffff;
+    animation: scrollArrow 1.5s infinite ease-in-out;
+  }
+  
+  @keyframes scrollArrow {
+    0%, 100% { transform: translateX(0); opacity: 0.5; }
+    50% { transform: translateX(5px); opacity: 1; }
+  }
+  
+  /* MODAL PROJET (Déjà corrigé) */
+  .project-popup-content {
+    width: 90% !important;
+    max-width: 1000px !important;
+    margin: auto;
+    height: auto !important;
+    max-height: 90vh !important;
+    padding: 0 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .project-popup-content .about-popup-inner {
+    background: #201F1E !important;
+    border: 1px solid #323130 !important;
+    color: #FFFFFF !important;
+    width: 100%;
+    height: 100%;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  .project-modal-header {
+    padding: 20px 30px;
+    background: #252423;
+    border-bottom: 1px solid #323130;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  
+  .project-popup-content .about-popup-title {
+    font-size: 1.8rem !important;
+    margin: 0 !important;
+    text-align: left !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+  }
+  
+  .project-popup-content .about-popup-close {
+    position: static !important;
+    width: 36px !important;
+    height: 36px !important;
+    background: transparent !important;
+    border: none !important;
+    color: #ffffff !important;
+    font-size: 1.5rem !important;
+    margin-left: 20px;
+  }
+  
+  .project-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    overflow-y: auto;
+    height: 100%;
+  }
+  
+  .project-media-wrapper {
+    background: #000000 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    position: sticky;
+    top: 0;
+    height: 100%;
+    min-height: 400px;
+  }
+  
+  .project-popup-image {
+    width: 100%;
+    height: 100%;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+  }
+  
+  .project-info-wrapper {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    background: #201F1E;
+  }
+  
+  .project-popup-content .about-popup-text {
+    color: #E1DFDD !important;
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+    font-weight: 400 !important;
+  }
+  
+  .project-tech-stack {
+    background: #2D2C2C !important;
+    padding: 20px;
+    border-radius: 4px;
+    border-left: 4px solid #0078D4 !important;
+    margin-top: 10px;
+  }
+  
+  .project-tech-stack strong {
+    color: #0078D4 !important;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+  }
+  
+  .project-tech-stack span {
+    color: #ffffff !important;
+    font-family: 'Segoe UI Mono', monospace;
+    font-size: 0.95rem;
+  }
+  
+  .project-popup-actions {
+    margin-top: auto;
+    padding-top: 30px;
+  }
+  
+  .project-popup-actions .btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 14px;
+    background: #0078D4;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  
+  .project-popup-actions .btn-primary:hover {
+    background: #106EBE;
+  }
+  
+  @media (max-width: 900px) {
+    .project-details-grid {
+      grid-template-columns: 1fr;
+      height: auto;
+      overflow-y: visible;
+    }
+  
+    .project-media-wrapper {
+      height: 300px;
+      min-height: auto;
+      padding: 20px;
+      position: relative;
+    }
+  
+    .project-popup-image {
+      max-height: 100%;
+    }
+  
+    .project-info-wrapper {
+      padding: 30px 20px;
+    }
+    
+    .project-popup-content {
+      max-height: 95vh !important;
+      width: 95% !important;
+    }
+    
+    .project-popup-content .about-popup-inner {
+      overflow-y: auto;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    #tab-projects {
+      padding: 60px 15px;
+    }
+    
+    .mobile-scroll-indicator {
+      display: flex;
+    }
+  }
+  

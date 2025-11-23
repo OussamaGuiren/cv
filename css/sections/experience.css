@@ -1,0 +1,344 @@
+/* ===================== SECTION EXPÉRIENCE - TIMELINE SLIDER ===================== */
+
+.experience-section {
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    background: var(--splash-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    color: var(--splash-text); /* Texte sombre du thème clair */
+  }
+  
+  .timeline-container {
+    background: #FFFFFF; /* Fond blanc pour le thème clair */
+    border-radius: 20px;
+    padding: 4rem 3rem;
+    max-width: 1400px;
+    width: 100%;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), /* Ombres plus douces */
+      0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    text-align: center;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(0, 120, 212, 0.1); /* Bordure subtilement bleue */
+    backdrop-filter: none;
+  }
+  
+  /*.timeline-header {
+    margin-bottom: 3rem;
+  }*/
+  
+  .timeline-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeInUptTitle 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    color: #0078D4; /* Titre en bleu Microsoft */
+    letter-spacing: -0.025em;
+  }
+  
+  .timeline-subtitle {
+    font-size: 1.125rem;
+    font-weight: 400;
+    opacity: 0;
+    animation: fadeInUptTitle 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+    color: #605E5C; /* Gris foncé pour sous-titre */
+    letter-spacing: 0.025em;
+  }
+  
+  @keyframes fadeInUptTitle {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    60% {
+      opacity: 1;
+      transform: translateY(-5px);
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .timeline-content {
+    margin-bottom: 4rem;
+    min-height: 550px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .event-icon {
+    width: 72px;
+    height: 72px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: white;
+    box-shadow: 0 10px 25px rgba(0, 120, 212, 0.3);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  }
+  
+  .event-year {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: #201F1E; /* Année en noir */
+    letter-spacing: -0.05em;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  }
+  
+  .event-company {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    color: #0078D4; /* Entreprise en bleu */
+    letter-spacing: -0.025em;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  }
+  
+  .event-description {
+    font-size: 1.125rem;
+    font-weight: 400;
+    max-width: 950px;
+    line-height: 1.7;
+    color: #323130; /* Description en gris foncé */
+    letter-spacing: 0.015em;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  }
+  
+  /* Techs dans description - needs specificity */
+  .event-techs {
+    color: #605E5C !important;
+    border-top: 1px solid rgba(0, 120, 212, 0.2) !important;
+  }
+  
+  .event-techs strong {
+    color: #0078D4 !important;
+  }
+  
+  .slider-container {
+    position: relative;
+    margin: 3rem 0 0 0;
+    padding: 0 1rem;
+  }
+  
+  .slider-track {
+    position: relative;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.1); /* Piste grise claire */
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    user-select: none;
+  }
+  
+  .progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    border-radius: 8px;
+    width: 0%;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .tick {
+    position: absolute;
+    top: -4px;
+    width: 2px;
+    height: 14px;
+    background: rgba(0, 0, 0, 0.2); /* Ticks gris */
+    border-radius: 1px;
+    transform: translateX(-1px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .tick.active {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    height: 18px;
+    top: -6px;
+    width: 3px;
+    box-shadow: 0 0 8px rgba(0, 120, 212, 0.4);
+  }
+  
+  .year-labels {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    font-size: 0.875rem;
+    color: #8A8886; /* Labels gris moyen */
+    font-weight: 500;
+    user-select: none;
+    letter-spacing: 0.025em;
+    position: relative;
+  }
+  
+  .year-label {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: absolute;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+  
+  .year-label.active {
+    color: var(--accent); /* Label actif en bleu */
+    font-weight: 700;
+    transform: translateX(-50%) scale(1.1);
+    text-shadow: none;
+  }
+  
+  .timeline-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 40px; /* Larger touch target */
+    background: transparent;
+    outline: none;
+    position: absolute;
+    top: -13px; /* Center vertically over the track (track top:0, height:6px) */
+    left: 0;
+    margin: 0;
+    cursor: pointer;
+    z-index: 10;
+    touch-action: none; /* Prevent scrolling while dragging */
+  }
+  
+  .timeline-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 28px; /* Larger thumb */
+    height: 28px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid var(--accent);
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 120, 212, 0.4);
+    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.1s ease; /* Faster transition */
+    margin-top: -11px; /* Center relative to track (if track were standardized) - adjusted for appearance */
+    position: relative;
+    z-index: 2;
+  }
+  
+  .timeline-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 6px 20px rgba(0, 120, 212, 0.5),
+      0 0 0 8px rgba(0, 120, 212, 0.1);
+  }
+  
+  .timeline-slider::-moz-range-thumb {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid var(--accent);
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 120, 212, 0.4);
+    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.1s ease;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .timeline-slider::-moz-range-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 6px 20px rgba(0, 120, 212, 0.5),
+      0 0 0 8px rgba(0, 120, 212, 0.1);
+  }
+  
+  /* Era Styles - Subtils backgrounds pour thème clair */
+  .timeline-container.era-early-web {
+    border-color: rgba(0, 120, 212, 0.2);
+    background: linear-gradient(to bottom right, #ffffff, #f0f8ff);
+  }
+  
+  .timeline-container.era-dot-com {
+    border-color: rgba(102, 177, 241, 0.2);
+    background: linear-gradient(to bottom right, #ffffff, #e6f4ff);
+  }
+  
+  .timeline-container.era-social-media {
+    border-color: rgba(0, 78, 140, 0.2);
+    background: linear-gradient(to bottom right, #ffffff, #eaf6ff);
+  }
+  
+  .timeline-container.era-mobile {
+    border-color: rgba(43, 136, 216, 0.2);
+    background: linear-gradient(to bottom right, #ffffff, #f0faff);
+  }
+  
+  /* Animations */
+  .fade-transition {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  }
+  
+  .fade-out {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  }
+  
+  .fade-in {
+    animation: fadeInContent 0.4s ease-out forwards;
+  }
+  
+  @keyframes fadeInContent {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .timeline-container {
+      padding: 2rem 1.5rem;
+    }
+  
+    .timeline-title {
+      font-size: 1.75rem;
+    }
+  
+    .event-year {
+      font-size: 2.5rem;
+    }
+  
+    .event-company {
+      font-size: 1.25rem;
+    }
+  
+    .event-description {
+      font-size: 1rem;
+    }
+  
+    .slider-container {
+      margin-top: 2rem;
+      padding: 0; /* Remove padding to maximize width on mobile */
+    }
+    
+    .year-labels {
+      font-size: 0.75rem; /* Smaller font for years on mobile */
+    }
+    
+    .timeline-slider {
+      height: 50px; /* Even larger touch target for mobile */
+      top: -18px;
+    }
+  }
+  

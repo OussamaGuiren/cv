@@ -1,0 +1,344 @@
+/* ===================== SECTION CONTACT (THEME MICROSOFT SURFACE DARK) ===================== */
+
+/* Application du fond sombre sur la SECTION ENTIÈRE */
+#tab-contact {
+    background-color: #201F1E; /* Surface Dark */
+    position: relative;
+    padding: 80px 20px;
+    color: #ffffff;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    justify-content: center; /* Centrage horizontal */
+  }
+  
+  /* Centrage du contenu interne */
+  #tab-contact .slide-inner {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Header de Section (Eyebrow, H2, Intro) */
+  #tab-contact .section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 60px auto;
+    width: 100%;
+  }
+  
+  /* Eyebrow (Petit titre au dessus) */
+  #tab-contact .eyebrow {
+    color: #50E6FF !important; /* Cyan lumineux */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    display: block;
+    font-size: 0.9rem;
+  }
+  
+  /* Titre Principal */
+  #tab-contact h2 {
+    color: #ffffff !important;
+    font-size: 3rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  
+  /* Intro Paragraphe */
+  #tab-contact p.slide-intro {
+    color: #C8C6C4 !important; /* Gris clair lisible */
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin: 0 auto;
+  }
+  
+  /* Le conteneur des cartes (Reset des styles précédents erronés) */
+  .contact-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent !important; /* Plus de fond ici, c'est la section qui l'a */
+    padding: 0 !important;
+    border: none !important;
+  }
+  
+  /* Grille Contact */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    width: 100%;
+    margin-bottom: 60px;
+  }
+  
+  /* Cartes Contact Sombres */
+  .contact-card {
+    background: #323130;
+    border: 1px solid #484644;
+    border-radius: 8px;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+  
+  .contact-card:hover {
+    transform: translateY(-1px);
+    background: #3B3A39;
+    border-color: #0078D4;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+  }
+  
+  .contact-icon-wrapper {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #201F1E;
+    border: 1px solid #0078D4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    font-size: 1.8rem;
+    color: #0078D4;
+    transition: all 0.3s ease;
+  }
+  
+  .contact-card:hover .contact-icon-wrapper {
+    background: #0078D4;
+    color: #ffffff;
+    box-shadow: 0 0 20px rgba(0, 120, 212, 0.4);
+  }
+  
+  .contact-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    color: #ffffff;
+    font-weight: 600;
+  }
+  
+  .contact-card p {
+    color: #D2D0CE;
+    font-size: 1rem;
+    margin-bottom: 30px;
+    line-height: 1.5;
+  }
+  
+  /* Boutons Cards */
+  .contact-card-btn {
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid transparent;
+    display: inline-block;
+  }
+  
+  .contact-card-btn:not(.secondary) {
+    background: #0078D4;
+    color: #ffffff;
+  }
+  
+  .contact-card-btn:not(.secondary):hover {
+    background: #106EBE;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .contact-card-btn.secondary {
+    background: transparent;
+    border-color: #C8C6C4;
+    color: #F3F2F1;
+  }
+  
+  .contact-card-btn.secondary:hover {
+    border-color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .contact-footer {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+  }
+  
+  .contact-footer p {
+    color: #A19F9D;
+    font-size: 0.9rem;
+  }
+  
+  /* Mobile Socials */
+  .mobile-socials {
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .icon-3d {
+    padding: 10px;
+    color: #ffffff;
+    transition: transform 0.3s ease;
+  }
+  
+  .icon-3d:hover {
+    transform: scale(1.2);
+    color: #0078D4;
+  }
+  
+  /* === FORMULAIRE CONTACT (STYLES GLOBAUX / MODAL) === */
+  .form-group {
+    margin-bottom: 24px;
+    position: relative;
+    display: block;
+  }
+  
+  .form-group label,
+  label[for] {
+    display: block;
+    margin-bottom: 8px;
+    color: #F3F2F1 !important;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  #contactForm input,
+  #contactForm textarea,
+  #contactForm select,
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 12px 16px;
+    background: #323130 !important;
+    border: 1px solid #484644 !important;
+    border-radius: 4px;
+    color: #ffffff !important;
+    font-family: 'Segoe UI', sans-serif !important;
+    font-size: 1rem !important;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  
+  #contactForm input::placeholder,
+  #contactForm textarea::placeholder,
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: #A19F9D !important;
+    opacity: 1;
+  }
+  
+  #contactForm input:focus,
+  #contactForm textarea:focus,
+  #contactForm select:focus,
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: #0078D4 !important;
+    background: #3B3A39 !important;
+    box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.25);
+  }
+  
+  .form-group .error {
+    color: #FF5A5A !important;
+    font-size: 0.85rem;
+    margin-top: 6px;
+    min-height: 20px;
+    display: block;
+  }
+  
+  .form-group .hint {
+    color: #A19F9D;
+    font-size: 0.85rem;
+    margin-top: 4px;
+    display: block;
+  }
+  
+  .file-upload-wrapper {
+    border: 2px dashed #484644 !important;
+    padding: 20px;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.02) !important;
+    transition: all 0.3s ease;
+    display: block;
+    position: relative;
+  }
+  
+  .file-upload-wrapper:hover {
+    border-color: #8A8886 !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+  }
+  
+  .file-upload-label {
+    color: #C8C6C4 !important;
+    font-size: 0.9rem;
+    display: block;
+  }
+  
+  #submitBtn,
+  button[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    background: #0078D4 !important;
+    color: #ffffff !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    display: block;
+  }
+  
+  #submitBtn:hover,
+  button[type="submit"]:hover {
+    background: #106EBE !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  #submitBtn:disabled {
+    background: #484644 !important;
+    cursor: not-allowed;
+    transform: none;
+    opacity: 0.7;
+  }
+  
+  #formStatus {
+    text-align: center;
+    margin-top: 15px;
+    min-height: 24px;
+    font-weight: 500;
+    color: #ffffff;
+    display: block;
+  }
+  
+  @media (max-width: 768px) {
+    #tab-contact {
+      padding: 40px 15px;
+    }
+  }
+  

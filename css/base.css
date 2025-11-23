@@ -1,0 +1,126 @@
+:root {
+    --ease-push: cubic-bezier(.25, .8, .25, 1);
+    --dur-open: 900ms;
+    --dur-close: 700ms;
+  
+    /* Couleurs du splash screen (Conservées) */
+    --bg-a: #191919;
+    --bg-b: #252525;
+    --bg-c: #2a2a2a;
+    
+    /* Microsoft Brand Colors (Clarté & Professionnel) */
+    --accent: #0078D4;       /* Microsoft Blue */
+    --accent-2: #005A9E;     /* Darker Blue */
+    --accent-dark: #004578;
+    --accent-foreground: #ffffff;
+    
+    /* Microsoft Gradient */
+    --accent-gradient: linear-gradient(135deg, #0078D4 0%, #50E6FF 100%);
+    
+    /* Thème Clair/Moderne Microsoft (Fluent Design inspired) */
+    --splash-bg: #F3F2F1;    /* Light gray / Off-white background (Surface) */
+    --splash-text: #201F1E;  /* Dark gray text (almost black) for readability */
+    --splash-lines: #8A8886; /* Neutral gray for lines */
+    --splash-dark: #FFFFFF;  /* Cards background (White) */
+  
+    --stage-overlay: rgba(0, 120, 212, 0.05);
+    --stage-overlay-2: rgba(0, 120, 212, 0.02);
+  
+    --ui-letter-spacing: 1px;
+  }
+  
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Segoe UI', 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif; /* Segoe UI first for Microsoft feel */
+    background: var(--splash-bg);
+    background-color: var(--splash-bg);
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: var(--splash-text);
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  /* Scrollbar personnalisée (Style Microsoft Edge) */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #F3F2F1;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #C8C6C4;
+    border-radius: 5px;
+    border: 2px solid #F3F2F1;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #8A8886;
+  }
+  
+  body.splash-active {
+    /* Le splash screen garde son fond sombre pour le contraste initial */
+    background: #191919 !important; 
+    color: #ffffff;
+    overflow: hidden;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  /* Stage Background & Overlay */
+  .stage {
+    position: relative;
+    width: 100%;
+    isolation: isolate;
+    background: var(--splash-bg); /* Fond clair */
+    color: var(--splash-text);   /* Texte sombre */
+    transition: background 0.5s ease, color 0.5s ease;
+  }
+  
+  .stage::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      linear-gradient(90deg, var(--stage-overlay) 1px, transparent 1px) 0 0 / 80px 80px,
+      linear-gradient(0deg, var(--stage-overlay) 1px, transparent 1px) 0 0 / 80px 80px;
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+    z-index: -1;
+    pointer-events: none;
+  }
+  
+  /* ===================== ANIMATIONS DE TRANSITION DE SECTION (FLUENT MOTION) ===================== */
+  /* Uniquement pour Web (> 1024px) et Tablette (> 768px) */
+  @media (min-width: 769px) {
+    /* État initial : Caché et décalé vers le bas */
+    .fluent-section-hidden {
+      opacity: 0 !important;
+      transform: translateY(80px) scale(0.98) !important;
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 1s cubic-bezier(0.16, 1, 0.3, 1) !important; /* Courbe "Fluent" Microsoft */
+      will-change: opacity, transform;
+    }
+  
+    /* État final : Visible et à sa place */
+    .fluent-section-visible {
+      opacity: 1 !important;
+      transform: translateY(0) scale(1) !important;
+    }
+  }
+  

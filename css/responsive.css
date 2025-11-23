@@ -1,0 +1,637 @@
+/* ===================== RESPONSIVE CSS (GLOBAL) ===================== */
+
+/* ===================== RESPONSIVE - TABLETTE (768px - 1024px) ===================== */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .btnMeContacter {
+      display: none;
+    }
+  
+    .blockquote-wrapper {
+      padding: 0 15px;
+    }
+  
+    .blockquote.hero-quote-container {
+      max-width: 580px;
+      margin: 60px auto;
+    }
+  
+    .blockquote.hero-quote-container h1 {
+      font-size: 2.6rem;
+    }
+  
+    .et-hero-tabs h1 {
+      font-size: clamp(56px, 10vw, 100px);
+    }
+  
+    .hero-kicker {
+      font-size: clamp(0.85rem, 1.3vw, 1.1rem);
+    }
+  
+    .status-badge {
+      top: 20px;
+      right: clamp(20px, 5vw, 60px);
+      font-size: 12px;
+      padding: 8px 14px;
+    }
+    
+    /* Navbar fonctionne comme desktop : en bas puis sticky en haut */
+    .et-hero-tabs-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      z-index: 1100;
+      display: flex;
+    }
+  
+    .et-hero-tabs-container--top {
+      position: fixed;
+      top: 0;
+    }
+  
+    .et-hero-tab {
+      font-size: 0.75rem;
+      padding: 0 10px;
+    }
+  
+    .et-hero-logo {
+      padding: 0 15px;
+      font-size: 0.9rem;
+    }
+  
+    .slide-inner {
+      max-width: 90vw;
+    }
+  
+    .container-quisuisje {
+      padding: 60px 0;
+    }
+  
+    /* Sections en hauteur automatique pour éviter les chevauchements */
+    .et-slide {
+      min-height: auto;
+      height: auto;
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+  
+    .experience-section {
+      min-height: auto;
+      height: auto;
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+  
+    .about-photo-section {
+      min-height: auto;
+      height: auto;
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+  }
+  
+  /* ===================== RESPONSIVE - MOBILE (max-width: 767px) ===================== */
+  @media (max-width: 767px) {
+    /* Afficher la navbar mobile */
+    .mobile-navbar {
+      display: flex !important;
+    }
+    
+    /* Afficher le bouton toggle du menu mobile */
+    .mobile-menu-toggle {
+      display: flex !important;
+    }
+    
+    /* Afficher le menu mobile (quand ouvert) */
+    .mobile-menu {
+      display: flex !important;
+    }
+    
+    /* Désactiver les animations typewriter en mobile */
+    .et-hero-tabs [data-typewriter].typing {
+      animation: none !important;
+      border-right: none !important;
+    }
+   
+    /* Afficher le ::before uniquement si l'élément n'a pas encore de contenu (fallback si JS n'a pas encore injecté) */
+    .et-hero-tabs .hero-kicker[data-typewriter]:not(.has-content)::before {
+      content: attr(data-typewriter);
+      font-size: clamp(0.95rem, 3.5vw, 1.15rem);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #a7c5f5;
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 0 clamp(10px, 3vw, 20px);
+      margin-bottom: clamp(12px, 2vh, 20px);
+      visibility: visible !important;
+      position: relative;
+      z-index: 2;
+    }
+  
+    /* Cacher le ::before si le JavaScript a injecté le texte dans l'élément (pour éviter la duplication) */
+    .et-hero-tabs .hero-kicker.has-content[data-typewriter]::before,
+    .et-hero-tabs h1.has-content[data-typewriter]::before {
+      display: none !important;
+      content: none !important;
+    }
+  
+      /* Si JavaScript a injecté du texte, restaurer la visibilité du contenu réel */
+      .et-hero-tabs .hero-kicker.has-content[data-typewriter],
+      .et-hero-tabs h1.has-content[data-typewriter] {
+        font-size: clamp(1.2rem, 3.5vw, 1.15rem) !important;
+        line-height: 1.2 !important;
+        height: auto !important;
+        overflow: visible !important;
+        visibility: visible !important;
+        display: block !important;
+      }
+    .et-hero-tabs h1[data-typewriter]::before {
+      content: attr(data-typewriter);
+      font-size: clamp(32px, 10vw, 56px);
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 30%, var(--accent) 60%, var(--accent-2) 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      text-align: center;
+      padding: 0 clamp(12px, 3vw, 24px);
+      margin: 0 auto clamp(20px, 4vh, 32px);
+      word-break: break-word;
+      overflow-wrap: break-word;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 1;
+    }
+  
+    .blockquote.hero-quote-container h1 {
+      font-size: clamp(1.1rem, 4vw, 1.4rem) !important;
+      padding: 15px !important;
+      line-height: 1.5 !important;
+    }
+  
+    .hero-quote-container::before {
+      left: -20px;
+      font-size: clamp(3em, 12vw, 4.5em);
+      top: -5px;
+    }
+    
+    .hero-quote-container::after {
+      right: -20px;
+      font-size: clamp(3em, 12vw, 4.5em);
+      top: 60px;
+    }
+    
+    .hero-quote-container blockquote {
+      width: min(80vw, 85vw);
+      font-size: clamp(1rem, 3.5vw, 1.3rem);
+      padding: 20px 0 15px 12px;
+      transform: rotate(-0.5deg) !important;
+      line-height: 1.4;
+    }
+  
+    .hero-quote-container blockquote::first-line {
+      font-size: 1.3em;
+    }
+  
+    .hero-quote-container blockquote::first-letter {
+      font-size: 2em;
+    }
+  
+    .hero-quote-container blockquote strong:last-child {
+      font-size: 1.2em;
+    }
+  
+    .blockquote h4 {
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem) !important;
+      margin-left: 80px !important;
+      padding-top: 10px !important;
+    }
+  
+    .et-hero-tabs h1 {
+      letter-spacing: 0.12em;
+    }
+  
+    .hero-kicker {
+      font-size: clamp(0.95rem, 3.5vw, 1.2rem);
+      margin-bottom: clamp(14px, 2.5vh, 22px);
+      width: 100%;
+      text-align: center;
+      padding: 0 clamp(8px, 2.5vw, 18px);
+    }
+  
+    .status-badge {
+      top: 15px;
+      right: 15px;
+      font-size: 11px;
+      padding: 6px 12px;
+    }
+  
+    .status-icon {
+      font-size: 14px;
+    }
+  
+    /* ========== HERO INTRO - RÈGLES MOBILE PRINCIPALES (PRIORITÉ) ========== */
+    /* Réduire le padding de la section hero pour éliminer les espaces vides */
+    .et-hero-tabs {
+      padding: 20px clamp(16px, 4vw, 24px) !important;
+      min-height: 80vh;/* Soustraire la hauteur de la navbar mobile */
+      justify-content: center !important;
+      align-items: center !important;
+    }
+
+    .hero-intro {
+     gap: clamp(0.8rem, 1.5vh, 1.2rem) !important; 
+      max-width: 95vw !important;
+      justify-content: center !important;
+      align-items: center !important;
+      width: 100% !important;
+      margin-top: 5rem;
+    }
+
+    /* Agrandir le hero-kicker */
+    .hero-kicker {
+      width: 100%;
+      text-align: center;
+      padding: 0;
+      margin: 0 0 clamp(0.5rem, 1vh, 0.8rem) 0 !important;
+      flex-shrink: 0;
+      font-size: clamp(1rem, 4vw, 1.3rem) !important;
+    }
+
+    /* Agrandir le titre h1 */
+    .et-hero-tabs h1 {
+      margin: 0 0 clamp(0.8rem, 1.5vh, 1.2rem) 0 !important;
+      font-size: clamp(36px, 12vw, 64px) !important;
+      line-height: 1.1 !important;
+    }
+
+    .et-hero-tabs h1[data-typewriter]::before {
+      visibility: visible !important;
+      display: block !important;
+      font-size: clamp(36px, 12vw, 64px) !important;
+      margin-bottom: clamp(0.8rem, 1.5vh, 1.2rem) !important;
+    }
+
+    /* Réduire les espacements du blockquote-wrapper */
+    .blockquote-wrapper {
+      width: 100%;
+      flex: 0 1 auto !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 0;
+      padding: clamp(4px, 1vh, 8px) clamp(8px, 2vw, 12px) !important;
+      box-sizing: border-box;
+      overflow: hidden;
+      margin: 0 !important;
+    }
+
+    .blockquote.hero-quote-container {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 !important;
+      flex-shrink: 0 !important;
+      min-height: 0;
+    }
+
+    /* Agrandir le texte de la citation */
+    .blockquote.hero-quote-container h1 {
+      font-size: clamp(1.4rem, 5vw, 2rem) !important;
+      line-height: 1.25 !important;
+      padding: clamp(12px, 2.5vh, 18px) !important;
+      margin: 0 !important;
+      box-sizing: border-box;
+    }
+
+    .blockquote.hero-quote-container h4 {
+      padding-top: clamp(8px, 1.5vh, 12px) !important;
+      margin-left: 0 !important;
+      padding-left: 0 !important;
+      font-size: clamp(1rem, 3.5vw, 1.3rem) !important;
+      text-align: center !important;
+      width: 100% !important;
+    }
+
+    .blockquote.hero-quote-container h4:first-letter {
+      margin-left: 0 !important;
+    }
+
+    .about-photo-section img {
+      max-width: 25rem;
+    }
+
+    /* ========== SECTION QUI SUIS-JE - MOBILE ========== */
+    /* Cacher le texte en mobile - il sera affiché uniquement dans la popup */
+    .about-text-container.about-text-desktop {
+      display: none !important;
+    }
+
+    /* Afficher le bouton "En savoir plus" en mobile */
+    .about-learn-more-btn {
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(12px, 2.5vh, 16px) clamp(24px, 6vw, 32px);
+      font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+      border: 2px solid rgba(0, 120, 212, 0.5);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 15px rgba(0, 120, 212, 0.3),
+                  0 0 20px rgba(0, 120, 212, 0.1);
+      position: relative;
+      overflow: hidden;
+      margin-top: clamp(20px, 3vh, 30px);
+      z-index: 1;
+      width: auto;
+      min-width: 200px;
+    }
+
+    .about-learn-more-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .about-learn-more-btn:hover::before {
+      left: 100%;
+    }
+
+    .about-learn-more-btn:hover {
+      background: linear-gradient(135deg, var(--accent-2) 0%, var(--accent) 100%);
+      border-color: rgba(0, 120, 212, 0.8);
+      box-shadow: 0 6px 25px rgba(0, 120, 212, 0.5),
+                  0 0 30px rgba(0, 120, 212, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .about-learn-more-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 10px rgba(0, 120, 212, 0.4);
+    }
+
+    /* Ajuster la grille pour mobile - une seule colonne */
+    .about-content-wrapper {
+      grid-template-columns: 1fr !important;
+      gap: clamp(30px, 4vh, 40px) !important;
+    }
+
+    /* Centrer l'image et le bouton */
+    .about-image-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Réduire l'espacement du bouton */
+    .hero-intro > div:last-child {
+      margin-top: clamp(2.8rem, 1.5vh, 1.2rem) !important;
+      width: 100% !important;
+      display: flex !important;
+      justify-content: center !important;
+      flex-shrink: 0 !important;
+      padding-top: 0 !important;
+    }
+
+    /* Agrandir le bouton "Me contacter" */
+    .btnMeContacter {
+      font-size: clamp(1rem, 3.5vw, 1.2rem) !important;
+      padding: clamp(14px, 2.5vh, 18px) clamp(28px, 6vw, 36px) !important;
+      margin-top: 0 !important;
+    }
+  
+    .et-hero-tabs-container {
+      height: 68px;
+    }
+    .et-hero-logo {
+      padding: 0 12px;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+    }
+    .et-hero-tab {
+      font-size: 0.7rem;
+      padding: 0 4px;
+    }
+    
+    /* Uniformiser et réduire les espacements entre toutes les sections en mobile */
+    .et-main {
+      margin: 0;
+      padding: 0;
+      gap: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px; /* Ajout d'une marge légère entre les sections */
+    }
+  
+    /* S'assurer que chaque section est dans le flux normal sans chevauchement */
+    .et-slide,
+    .experience-section,
+    .container-quisuisje {
+      margin: 0 !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      position: relative !important;
+      z-index: auto !important;
+      isolation: isolate !important;
+      padding-top: 20px !important; /* Marge interne haut */
+      padding-bottom: 20px !important; /* Marge interne bas */
+    }
+  
+    .et-slide {
+      min-height: auto !important;
+      height: auto !important;
+      max-height: none !important;
+      padding-inline: clamp(12px, 3vw, 18px);
+      padding-block: clamp(10px, 1.5vh, 15px);
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      margin: 0;
+      position: relative !important;
+      z-index: 1 !important;
+    }
+  
+    .experience-section {
+      min-height: auto !important;
+      height: auto !important;
+      max-height: none !important;
+      margin: 0;
+      padding: clamp(10px, 1.5vh, 15px) clamp(12px, 3vw, 18px);
+      position: relative !important;
+      z-index: 1 !important;
+    }
+  
+    .container-quisuisje {
+      min-height: auto !important;
+      height: auto !important;
+      max-height: none !important;
+      margin: 0;
+      padding: 0;
+      position: relative !important;
+      z-index: 1 !important;
+    }
+  
+    .about-photo-section {
+      min-height: auto !important;
+      height: auto !important;
+      max-height: none !important;
+      margin: 0;
+      padding: clamp(10px, 1.5vh, 15px) clamp(12px, 3vw, 18px);
+      position: relative !important;
+      z-index: 1 !important;
+      padding-top: 20px !important;
+      padding-bottom: 20px !important;
+    }
+  
+    /* S'assurer que le main et les sections sont dans le flux normal */
+    .et-main {
+      position: relative !important;
+      z-index: 1 !important;
+    }
+  
+    .et-main > * {
+      z-index: auto !important;
+    }
+    .pill-groups,
+    .two-columns,
+    .contact-layout {
+      flex-direction: column;
+    }
+    .gallery {
+      display: flex;
+      flex-direction: row;
+      overflow-x: auto;
+      width: 100%;
+      padding: 20px 0;
+      gap: 0;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      align-items: stretch;
+      justify-content: flex-start;
+    }
+    
+    .project-card {
+      min-width: 100vw;
+      max-width: 100vw;
+      flex-shrink: 0;
+      margin: 0;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+    }
+    .modal-body {
+      grid-template-columns: 1fr;
+    }
+    .splash-text {
+      width: 90vw;
+      font-size: 28px;
+      height: auto;
+      transform: translate(-50%, -50%);
+      margin: 0; /* on laisse le centrage au transform */
+    }
+  
+    /* Désactive complètement l'animation de la citation sur mobile - AFFICHAGE IMMÉDIAT */
+    .blockquote.hero-quote-container {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+      visibility: visible !important;
+    }
+  
+    body.hero-title-typed .blockquote.hero-quote-container,
+    body.hero-visible .blockquote.hero-quote-container,
+    body.hero-typed .blockquote.hero-quote-container {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+      visibility: visible !important;
+    }
+  
+    .blockquote-wrapper {
+      opacity: 1 !important;
+      transform: none !important;
+      animation: none !important;
+      visibility: visible !important;
+    }
+  
+    body.hero-title-typed .blockquote.hero-quote-container h4,
+    body.hero-visible .blockquote.hero-quote-container h4,
+    .blockquote.hero-quote-container h4 {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+      visibility: visible !important;
+    }
+  
+    /* Règle remplacée par la media query mobile principale */
+  /*
+    .et-hero-tabs-container {
+      display: none !important;
+    }
+  */
+  
+  
+    .slide-inner {
+      max-width: 100%;
+    }
+  
+    .section-header h2 {
+      font-size: clamp(24px, 6vw, 32px);
+    }
+  
+    .project-card {
+      width: 100%;
+      max-width: 100%;
+    }
+  
+    .status-badge {
+      position: relative;
+      top: auto;
+      right: auto;
+      left: auto;
+      margin: 0 auto 20px auto;
+      width: fit-content;
+      max-width: calc(100vw - 40px);
+      font-size: clamp(10px, 2.5vw, 12px);
+      padding: clamp(6px, 1.5vw, 8px) clamp(10px, 3vw, 14px);
+      display: inline-flex;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  
+    .status-badge .status-text {
+      font-size: inherit;
+    }
+  
+    .status-badge .status-icon {
+      font-size: clamp(12px, 3vw, 14px);
+    }
+  }
+  

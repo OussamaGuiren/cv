@@ -1,0 +1,91 @@
+/* ===================== TECH TICKER SECTION ===================== */
+.tech-ticker-section {
+    width: 100%;
+    padding: 20px 0;
+    background: #5C2D91; /* Microsoft Purple (Mauve) */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    position: relative;
+    margin: 0 !important;
+    display: block !important;
+    z-index: 10;
+  }
+  
+  .tech-ticker-wrapper {
+    width: 100%;
+    overflow: hidden;
+    /* Ajustement du masque pour le fond solide */
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  }
+  
+  .tech-ticker-track {
+    display: flex;
+    gap: 40px;
+    width: max-content;
+    animation: ticker-scroll 30s linear infinite;
+  }
+  
+  .tech-ticker-track:hover {
+    animation-play-state: paused;
+  }
+  
+  .tech-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Segoe UI', 'Rajdhani', sans-serif; /* Segoe UI first */
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #ffffff; /* Texte blanc pour contraste */
+    white-space: nowrap;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.15); /* Fond semi-transparent blanc */
+    border-radius: 4px; /* Style "carré" Microsoft */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .tech-item i {
+    color: #ffffff; /* Icônes blanches */
+  }
+  
+  .tech-item:hover {
+    background: #ffffff;
+    border-color: #ffffff;
+    color: #5C2D91; /* Texte mauve au survol */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .tech-item:hover i {
+    color: #5C2D91; /* Icônes mauves au survol */
+  }
+  
+  @keyframes ticker-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    .tech-ticker-section {
+      padding: 15px 0;
+    }
+  
+    .tech-item {
+      font-size: 1rem;
+      padding: 6px 12px;
+    }
+  
+    .tech-ticker-track {
+      gap: 20px;
+      animation-duration: 20s;
+    }
+  }
+  
