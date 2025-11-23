@@ -1,13 +1,14 @@
-/* ===================== SECTION POWER PLATFORM ===================== */
+/* ===================== SECTION POWER PLATFORM (THEME MICROSOFT POWER PURPLE) ===================== */
 
-/* Power Platform Modern Styling */
 #tab-power {
+  /* Fond Clair légèrement teinté pour douceur */
+  background: #F8F9FA; 
+  background-image: radial-gradient(circle at 90% 10%, rgba(92, 45, 145, 0.05) 0%, transparent 40%);
+  position: relative;
+  padding: 80px 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  overflow: hidden;
-  background: var(--splash-bg); /* Fond clair */
 }
 
 #tab-power .slide-inner {
@@ -18,79 +19,105 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  gap: 40px;
 }
 
+/* Header centré et stylé */
 #tab-power .section-header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   max-width: 800px;
 }
 
+#tab-power h2 {
+  /* Violet Power Platform */
+  color: #5C2D91 !important; 
+  font-size: 3rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+#tab-power p.section-desc {
+  color: #605E5C !important;
+  font-size: 1.2rem;
+}
+
+/* Grille Power Platform */
 #tab-power .two-columns {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 40px;
   width: 100%;
 }
 
-/* Power Platform Cards (Replacing list) */
 .check-list {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
+/* Cartes Power Platform (Liste stylisée) */
 .check-list li {
-  background: #FFFFFF; /* Fond blanc pour les cartes */
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #FFFFFF;
+  border: 1px solid #E1DFDD;
+  /* Bordure gauche Violette pour marquer l'identité */
+  border-left: 4px solid #5C2D91;
   padding: 20px 24px;
-  border-radius: 8px; /* Coins moins arrondis */
+  border-radius: 4px; /* Style plus "Business App" */
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  backdrop-filter: none;
-  color: #323130; /* Texte gris foncé */
-  position: relative;
-  line-height: 1.6;
+  transition: all 0.3s ease;
+  color: #323130;
   font-size: 1rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  line-height: 1.6;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.04);
 }
 
+/* Icône Check Violette */
 .check-list li::before {
-  content: '\f00c'; /* FontAwesome check */
+  content: '\f00c';
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
-  color: #0078D4; /* Check bleu Microsoft */
+  color: #5C2D91; /* Violet */
   font-size: 1.1rem;
-  margin-top: 2px;
+  margin-top: 3px;
   flex-shrink: 0;
-  position: static;
+  background: rgba(92, 45, 145, 0.1);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
 }
 
 .check-list li:hover {
-  transform: translateY(-2px); /* Mouvement subtil */
+  transform: translateX(5px);
   background: #FFFFFF;
-  border-color: rgba(0, 120, 212, 0.4);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  color: #201F1E; /* Texte plus sombre au survol */
+  border-color: #5C2D91; /* Bordure complète violette au survol */
+  box-shadow: 0 8px 16px rgba(92, 45, 145, 0.15);
 }
 
-/* Mobile adjustments for Power Platform */
+.check-list li strong {
+  color: #5C2D91;
+  font-weight: 600;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
+  #tab-power {
+    padding: 60px 15px;
+  }
+
   #tab-power .two-columns {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 24px;
   }
-
-  #tab-power .slide-inner {
-    padding: 0 15px;
-  }
-
+  
   .check-list li {
     padding: 16px;
     font-size: 0.95rem;

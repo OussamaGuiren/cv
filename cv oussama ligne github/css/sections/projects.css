@@ -1,150 +1,139 @@
-/* ===================== SECTION PROJETS WEB (GALLERY) ===================== */
+/* ===================== SECTION PROJETS WEB (THEME MICROSOFT BLUE) ===================== */
 
-/* FOND SOMBRE PROFOND pour une séparation nette avec la section Expérience (Claire) */
 #tab-projects {
-  background-color: #11100f; /* Noir/Gris très profond */
+  /* Gradient Microsoft Blue Profond */
+  background: linear-gradient(135deg, #004578 0%, #003366 100%);
   position: relative;
-  padding-top: 40px;
-  padding-bottom: 60px;
-  /* Bordure supérieure subtile pour marquer le début */
+  padding: 80px 20px;
+  /* Séparateur visuel */
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Adaptation du titre de section pour le fond sombre */
+/* Titres en Blanc sur fond Bleu */
 #tab-projects h2 {
   color: #ffffff !important;
   text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 10px;
+  font-size: 3rem;
+  margin-bottom: 15px;
+  font-weight: 700;
 }
 
 #tab-projects p {
-  color: #a19f9d !important;
+  color: rgba(255, 255, 255, 0.8) !important;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 32px;
-  width: 100%;
-  perspective: 1000px;
-  padding: 0 20px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-bottom: 20px;
 }
 
-/* Cartes Projets : THEME SOMBRE CLASSE */
+/* CARTES : Blanc éclatant sur fond bleu (Style "Azure Portal") */
 .project-card {
-  background: #1f1e1d; /* Gris anthracite "Premium" */
-  border: 1px solid #3d3c3b; /* Bordure subtile */
-  border-radius: 8px;
+  background: #FFFFFF;
+  border: none;
+  border-radius: 8px; /* Microsoft style radius */
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
-  backdrop-filter: none;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Ombre plus marquée */
 }
 
 .project-card:hover {
-  transform: translateY(-6px);
-  background: #292827; /* Légèrement plus clair au survol */
-  border-color: #0078D4; /* Bordure bleue Microsoft */
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .card-image {
   width: 100%;
-  height: 200px;
+  height: 220px;
   overflow: hidden;
   position: relative;
-  border-bottom: 1px solid #3d3c3b;
+  background: #f3f2f1;
 }
 
 .card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s ease;
 }
 
 .project-card:hover .card-image img {
   transform: scale(1.05);
 }
 
-.card-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 120, 212, 0.2);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.project-card:hover .card-overlay {
-  opacity: 1;
-}
-
 .card-content {
-  padding: 24px;
+  padding: 28px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
 .card-content h3 {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   margin-bottom: 12px;
-  color: #ffffff; /* Titre blanc éclatant */
+  color: #004578; /* Titre bleu sombre */
   font-family: 'Segoe UI', sans-serif;
   font-weight: 700;
-  letter-spacing: 0.02em;
 }
 
 .card-description {
-  font-size: 0.95rem;
-  color: #c8c6c4; /* Texte gris clair lisible */
-  margin-bottom: 20px;
+  font-size: 1rem;
+  color: #484644; /* Gris texte standard */
+  margin-bottom: 24px;
   line-height: 1.6;
   flex-grow: 1;
 }
 
+/* Tech Pills : Style "Badge" */
 .card-tech {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .tech-pill {
-  font-size: 0.75rem;
-  padding: 4px 10px;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.1); /* Fond translucide sombre */
-  color: #50E6FF; /* Cyan lumineux */
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  font-family: 'Segoe UI Mono', monospace;
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 100px; /* Pill shape */
+  background: #F3F2F1;
+  color: #004578;
   font-weight: 600;
+  font-family: 'Segoe UI', sans-serif;
+  border: 1px solid transparent;
+  transition: all 0.2s;
 }
 
+.project-card:hover .tech-pill {
+  background: #E1DFDD;
+}
+
+/* Boutons Cards */
 .card-actions {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   margin-top: auto;
 }
 
 .card-btn {
   flex: 1;
-  padding: 10px;
+  padding: 12px;
   border-radius: 4px;
-  border: 1px solid #0078D4;
-  background: transparent;
-  color: #50E6FF; /* Texte cyan/bleu clair */
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: center;
@@ -156,243 +145,49 @@
   font-weight: 600;
 }
 
-.card-btn:hover {
-  background: #0078D4;
-  color: #ffffff;
-  border-color: #0078D4;
-}
-
 .card-open {
-  background: #0078D4;
-  border-color: #0078D4;
+  background: #0078D4; /* Bleu Microsoft */
   color: #ffffff;
+  border: none;
 }
 
 .card-open:hover {
   background: #005A9E;
-  border-color: #005A9E;
+  box-shadow: 0 4px 8px rgba(0, 120, 212, 0.3);
 }
 
-/* ===================== MODAL PROJET (DARK THEME CLASSY) ===================== */
-
-.project-popup-content {
-  max-width: 1100px !important;
-  width: 95vw !important;
-}
-
+/* === MODAL (Garder le Dark Mode pour l'immersion, mais ajusté aux tons bleus) === */
 .project-popup-content .about-popup-inner {
-  /* FOND SOMBRE LUXE */
-  background: #1B1A19 !important;
+  background: #201F1E !important; /* Dark Gray (Microsoft) */
   border: 1px solid #323130 !important;
-  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.6) !important;
-  color: #F3F2F1 !important;
+  color: #FFFFFF !important;
 }
 
-.project-popup-content .about-popup-close {
-  background: #323130 !important;
-  border-color: #484644 !important;
-  color: #ffffff !important;
+.project-popup-content .about-popup-title {
+  color: #0078D4 !important; /* Titre bleu */
 }
 
-.project-popup-content .about-popup-close:hover {
-  background: #0078D4 !important;
-  border-color: #0078D4 !important;
-}
-
-.project-details-grid {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 50px;
-  margin-top: 20px;
-  align-items: start;
-}
-
-/* Image container */
-.project-media-wrapper {
-  width: 100%;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #000000 !important;
-  border: 1px solid #323130 !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.project-popup-image {
-  width: 100%;
-  height: auto;
-  max-height: 600px;
-  object-fit: contain;
-  border-radius: 4px;
-  transition: transform 0.5s ease;
-}
-
-.project-media-wrapper:hover .project-popup-image {
-  transform: scale(1.02);
-}
-
-/* Info container */
-.project-info-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.project-info-wrapper .about-popup-title {
-  text-align: left;
-  margin-bottom: 10px;
-  font-size: 2.8rem;
-  background: none !important;
-  -webkit-text-fill-color: unset !important;
-  color: #50E6FF !important;
-  text-shadow: 0 0 20px rgba(0, 120, 212, 0.4);
-  font-family: 'Segoe UI', sans-serif;
-  font-weight: 700;
-}
-
-.project-popup-content .about-popup-text {
-  color: #E1DFDD !important;
-  font-size: 1.1rem !important;
-  line-height: 1.8 !important;
-  font-weight: 400 !important;
-}
-
-/* Bloc Technologies */
 .project-tech-stack {
-  margin-top: 20px;
-  padding: 24px;
-  background: #252423 !important;
-  border: 1px solid #484644 !important;
-  border-radius: 8px;
-  position: relative;
-}
-
-.project-tech-stack::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: #0078D4;
-  border-radius: 8px 0 0 8px;
-}
-
-.project-tech-stack strong {
-  display: block;
-  color: #0078D4 !important;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  letter-spacing: 2px;
-  margin-bottom: 12px;
+  background: #323130 !important;
+  border-left-color: #0078D4 !important;
 }
 
 .project-tech-stack span {
-  color: #ffffff !important;
-  font-family: 'Segoe UI Mono', monospace;
-  font-size: 1rem;
-  line-height: 1.6;
-  font-weight: 500 !important;
-}
-
-/* Actions */
-.project-popup-actions {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid #323130;
-}
-
-.project-popup-actions .btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 14px 32px;
-  font-size: 1.1rem;
-  text-decoration: none;
-  background: #0078D4;
-  color: white;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-  font-weight: 600;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  width: 100%;
-}
-
-.project-popup-actions .btn-primary:hover {
-  background: #005A9E;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 120, 212, 0.4);
-}
-
-/* Indicateur de scroll mobile */
-.mobile-scroll-indicator {
-  display: none;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 1rem;
-  color: #0078D4;
-  font-family: 'Segoe UI', monospace;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 0.85rem;
-  animation: fadeIn 1s ease-out;
-}
-
-.mobile-scroll-indicator .animated-arrow {
-  color: var(--accent);
-  animation: scrollArrow 1.5s infinite ease-in-out;
-}
-
-@keyframes scrollArrow {
-  0%, 100% { transform: translateX(0); opacity: 0.5; }
-  50% { transform: translateX(5px); opacity: 1; }
+  color: #F3F2F1 !important;
 }
 
 /* Responsive */
-@media (max-width: 900px) {
-  .project-details-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  .project-info-wrapper .about-popup-title {
-    font-size: 2.2rem;
-  }
-
-  .project-popup-content {
-    width: 100vw !important;
-    height: 100vh !important;
-    max-height: 100vh !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
-  }
-  
-  .project-popup-content .about-popup-inner {
-    height: 100%;
-    max-height: none;
-    border-radius: 0;
-    border: none;
-    padding: 80px 20px 40px 20px;
-  }
-  
-  .project-popup-content .about-popup-close {
-    top: 20px;
-    right: 20px;
-    background: rgba(0,0,0,0.5) !important;
-    backdrop-filter: blur(10px);
-  }
-}
-
 @media (max-width: 768px) {
-  .mobile-scroll-indicator {
-    display: flex;
+  #tab-projects {
+    padding: 60px 15px;
   }
   
-  .project-info-wrapper .about-popup-title {
-    font-size: 1.8rem;
+  .mobile-scroll-indicator {
+    color: #ffffff; /* Blanc sur fond bleu */
+    opacity: 0.8;
+  }
+  
+  .mobile-scroll-indicator .animated-arrow {
+    color: #ffffff;
   }
 }
