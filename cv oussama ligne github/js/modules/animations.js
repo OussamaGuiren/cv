@@ -5,12 +5,9 @@
  */
 
 export function initScrollAnimations() {
-  // Vérification stricte de la taille d'écran (min-width: 769px)
-  const isDesktopOrTablet = window.matchMedia('(min-width: 769px)').matches;
-
-  if (!isDesktopOrTablet) {
-    // Si on est sur mobile, on s'assure que tout est visible par défaut
-    // au cas où des classes resteraient
+  // Vérification : Uniquement si > 768px
+  if (window.innerWidth <= 768) {
+    // Mobile : On rend tout visible immédiatement
     document.querySelectorAll('.fluent-section-hidden').forEach(el => {
       el.classList.remove('fluent-section-hidden');
       el.classList.add('fluent-section-visible');
@@ -18,42 +15,34 @@ export function initScrollAnimations() {
     return;
   }
 
-  // Sélection des sections à animer
-  const selectors = [
-    '#tab-experience',
-    '#tab-projects',
-    '#tab-power',
-    '#tab-contact',
-    '.about-intro-section',
-    '.about-photo-section'
-  ];
-  
-  const sections = document.querySelectorAll(selectors.join(', '));
-
-  if (sections.length === 0) return;
+  // Sélecteurs des éléments à animer
+  // On ajoute des sélecteurs génériques pour être sûr de tout attraper
+  const targets = document.querySelectorAll(
+    '#tab-experience, #tab-projects, #tab-power, #tab-contact, .about-intro-section, .about-photo-section, section.et-slide'
+  );
 
   const observerOptions = {
-    root: null, // Viewport
-    rootMargin: '0px 0px -100px 0px', // Déclencher un peu avant que le bas n'arrive, ou quand le haut entre bien
-    threshold: 0.1 // 10% de visibilité suffit
+    root: null,
+    rootMargin: '0px 0px -50px 0px', // Déclenche un peu avant le bas
+    threshold: 0.1 // 10% visible suffit
   };
 
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // Petit délai pour l'effet "cascade" si plusieurs éléments arrivent en même temps
-        requestAnimationFrame(() => {
-          entry.target.classList.add('fluent-section-visible');
-          entry.target.classList.remove('fluent-section-hidden');
-        });
+        // Animation
+        entry.target.classList.add('fluent-section-visible');
+        entry.target.classList.remove('fluent-section-hidden');
         obs.unobserve(entry.target);
       }
     });
   }, observerOptions);
 
-  sections.forEach(section => {
-    // Force l'état initial caché
-    section.classList.add('fluent-section-hidden');
-    observer.observe(section);
+  targets.forEach(section => {
+    // Ne pas ré-appliquer si déjà visible
+    if (!section.classList.contains('fluent-section-visible')) {
+      section.classList.add('fluent-section-hidden');
+      observer.observe(section);
+    }
   });
 }

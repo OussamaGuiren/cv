@@ -7,7 +7,6 @@
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Titre de section */
 #tab-projects h2 {
   color: #ffffff !important;
   text-align: center;
@@ -16,8 +15,6 @@
   font-weight: 700;
 }
 
-/* Description de section (Intro) */
-/* J'utilise > p pour ne cibler que le paragraphe direct et pas ceux des cartes */
 #tab-projects > p {
   color: rgba(255, 255, 255, 0.8) !important;
   text-align: center;
@@ -27,11 +24,6 @@
   margin-left: auto;
   margin-right: auto;
   display: block;
-}
-
-/* Si le HTML n'est pas direct child, on garde la règle générale mais on la surcharge ensuite */
-#tab-projects p {
-  color: rgba(255, 255, 255, 0.8); 
 }
 
 .gallery {
@@ -49,7 +41,8 @@
   border: none;
   border-radius: 8px;
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  /* SUPPRESSION de la transition de transformation excessive */
+  transition: box-shadow 0.3s ease; 
   position: relative;
   display: flex;
   flex-direction: column;
@@ -57,9 +50,10 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+/* PLUS DE TRANSLATION AU HOVER */
 .project-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  transform: none !important; /* On force l'immobilité */
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3); /* Juste une ombre plus forte */
 }
 
 .card-image {
@@ -79,7 +73,7 @@
 }
 
 .project-card:hover .card-image img {
-  transform: scale(1.05);
+  transform: scale(1.05); /* Zoom image conservé (subtil) */
 }
 
 /* CONTENU DE LA CARTE */
@@ -89,31 +83,50 @@
   flex-direction: column;
   flex-grow: 1;
   background: #FFFFFF !important;
-  color: #323130 !important;
+  /* FORCE COULEUR NOIRE POUR TOUT LE TEXTE PAR DEFAUT */
+  color: #201F1E !important; 
 }
 
-/* Titre (H3) - Surcharge avec haute spécificité */
-#tab-projects .project-card .card-content h3,
-.project-card h3 {
+/* Titre (H3) */
+.project-card h3,
+.card-content h3 {
   font-size: 1.5rem;
   margin: 0 0 12px 0;
-  color: #004578 !important; /* Bleu Microsoft foncé FORCE */
+  color: #004578 !important; /* Bleu foncé */
   font-family: 'Segoe UI', sans-serif;
   font-weight: 700;
   line-height: 1.3;
-  text-shadow: none !important;
 }
 
-/* Description (card-excerpt) - Surcharge avec haute spécificité pour battre le #tab-projects p */
-#tab-projects .project-card .card-content p.card-excerpt,
-.project-card .card-excerpt {
+/* Description & Tous les paragraphes */
+.project-card p,
+.card-content p,
+.card-excerpt {
   font-size: 1rem;
-  color: #484644 !important; /* Gris foncé FORCE */
+  color: #323130 !important; /* Gris très foncé pour lisibilité MAXIMALE */
   margin-bottom: 24px;
   line-height: 1.6;
   flex-grow: 1;
-  text-shadow: none !important;
   opacity: 1 !important;
+  text-shadow: none !important;
+}
+
+/* Tech Pills */
+.card-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.tech-pill {
+  font-size: 0.75rem;
+  padding: 6px 12px;
+  border-radius: 100px;
+  background: #EFF6FC;
+  color: #005A9E !important; /* Texte bleu foncé force */
+  font-weight: 600;
+  border: 1px solid rgba(0, 120, 212, 0.1);
 }
 
 /* BOUTON (card-open) */
@@ -127,7 +140,7 @@
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition: background 0.2s ease;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -137,13 +150,13 @@
 
 .card-open:hover {
   background: #106EBE;
-  transform: translateY(-2px);
+  transform: none !important; /* Pas de mouvement */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* INDICATEUR DE SCROLL MOBILE (SWIPE) */
+/* INDICATEUR DE SCROLL MOBILE */
 .mobile-scroll-indicator {
-  display: none; /* CACHÉ PAR DÉFAUT (Web/Tablet) */
+  display: none;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -172,7 +185,7 @@
   pointer-events: none;
 }
 
-/* MODAL PROJET */
+/* MODAL PROJET (Intouché car déjà corrigé) */
 .project-popup-content {
   width: 90% !important;
   max-width: 1000px !important;
@@ -350,7 +363,6 @@
   }
 }
 
-/* Uniquement sur Mobile (max-width: 768px) */
 @media (max-width: 768px) {
   #tab-projects {
     padding: 60px 15px;
