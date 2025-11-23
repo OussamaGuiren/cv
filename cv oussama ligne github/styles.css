@@ -4576,3 +4576,319 @@ button[disabled] {
   }
 }
 
+
+
+/* ===================== MICROSOFT THEME OVERRIDES (LIGHT MODE) ===================== */
+
+/* Ensure body background switches to light when splash is gone to avoid dark edges */
+body:not(.splash-active) {
+  background-color: #f3f2f1;
+  color: #201f1e;
+}
+
+.stage {
+  /* Redefine core variables for the light theme within stage */
+  --splash-bg: #f3f2f1; /* Microsoft Neutral Gray 100 */
+  --splash-text: #201f1e; /* Microsoft Neutral Primary */
+  --splash-lines: #e1dfdd; /* Microsoft Neutral Light */
+  --splash-dark: #ffffff; /* For cards/surfaces */
+  --card-bg: #ffffff;
+  --text-primary: #201f1e;
+  --text-secondary: #605e5c; /* Microsoft Neutral Secondary */
+  --border-color: #e1dfdd;
+  --accent: #0078D4; /* Keep Microsoft Blue */
+  --shadow-card: 0 1.6px 3.6px 0 rgba(0,0,0,0.132), 0 0.3px 0.9px 0 rgba(0,0,0,0.108);
+  
+  background-color: var(--splash-bg);
+  color: var(--text-primary);
+  min-height: 100vh; /* Ensure coverage */
+}
+
+/* General Text Overrides */
+.stage h1, .stage h2, .stage h3, .stage h4, .stage h5, .stage h6 {
+  color: var(--text-primary);
+}
+
+.stage p, .stage li, .stage span, .stage div {
+  color: var(--text-primary);
+}
+
+.stage .text-muted, 
+.stage .subtitle, 
+.stage .slide-intro {
+  color: var(--text-secondary);
+}
+
+/* Hero Section */
+.stage .et-hero-tabs {
+  background: radial-gradient(circle at 50% 50%, #ffffff 0%, #f3f2f1 100%);
+}
+
+.stage .hero-kicker {
+  color: var(--accent);
+}
+
+.stage .hero-quote h1 {
+  color: var(--text-primary);
+}
+
+.stage .hero-quote .text-white {
+  color: var(--accent) !important;
+}
+
+/* Sticky Navigation */
+.stage .et-hero-tabs-container {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.stage .et-hero-logo {
+  color: var(--accent);
+}
+
+.stage .et-hero-tab {
+  color: var(--text-secondary);
+}
+
+.stage .et-hero-tab:hover,
+.stage .et-hero-tab.et-hero-tab-active {
+  color: var(--accent);
+  background-color: transparent;
+}
+
+.stage .et-hero-tab-slider {
+  background-color: var(--accent);
+}
+
+/* Mobile Navigation */
+.stage .mobile-navbar {
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
+}
+
+.stage .mobile-navbar-logo {
+  color: var(--accent);
+}
+
+.stage .hamburger-line {
+  background-color: var(--text-primary);
+}
+
+.stage .mobile-menu {
+  background-color: #ffffff;
+}
+
+.stage .mobile-menu-link {
+  color: var(--text-primary);
+}
+
+.stage .mobile-menu-close {
+  color: var(--text-primary);
+}
+
+.stage .mobile-menu-header {
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* About Section */
+.stage .about-intro-card,
+.stage .skill-card {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
+}
+
+.stage .about-intro-title {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.stage .about-intro-text {
+  color: var(--text-secondary);
+}
+
+.stage .about-intro-text strong {
+  color: var(--text-primary);
+}
+
+.stage .skill-card h3 {
+  color: var(--text-primary);
+}
+
+.stage .skill-card p {
+  color: var(--text-secondary);
+}
+
+/* Tech Ticker */
+.stage .tech-ticker-section {
+  background: #ffffff;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.stage .tech-item {
+  background: #f3f2f1;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+.stage .tech-item:hover {
+  background: #ffffff;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Experience Section */
+.stage .experience-section {
+  background: var(--splash-bg);
+}
+
+.stage .timeline-container {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
+}
+
+.stage .timeline-title {
+  color: var(--text-primary);
+}
+
+.stage .timeline-subtitle {
+  color: var(--text-secondary);
+}
+
+.stage .event-year {
+  color: var(--accent);
+}
+
+.stage .event-company {
+  color: var(--text-primary);
+}
+
+.stage .event-description {
+  color: var(--text-secondary);
+}
+
+.stage .slider-track {
+  background: #edebe9;
+}
+
+.stage .tick {
+  background: #c8c6c4;
+}
+
+.stage .year-labels {
+  color: var(--text-secondary);
+}
+
+/* Projects & Cards */
+.stage .project-card,
+.stage .contact-card {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
+}
+
+.stage .project-card:hover,
+.stage .contact-card:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.stage .card-content h3,
+.stage .contact-card h3 {
+  color: var(--text-primary);
+}
+
+.stage .card-excerpt,
+.stage .contact-card p {
+  color: var(--text-secondary);
+}
+
+.stage .project-card.is-placeholder {
+  background: #f3f2f1;
+  border: 1px dashed #bebbb8;
+}
+
+.stage .project-card.is-placeholder h3 {
+  color: var(--text-secondary);
+}
+
+/* Contact Form Popup */
+.stage .about-popup-content {
+  background: #ffffff;
+  color: var(--text-primary);
+}
+
+.stage .about-popup-close {
+  color: var(--text-secondary);
+}
+
+.stage .about-popup-close:hover {
+  color: var(--accent);
+}
+
+.stage .form-group label {
+  color: var(--text-primary);
+}
+
+.stage .form-group input,
+.stage .form-group textarea,
+.stage .form-group select {
+  background: #ffffff;
+  border: 1px solid #8a8886;
+  color: var(--text-primary);
+}
+
+.stage .form-group input:focus,
+.stage .form-group textarea:focus,
+.stage .form-group select:focus {
+  border-color: var(--accent);
+  outline: 1px solid var(--accent);
+}
+
+.stage .form-group .hint {
+  color: var(--text-secondary);
+}
+
+/* Glitch effect text in About */
+.stage .credit {
+  color: var(--text-primary);
+}
+
+.stage .credit em {
+  color: var(--accent);
+}
+
+/* Typewriter in Hero */
+.stage .et-hero-tabs [data-typewriter] {
+  border-right-color: var(--text-primary);
+}
+
+@keyframes hero-caret-light {
+  0%, 49% { border-color: var(--text-primary); opacity: 1; }
+  50%, 99% { border-color: transparent; opacity: 0; }
+  100% { border-color: var(--text-primary); opacity: 1; }
+}
+
+.stage .et-hero-tabs [data-typewriter].typing {
+  border-right: 3px solid var(--text-primary);
+  animation: hero-caret-light 800ms step-end infinite;
+}
+
+/* Scrollbar */
+.stage ::-webkit-scrollbar-track {
+  background: #f3f2f1;
+}
+
+.stage ::-webkit-scrollbar-thumb {
+  background: #c8c6c4;
+  border: 3px solid #f3f2f1;
+}
+
+.stage ::-webkit-scrollbar-thumb:hover {
+  background: #8a8886;
+}
+
