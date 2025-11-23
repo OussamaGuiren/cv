@@ -3,11 +3,8 @@
  */
 
 export function initScrollAnimations() {
-  console.log("Initialisation des animations Fluent Design...");
-
-  // 1. Vérification Mobile
+  // 1. Vérification Mobile (Désactive sur petits écrans)
   if (window.innerWidth <= 768) {
-    console.log("Mode Mobile détecté : Animations désactivées.");
     document.querySelectorAll('.fluent-section-hidden').forEach(el => {
       el.classList.remove('fluent-section-hidden');
       el.classList.add('fluent-section-visible');
@@ -16,10 +13,18 @@ export function initScrollAnimations() {
   }
 
   // 2. Sélection Large des Sections
-  // On cible toutes les sections directes du main et les div spécifiques
-  const sections = document.querySelectorAll('main > section, .about-intro-section, .about-photo-section, #tab-contact, #tab-projects, #tab-power, #tab-experience');
+  // On cible toutes les sections importantes
+  const selectors = [
+    'main > section',
+    '.about-intro-section',
+    '.about-photo-section',
+    '#tab-contact',
+    '#tab-projects',
+    '#tab-power',
+    '#tab-experience'
+  ];
   
-  console.log(`${sections.length} sections trouvées pour l'animation.`);
+  const sections = document.querySelectorAll(selectors.join(', '));
 
   if (sections.length === 0) return;
 
@@ -33,7 +38,7 @@ export function initScrollAnimations() {
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // console.log("Section visible : ", entry.target.id || entry.target.className);
+        // Ajout de la classe visible
         entry.target.classList.add('fluent-section-visible');
         entry.target.classList.remove('fluent-section-hidden');
         obs.unobserve(entry.target);
@@ -41,7 +46,7 @@ export function initScrollAnimations() {
     });
   }, observerOptions);
 
-  // 4. Application
+  // 4. Application initiale
   sections.forEach(section => {
     // Si pas déjà visible, on cache et on observe
     if (!section.classList.contains('fluent-section-visible')) {
