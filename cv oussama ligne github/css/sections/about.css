@@ -359,8 +359,8 @@
   align-items: center;
   justify-content: center;
   transition: 0.3s ease-out;
-  background: #F3F2F1; /* Fond clair Microsoft */
-  color: #201F1E; /* Texte sombre */
+  background: #191919; /* Retour au fond noir sombre */
+  color: #ffffff; /* Texte blanc */
 }
 
 .about-content-wrapper {
@@ -377,41 +377,46 @@
 .about-text {
   font-size: clamp(1rem, 1.5vw, 1.25rem);
   line-height: 1.8;
-  color: #201F1E; /* Texte sombre standard */
+  color: rgba(255, 255, 255, 0.85); /* Texte blanc cassé sur fond noir */
   margin: 0;
   font-weight: 400;
 }
 
 .about-text strong {
-  color: #0078D4; /* Bleu Microsoft */
-  font-weight: 700;
-  background: none;
-  -webkit-background-clip: unset;
-  -webkit-text-fill-color: unset;
+  color: #ffffff; /* Blanc pur */
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%); /* Réintroduction du gradient text si souhaité ou juste couleur accent */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .about-title {
   font-family: 'Segoe UI', 'Orbitron', monospace;
   font-size: clamp(2rem, 4vw, 3.5rem);
   font-weight: 800;
-  color: #0078D4; /* Titre en bleu Microsoft */
+  color: #ffffff; /* Titre blanc */
   margin: 0;
   line-height: 1.2;
   letter-spacing: -0.02em;
-  background: none;
-  -webkit-text-fill-color: unset;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%); /* Gradient sur titre */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .about-photo-section h2.credit {
   font-family: 'Segoe UI', 'Orbitron', monospace;
   font-size: clamp(1.5rem, 3vw, 2.5rem);
   font-weight: 700;
-  color: #201F1E; /* Nom en noir */
+  color: #ffffff; /* Nom en blanc */
   text-align: center;
   margin: 0;
   line-height: 1.4;
-  background: none;
-  -webkit-text-fill-color: unset;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .about-photo-section h2.credit em {
@@ -421,8 +426,8 @@
   font-weight: 400;
   display: block;
   margin-top: 8px;
-  color: #0078D4; /* Rôle en bleu */
-  -webkit-text-fill-color: unset;
+  color: rgba(255, 255, 255, 0.8); /* Rôle en blanc cassé */
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.8);
 }
 
 .about-text-container {
