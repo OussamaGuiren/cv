@@ -22,7 +22,7 @@
     filter: blur(80px);
     opacity: 0.6;
     z-index: -1;
-    animation: auroraMove 10s infinite alternate;
+    /* animation désactivée pour thème Microsoft épuré */
   }
   
   .hero-section::before {

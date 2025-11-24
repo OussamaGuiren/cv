@@ -4,7 +4,7 @@ import { initNavigation } from './modules/navigation.js';
 import { initTimeline } from './modules/timeline.js';
 import { initModals } from './modules/modals.js';
 import { initForm } from './modules/contact-form.js';
-import { initScrollAnimations } from './modules/animation.js';
+// import { initScrollAnimations } from './modules/animation.js'; // Désactivé pour thème Microsoft épuré
 
 // Add CSS class when fonts are loaded
 try {
@@ -23,10 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initModals();
   initForm();
   
-  // Lancer les animations de scroll avec un léger délai pour garantir le rendu initial
-  setTimeout(() => {
-    initScrollAnimations();
-  }, 100);
+  // Animations de scroll désactivées pour un thème Microsoft épuré
+  // setTimeout(() => {
+  //   initScrollAnimations();
+  // }, 100);
   
   // Typewriter starts when hero is visible (event dispatched by splash)
   window.addEventListener('hero-visible', () => {

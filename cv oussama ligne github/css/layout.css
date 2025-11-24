@@ -114,7 +114,7 @@
     align-items: center;
     justify-content: center;
     gap: 5px;
-    transition: all 0.3s ease;
+    /* transition désactivée pour thème Microsoft épuré */
     padding: 0;
     z-index: 1201;
   }
@@ -147,7 +147,7 @@
     width: 24px;
     height: 2px;
     background: rgba(0, 212, 255, 0.9);
-    transition: all 0.3s ease;
+    /* transition désactivée pour thème Microsoft épuré */
     border-radius: 2px;
   }
   
@@ -160,7 +160,7 @@
     background: rgba(25, 25, 25, 0.98);
     backdrop-filter: blur(20px);
     z-index: 1300;
-    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* transition désactivée pour thème Microsoft épuré */
     box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
     display: none;
     flex-direction: column;
@@ -182,7 +182,7 @@
     z-index: 1250;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    /* transition désactivée pour thème Microsoft épuré */
   }
   
   .mobile-menu-overlay[aria-hidden="false"] {
@@ -216,7 +216,7 @@
     line-height: 1;
     border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    /* transition désactivée pour thème Microsoft épuré */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -242,7 +242,7 @@
     font-size: 0.95rem;
     letter-spacing: 0.12rem;
     text-transform: uppercase;
-    transition: all 0.3s ease;
+    /* transition désactivée pour thème Microsoft épuré */
     border-left: 3px solid transparent;
     position: relative;
   }
@@ -282,7 +282,7 @@
     flex: 1;
     color: #e2e8f0;
     letter-spacing: 0.12rem;
-    transition: background 0.3s ease, color 0.3s ease;
+    /* transition désactivée pour thème Microsoft épuré */
     font-size: 0.8rem;
     text-transform: uppercase;
   }
@@ -298,7 +298,7 @@
     height: 3px;
     width: 0;
     background: #66B1F1;
-    transition: left 0.3s ease, width 0.3s ease;
+    /* transition désactivée pour thème Microsoft épuré */
     pointer-events: none;
   }
   

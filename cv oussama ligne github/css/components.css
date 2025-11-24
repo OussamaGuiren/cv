@@ -13,7 +13,7 @@
   padding: 10px 18px;
   cursor: pointer;
   border: 1px solid transparent;
-  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+  /* transition désactivée pour thème Microsoft épuré */
 }
 
 .btn-primary {
@@ -57,8 +57,7 @@
   white-space: nowrap;
   z-index: 100;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 20px rgba(255, 152, 0, 0.1);
-  animation: status-pulse 2s ease-in-out infinite;
-  transition: all 0.3s ease;
+  /* animation et transition désactivées pour thème Microsoft épuré */
 }
 
 .status-badge:hover {
@@ -71,7 +70,7 @@
 .status-icon {
   font-size: 16px;
   line-height: 1;
-  animation: status-icon-rotate 3s ease-in-out infinite;
+  /* animation désactivée pour thème Microsoft épuré */
 }
 
 .status-text {
@@ -116,7 +115,7 @@
   border: 2px solid rgba(0, 120, 212, 0.5);
   border-radius: 50px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* transition désactivée pour thème Microsoft épuré */
   box-shadow: 0 4px 15px rgba(0, 120, 212, 0.3),
               0 0 20px rgba(0, 120, 212, 0.1);
   position: relative;
@@ -133,7 +132,7 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s ease;
+  /* transition désactivée pour thème Microsoft épuré */
 }
 
 .btnMeContacter:hover::before {
@@ -182,7 +181,7 @@
   border: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 6px 22px rgba(0, 0, 0, 0.35);
   color: #eef4ff;
-  animation: toast-in 240ms var(--ease-push);
+  /* animation désactivée pour thème Microsoft épuré */
 }
 .toast-icon {
   width: 24px;
