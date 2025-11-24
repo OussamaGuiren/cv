@@ -87,10 +87,19 @@
   .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    /* Pour éviter qu'une seule carte ne prenne toute la largeur, on limite la largeur max des colonnes quand il y en a peu */
+    grid-auto-rows: 1fr;
     gap: 30px;
     max-width: 1400px;
     margin: 0 auto;
     padding-bottom: 20px;
+    justify-content: center; /* Centre les cartes si elles ne remplissent pas la ligne */
+  }
+
+  /* Si une seule carte, on limite sa largeur */
+  .gallery:has(> :last-child:nth-child(1)) {
+     grid-template-columns: minmax(320px, 400px);
+     justify-content: center;
   }
   
   /* CARTES PROJETS (Fond blanc, texte sombre) */
