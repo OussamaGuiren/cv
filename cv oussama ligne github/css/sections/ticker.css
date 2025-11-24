@@ -24,7 +24,7 @@
     display: flex;
     gap: 40px;
     width: max-content;
-    animation: ticker-scroll 30s linear infinite;
+    animation: ticker-scroll 50s linear infinite;
   }
   
   .tech-ticker-track:hover {
@@ -74,18 +74,18 @@
   
   /* Mobile adjustments */
   @media (max-width: 768px) {
-    .tech-ticker-section {
+    /* .tech-ticker-section {
       padding: 15px 0;
     }
-  
+   */
     .tech-item {
       font-size: 1rem;
       padding: 6px 12px;
     }
   
     .tech-ticker-track {
-      gap: 20px;
-      animation-duration: 20s;
+      gap: 30px;
+      animation-duration: 40s;
     }
   }
   

@@ -113,23 +113,9 @@
       animation: none !important;
       border-right: none !important;
     }
-   
     /* Afficher le ::before uniquement si l'élément n'a pas encore de contenu (fallback si JS n'a pas encore injecté) */
-    .et-hero-tabs .hero-kicker[data-typewriter]:not(.has-content)::before {
-      content: attr(data-typewriter);
-      font-size: clamp(0.95rem, 3.5vw, 1.15rem);
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: #a7c5f5;
-      display: block;
-      width: 100%;
-      text-align: center;
-      padding: 0 clamp(10px, 3vw, 20px);
-      margin-bottom: clamp(12px, 2vh, 20px);
-      visibility: visible !important;
-      position: relative;
-      z-index: 2;
-    }
+    /* Cette règle est maintenant gérée spécifiquement pour kicker ci-dessous pour garantir la cohérence */
+    /* .et-hero-tabs .hero-kicker[data-typewriter]:not(.has-content)::before { ... } - SUPPRIMÉ pour éviter conflit */
   
     /* Cacher le ::before si le JavaScript a injecté le texte dans l'élément (pour éviter la duplication) */
     .et-hero-tabs .hero-kicker.has-content[data-typewriter]::before,
@@ -137,30 +123,40 @@
       display: none !important;
       content: none !important;
     }
-  
+
       /* Si JavaScript a injecté du texte, restaurer la visibilité du contenu réel */
       .et-hero-tabs .hero-kicker.has-content[data-typewriter],
       .et-hero-tabs h1.has-content[data-typewriter] {
-        font-size: clamp(1.2rem, 3.5vw, 1.15rem) !important;
+        font-size: clamp(0.95rem, 3.5vw, 1.15rem) !important;
         line-height: 1.2 !important;
         height: auto !important;
         overflow: visible !important;
         visibility: visible !important;
         display: block !important;
       }
+    
+    /* Correction spécifique pour le H1 has-content */
+    .et-hero-tabs h1.has-content[data-typewriter] {
+      font-size: clamp(36px, 12vw, 64px) !important;
+      line-height: 1.1 !important;
+      margin: 0 0 clamp(0.8rem, 1.5vh, 1.2rem) 0 !important;
+    }
+
     .et-hero-tabs h1[data-typewriter]::before {
       content: attr(data-typewriter);
-      font-size: clamp(32px, 10vw, 56px);
-      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      font-weight: 900;
-      line-height: 1.15;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 30%, var(--accent) 60%, var(--accent-2) 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-size: clamp(36px, 12vw, 64px);
+      font-family: 'Segoe UI', sans-serif;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: #201F1E;
+      /* Remove gradient background from ::before to match final state or apply it consistently if needed */
+      /* Using standard color to match typical H1 if gradient is not desired on mobile fallback */
+      /* OR keep gradient if that's the design intent */
+      background: none; 
+      -webkit-background-clip: unset;
+      -webkit-text-fill-color: initial;
+      
       display: block;
       width: 100%;
       max-width: 100%;
@@ -267,6 +263,42 @@
       margin: 0 0 clamp(0.5rem, 1vh, 0.8rem) 0 !important;
       flex-shrink: 0;
       font-size: clamp(1rem, 4vw, 1.3rem) !important;
+      /* Force font consistency to prevent flash */
+      font-family: 'Segoe UI', sans-serif !important;
+      font-weight: 600 !important;
+      letter-spacing: 3px !important;
+      text-transform: uppercase !important;
+      color: #0078D4 !important;
+      opacity: 1 !important;
+      animation: none !important;
+      transform: none !important; /* Disable translation animation on mobile to prevent shift */
+      line-height: 1.2 !important; /* Lock line-height */
+      display: block !important;
+      min-height: 1.2em; /* Reserve height */
+    }
+
+    /* Ensure ::before matches exactly - SEULEMENT si pas de contenu */
+    .et-hero-tabs .hero-kicker[data-typewriter]:not(.has-content)::before {
+      content: attr(data-typewriter);
+      font-family: 'Segoe UI', sans-serif !important;
+      font-size: clamp(1rem, 4vw, 1.3rem) !important;
+      font-weight: 600 !important;
+      letter-spacing: 3px !important;
+      text-transform: uppercase !important;
+      color: #0078D4 !important;
+      display: block;
+      width: 100%;
+      text-align: center;
+      /* Match parent margin logic */
+      margin: 0;
+      line-height: 1.2 !important;
+      visibility: visible !important;
+      position: relative;
+      z-index: 2;
+      /* Disable animation and transform */
+      animation: none !important;
+      transform: none !important;
+      opacity: 1 !important;
     }
 
     /* Agrandir le titre h1 */
@@ -361,6 +393,7 @@
       z-index: 1;
       width: auto;
       min-width: 200px;
+      margin-bottom: 1rem;
     }
 
     .about-learn-more-btn::before {
@@ -443,7 +476,7 @@
       gap: 0;
       display: flex;
       flex-direction: column;
-      gap: 20px; /* Ajout d'une marge légère entre les sections */
+      /*gap: 20px;  Ajout d'une marge légère entre les sections */
     }
   
     /* S'assurer que chaque section est dans le flux normal sans chevauchement */
@@ -503,7 +536,14 @@
       position: relative !important;
       z-index: 1 !important;
       padding-top: 20px !important;
-      padding-bottom: 20px !important;
+      padding-bottom: 0 !important; /* Collé au ticker */
+    }
+
+    /* Ajustement spécifique pour le ticker en mobile pour le coller à la section précédente */
+    .tech-ticker-section {
+      margin-top: -20px !important; /* Compense le gap de .et-main */
+      /* padding-top: 0 !important; */
+      padding-bottom: 15px !important;
     }
   
     /* S'assurer que le main et les sections sont dans le flux normal */
