@@ -650,12 +650,41 @@
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  /* Effet 1 : Scanlines fines (lignes horizontales) */
-  /* Effet 2 : Vignette sombre sur les bords pour focus visage et cacher le corps */
   background: 
     linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
     radial-gradient(circle at 50% 40%, transparent 40%, rgba(0, 0, 0, 0.8) 100%);
   background-size: 100% 4px, 100% 100%;
+  animation: vhs-flicker 0.15s infinite;
+  opacity: 0.6;
+}
+
+/* Ajout d'une bande de distorsion VHS qui passe de temps en temps */
+.video-stack::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.02);
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  animation: vhs-glitch-bar 5s infinite linear;
+}
+
+@keyframes vhs-flicker {
+  0% { opacity: 0.55; }
+  50% { opacity: 0.65; }
+  100% { opacity: 0.55; }
+}
+
+@keyframes vhs-glitch-bar {
+  0% { top: -10%; opacity: 0; }
+  2% { top: -10%; opacity: 0.3; }
+  10% { top: 110%; opacity: 0.3; }
+  12% { top: 110%; opacity: 0; }
+  100% { top: 110%; opacity: 0; }
 }
 
 .video-stack:hover {
@@ -674,13 +703,13 @@
   /* Contrast+ : Ecrase les détails des tissus */
   /* Brightness- : Assombrit les zones d'ombre */
   /* Sepia/Grayscale : Unifie les tons pour un rendu plus pro */
-  filter: contrast(1.15) brightness(0.9) grayscale(0.3) sepia(0.2);
+  filter: contrast(1.15) brightness(0.9) grayscale(0.3) sepia(0.2) blur(0.5px);
   transition: filter 0.5s ease;
 }
 
 /* On éclaire légèrement au survol */
 .video-stack:hover .about-video {
-  filter: contrast(1.1) brightness(1) grayscale(0) sepia(0);
+  filter: contrast(1.1) brightness(1) grayscale(0) sepia(0) blur(0);
 }
 
 /* Gestion de l'affichage mobile/desktop des vidéos */
