@@ -113,23 +113,9 @@
       animation: none !important;
       border-right: none !important;
     }
-   
     /* Afficher le ::before uniquement si l'élément n'a pas encore de contenu (fallback si JS n'a pas encore injecté) */
-    .et-hero-tabs .hero-kicker[data-typewriter]:not(.has-content)::before {
-      content: attr(data-typewriter);
-      font-size: clamp(0.95rem, 3.5vw, 1.15rem);
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: #a7c5f5;
-      display: block;
-      width: 100%;
-      text-align: center;
-      padding: 0 clamp(10px, 3vw, 20px);
-      margin-bottom: clamp(12px, 2vh, 20px);
-      visibility: visible !important;
-      position: relative;
-      z-index: 2;
-    }
+    /* Cette règle est maintenant gérée spécifiquement pour kicker ci-dessous pour garantir la cohérence */
+    /* .et-hero-tabs .hero-kicker[data-typewriter]:not(.has-content)::before { ... } - SUPPRIMÉ pour éviter conflit */
   
     /* Cacher le ::before si le JavaScript a injecté le texte dans l'élément (pour éviter la duplication) */
     .et-hero-tabs .hero-kicker.has-content[data-typewriter]::before,
@@ -277,6 +263,32 @@
       margin: 0 0 clamp(0.5rem, 1vh, 0.8rem) 0 !important;
       flex-shrink: 0;
       font-size: clamp(1rem, 4vw, 1.3rem) !important;
+      /* Force font consistency to prevent flash */
+      font-family: 'Segoe UI', sans-serif !important;
+      font-weight: 600 !important;
+      letter-spacing: 3px !important;
+      text-transform: uppercase !important;
+      color: #0078D4 !important;
+      opacity: 1 !important;
+      animation: none !important;
+    }
+
+    /* Ensure ::before matches exactly - SEULEMENT si pas de contenu */
+    .et-hero-tabs .hero-kicker[data-typewriter]:not(.has-content)::before {
+      content: attr(data-typewriter);
+      font-family: 'Segoe UI', sans-serif !important;
+      font-size: clamp(1rem, 4vw, 1.3rem) !important;
+      font-weight: 600 !important;
+      letter-spacing: 3px !important;
+      text-transform: uppercase !important;
+      color: #0078D4 !important;
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin-bottom: clamp(12px, 2vh, 20px);
+      visibility: visible !important;
+      position: relative;
+      z-index: 2;
     }
 
     /* Agrandir le titre h1 */
