@@ -384,7 +384,7 @@
       border: 2px solid rgba(0, 120, 212, 0.5);
       border-radius: 50px;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      /* transition désactivée pour thème Microsoft épuré */
       box-shadow: 0 4px 15px rgba(0, 120, 212, 0.3),
                   0 0 20px rgba(0, 120, 212, 0.1);
       position: relative;
@@ -404,7 +404,7 @@
       width: 100%;
       height: 100%;
       background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.5s ease;
+      /* transition désactivée pour thème Microsoft épuré */
     }
 
     .about-learn-more-btn:hover::before {

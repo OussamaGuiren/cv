@@ -86,7 +86,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    transition: all 0.3s ease;
+    /* transition désactivée pour thème Microsoft épuré */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   }
   
@@ -109,7 +109,7 @@
     margin-bottom: 24px;
     font-size: 1.8rem;
     color: #0078D4;
-    transition: all 0.3s ease;
+    /* transition désactivée pour thème Microsoft épuré */
   }
   
   .contact-card:hover .contact-icon-wrapper {

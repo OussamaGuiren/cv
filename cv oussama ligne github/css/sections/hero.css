@@ -22,7 +22,7 @@
     filter: blur(80px);
     opacity: 0.6;
     z-index: -1;
-    animation: auroraMove 10s infinite alternate;
+    /* animation désactivée pour thème Microsoft épuré */
   }
   
   .hero-section::before {
@@ -71,8 +71,8 @@
     color: #0078D4;
     margin-bottom: 20px;
     display: block;
-    opacity: 0;
-    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s forwards;
+    opacity: 1; /* Visible immédiatement pour thème Microsoft épuré */
+    /* animation désactivée pour thème Microsoft épuré */
   }
   
   /* Titre Principal H1 */
@@ -84,8 +84,8 @@
     margin-bottom: 40px;
     color: #201F1E;
     letter-spacing: -0.03em;
-    opacity: 0;
-    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s forwards;
+    opacity: 1; /* Visible immédiatement pour thème Microsoft épuré */
+    /* animation désactivée pour thème Microsoft épuré */
   }
   
   .et-hero-tabs h1 span {
@@ -96,8 +96,8 @@
   .blockquote-wrapper {
     margin: 0 auto 60px auto;
     max-width: 900px;
-    opacity: 0;
-    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s forwards;
+    opacity: 1; /* Visible immédiatement pour thème Microsoft épuré */
+    /* animation désactivée pour thème Microsoft épuré */
     position: relative;
     padding: 0 40px;
   }
@@ -141,8 +141,8 @@
   /* --- BOUTON D'ACTION --- */
   .hero-cta-wrapper {
     margin-top: 20px;
-    opacity: 0;
-    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.8s forwards;
+    opacity: 1; /* Visible immédiatement pour thème Microsoft épuré */
+    /* animation désactivée pour thème Microsoft épuré */
   }
   
   .btnMeContacter {
@@ -154,7 +154,7 @@
     font-weight: 600;
     border-radius: 4px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    /* transition désactivée pour thème Microsoft épuré */
     box-shadow: 0 4px 10px rgba(0, 120, 212, 0.3);
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -173,8 +173,8 @@
     bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
-    opacity: 0;
-    animation: fadeIn 1s ease 1.5s forwards;
+    opacity: 1; /* Visible immédiatement pour thème Microsoft épuré */
+    /* animation désactivée pour thème Microsoft épuré */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -206,7 +206,7 @@
     top: 6px;
     left: 50%;
     transform: translateX(-50%);
-    animation: scrollWheel 2s infinite;
+    /* animation désactivée pour thème Microsoft épuré */
   }
   
   @keyframes fadeInUp {
