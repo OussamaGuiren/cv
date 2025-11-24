@@ -550,8 +550,8 @@
     font-weight: 600;
   }
   
-  /* GLITCH STACK (Conserved but wrapped appropriately if used inside modal) */
-  .glitch-stack {
+  /* ===================== VIDÉO ABOUT (REMPLACE GLITCH STACK) ===================== */
+  .video-wrapper {
     position: relative;
     display: block;
     width: 100%;
@@ -559,74 +559,58 @@
     border-radius: 16px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
     border: 3px solid rgba(0, 120, 212, 0.3);
-    transition: all 0.4s ease;
     overflow: hidden;
     background: #000000;
+    transition: all 0.4s ease;
   }
-  
-  .glitch-img {
-    display: block;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    border-radius: 16px;
-  }
-  
-  .glitch-stack:hover {
+
+  .video-wrapper:hover {
     transform: translateY(-10px) scale(1.02);
     box-shadow: 0 30px 80px rgba(0, 120, 212, 0.3);
     border-color: rgba(0, 120, 212, 0.5);
   }
-  
-  .glitch-stack:hover .glitch-clone {
-    opacity: 0;
-    animation: none;
+
+  .about-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+
+  /* Gestion de l'affichage Desktop/Mobile des vidéos */
+  .desktop-video {
+    display: block;
+  }
+  .mobile-video {
     display: none;
   }
-  
-  .glitch-clone {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 1;
-    pointer-events: none;
-    z-index: 1;
-    mix-blend-mode: hard-light;
-    transition: opacity 0.3s ease;
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .about-content-wrapper {
+      /* Sur tablette/desktop : Texte à gauche, Image à droite */
+      /* Comme j'ai inversé l'ordre dans le HTML (Texte puis Image), c'est déjà bon en Grid/Flex par défaut */
+    }
   }
-  
-  .glitch-clone:nth-child(2) { animation: glitch-anim-1 2.5s infinite linear alternate-reverse; }
-  .glitch-clone:nth-child(3) { animation: glitch-anim-2 3s infinite linear alternate-reverse; }
-  .glitch-clone:nth-child(4) { animation: glitch-anim-flash 2s infinite linear; }
-  
-  @keyframes glitch-anim-1 {
-    0% { clip-path: inset(20% 0 80% 0); transform: translate(-10px, 5px); filter: hue-rotate(90deg) saturate(200%); }
-    5% { clip-path: inset(10% 0 40% 0); transform: translate(10px, -5px); filter: invert(0.3); }
-    10% { clip-path: inset(80% 0 5% 0); transform: translate(-15px, 5px); filter: none; }
-    15% { clip-path: inset(40% 0 20% 0); transform: translate(15px, -10px); filter: hue-rotate(180deg); }
-    20% { clip-path: inset(10% 0 60% 0); transform: translate(-10px, 10px); filter: none; }
-    25% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
-    100% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
-  }
-  
-  @keyframes glitch-anim-2 {
-    0% { clip-path: inset(60% 0 10% 0); transform: translate(10px, -5px); filter: none; }
-    5% { clip-path: inset(20% 0 50% 0); transform: translate(-10px, 5px); filter: hue-rotate(45deg) contrast(2); }
-    10% { clip-path: inset(10% 0 80% 0); transform: translate(15px, 15px); filter: none; }
-    15% { clip-path: inset(50% 0 30% 0); transform: translate(-15px, -5px); filter: sepia(1) saturate(300%); }
-    20% { clip-path: inset(80% 0 5% 0); transform: translate(10px, -10px); filter: none; }
-    25% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
-    100% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
-  }
-  
-  @keyframes glitch-anim-flash {
-    0%, 90% { opacity: 0; transform: translate(0); filter: none; }
-    92% { opacity: 1; transform: translate(5px, 5px); filter: hue-rotate(90deg) saturate(400%) brightness(1.2); }
-    94% { opacity: 0.5; transform: translate(-5px, -5px); filter: invert(1); }
-    96% { opacity: 1; transform: translate(5px, -5px); filter: hue-rotate(270deg) blur(1px); }
-    100% { opacity: 0; transform: translate(0); filter: none; }
+
+  @media (max-width: 768px) {
+    .desktop-video {
+      display: none;
+    }
+    .mobile-video {
+      display: block;
+    }
+    
+    .about-content-wrapper {
+      display: flex;
+      flex-direction: column-reverse; /* Inverse l'ordre : Image (2e dans DOM) passe en haut, Texte (1er) en bas */
+      gap: 40px;
+    }
+
+    .video-wrapper {
+      max-width: 100%;
+    }
   }
   
   /* Responsive pour le modal */
