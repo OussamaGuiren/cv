@@ -137,30 +137,40 @@
       display: none !important;
       content: none !important;
     }
-  
+
       /* Si JavaScript a injecté du texte, restaurer la visibilité du contenu réel */
       .et-hero-tabs .hero-kicker.has-content[data-typewriter],
       .et-hero-tabs h1.has-content[data-typewriter] {
-        font-size: clamp(1.2rem, 3.5vw, 1.15rem) !important;
+        font-size: clamp(0.95rem, 3.5vw, 1.15rem) !important;
         line-height: 1.2 !important;
         height: auto !important;
         overflow: visible !important;
         visibility: visible !important;
         display: block !important;
       }
+    
+    /* Correction spécifique pour le H1 has-content */
+    .et-hero-tabs h1.has-content[data-typewriter] {
+      font-size: clamp(36px, 12vw, 64px) !important;
+      line-height: 1.1 !important;
+      margin: 0 0 clamp(0.8rem, 1.5vh, 1.2rem) 0 !important;
+    }
+
     .et-hero-tabs h1[data-typewriter]::before {
       content: attr(data-typewriter);
-      font-size: clamp(32px, 10vw, 56px);
-      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      font-weight: 900;
-      line-height: 1.15;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 30%, var(--accent) 60%, var(--accent-2) 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-size: clamp(36px, 12vw, 64px);
+      font-family: 'Segoe UI', sans-serif;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: #201F1E;
+      /* Remove gradient background from ::before to match final state or apply it consistently if needed */
+      /* Using standard color to match typical H1 if gradient is not desired on mobile fallback */
+      /* OR keep gradient if that's the design intent */
+      background: none; 
+      -webkit-background-clip: unset;
+      -webkit-text-fill-color: initial;
+      
       display: block;
       width: 100%;
       max-width: 100%;
