@@ -503,7 +503,14 @@
       position: relative !important;
       z-index: 1 !important;
       padding-top: 20px !important;
-      padding-bottom: 20px !important;
+      padding-bottom: 0 !important; /* Collé au ticker */
+    }
+
+    /* Ajustement spécifique pour le ticker en mobile pour le coller à la section précédente */
+    .tech-ticker-section {
+      margin-top: -20px !important; /* Compense le gap de .et-main */
+      padding-top: 0 !important;
+      padding-bottom: 15px !important;
     }
   
     /* S'assurer que le main et les sections sont dans le flux normal */
