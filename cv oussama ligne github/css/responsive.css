@@ -271,6 +271,10 @@
       color: #0078D4 !important;
       opacity: 1 !important;
       animation: none !important;
+      transform: none !important; /* Disable translation animation on mobile to prevent shift */
+      line-height: 1.2 !important; /* Lock line-height */
+      display: block !important;
+      min-height: 1.2em; /* Reserve height */
     }
 
     /* Ensure ::before matches exactly - SEULEMENT si pas de contenu */
@@ -285,10 +289,16 @@
       display: block;
       width: 100%;
       text-align: center;
-      margin-bottom: clamp(12px, 2vh, 20px);
+      /* Match parent margin logic */
+      margin: 0;
+      line-height: 1.2 !important;
       visibility: visible !important;
       position: relative;
       z-index: 2;
+      /* Disable animation and transform */
+      animation: none !important;
+      transform: none !important;
+      opacity: 1 !important;
     }
 
     /* Agrandir le titre h1 */
