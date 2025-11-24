@@ -629,7 +629,53 @@
     100% { opacity: 0; transform: translate(0); filter: none; }
   }
   
-  /* Responsive pour le modal */
+  /* Styles pour la vidéo qui remplace le glitch stack */
+.video-stack {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  border: 3px solid rgba(0, 120, 212, 0.3);
+  transition: all 0.4s ease;
+  overflow: hidden;
+  background: #000000;
+}
+
+.video-stack:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 30px 80px rgba(0, 120, 212, 0.3);
+  border-color: rgba(0, 120, 212, 0.5);
+}
+
+.about-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* Gestion de l'affichage mobile/desktop des vidéos */
+.video-mobile {
+  display: none;
+}
+
+.video-desktop {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .video-mobile {
+    display: block;
+  }
+  .video-desktop {
+    display: none;
+  }
+}
+
+/* Responsive pour le modal */
   @media (max-width: 768px) {
     .about-popup-content {
       width: 95%;
