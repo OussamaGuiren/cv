@@ -67,6 +67,8 @@ function typewriter(element, text, speed = 50, callback) {
       }
       
       if (title) {
+        const text = title.dataset.typewriter;
+        if (text) title.textContent = text;
         title.classList.add('typed');
         document.body.classList.add('hero-title-typed');
       }

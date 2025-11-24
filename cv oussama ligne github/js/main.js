@@ -4,7 +4,7 @@ import { initNavigation } from './modules/navigation.js';
 import { initTimeline } from './modules/timeline.js';
 import { initModals } from './modules/modals.js';
 import { initForm } from './modules/contact-form.js';
-import { initScrollAnimations } from './modules/animation.js';
+import { initScrollAnimations, refreshScrollTrigger } from './modules/animation.js';
 
 // Add CSS class when fonts are loaded
 try {
@@ -35,4 +35,19 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(startTypewriterSequence, 200);
     } catch (e) { /* ignore */ }
   });
+});
+
+// Handle bfcache restore
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) {
+    try {
+      refreshScrollTrigger();
+      // Ensure typewriter text is visible if needed (fallback)
+      const title = document.querySelector('.et-hero-tabs h1[data-typewriter]');
+      if (title && !title.textContent && title.dataset.typewriter) {
+          title.textContent = title.dataset.typewriter;
+          title.classList.add('typed');
+      }
+    } catch(e) { /* ignore */ }
+  }
 });
