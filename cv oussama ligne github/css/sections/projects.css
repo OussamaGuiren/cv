@@ -1,7 +1,7 @@
 /* ===================== SECTION PROJETS PERSONNELS (STYLE COHÉRENT AVEC WEB) ===================== */
 
 #tab-personal-projects {
-  background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%); /* Fond plus sombre/Lab pour distinguer */
+  background: #5C2D91; /* Microsoft Purple (Mauve) - Identique au Ticker */
   position: relative;
   padding: 80px 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -16,12 +16,13 @@
 }
 
 #tab-personal-projects .eyebrow {
-  color: #FFD700 !important; /* Or pour Lab/R&D */
+  color: #ffffff !important; /* Blanc pur pour ressortir sur le mauve */
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: 10px;
   display: block;
+  opacity: 0.9;
 }
 
 #tab-personal-projects h2 {
@@ -33,7 +34,7 @@
 
 #tab-personal-projects p.slide-intro, 
 #tab-personal-projects .section-header p {
-  color: rgba(255, 255, 255, 0.85) !important;
+  color: rgba(255, 255, 255, 0.9) !important; /* Blanc très lisible */
   font-size: 1.2rem;
   line-height: 1.6;
 }
