@@ -419,6 +419,29 @@
     gap: clamp(24px, 3vh, 40px);
     max-width: 100%;
   }
+
+  /* Conteneur de l'image/vidéo prend toute la hauteur disponible */
+  .about-image-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* En mode desktop, le conteneur prend toute la hauteur */
+  @media (min-width: 769px) {
+    .about-image-container {
+      height: 100%;
+      min-height: 600px; /* Hauteur minimale pour que la vidéo soit bien visible */
+    }
+    
+    .video-stack {
+      flex: 1; /* Prend tout l'espace disponible */
+      min-height: 500px; /* Hauteur minimale pour la vidéo */
+    }
+  }
   
   .about-text-content {
     display: flex;
@@ -633,11 +656,12 @@
   position: relative;
   display: block;
   width: 100%;
-  max-width: 500px;
+  height: 100%;
+  /* max-width supprimé pour que la vidéo prenne toute la place */
   border-radius: 16px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
   border: 3px solid rgba(0, 120, 212, 0.3);
-  transition: all 0.4s ease;
+  /* transition désactivée pour thème Microsoft épuré */
   overflow: hidden;
   background: #000000;
 }
@@ -701,13 +725,13 @@
 .about-video {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
   border-radius: 16px;
   /* Filtres accentués pour effet VHS usé : flou, contraste fort, couleurs froides (tech) */
   /* Remplacement du Sepia par une teinte bleutée/froide via hue-rotate et suppression du sépia */
   filter: contrast(1.2) brightness(0.9) grayscale(0.2) hue-rotate(10deg) saturate(1.1) blur(1px);
-  transition: filter 0.5s ease;
+  /* transition désactivée pour thème Microsoft épuré */
 }
 
 /* On réduit les effets au survol pour mieux voir */
