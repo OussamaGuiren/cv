@@ -51,50 +51,64 @@ function typewriter(element, text, speed = 50, callback) {
   }
   
   export function startTypewriterSequence() {
-    // Désactiver le typewriter en mobile
-    if (window.innerWidth <= 767) {
-      const kicker = document.querySelector('.hero-kicker[data-typewriter]');
-      const title = document.querySelector('.et-hero-tabs h1[data-typewriter]');
-      
-      // Injecter le texte immédiatement en mobile pour éviter le glitch avec le ::before CSS
-      if (kicker) {
-        const text = kicker.dataset.typewriter;
-        if (text) {
-          kicker.textContent = text;
-          kicker.classList.add('typed');
-          kicker.classList.add('has-content');
-        }
-      }
-      
-      if (title) {
-        title.classList.add('typed');
-        document.body.classList.add('hero-title-typed');
-      }
-      
-      document.body.classList.add('hero-typed');
-      return;
-    }
-    
+    // Récupération des éléments
     const kicker = document.querySelector('.hero-kicker[data-typewriter]');
     const title = document.querySelector('.et-hero-tabs h1[data-typewriter]');
     const subtitle = document.querySelector('.hero-subtitle[data-typewriter]');
     
+    // Gérer l'état initial en fonction de la taille de l'écran
+    const isMobile = window.innerWidth <= 767;
+    
+    // Fonction pour initialiser ou restaurer le texte
+    const ensureTextContent = () => {
+        if (kicker && kicker.dataset.typewriter) {
+            // En mobile, on force le texte si pas déjà présent
+            if (window.innerWidth <= 767 || kicker.classList.contains('has-content')) {
+                 if (!kicker.textContent.trim()) {
+                     kicker.textContent = kicker.dataset.typewriter;
+                     kicker.classList.add('typed', 'has-content');
+                 }
+            }
+        }
+        
+        if (title && title.dataset.typewriter) {
+             if (window.innerWidth <= 767 || title.classList.contains('has-content')) {
+                 if (!title.textContent.trim()) {
+                     title.textContent = title.dataset.typewriter;
+                     title.classList.add('typed', 'has-content');
+                     document.body.classList.add('hero-title-typed');
+                 }
+             }
+        }
+    };
+
+    // Désactiver le typewriter animé en mobile et afficher direct
+    if (isMobile) {
+      ensureTextContent();
+      document.body.classList.add('hero-typed');
+      return;
+    }
+    
     if (!kicker && !title && !subtitle) return;
     
+    // Séquence d'animation pour desktop/tablette
     const sequence = async () => {
       if (kicker) {
         await typewriter(kicker, kicker.dataset.typewriter, 40);
+        kicker.classList.add('has-content'); // Marquer comme ayant du contenu
         await new Promise(resolve => setTimeout(resolve, 300));
       }
       
       if (title) {
         await typewriter(title, title.dataset.typewriter, 60);
+        title.classList.add('has-content'); // Marquer comme ayant du contenu
         document.body.classList.add('hero-title-typed');
         await new Promise(resolve => setTimeout(resolve, 400));
       }
       
       if (subtitle) {
         await typewriter(subtitle, subtitle.dataset.typewriter, 35);
+        subtitle.classList.add('has-content');
       }
       
       setTimeout(() => {
@@ -103,6 +117,13 @@ function typewriter(element, text, speed = 50, callback) {
     };
     
     sequence();
+
+    // Gestion du redimensionnement pour éviter la perte de contenu
+    window.addEventListener('resize', () => {
+        // Petit délai pour ne pas spammer pendant le resize
+        clearTimeout(window.resizeTimer);
+        window.resizeTimer = setTimeout(ensureTextContent, 100);
+    });
   }
   
   // ============ TOASTS ============
