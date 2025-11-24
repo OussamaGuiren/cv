@@ -705,14 +705,15 @@
   height: auto;
   object-fit: cover;
   border-radius: 16px;
-  /* Filtres accentués pour effet VHS usé : flou, contraste fort, couleurs délavées */
-  filter: contrast(1.3) brightness(0.85) grayscale(0.4) sepia(0.3) saturate(1.4) blur(1.2px);
+  /* Filtres accentués pour effet VHS usé : flou, contraste fort, couleurs froides (tech) */
+  /* Remplacement du Sepia par une teinte bleutée/froide via hue-rotate et suppression du sépia */
+  filter: contrast(1.2) brightness(0.9) grayscale(0.2) hue-rotate(10deg) saturate(1.1) blur(1px);
   transition: filter 0.5s ease;
 }
 
 /* On réduit les effets au survol pour mieux voir */
 .video-stack:hover .about-video {
-  filter: contrast(1.1) brightness(1) grayscale(0) sepia(0) saturate(1) blur(0);
+  filter: contrast(1.05) brightness(1) grayscale(0) hue-rotate(0deg) saturate(1) blur(0);
 }
 
 /* Gestion de l'affichage mobile/desktop des vidéos */
