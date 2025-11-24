@@ -390,7 +390,65 @@
   .project-popup-actions .btn-primary:hover {
     background: #106EBE;
   }
+
+  /* --- PLACEHOLDER CARD STYLING --- */
+  .project-card.is-placeholder {
+    background: #F8F9FA !important;
+    border: 2px dashed rgba(0, 120, 212, 0.3);
+    box-shadow: none !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .project-card.is-placeholder:hover {
+    background: #FFFFFF !important;
+    border-color: #0078D4;
+    border-style: solid;
+    transform: translateY(-4px) !important;
+    box-shadow: 0 12px 32px rgba(0, 120, 212, 0.15) !important;
+  }
+
+  .project-card.is-placeholder .card-image {
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    border-bottom: none;
+    overflow: visible; /* Allow icon animation */
+  }
+
+  .project-card.is-placeholder .card-image::after {
+    content: '\f0ad'; /* Icone Clé à molette/Wrench ou \f017 Clock */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 4rem;
+    color: rgba(0, 120, 212, 0.2);
+    transition: all 0.4s ease;
+  }
   
+  /* Use Hourglass for the second placeholder if needed, but generic is fine */
+  
+  .project-card.is-placeholder:hover .card-image::after {
+    color: #0078D4;
+    transform: scale(1.1) rotate(15deg);
+    filter: drop-shadow(0 4px 8px rgba(0, 120, 212, 0.3));
+  }
+
+  .project-card.is-placeholder .card-content {
+    background: transparent !important;
+    align-items: center;
+    text-align: center;
+  }
+
+  .project-card.is-placeholder h3 {
+    color: #605E5C !important;
+    font-style: italic;
+  }
+
+  .project-card.is-placeholder:hover h3 {
+    color: #0078D4 !important;
+  }
+
   @media (max-width: 900px) {
     .project-details-grid {
       grid-template-columns: 1fr;
