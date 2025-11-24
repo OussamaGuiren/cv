@@ -1,4 +1,50 @@
-/* ===================== SECTION PROJETS WEB (THEME MICROSOFT BLUE) ===================== */
+/* ===================== SECTION PROJETS PERSONNELS (STYLE COHÉRENT AVEC WEB) ===================== */
+
+#tab-personal-projects {
+  background: #5C2D91; /* Microsoft Purple (Mauve) - Identique au Ticker */
+  position: relative;
+  padding: 80px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+#tab-personal-projects .section-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px auto;
+  color: #ffffff;
+}
+
+#tab-personal-projects .eyebrow {
+  color: #ffffff !important; /* Blanc pur pour ressortir sur le mauve */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  display: block;
+  opacity: 0.9;
+}
+
+#tab-personal-projects h2 {
+  color: #ffffff !important;
+  font-size: 3rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+#tab-personal-projects p.slide-intro, 
+#tab-personal-projects .section-header p {
+  color: rgba(255, 255, 255, 0.9) !important; /* Blanc très lisible */
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  #tab-personal-projects {
+    padding: 60px 15px;
+  }
+}
+
 
 #tab-projects {
     background: linear-gradient(135deg, #004578 0%, #003366 100%);
@@ -42,10 +88,19 @@
   .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    /* Pour éviter qu'une seule carte ne prenne toute la largeur, on limite la largeur max des colonnes quand il y en a peu */
+    grid-auto-rows: 1fr;
     gap: 30px;
     max-width: 1400px;
     margin: 0 auto;
     padding-bottom: 20px;
+    justify-content: center; /* Centre les cartes si elles ne remplissent pas la ligne */
+  }
+
+  /* Si une seule carte, on limite sa largeur */
+  .gallery:has(> :last-child:nth-child(1)) {
+     grid-template-columns: minmax(320px, 400px);
+     justify-content: center;
   }
   
   /* CARTES PROJETS (Fond blanc, texte sombre) */
