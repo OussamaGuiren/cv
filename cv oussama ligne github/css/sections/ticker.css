@@ -24,11 +24,11 @@
     display: flex;
     gap: 40px;
     width: max-content;
-    animation: ticker-scroll 50s linear infinite;
+    /* animation désactivée pour thème Microsoft épuré */
   }
-  
+
   .tech-ticker-track:hover {
-    animation-play-state: paused;
+    /* animation-play-state: paused; */
   }
   
   .tech-item {
@@ -44,7 +44,7 @@
     background: rgba(255, 255, 255, 0.15); /* Fond semi-transparent blanc */
     border-radius: 4px; /* Style "carré" Microsoft */
     border: 1px solid rgba(255, 255, 255, 0.3);
-    transition: all 0.3s ease;
+    /* transition désactivée pour thème Microsoft épuré */
   }
   
   .tech-item i {

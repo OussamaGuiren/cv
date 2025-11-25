@@ -21,7 +21,7 @@
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), /* Ombres plus douces */
       0 10px 10px -5px rgba(0, 0, 0, 0.04);
     text-align: center;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    /* transition désactivée pour thème Microsoft épuré */
     border: 1px solid rgba(0, 120, 212, 0.1); /* Bordure subtilement bleue */
     backdrop-filter: none;
   }
@@ -34,8 +34,8 @@
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    opacity: 0;
-    animation: fadeInUptTitle 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    opacity: 1; /* Visible immédiatement pour thème Microsoft épuré */
+    /* animation désactivée pour thème Microsoft épuré */
     color: #0078D4; /* Titre en bleu Microsoft */
     letter-spacing: -0.025em;
   }
@@ -43,8 +43,8 @@
   .timeline-subtitle {
     font-size: 1.125rem;
     font-weight: 400;
-    opacity: 0;
-    animation: fadeInUptTitle 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+    opacity: 1; /* Visible immédiatement pour thème Microsoft épuré */
+    /* animation désactivée pour thème Microsoft épuré */
     color: #605E5C; /* Gris foncé pour sous-titre */
     letter-spacing: 0.025em;
   }
@@ -88,27 +88,27 @@
     margin-bottom: 2rem;
     color: white;
     box-shadow: 0 10px 25px rgba(0, 120, 212, 0.3);
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    /* transition désactivée pour thème Microsoft épuré */
   }
-  
+
   .event-year {
     font-size: 3.5rem;
     font-weight: 700;
     margin-bottom: 0.75rem;
     color: #201F1E; /* Année en noir */
     letter-spacing: -0.05em;
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    /* transition désactivée pour thème Microsoft épuré */
   }
-  
+
   .event-company {
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 1.25rem;
     color: #0078D4; /* Entreprise en bleu */
     letter-spacing: -0.025em;
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    /* transition désactivée pour thème Microsoft épuré */
   }
-  
+
   .event-description {
     font-size: 1.125rem;
     font-weight: 400;
@@ -116,7 +116,7 @@
     line-height: 1.7;
     color: #323130; /* Description en gris foncé */
     letter-spacing: 0.015em;
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    /* transition désactivée pour thème Microsoft épuré */
   }
   
   /* Techs dans description - needs specificity */
