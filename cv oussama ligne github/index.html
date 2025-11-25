@@ -500,7 +500,7 @@
                 autocomplete="organization"
                 aria-describedby="companyName-error"
                 pattern="^[A-Za-zÀ-ÖØ-öø-ÿ0-9][A-Za-zÀ-ÖØ-öø-ÿ0-9 .'’&()\\-]{1,}$"
-                placeholder="Ex: Entreprise Dupont SAS">
+                placeholder="">
               <div class="error" id="companyName-error" aria-live="polite"></div>
             </div>
 
@@ -516,7 +516,7 @@
                 autocapitalize="off"
                 spellcheck="false"
                 aria-describedby="email-error"
-                placeholder="nom@domaine.fr"
+                placeholder=""
                 pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}$">
               <div class="hint">Format attendu : nom@domaine.tld</div>
               <div class="error" id="email-error" aria-live="polite"></div>
@@ -531,7 +531,7 @@
                 inputmode="tel"
                 autocomplete="tel"
                 aria-describedby="phone-error"
-                placeholder="06 12 34 56 78 ou +33 6 12 34 56 78"
+                placeholder=""
                 title="Numéro FR: 0X XX XX XX XX, +33 X XX XX XX XX, ou 0033 X XX XX XX XX"
                 pattern="^(?:0[1-9]|(?:\\+33|0033)[ .-]?[1-9])(?:[ .-]?\\d{2}){4}$"
                 maxlength="20">
