@@ -344,7 +344,7 @@
     align-items: center;
     justify-content: center;
     transition: 0.3s ease-out;
-    background: #191919;
+    background: #0078D4; /* Même couleur que la navbar */
     color: #ffffff;
   }
   
@@ -369,18 +369,14 @@
   .about-text {
     font-size: clamp(1rem, 1.5vw, 1.25rem);
     line-height: 1.8;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.95);
     margin: 0;
     font-weight: 400;
   }
   
   .about-text strong {
     color: #ffffff;
-    font-weight: 600;
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-weight: 700;
   }
   
   .about-title {
@@ -391,10 +387,6 @@
     margin: 0;
     line-height: 1.2;
     letter-spacing: -0.02em;
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
   
   .about-photo-section h2.credit {
@@ -405,10 +397,6 @@
     text-align: center;
     margin: 0;
     line-height: 1.4;
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
   
   .about-photo-section h2.credit em {
