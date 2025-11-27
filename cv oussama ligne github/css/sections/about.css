@@ -354,18 +354,16 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: clamp(40px, 6vw, 80px);
-    align-items: center;
-    justify-items: center;
+  align-items: stretch;
+  justify-items: stretch;
   }
 
 /* Bloc image dans le bloc de droite */
 .about-image-container {
   width: 100%;
+  height: 100%;
   max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
+  display: block;
 }
   
   .about-text {
@@ -428,12 +426,11 @@
 .about-photo-full {
   display: block;
   width: 100%;
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
-  border-radius: 24px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-  background: radial-gradient(circle at 20% 0%, #222 0, #111 45%, #050505 100%);
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
 }
 
 @media (max-width: 768px) {
