@@ -345,7 +345,7 @@
     align-items: center;
     justify-content: center;
     transition: 0.3s ease-out;
-    background: #191919;
+    background: #0078D4; /* Même couleur que la navbar */
     color: #ffffff;
   }
   
