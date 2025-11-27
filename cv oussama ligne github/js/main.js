@@ -4,6 +4,7 @@ import { initNavigation } from './modules/navigation.js';
 import { initTimeline } from './modules/timeline.js';
 import { initModals } from './modules/modals.js';
 import { initForm } from './modules/contact-form.js';
+import { initAboutPhotoReveal } from './modules/about-photo-reveal.js';
 // import { initScrollAnimations } from './modules/animation.js'; // Désactivé pour thème Microsoft épuré
 
 // Add CSS class when fonts are loaded
@@ -22,6 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initTimeline();
   initModals();
   initForm();
+  
+  // Animation de révélation de la photo au scroll
+  setTimeout(() => {
+    initAboutPhotoReveal();
+  }, 100);
   
   // Animations de scroll désactivées pour un thème Microsoft épuré
   // setTimeout(() => {

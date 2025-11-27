@@ -364,6 +364,8 @@
   height: 500px;
   max-width: 100%;
   display: block;
+  position: relative;
+  overflow: hidden; /* Cache la partie de l'image qui dépasse */
 }
   
   .about-text {
@@ -414,11 +416,16 @@
 .about-photo-full {
   display: block;
   width: 100%;
-  /* height: 90%; */
+  height: 100%;
   object-fit: cover;
   border-radius: 0;
   box-shadow: none;
   background: none;
+  position: relative;
+  will-change: transform, clip-path; /* Optimisation pour l'animation */
+  /* État initial : photo masquée en bas (sera animée par GSAP au scroll) */
+  transform: translateY(80%);
+  clip-path: inset(100% 0 0 0);
 }
 
 @media (max-width: 768px) {
