@@ -335,10 +335,10 @@
   
   /* Section Qui suis-je - Photo et texte */
   .about-photo-section {
-    min-height: auto;
-    width: 100%;
+  min-height: 100vh;
+  width: 100vw;
     position: relative;
-    padding: clamp(40px, 5vh, 80px) clamp(20px, 5vw, 120px);
+  padding: 0;
     margin: auto;
     display: flex;
     align-items: center;
@@ -349,14 +349,22 @@
   }
   
   .about-content-wrapper {
-    width: 100%;
-    max-width: 1400px;
+  width: 100%;
+  max-width: none;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: clamp(40px, 6vw, 80px);
-    align-items: center;
-    justify-items: center;
+  align-items: stretch;
+  justify-items: stretch;
   }
+
+/* Bloc image dans le bloc de droite */
+.about-image-container {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  display: block;
+}
   
   .about-text {
     font-size: clamp(1rem, 1.5vw, 1.25rem);
@@ -413,12 +421,30 @@
     color: rgba(255, 255, 255, 0.8);
     -webkit-text-fill-color: rgba(255, 255, 255, 0.8);
   }
+
+/* Image plein format dans la colonne de droite */
+.about-photo-full {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+}
+
+@media (max-width: 768px) {
+  .about-content-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
   
   .about-text-container {
     display: flex;
     flex-direction: column;
     gap: clamp(24px, 3vh, 40px);
     max-width: 100%;
+  padding: clamp(40px, 5vh, 80px) clamp(20px, 5vw, 80px);
   }
   
   .about-text-content {
