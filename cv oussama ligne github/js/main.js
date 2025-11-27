@@ -28,18 +28,27 @@ function initAboutPhotoReveal() {
     return;
   }
 
-  // Fonction pour calculer le rayon maximum
-  const calculateMaxRadius = () => {
+  // Fonction pour calculer le rayon maximum et positionner le cercle
+  const calculateMaskValues = () => {
     const containerRect = photoContainer.getBoundingClientRect();
+    const centerX = containerRect.width / 2;
+    const centerY = containerRect.height / 2;
     // Utilise la diagonale du container pour s'assurer que le cercle couvre tout
-    return Math.sqrt(
+    const maxRadius = Math.sqrt(
       Math.pow(containerRect.width, 2) + Math.pow(containerRect.height, 2)
     ) / 2;
+    return { centerX, centerY, maxRadius };
   };
 
-  // Initialiser le rayon à 0
-  const maxRadius = calculateMaxRadius();
-  gsap.set(circleMask, { attr: { r: 0 } });
+  // Initialiser le masque avec des valeurs absolues
+  const maskValues = calculateMaskValues();
+  gsap.set(circleMask, { 
+    attr: { 
+      cx: maskValues.centerX,
+      cy: maskValues.centerY,
+      r: 0 
+    } 
+  });
 
   // Animation du masque circulaire qui se révèle progressivement
   // Le rayon du cercle passe de 0 à maxRadius au scroll
@@ -54,7 +63,7 @@ function initAboutPhotoReveal() {
       toggleActions: 'play none reverse none'
     },
     attr: {
-      r: maxRadius // Le rayon grandit progressivement pour révéler l'image
+      r: maskValues.maxRadius // Le rayon grandit progressivement pour révéler l'image
     },
     ease: 'power1.out'
   });
@@ -76,12 +85,14 @@ function initAboutPhotoReveal() {
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
-      const newMaxRadius = calculateMaxRadius();
-      // Mettre à jour l'animation avec le nouveau rayon
-      gsap.to(circleMask, {
-        attr: { r: newMaxRadius },
-        duration: 0,
-        overwrite: true
+      const newMaskValues = calculateMaskValues();
+      // Mettre à jour le cercle avec les nouvelles valeurs
+      gsap.set(circleMask, {
+        attr: {
+          cx: newMaskValues.centerX,
+          cy: newMaskValues.centerY,
+          r: newMaskValues.maxRadius
+        }
       });
       ScrollTrigger.refresh();
     }, 100);
