@@ -344,7 +344,7 @@
     align-items: center;
     justify-content: center;
     transition: 0.3s ease-out;
-    background: #191919;
+    background: #0078D4; /* Même couleur que la navbar */
     color: #ffffff;
   }
   
@@ -364,23 +364,31 @@
   height: 500px;
   max-width: 100%;
   display: block;
+  position: relative;
+  overflow: hidden; /* Cache la partie de l'image qui dépasse */
+}
+
+/* SVG container pour l'effet de masque circulaire */
+.about-photo-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
   
   .about-text {
     font-size: clamp(1rem, 1.5vw, 1.25rem);
     line-height: 1.8;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.95);
     margin: 0;
     font-weight: 400;
   }
   
   .about-text strong {
     color: #ffffff;
-    font-weight: 600;
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-weight: 700;
   }
   
   .about-title {
@@ -391,10 +399,6 @@
     margin: 0;
     line-height: 1.2;
     letter-spacing: -0.02em;
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
   
   .about-photo-section h2.credit {
@@ -405,10 +409,6 @@
     text-align: center;
     margin: 0;
     line-height: 1.4;
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
   
   .about-photo-section h2.credit em {
@@ -422,15 +422,11 @@
     -webkit-text-fill-color: rgba(255, 255, 255, 0.8);
   }
 
-/* Image plein format dans la colonne de droite */
+/* Image dans le SVG - masquée par le cercle qui grandit */
 .about-photo-full {
-  display: block;
   width: 100%;
-  /* height: 90%; */
+  height: 100%;
   object-fit: cover;
-  border-radius: 0;
-  box-shadow: none;
-  background: none;
 }
 
 @media (max-width: 768px) {
