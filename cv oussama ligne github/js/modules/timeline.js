@@ -13,7 +13,7 @@ export function initTimeline() {
         year: 2019,
         duree: "Août 2019 - Décembre 2019",
         company: "ANALYSTE PROGRAMMEUR .NET chez MyRsi à Meudon",
-        description: "Spécialisation dans le développement .NET. Assurer la maintenance évolutive et corrective d’une application métier en corrigeant les anomalies et exceptions imprévues, en estimant les charges des nouvelles fonctionnalités, en concevant/optimisant les fonctionnalités existantes et en supervisant les livraisons en environnement de recette.",
+        description: "Spécialisation dans le développement .NET. Assurer la maintenance évolutive et corrective d'une application métier en corrigeant les anomalies et exceptions imprévues, en estimant les charges des nouvelles fonctionnalités, en concevant/optimisant les fonctionnalités existantes et en supervisant les livraisons en environnement de recette.",
         techs: "C#, ASP.NET, WPF (MVVM), LINQ, Angular, HTML/CSS, SQL Server, Git, Jenkins, XLDeploy, Visual Studio, VS Code",
         icon: "fa-server",
         era: "era-dot-com"
@@ -37,210 +37,92 @@ export function initTimeline() {
         era: "era-social-media"
       }
     ];
-  
-    const slider = document.getElementById("timelineSlider");
-    const eventIcon = document.getElementById("eventIcon");
-    const eventYear = document.getElementById("eventYear");
-    const eventCompany = document.getElementById("eventCompany");
-    const eventDescription = document.getElementById("eventDescription");
-    const progressFill = document.getElementById("progressFill");
-    const timelineContainer = document.getElementById("timelineContainer");
-    const content = document.getElementById("timelineContent");
-    const sliderTrack = document.getElementById("sliderTrack");
-    const yearLabelsContainer = document.getElementById("yearLabels");
-  
-    if (!slider || !eventIcon || !eventYear || !eventCompany || !eventDescription) {
+
+    const timelineList = document.getElementById("timelineList");
+    const popup = document.getElementById("experiencePopup");
+    const popupTitle = document.getElementById("experiencePopupTitle");
+    const popupSubtitle = document.getElementById("experiencePopupSubtitle");
+    const popupDescription = document.getElementById("experiencePopupDescription");
+    const popupTechs = document.getElementById("experiencePopupTechs");
+    const closePopupBtn = document.getElementById("closeExperiencePopup");
+    const popupOverlay = popup?.querySelector(".experience-popup-overlay");
+
+    if (!timelineList) {
       return;
     }
-  
-    slider.max = timelineData.length - 1;
-  
-    let currentIndex = 0;
-    let targetIndex = 0;
-    let isAnimating = false;
-    let autoPlayInterval;
-    let ticks = [];
-    let yearLabels = [];
-  
-    function createTicks() {
-      timelineData.forEach((event, index) => {
-        const tick = document.createElement("div");
-        tick.classList.add("tick");
-        const percent = (index / (timelineData.length - 1)) * 100;
-        tick.style.left = `calc(${percent}%)`;
-        sliderTrack.appendChild(tick);
-        ticks.push(tick);
-      });
-    }
-  
-    function createYearLabels() {
-      yearLabelsContainer.style.position = "relative";
-  
-      timelineData.forEach((event, index) => {
-        const span = document.createElement("span");
-        span.classList.add("year-label");
-        // Affiche seulement l'année, pas le (stage) pour les labels du bas pour rester propre
-        // ou affiche tout, selon la préférence. Ici on affiche tout mais on peut filtrer.
-        span.textContent = String(event.year).replace(' (stage)', ''); 
-        const percent = (index / (timelineData.length - 1)) * 100;
-        span.style.position = "absolute";
-        span.style.left = `${percent}%`;
-        span.style.transform = "translateX(-50%)";
-  
-        yearLabelsContainer.appendChild(span);
-        yearLabels.push(span);
-      });
-    }
-  
-    function updateTimeline(index) {
-      const progress = (index / (timelineData.length - 1)) * 100;
-      progressFill.style.width = `${progress}%`;
-  
-      ticks.forEach((tick, i) => {
-        tick.classList.toggle("active", i === index);
-      });
-  
-      yearLabels.forEach((label, i) => {
-        label.classList.toggle("active", i === index);
-      });
-  
-      targetIndex = index;
-  
-      // Sécurité anti-spam clic
-      if (isAnimating) return;
-      if (targetIndex === currentIndex) return;
-      isAnimating = true;
 
-      // 1. Masquer le contenu avec transition en utilisant les classes CSS
-      content.classList.remove("fade-in", "fade-transition");
-      content.classList.add("fade-out");
-      eventIcon.classList.add("fade-out");
-      eventYear.classList.add("fade-out");
-      eventCompany.classList.add("fade-out");
-      eventDescription.classList.add("fade-out");
+    // Générer les items de timeline
+    timelineData.forEach((event, index) => {
+      const li = document.createElement("li");
+      li.className = "timeline-item";
+      li.setAttribute("data-index", index);
 
-      // 2. Attendre que la transition CSS de masquage se termine (300ms selon CSS)
-      setTimeout(() => {
-        try {
-          const event = timelineData[targetIndex];
+      li.innerHTML = `
+        <div class="timeline-item-icon">
+          <i class="fa-solid ${event.icon}"></i>
+        </div>
+        <div class="timeline-item-content">
+          <div class="timeline-item-year">
+            ${event.year}
+            <span class="timeline-item-duration">${event.duree}</span>
+          </div>
+          <div class="timeline-item-company">${event.company}</div>
+          <button type="button" class="timeline-item-btn" data-index="${index}">
+            En savoir plus
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      `;
 
-          if (event) {
-            // Mise à jour des icônes et textes
-            eventIcon.innerHTML = `<i class="fa-solid ${event.icon}"></i>`;
-            
-            eventYear.innerHTML = `
-              <span style="display:block; line-height:1;">${event.year}</span>
-              <span class="event-duration" style="display:block; font-size:0.875rem; font-weight:400; color:#8A8886; margin-top:0.5rem; text-transform:uppercase; letter-spacing:0.05em;">
-                ${event.duree}
-              </span>
-            `;
-            
-            eventCompany.textContent = event.company;
-            
-            eventDescription.innerHTML = `
-              <p>${event.description}</p>
-              <div class="event-techs">
-                <strong>Stack technique :</strong><br>
-                ${event.techs}
-              </div>
-            `;
-
-            // Mise à jour du thème (era)
-            // On retire toutes les classes era possibles pour être sûr
-            timelineContainer.classList.remove("era-early-web", "era-dot-com", "era-social-media", "era-mobile");
-            timelineContainer.classList.add(event.era);
-          }
-        } catch (error) {
-          console.error("Erreur lors de la mise à jour de la timeline :", error);
-        }
-        
-        // 3. Réafficher le contenu avec transition en utilisant les classes CSS
-        // Retirer fade-out et ajouter fade-in
-        content.classList.remove("fade-out");
-        eventIcon.classList.remove("fade-out");
-        eventYear.classList.remove("fade-out");
-        eventCompany.classList.remove("fade-out");
-        eventDescription.classList.remove("fade-out");
-        
-        content.classList.add("fade-in");
-        
-        // On libère le verrou d'animation après la fin de la transition d'apparition (400ms selon CSS)
-        setTimeout(() => {
-          isAnimating = false;
-          currentIndex = targetIndex;
-        }, 400);
-      }, 300);
-    }
-  
-    slider.addEventListener("input", function () {
-      const index = parseInt(this.value);
-      const progress = (index / (timelineData.length - 1)) * 100;
-      progressFill.style.width = `${progress}%`;
-      updateTimeline(index);
+      timelineList.appendChild(li);
     });
-  
-    function startAutoPlay() {
-      autoPlayInterval = setInterval(() => {
-        let nextIndex = currentIndex + 1;
-        if (nextIndex >= timelineData.length) {
-          nextIndex = 0;
-        }
-        slider.value = nextIndex;
-        updateTimeline(nextIndex);
-      }, 10000); // Augmenté à 6s pour laisser le temps de lire
-    }
-  
-    function stopAutoPlay() {
-      clearInterval(autoPlayInterval);
-    }
-  
-    createTicks();
-    createYearLabels();
-    
-    // Initial call - S'assurer que le contenu est visible au départ
-    const initialEvent = timelineData[0];
-    
-    // Retirer toutes les classes d'animation pour l'état initial
-    content.classList.remove("fade-out", "fade-in", "fade-transition");
-    eventIcon.classList.remove("fade-out");
-    eventYear.classList.remove("fade-out");
-    eventCompany.classList.remove("fade-out");
-    eventDescription.classList.remove("fade-out");
-    
-    eventIcon.innerHTML = `<i class="fa-solid ${initialEvent.icon}"></i>`;
-    eventYear.innerHTML = `
-      <span style="display:block; line-height:1;">${initialEvent.year}</span>
-      <span class="event-duration" style="display:block; font-size:0.875rem; font-weight:400; color:#8A8886; margin-top:0.5rem; text-transform:uppercase; letter-spacing:0.05em;">
-        ${initialEvent.duree}
-      </span>
-    `;
-    eventCompany.textContent = initialEvent.company;
-    eventDescription.innerHTML = `
-      <p>${initialEvent.description}</p>
-      <div class="event-techs">
-        <strong>Stack technique :</strong><br>
-        ${initialEvent.techs}
-      </div>
-    `;
-    
-    // Mettre à jour l'era du container
-    timelineContainer.classList.remove("era-early-web", "era-dot-com", "era-social-media", "era-mobile");
-    timelineContainer.classList.add(initialEvent.era);
 
-    setTimeout(startAutoPlay, 3000);
-  
-    slider.addEventListener("mousedown", stopAutoPlay);
-    slider.addEventListener("touchstart", stopAutoPlay);
-  
-    let userInteractionTimeout;
-    slider.addEventListener("mouseup", () => {
-      clearTimeout(userInteractionTimeout);
-      userInteractionTimeout = setTimeout(startAutoPlay, 8000);
+    // Fonction pour ouvrir la popup
+    function openPopup(index) {
+      const event = timelineData[index];
+      if (!event || !popup) return;
+
+      popupTitle.textContent = event.company;
+      popupSubtitle.textContent = `${event.year} • ${event.duree}`;
+      popupDescription.textContent = event.description;
+      popupTechs.innerHTML = `
+        <strong>Stack technique :</strong>
+        <span>${event.techs}</span>
+      `;
+
+      popup.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    // Fonction pour fermer la popup
+    function closePopup() {
+      if (!popup) return;
+      popup.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    // Event listeners pour les boutons "En savoir plus"
+    timelineList.addEventListener("click", (e) => {
+      const btn = e.target.closest(".timeline-item-btn");
+      if (btn) {
+        const index = parseInt(btn.getAttribute("data-index"));
+        openPopup(index);
+      }
     });
-  
-    slider.addEventListener("touchend", () => {
-      clearTimeout(userInteractionTimeout);
-      userInteractionTimeout = setTimeout(startAutoPlay, 8000);
+
+    // Event listeners pour fermer la popup
+    if (closePopupBtn) {
+      closePopupBtn.addEventListener("click", closePopup);
+    }
+
+    if (popupOverlay) {
+      popupOverlay.addEventListener("click", closePopup);
+    }
+
+    // Fermer avec Escape
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && popup?.getAttribute("aria-hidden") === "false") {
+        closePopup();
+      }
     });
   }
-  
