@@ -8,7 +8,8 @@ import { initForm } from './modules/contact-form.js';
 
 /**
  * Animation de révélation progressive de la photo dans la section "Qui suis-je"
- * La photo glisse depuis la droite vers sa position au scroll
+ * Effet de masque circulaire qui se révèle progressivement au scroll
+ * Inspiré de : https://tympanus.net/codrops/2023/07/05/on-scroll-svg-filter-effect/
  */
 function initAboutPhotoReveal() {
   // Vérifier que GSAP et ScrollTrigger sont disponibles
@@ -21,42 +22,70 @@ function initAboutPhotoReveal() {
   gsap.registerPlugin(ScrollTrigger);
 
   const photoContainer = document.querySelector('.about-image-container');
-  const photo = document.querySelector('.about-photo-full');
+  const circleMask = document.querySelector('.circle-reveal');
   
-  if (!photoContainer || !photo) {
+  if (!photoContainer || !circleMask) {
     return;
   }
 
-  // Animation de glissement depuis la droite
-  // La photo commence hors de la div (à droite) et glisse doucement vers sa position
-  gsap.fromTo(photo, 
-    {
-      x: '100%', // Commence complètement à droite (hors de la div)
-      opacity: 0, // Commence invisible pour un effet plus doux
-    },
-    {
-      scrollTrigger: {
-        trigger: '.about-photo-section', // Utilise la section complète comme trigger
-        start: 'top 85%', // Démarre quand la section arrive à 85% de la hauteur de fenêtre
-        end: 'top 30%', // Se termine quand la section arrive à 30% de la hauteur de fenêtre
-        scrub: 1.5, // Animation liée au scroll (1.5 = fluide et doux)
-        markers: false, // Mettre à true pour debug
-        invalidateOnRefresh: true, // Recalcule les positions si la page change
-      },
-      x: '0%', // Finit à sa position normale (centrée dans la div)
-      opacity: 1, // Finit complètement visible
-      ease: 'power2.out', // Courbe d'animation douce et naturelle
-    }
-  );
+  // Fonction pour calculer le rayon maximum
+  const calculateMaxRadius = () => {
+    const containerRect = photoContainer.getBoundingClientRect();
+    // Utilise la diagonale du container pour s'assurer que le cercle couvre tout
+    return Math.sqrt(
+      Math.pow(containerRect.width, 2) + Math.pow(containerRect.height, 2)
+    ) / 2;
+  };
 
-  // Rafraîchir ScrollTrigger après le chargement des images
-  if (photo.complete) {
-    ScrollTrigger.refresh();
-  } else {
-    photo.addEventListener('load', () => {
+  // Initialiser le rayon à 0
+  const maxRadius = calculateMaxRadius();
+  gsap.set(circleMask, { attr: { r: 0 } });
+
+  // Animation du masque circulaire qui se révèle progressivement
+  // Le rayon du cercle passe de 0 à maxRadius au scroll
+  gsap.to(circleMask, {
+    scrollTrigger: {
+      trigger: '.about-photo-section',
+      start: 'top 85%', // Démarre quand la section arrive à 85% de la hauteur de fenêtre
+      end: 'top 30%', // Se termine quand la section arrive à 30% de la hauteur de fenêtre
+      scrub: 2, // Animation liée au scroll (2 = fluide et doux)
+      markers: false, // Mettre à true pour debug
+      invalidateOnRefresh: true, // Recalcule les positions si la page change
+      toggleActions: 'play none reverse none'
+    },
+    attr: {
+      r: maxRadius // Le rayon grandit progressivement pour révéler l'image
+    },
+    ease: 'power1.out'
+  });
+
+  // Rafraîchir ScrollTrigger après le chargement des images et au redimensionnement
+  const svgImage = document.querySelector('.about-photo-svg image');
+  if (svgImage) {
+    if (svgImage.complete) {
       ScrollTrigger.refresh();
-    });
+    } else {
+      svgImage.addEventListener('load', () => {
+        ScrollTrigger.refresh();
+      });
+    }
   }
+
+  // Rafraîchir aussi au redimensionnement de la fenêtre
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      const newMaxRadius = calculateMaxRadius();
+      // Mettre à jour l'animation avec le nouveau rayon
+      gsap.to(circleMask, {
+        attr: { r: newMaxRadius },
+        duration: 0,
+        overwrite: true
+      });
+      ScrollTrigger.refresh();
+    }, 100);
+  });
 }
 
 // Add CSS class when fonts are loaded

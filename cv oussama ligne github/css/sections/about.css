@@ -367,6 +367,16 @@
   position: relative;
   overflow: hidden; /* Cache la partie de l'image qui dépasse */
 }
+
+/* SVG container pour l'effet de masque circulaire */
+.about-photo-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
   
   .about-text {
     font-size: clamp(1rem, 1.5vw, 1.25rem);
@@ -412,20 +422,11 @@
     -webkit-text-fill-color: rgba(255, 255, 255, 0.8);
   }
 
-/* Image plein format dans la colonne de droite */
+/* Image dans le SVG - masquée par le cercle qui grandit */
 .about-photo-full {
-  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 0;
-  box-shadow: none;
-  background: none;
-  position: relative;
-  will-change: transform, opacity; /* Optimisation pour l'animation */
-  /* État initial : photo décalée vers la droite (sera animée par GSAP au scroll) */
-  transform: translateX(100%);
-  opacity: 0;
 }
 
 @media (max-width: 768px) {
