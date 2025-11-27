@@ -93,7 +93,7 @@ export function initTimeline() {
           <div class="${colClass} timeline-item">
             <div class="row">
               <div class="${colInnerClass}">
-                <div class="timeline-panel ${panelClass} anim animate ${animationClass}" data-index="${event.originalIndex}">
+                <div class="timeline-panel ${panelClass} anim ${animationClass}" data-index="${event.originalIndex}">
                   <ul class="timeline-panel-ul">
                     <div class="lefting-wrap">
                       <li class="img-wraping">
@@ -177,23 +177,97 @@ export function initTimeline() {
       }
     });
 
-    // Animation au scroll
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -100px 0px'
-    };
+    // Animation au scroll - Fonction pour initialiser l'observer
+    function initScrollAnimations() {
+      const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -80px 0px'
+      };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animated');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Ajouter la classe animated pour déclencher l'animation
+            entry.target.classList.add('animated');
+            // Ne plus observer cet élément une fois animé
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      // Observer tous les panels de timeline
+      const panels = document.querySelectorAll('.timeline-panel.anim');
+      if (panels.length === 0) {
+        console.warn('Aucun panel de timeline trouvé pour les animations');
+        return;
+      }
+
+      panels.forEach((panel, index) => {
+        // Observer chaque panel
+        observer.observe(panel);
+        
+        // Vérifier si le panel est déjà visible au chargement
+        const rect = panel.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        if (isVisible) {
+          // Petit délai pour un effet séquentiel
+          setTimeout(() => {
+            panel.classList.add('animated');
+            observer.unobserve(panel);
+          }, index * 100);
         }
       });
-    }, observerOptions);
+    }
 
-    document.querySelectorAll('.timeline-panel.anim').forEach(panel => {
-      observer.observe(panel);
-    });
+    // Initialiser les animations après un court délai pour s'assurer que le DOM est prêt
+    setTimeout(() => {
+      initScrollAnimations();
+      
+      // Fallback : si après 1 seconde les animations ne se sont pas déclenchées, forcer l'animation des éléments visibles
+      setTimeout(() => {
+        const panels = document.querySelectorAll('.timeline-panel.anim:not(.animated)');
+        panels.forEach((panel, index) => {
+          const rect = panel.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight + 200 && rect.bottom > -200;
+          if (isVisible) {
+            setTimeout(() => {
+              panel.classList.add('animated');
+            }, index * 150);
+          }
+        });
+      }, 1000);
+    }, 300);
+
+    // Réinitialiser si la section devient visible (pour les cas de navigation)
+    const experienceSection = document.getElementById('tab-experience');
+    if (experienceSection) {
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Réinitialiser les animations si la section devient visible
+            setTimeout(initScrollAnimations, 100);
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      sectionObserver.observe(experienceSection);
+    }
+
+    // Écouter le scroll pour déclencher les animations manuellement si nécessaire
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        const panels = document.querySelectorAll('.timeline-panel.anim:not(.animated)');
+        panels.forEach(panel => {
+          const rect = panel.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+          if (isVisible) {
+            panel.classList.add('animated');
+          }
+        });
+      }, 100);
+    }, { passive: true });
 
     // Hover effect sur les badges centraux
     document.querySelectorAll('.timeline-panel.credits').forEach(panel => {
