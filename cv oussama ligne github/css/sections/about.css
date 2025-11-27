@@ -5,6 +5,7 @@
     position: relative;
     width: 100%;
     min-height: auto;
+    background: #0078D4; /* Même couleur que la navbar */
   }
   
   /* Section d'introduction */
