@@ -38,7 +38,7 @@ export function initTimeline() {
       }
     ];
 
-    const timelineList = document.getElementById("timelineList");
+    const timeline = document.getElementById("timeline");
     const popup = document.getElementById("experiencePopup");
     const popupTitle = document.getElementById("experiencePopupTitle");
     const popupSubtitle = document.getElementById("experiencePopupSubtitle");
@@ -47,34 +47,85 @@ export function initTimeline() {
     const closePopupBtn = document.getElementById("closeExperiencePopup");
     const popupOverlay = popup?.querySelector(".experience-popup-overlay");
 
-    if (!timelineList) {
+    if (!timeline) {
       return;
     }
 
-    // Générer les items de timeline
+    // Grouper les expériences par année
+    const groupedByYear = {};
     timelineData.forEach((event, index) => {
-      const li = document.createElement("li");
-      li.className = "timeline-item";
-      li.setAttribute("data-index", index);
+      const year = typeof event.year === 'string' ? event.year.split(' ')[0] : event.year;
+      if (!groupedByYear[year]) {
+        groupedByYear[year] = [];
+      }
+      groupedByYear[year].push({ ...event, originalIndex: index });
+    });
 
-      li.innerHTML = `
-        <div class="timeline-item-icon">
-          <i class="fa-solid ${event.icon}"></i>
-        </div>
-        <div class="timeline-item-content">
-          <div class="timeline-item-year">
-            ${event.year}
-            <span class="timeline-item-duration">${event.duree}</span>
-          </div>
-          <div class="timeline-item-company">${event.company}</div>
-          <button type="button" class="timeline-item-btn" data-index="${index}">
-            En savoir plus
-            <i class="fa-solid fa-arrow-right"></i>
-          </button>
+    // Trier les années par ordre décroissant
+    const sortedYears = Object.keys(groupedByYear).sort((a, b) => parseInt(b) - parseInt(a));
+
+    // Générer la timeline
+    sortedYears.forEach((year, yearIndex) => {
+      const events = groupedByYear[year];
+
+      // Badge d'année
+      const yearBadge = document.createElement("div");
+      yearBadge.className = "row timeline-movement timeline-movement-top";
+      yearBadge.innerHTML = `
+        <div class="timeline-badge timeline-future-movement">
+          <p>${year}</p>
         </div>
       `;
+      timeline.appendChild(yearBadge);
 
-      timelineList.appendChild(li);
+      // Générer les événements de cette année
+      events.forEach((event, eventIndex) => {
+        const isLeft = (yearIndex + eventIndex) % 2 === 0;
+        const panelClass = isLeft ? "credits" : "debits";
+        const animationClass = isLeft ? "fadeInLeft" : "fadeInRight";
+        const colClass = isLeft ? "col-sm-6" : "offset-sm-6 col-sm-6";
+        const colInnerClass = isLeft ? "col-sm-11" : "offset-sm-1 col-sm-11";
+
+        const movement = document.createElement("div");
+        movement.className = "row timeline-movement";
+        movement.innerHTML = `
+          <div class="timeline-badge ${isLeft ? 'center-left' : 'center-right'}"></div>
+          <div class="${colClass} timeline-item">
+            <div class="row">
+              <div class="${colInnerClass}">
+                <div class="timeline-panel ${panelClass} anim animate ${animationClass}" data-index="${event.originalIndex}">
+                  <ul class="timeline-panel-ul">
+                    <div class="lefting-wrap">
+                      <li class="img-wraping">
+                        <i class="fa-solid ${event.icon}"></i>
+                      </li>
+                    </div>
+                    <div class="righting-wrap">
+                      <li><a href="#" class="importo">${event.company}</a></li>
+                      <li><span class="causale" style="color:#000; font-weight: 600;">${event.company.split(' ')[0]} ${event.company.split(' ')[1] || ''}</span></li>
+                      <li><span class="causale">${event.description.substring(0, 100)}${event.description.length > 100 ? '...' : ''}</span></li>
+                      <li>
+                        <p class="timeline-date">
+                          <i class="fa-solid fa-calendar"></i>
+                          <small>${event.duree}</small>
+                        </p>
+                      </li>
+                      <li>
+                        <button type="button" class="timeline-btn-more" data-index="${event.originalIndex}">
+                          En savoir plus
+                          <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                      </li>
+                    </div>
+                    <div class="clear"></div>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        timeline.appendChild(movement);
+      });
     });
 
     // Fonction pour ouvrir la popup
@@ -102,8 +153,8 @@ export function initTimeline() {
     }
 
     // Event listeners pour les boutons "En savoir plus"
-    timelineList.addEventListener("click", (e) => {
-      const btn = e.target.closest(".timeline-item-btn");
+    timeline.addEventListener("click", (e) => {
+      const btn = e.target.closest(".timeline-btn-more");
       if (btn) {
         const index = parseInt(btn.getAttribute("data-index"));
         openPopup(index);
@@ -124,5 +175,46 @@ export function initTimeline() {
       if (e.key === "Escape" && popup?.getAttribute("aria-hidden") === "false") {
         closePopup();
       }
+    });
+
+    // Animation au scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.timeline-panel.anim').forEach(panel => {
+      observer.observe(panel);
+    });
+
+    // Hover effect sur les badges centraux
+    document.querySelectorAll('.timeline-panel.credits').forEach(panel => {
+      panel.addEventListener('mouseenter', () => {
+        const badge = panel.closest('.timeline-movement')?.querySelector('.center-left');
+        if (badge) badge.style.backgroundColor = '#0078D4';
+      });
+      panel.addEventListener('mouseleave', () => {
+        const badge = panel.closest('.timeline-movement')?.querySelector('.center-left');
+        if (badge) badge.style.backgroundColor = '#FFFFFF';
+      });
+    });
+
+    document.querySelectorAll('.timeline-panel.debits').forEach(panel => {
+      panel.addEventListener('mouseenter', () => {
+        const badge = panel.closest('.timeline-movement')?.querySelector('.center-right');
+        if (badge) badge.style.backgroundColor = '#0078D4';
+      });
+      panel.addEventListener('mouseleave', () => {
+        const badge = panel.closest('.timeline-movement')?.querySelector('.center-right');
+        if (badge) badge.style.backgroundColor = '#FFFFFF';
+      });
     });
   }

@@ -1,4 +1,4 @@
-/* ===================== SECTION EXPÉRIENCE - TIMELINE VERTICALE COMPLÈTE ===================== */
+/* ===================== SECTION EXPÉRIENCE - TIMELINE ALTERNÉE ===================== */
 
 .experience-section {
   position: relative;
@@ -66,150 +66,243 @@
   }
 }
 
-/* Conteneur de la timeline verticale */
-.timeline-list {
-  position: relative;
-  padding-left: 80px; /* Espace pour la ligne verticale */
+/* Conteneur principal de la timeline */
+#timeline {
   list-style: none;
+  position: relative;
+  margin: 50px auto;
+  width: 100%;
+  padding: 0;
 }
 
-/* Ligne verticale de la timeline */
-.timeline-list::before {
-  content: '';
+/* Ligne verticale centrale */
+#timeline:before {
+  content: " ";
   position: absolute;
-  left: 24px;
   top: 0;
   bottom: 0;
   width: 3px;
   background: linear-gradient(to bottom, #0078D4, rgba(0, 120, 212, 0.3));
-  border-radius: 2px;
+  left: 50%;
+  margin-left: -1.5px;
+  z-index: 1;
+}
+
+/* Badge d'année (grand cercle en haut) */
+.timeline-badge.timeline-future-movement {
+  background-color: #FFFFFF;
+  height: 100px;
+  width: 100px;
+  font-size: 1.5rem;
+  top: -20px;
+  margin-left: -50px;
+  border: 3px solid #0078D4;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 120, 212, 0.2);
+}
+
+.timeline-badge.timeline-future-movement p {
+  color: #0078D4;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 700;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* Badge central (petit cercle sur la ligne) */
+.timeline-badge.center-left,
+.timeline-badge.center-right {
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  font-size: 1.2em;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -10px;
+  background-color: #FFFFFF;
+  z-index: 6;
+  border-radius: 50%;
+  border: 3px solid #0078D4;
+  transition: all 0.3s ease;
+}
+
+.timeline-badge.center-left:hover,
+.timeline-badge.center-right:hover {
+  background-color: #0078D4;
+  transform: scale(1.2);
+}
+
+/* Mouvement de timeline */
+.timeline-movement {
+  position: relative;
+  margin-bottom: 6rem;
+  clear: both;
+}
+
+.timeline-movement.timeline-movement-top {
+  height: 60px;
+  margin-bottom: 3rem;
 }
 
 /* Item de timeline */
 .timeline-item {
   position: relative;
-  margin-bottom: 3rem;
+  padding: 0;
+}
+
+/* Panel de timeline */
+.timeline-panel {
+  border: 1px solid rgba(0, 120, 212, 0.15);
+  border-radius: 8px;
+  background-color: #FFFFFF;
+  color: #323130;
+  padding: 1.5rem;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0;
-  animation: fadeInUp 0.6s ease forwards;
 }
 
-.timeline-item:nth-child(1) { animation-delay: 0.1s; }
-.timeline-item:nth-child(2) { animation-delay: 0.2s; }
-.timeline-item:nth-child(3) { animation-delay: 0.3s; }
-.timeline-item:nth-child(4) { animation-delay: 0.4s; }
-.timeline-item:nth-child(5) { animation-delay: 0.5s; }
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.timeline-panel.animated {
+  opacity: 1;
 }
 
-/* Point d'ancrage sur la ligne (cercle) */
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  left: -68px;
-  top: 0;
-  width: 16px;
-  height: 16px;
-  background: #0078D4;
-  border: 4px solid #F3F2F1;
-  border-radius: 50%;
-  box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.2);
-  z-index: 2;
-  transition: all 0.3s ease;
+.timeline-panel:hover {
+  box-shadow: 0 4px 16px rgba(0, 120, 212, 0.15);
+  transform: translateY(-2px);
+  border-color: rgba(0, 120, 212, 0.3);
 }
 
-.timeline-item:hover::before {
-  transform: scale(1.2);
-  box-shadow: 0 0 0 6px rgba(0, 120, 212, 0.15);
+.timeline-panel-ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
 }
 
-/* Icône de l'événement */
-.timeline-item-icon {
-  position: absolute;
-  left: -56px;
-  top: -2px;
-  width: 48px;
-  height: 48px;
-  background: #0078D4;
+/* Panel à gauche (credits) */
+.timeline-panel.credits .timeline-panel-ul {
+  flex-direction: row-reverse;
+}
+
+.timeline-panel.credits .lefting-wrap {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #0078D4, #005A9E);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.25rem;
-  color: white;
   box-shadow: 0 4px 12px rgba(0, 120, 212, 0.25);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 3;
 }
 
-.timeline-item:hover .timeline-item-icon {
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(0, 120, 212, 0.4);
+.timeline-panel.credits .lefting-wrap i {
+  font-size: 2rem;
+  color: #FFFFFF;
 }
 
-/* Contenu de l'expérience */
-.timeline-item-content {
-  background: #FFFFFF;
-  padding: 2rem 2.5rem;
-  border-left: 4px solid #0078D4;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
+.timeline-panel.credits .righting-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: right;
 }
 
-.timeline-item-content:hover {
-  background: #FAFAFA;
-  border-left-color: #005A9E;
-  transform: translateX(4px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+/* Panel à droite (debits) */
+.timeline-panel.debits .timeline-panel-ul {
+  flex-direction: row;
 }
 
-/* Année */
-.timeline-item-year {
-  font-family: 'Segoe UI', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 0.25rem;
-  color: #201F1E;
-  letter-spacing: -0.02em;
+.timeline-panel.debits .lefting-wrap {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #0078D4, #005A9E);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 120, 212, 0.25);
 }
 
-.timeline-item-duration {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 400;
-  color: #8A8886;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+.timeline-panel.debits .lefting-wrap i {
+  font-size: 2rem;
+  color: #FFFFFF;
 }
 
-/* Nom du poste */
-.timeline-item-company {
-  font-family: 'Segoe UI', sans-serif;
+.timeline-panel.debits .righting-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+/* Styles du contenu */
+.importo {
+  color: #0078D4;
   font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: 1rem;
-  color: #0078D4;
-  letter-spacing: -0.01em;
-  line-height: 1.4;
+  font-family: 'Segoe UI', sans-serif;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 0.25rem;
+  transition: color 0.2s ease;
+}
+
+.importo:hover {
+  color: #005A9E;
+}
+
+.causale {
+  color: #323130;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  display: block;
+}
+
+.causale[style*="font-weight: 600"] {
+  color: #201F1E;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.timeline-date {
+  color: #8A8886;
+  font-size: 0.875rem;
+  font-family: 'Segoe UI', sans-serif;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.timeline-date i {
+  font-size: 0.75rem;
 }
 
 /* Bouton "En savoir plus" */
-.timeline-item-btn {
+.timeline-btn-more {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
+  padding: 0.625rem 1.25rem;
   font-family: 'Segoe UI', sans-serif;
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #0078D4;
   background: rgba(0, 120, 212, 0.08);
@@ -218,10 +311,10 @@
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
 }
 
-.timeline-item-btn:hover {
+.timeline-btn-more:hover {
   background: #0078D4;
   color: #FFFFFF;
   border-color: #0078D4;
@@ -229,17 +322,44 @@
   box-shadow: 0 4px 12px rgba(0, 120, 212, 0.3);
 }
 
-.timeline-item-btn:active {
-  transform: translateY(0);
-}
-
-.timeline-item-btn i {
-  font-size: 0.875rem;
+.timeline-btn-more i {
+  font-size: 0.75rem;
   transition: transform 0.2s ease;
 }
 
-.timeline-item-btn:hover i {
+.timeline-btn-more:hover i {
   transform: translateX(4px);
+}
+
+.clear {
+  clear: both;
+}
+
+/* Layout Bootstrap-like mais sans Bootstrap */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.col-sm-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding: 0 15px;
+}
+
+.offset-sm-6 {
+  margin-left: 50%;
+}
+
+.col-sm-11 {
+  flex: 0 0 91.666667%;
+  max-width: 91.666667%;
+  padding: 0 15px;
+}
+
+.offset-sm-1 {
+  margin-left: 8.333333%;
 }
 
 /* Popup pour les détails complets */
@@ -384,13 +504,39 @@
   line-height: 1.6;
 }
 
-/* Suppression des styles era */
-.timeline-container.era-early-web,
-.timeline-container.era-dot-com,
-.timeline-container.era-social-media,
-.timeline-container.era-mobile {
-  background: transparent;
-  border: none;
+/* Animations */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fadeInLeft {
+  animation-name: fadeInLeft;
+  animation-duration: 0.6s;
+  animation-fill-mode: both;
+}
+
+.fadeInRight {
+  animation-name: fadeInRight;
+  animation-duration: 0.6s;
+  animation-fill-mode: both;
 }
 
 /* Responsive */
@@ -399,48 +545,55 @@
     padding: 3rem 1rem;
   }
 
-  .timeline-header {
-    margin-bottom: 3rem;
+  #timeline:before {
+    left: 30px;
+    margin-left: 0;
   }
 
-  .timeline-title {
-    font-size: 1.75rem;
+  .timeline-badge.timeline-future-movement {
+    left: 30px;
+    margin-left: -50px;
+    height: 80px;
+    width: 80px;
+    font-size: 1.2rem;
   }
 
-  .timeline-list {
+  .timeline-badge.timeline-future-movement p {
+    font-size: 1.2rem;
+  }
+
+  .timeline-badge.center-left,
+  .timeline-badge.center-right {
+    left: 30px;
+    margin-left: -10px;
+  }
+
+  .col-sm-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
     padding-left: 60px;
   }
 
-  .timeline-list::before {
-    left: 18px;
-    width: 2px;
+  .offset-sm-6 {
+    margin-left: 0;
   }
 
-  .timeline-item::before {
-    left: -50px;
-    width: 12px;
-    height: 12px;
-    border-width: 3px;
+  .col-sm-11 {
+    flex: 0 0 100%;
+    max-width: 100%;
   }
 
-  .timeline-item-icon {
-    left: -44px;
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
+  .offset-sm-1 {
+    margin-left: 0;
   }
 
-  .timeline-item-content {
-    padding: 1.5rem 1.5rem;
-    border-left-width: 3px;
+  .timeline-panel-ul {
+    flex-direction: column !important;
   }
 
-  .timeline-item-year {
-    font-size: 1.25rem;
-  }
-
-  .timeline-item-company {
-    font-size: 1.125rem;
+  .timeline-panel.credits .righting-wrap,
+  .timeline-panel.debits .righting-wrap {
+    text-align: left !important;
   }
 
   .experience-popup-content {
