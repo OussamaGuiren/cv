@@ -32,11 +32,18 @@
     left: 0;
     right: 0;
     height: 72px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); */
     background: #0078D4; /* Microsoft Blue Theme for ALL devices */
     z-index: 1100;
     pointer-events: auto;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    /* border-bottom: 1px solid rgba(255, 255, 255, 0.2); */
+  }
+
+  .test{
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
   }
   
   /* Cacher la navbar normale sur mobile */

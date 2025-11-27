@@ -122,8 +122,10 @@ export function initNavigation() {
       const heroOffsetBottom = hero.offsetTop + hero.offsetHeight - tabContainerHeight;
       if (window.scrollY > heroOffsetBottom) {
         tabContainer.classList.add('et-hero-tabs-container--top');
+        tabContainer.classList.add('test');
       } else {
         tabContainer.classList.remove('et-hero-tabs-container--top');
+        tabContainer.classList.remove('test');
       }
     }
   
