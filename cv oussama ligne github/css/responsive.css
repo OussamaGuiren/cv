@@ -384,9 +384,9 @@
       font-weight: 600;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      color: #ffffff;
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
-      border: 2px solid rgba(0, 120, 212, 0.5);
+      color: #106EBE;
+      background: #ffffff;
+      border: #ffffff solid 2px;
       border-radius: 5px;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);

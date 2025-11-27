@@ -246,37 +246,34 @@
 
       <!-- Expérience -->
       <section class="experience-section" id="tab-experience">
-        <div class="timeline-container era-early-web" id="timelineContainer">
+        <div class="timeline-container" id="timelineContainer">
           <div class="timeline-header">
             <h1 class="timeline-title">Mon Parcours</h1>
             <p class="timeline-subtitle">Une évolution à travers mes expériences professionnelles</p>
           </div>
-          <div class="timeline-content" id="timelineContent">
-            <div class="event-icon" id="eventIcon"><i class="fa-solid fa-code"></i></div>
-            <div class="event-year" id="eventYear">
-              <span style="display:block; line-height:1;">2018</span>
-              <span class="event-duration" style="display:block; font-size:0.4em; opacity:0.7; margin-top:8px; font-weight:400; letter-spacing:1px; text-transform:uppercase;">
-                Novembre 2018 - Février 2019
-              </span>
-            </div>
-            <div class="event-company" id="eventCompany">DEVELOPPEUR WEB STAGIAIRE</div>
-            <div class="event-description" id="eventDescription">
-              <p style="margin-bottom:15px;">Mes premières expériences dans le développement, découverte des technologies web et des bases du développement logiciel.</p>
-              <div class="event-techs" style="font-size:0.9em; color:rgba(255,255,255,0.9); border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
-                <strong style="color:var(--accent-2); text-transform:uppercase; font-size:0.8em; letter-spacing:1px;">Stack technique :</strong><br>
-                PHP, HTML5, CSS3, CodeIgniter, VS Code, PhpMyAdmin
-              </div>
-            </div>
-          </div>
-          <div class="slider-container">
-            <div class="slider-track" id="sliderTrack">
-              <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <input type="range" min="0" max="3" value="0" class="timeline-slider" id="timelineSlider" step="1" aria-label="Timeline slider" />
-            <div class="year-labels" id="yearLabels"></div>
-          </div>
+          <ul id="timeline">
+            <!-- Les expériences seront générées par JavaScript -->
+          </ul>
         </div>
       </section>
+
+      <!-- Popup pour les détails d'expérience -->
+      <div class="experience-popup" id="experiencePopup" aria-hidden="true" role="dialog" aria-labelledby="experiencePopupTitle" aria-modal="true">
+        <div class="experience-popup-overlay"></div>
+        <div class="experience-popup-content">
+          <button class="experience-popup-close" id="closeExperiencePopup" aria-label="Fermer la popup">
+            <i class="fa-solid fa-times"></i>
+          </button>
+          <div class="experience-popup-inner">
+            <h2 class="experience-popup-title" id="experiencePopupTitle"></h2>
+            <p class="experience-popup-subtitle" id="experiencePopupSubtitle"></p>
+            <div class="experience-popup-content-wrapper">
+              <p class="experience-popup-description" id="experiencePopupDescription"></p>
+              <div class="experience-popup-techs" id="experiencePopupTechs"></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- Projets web -->
       <section class="et-slide" id="tab-projects">
