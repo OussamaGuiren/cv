@@ -130,7 +130,7 @@ export function initTimeline() {
             
             eventYear.innerHTML = `
               <span style="display:block; line-height:1;">${event.year}</span>
-              <span class="event-duration" style="display:block; font-size:0.4em; opacity:0.7; margin-top:8px; font-weight:400; letter-spacing:1px; text-transform:uppercase;">
+              <span class="event-duration" style="display:block; font-size:0.875rem; font-weight:400; color:#8A8886; margin-top:0.5rem; text-transform:uppercase; letter-spacing:0.05em;">
                 ${event.duree}
               </span>
             `;
@@ -138,9 +138,9 @@ export function initTimeline() {
             eventCompany.textContent = event.company;
             
             eventDescription.innerHTML = `
-              <p style="margin-bottom:15px;">${event.description}</p>
-              <div class="event-techs" style="font-size:0.9em; color:rgba(255,255,255,0.9); border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
-                <strong style="color:var(--accent-2); text-transform:uppercase; font-size:0.8em; letter-spacing:1px;">Stack technique :</strong><br>
+              <p>${event.description}</p>
+              <div class="event-techs">
+                <strong>Stack technique :</strong><br>
                 ${event.techs}
               </div>
             `;
@@ -210,15 +210,15 @@ export function initTimeline() {
     eventIcon.innerHTML = `<i class="fa-solid ${initialEvent.icon}"></i>`;
     eventYear.innerHTML = `
       <span style="display:block; line-height:1;">${initialEvent.year}</span>
-      <span class="event-duration" style="display:block; font-size:0.4em; opacity:0.7; margin-top:8px; font-weight:400; letter-spacing:1px; text-transform:uppercase;">
+      <span class="event-duration" style="display:block; font-size:0.875rem; font-weight:400; color:#8A8886; margin-top:0.5rem; text-transform:uppercase; letter-spacing:0.05em;">
         ${initialEvent.duree}
       </span>
     `;
     eventCompany.textContent = initialEvent.company;
     eventDescription.innerHTML = `
-      <p style="margin-bottom:15px;">${initialEvent.description}</p>
-      <div class="event-techs" style="font-size:0.9em; color:rgba(255,255,255,0.9); border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
-        <strong style="color:var(--accent-2); text-transform:uppercase; font-size:0.8em; letter-spacing:1px;">Stack technique :</strong><br>
+      <p>${initialEvent.description}</p>
+      <div class="event-techs">
+        <strong>Stack technique :</strong><br>
         ${initialEvent.techs}
       </div>
     `;

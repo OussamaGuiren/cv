@@ -1,344 +1,443 @@
-/* ===================== SECTION EXPÉRIENCE - TIMELINE SLIDER ===================== */
+/* ===================== SECTION EXPÉRIENCE - TIMELINE VERTICALE MODERNE ===================== */
 
 .experience-section {
-    position: relative;
-    width: 100%;
-    min-height: auto;
-    background: var(--splash-bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    color: var(--splash-text); /* Texte sombre du thème clair */
-  }
-  
-  .timeline-container {
-    background: #FFFFFF; /* Fond blanc pour le thème clair */
-    border-radius: 20px;
-    padding: 4rem 3rem;
-    max-width: 1400px;
-    width: 100%;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), /* Ombres plus douces */
-      0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    text-align: center;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(0, 120, 212, 0.1); /* Bordure subtilement bleue */
-    backdrop-filter: none;
-  }
-  
-  /*.timeline-header {
-    margin-bottom: 3rem;
-  }*/
-  
-  .timeline-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+  position: relative;
+  width: 100%;
+  min-height: auto;
+  background: var(--splash-bg); /* #F3F2F1 */
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 4rem 2rem;
+  color: var(--splash-text);
+}
+
+.timeline-container {
+  background: transparent; /* Pas de fond, pas de card */
+  border-radius: 0;
+  padding: 0;
+  max-width: 1200px;
+  width: 100%;
+  box-shadow: none; /* Pas d'ombre */
+  border: none; /* Pas de bordure */
+  text-align: left; /* Alignement à gauche pour timeline */
+  position: relative;
+}
+
+/* Header de la section */
+.timeline-header {
+  margin-bottom: 4rem;
+  padding-left: 0;
+}
+
+.timeline-title {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  animation: fadeInUptTitle 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  color: #0078D4;
+  letter-spacing: -0.02em;
+}
+
+.timeline-subtitle {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  opacity: 0;
+  animation: fadeInUptTitle 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+  color: #605E5C;
+  letter-spacing: 0;
+}
+
+@keyframes fadeInUptTitle {
+  from {
     opacity: 0;
-    animation: fadeInUptTitle 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    color: #0078D4; /* Titre en bleu Microsoft */
-    letter-spacing: -0.025em;
+    transform: translateY(30px);
   }
-  
-  .timeline-subtitle {
-    font-size: 1.125rem;
-    font-weight: 400;
-    opacity: 0;
-    animation: fadeInUptTitle 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
-    color: #605E5C; /* Gris foncé pour sous-titre */
-    letter-spacing: 0.025em;
-  }
-  
-  @keyframes fadeInUptTitle {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    60% {
-      opacity: 1;
-      transform: translateY(-5px);
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-  
-  .timeline-content {
-    margin-bottom: 4rem;
-    min-height: 550px; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+  60% {
     opacity: 1;
+    transform: translateY(-5px);
+  }
+  to {
     transform: translateY(0);
-  }
-  
-  .event-icon {
-    width: 72px;
-    height: 72px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    color: white;
-    box-shadow: 0 10px 25px rgba(0, 120, 212, 0.3);
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-  }
-  
-  .event-year {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-    color: #201F1E; /* Année en noir */
-    letter-spacing: -0.05em;
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-  }
-  
-  .event-company {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1.25rem;
-    color: #0078D4; /* Entreprise en bleu */
-    letter-spacing: -0.025em;
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-  }
-  
-  .event-description {
-    font-size: 1.125rem;
-    font-weight: 400;
-    max-width: 950px;
-    line-height: 1.7;
-    color: #323130; /* Description en gris foncé */
-    letter-spacing: 0.015em;
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-  }
-  
-  /* Techs dans description - needs specificity */
-  .event-techs {
-    color: #605E5C !important;
-    border-top: 1px solid rgba(0, 120, 212, 0.2) !important;
-  }
-  
-  .event-techs strong {
-    color: #0078D4 !important;
-  }
-  
-  .slider-container {
-    position: relative;
-    margin: 3rem 0 0 0;
-    padding: 0 1rem;
-  }
-  
-  .slider-track {
-    position: relative;
-    height: 6px;
-    background: rgba(0, 0, 0, 0.1); /* Piste grise claire */
-    border-radius: 8px;
-    margin-bottom: 2rem;
-    user-select: none;
-  }
-  
-  .progress-fill {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 6px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
-    border-radius: 8px;
-    width: 0%;
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .tick {
-    position: absolute;
-    top: -4px;
-    width: 2px;
-    height: 14px;
-    background: rgba(0, 0, 0, 0.2); /* Ticks gris */
-    border-radius: 1px;
-    transform: translateX(-1px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .tick.active {
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    height: 18px;
-    top: -6px;
-    width: 3px;
-    box-shadow: 0 0 8px rgba(0, 120, 212, 0.4);
-  }
-  
-  .year-labels {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 1rem;
-    font-size: 0.875rem;
-    color: #8A8886; /* Labels gris moyen */
-    font-weight: 500;
-    user-select: none;
-    letter-spacing: 0.025em;
-    position: relative;
-  }
-  
-  .year-label {
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: absolute;
-    transform: translateX(-50%);
-    white-space: nowrap;
-  }
-  
-  .year-label.active {
-    color: var(--accent); /* Label actif en bleu */
-    font-weight: 700;
-    transform: translateX(-50%) scale(1.1);
-    text-shadow: none;
-  }
-  
-  .timeline-slider {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 40px; /* Larger touch target */
-    background: transparent;
-    outline: none;
-    position: absolute;
-    top: -13px; /* Center vertically over the track (track top:0, height:6px) */
-    left: 0;
-    margin: 0;
-    cursor: pointer;
-    z-index: 10;
-    touch-action: none; /* Prevent scrolling while dragging */
-  }
-  
-  .timeline-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 28px; /* Larger thumb */
-    height: 28px;
-    border-radius: 50%;
-    background: white;
-    border: 3px solid var(--accent);
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 120, 212, 0.4);
-    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.1s ease; /* Faster transition */
-    margin-top: -11px; /* Center relative to track (if track were standardized) - adjusted for appearance */
-    position: relative;
-    z-index: 2;
-  }
-  
-  .timeline-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.15);
-    box-shadow: 0 6px 20px rgba(0, 120, 212, 0.5),
-      0 0 0 8px rgba(0, 120, 212, 0.1);
-  }
-  
-  .timeline-slider::-moz-range-thumb {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: white;
-    border: 3px solid var(--accent);
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 120, 212, 0.4);
-    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.1s ease;
-    position: relative;
-    z-index: 2;
-  }
-  
-  .timeline-slider::-moz-range-thumb:hover {
-    transform: scale(1.15);
-    box-shadow: 0 6px 20px rgba(0, 120, 212, 0.5),
-      0 0 0 8px rgba(0, 120, 212, 0.1);
-  }
-  
-  /* Era Styles - Subtils backgrounds pour thème clair */
-  .timeline-container.era-early-web {
-    border-color: rgba(0, 120, 212, 0.2);
-    background: linear-gradient(to bottom right, #ffffff, #f0f8ff);
-  }
-  
-  .timeline-container.era-dot-com {
-    border-color: rgba(102, 177, 241, 0.2);
-    background: linear-gradient(to bottom right, #ffffff, #e6f4ff);
-  }
-  
-  .timeline-container.era-social-media {
-    border-color: rgba(0, 78, 140, 0.2);
-    background: linear-gradient(to bottom right, #ffffff, #eaf6ff);
-  }
-  
-  .timeline-container.era-mobile {
-    border-color: rgba(43, 136, 216, 0.2);
-    background: linear-gradient(to bottom right, #ffffff, #f0faff);
-  }
-  
-  /* Animations */
-  .fade-transition {
     opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
   }
-  
-  .fade-out {
+}
+
+/* Conteneur principal avec timeline verticale */
+.timeline-content {
+  position: relative;
+  padding-left: 80px; /* Espace pour la ligne verticale */
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Ligne verticale de la timeline */
+.timeline-content::before {
+  content: '';
+  position: absolute;
+  left: 24px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, #0078D4, rgba(0, 120, 212, 0.3));
+  border-radius: 2px;
+}
+
+/* Point d'ancrage sur la ligne (cercle) */
+.timeline-content::after {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background: #0078D4;
+  border: 4px solid #F3F2F1;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.2);
+  z-index: 2;
+}
+
+/* Icône de l'événement - repositionnée à gauche */
+.event-icon {
+  position: absolute;
+  left: -56px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  background: #0078D4;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 120, 212, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 3;
+}
+
+.event-icon:hover {
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 120, 212, 0.4);
+}
+
+/* Contenu de l'expérience - bloc plein largeur sans card */
+.event-content-wrapper {
+  background: #FFFFFF;
+  padding: 2.5rem 3rem;
+  border-left: 4px solid #0078D4;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.event-content-wrapper:hover {
+  background: #FAFAFA;
+  border-left-color: #005A9E;
+  transform: translateX(4px);
+}
+
+/* Année */
+.event-year {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: clamp(2rem, 3vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #201F1E;
+  letter-spacing: -0.03em;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.event-duration {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #8A8886;
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Entreprise */
+.event-company {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #0078D4;
+  letter-spacing: -0.01em;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+/* Description */
+.event-description {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.75;
+  color: #323130;
+  letter-spacing: 0;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.event-description p {
+  margin-bottom: 1.25rem;
+}
+
+/* Technologies */
+.event-techs {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0, 120, 212, 0.15);
+  font-size: 0.9375rem;
+  color: #605E5C;
+  line-height: 1.6;
+}
+
+.event-techs strong {
+  display: block;
+  color: #0078D4;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8125rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+/* Slider horizontal en bas */
+.slider-container {
+  position: relative;
+  margin-top: 4rem;
+  padding: 0 1rem;
+}
+
+.slider-track {
+  position: relative;
+  height: 4px;
+  background: rgba(0, 120, 212, 0.12);
+  border-radius: 2px;
+  margin-bottom: 1.5rem;
+  user-select: none;
+}
+
+.progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: #0078D4;
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tick {
+  position: absolute;
+  top: -6px;
+  width: 2px;
+  height: 16px;
+  background: rgba(0, 120, 212, 0.3);
+  border-radius: 1px;
+  transform: translateX(-1px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tick.active {
+  background: #0078D4;
+  height: 20px;
+  top: -8px;
+  width: 3px;
+  box-shadow: 0 2px 8px rgba(0, 120, 212, 0.4);
+}
+
+.year-labels {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  font-size: 0.875rem;
+  color: #8A8886;
+  font-weight: 500;
+  user-select: none;
+  letter-spacing: 0;
+  position: relative;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.year-label {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: absolute;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.year-label.active {
+  color: #0078D4;
+  font-weight: 700;
+  transform: translateX(-50%) scale(1.1);
+}
+
+.timeline-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 40px;
+  background: transparent;
+  outline: none;
+  position: absolute;
+  top: -14px;
+  left: 0;
+  margin: 0;
+  cursor: pointer;
+  z-index: 10;
+  touch-action: none;
+}
+
+.timeline-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #0078D4;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 120, 212, 0.3);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+}
+
+.timeline-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 16px rgba(0, 120, 212, 0.4),
+    0 0 0 6px rgba(0, 120, 212, 0.1);
+}
+
+.timeline-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #0078D4;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 120, 212, 0.3);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+}
+
+.timeline-slider::-moz-range-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 16px rgba(0, 120, 212, 0.4),
+    0 0 0 6px rgba(0, 120, 212, 0.1);
+}
+
+/* Suppression des styles era (gradients de fond) */
+.timeline-container.era-early-web,
+.timeline-container.era-dot-com,
+.timeline-container.era-social-media,
+.timeline-container.era-mobile {
+  background: transparent;
+  border: none;
+}
+
+/* Animations */
+.fade-transition {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.fade-out {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.fade-in {
+  animation: fadeInContent 0.4s ease-out forwards;
+}
+
+@keyframes fadeInContent {
+  from {
     opacity: 0;
     transform: translateY(10px);
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
   }
-  
-  .fade-in {
-    animation: fadeInContent 0.4s ease-out forwards;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  @keyframes fadeInContent {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .experience-section {
+    padding: 3rem 1rem;
   }
-  
-  @media (max-width: 768px) {
-    .timeline-container {
-      padding: 2rem 1.5rem;
-    }
-  
-    .timeline-title {
-      font-size: 1.75rem;
-    }
-  
-    .event-year {
-      font-size: 2.5rem;
-    }
-  
-    .event-company {
-      font-size: 1.25rem;
-    }
-  
-    .event-description {
-      font-size: 1rem;
-    }
-  
-    .slider-container {
-      margin-top: 2rem;
-      padding: 0; /* Remove padding to maximize width on mobile */
-    }
-    
-    .year-labels {
-      font-size: 0.75rem; /* Smaller font for years on mobile */
-    }
-    
-    .timeline-slider {
-      height: 50px; /* Even larger touch target for mobile */
-      top: -18px;
-    }
+
+  .timeline-header {
+    margin-bottom: 3rem;
   }
-  
+
+  .timeline-title {
+    font-size: 1.75rem;
+  }
+
+  .timeline-content {
+    padding-left: 60px;
+    min-height: 400px;
+  }
+
+  .timeline-content::before {
+    left: 18px;
+    width: 2px;
+  }
+
+  .timeline-content::after {
+    left: 13px;
+    width: 12px;
+    height: 12px;
+    border-width: 3px;
+  }
+
+  .event-icon {
+    left: -48px;
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .event-content-wrapper {
+    padding: 2rem 1.5rem;
+    border-left-width: 3px;
+  }
+
+  .event-year {
+    font-size: 1.75rem;
+  }
+
+  .event-company {
+    font-size: 1.25rem;
+  }
+
+  .event-description {
+    font-size: 1rem;
+  }
+
+  .slider-container {
+    margin-top: 3rem;
+    padding: 0;
+  }
+
+  .year-labels {
+    font-size: 0.75rem;
+  }
+
+  .timeline-slider {
+    height: 50px;
+    top: -18px;
+  }
+}
