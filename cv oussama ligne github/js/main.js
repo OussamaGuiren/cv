@@ -8,7 +8,7 @@ import { initForm } from './modules/contact-form.js';
 
 /**
  * Animation de révélation progressive de la photo dans la section "Qui suis-je"
- * Effet de "couvercle qui se soulève" au scroll
+ * La photo glisse depuis la droite vers sa position au scroll
  */
 function initAboutPhotoReveal() {
   // Vérifier que GSAP et ScrollTrigger sont disponibles
@@ -27,26 +27,25 @@ function initAboutPhotoReveal() {
     return;
   }
 
-  // Animation de révélation progressive
-  // La photo monte progressivement au scroll comme si un couvercle se soulevait
-  // Utilise à la fois le déplacement vertical et le clip-path pour un effet naturel
+  // Animation de glissement depuis la droite
+  // La photo commence hors de la div (à droite) et glisse doucement vers sa position
   gsap.fromTo(photo, 
     {
-      y: '80%', // Commence décalée vers le bas (80% de sa hauteur)
-      clipPath: 'inset(100% 0 0 0)', // Commence complètement masquée par le bas
+      x: '100%', // Commence complètement à droite (hors de la div)
+      opacity: 0, // Commence invisible pour un effet plus doux
     },
     {
       scrollTrigger: {
         trigger: '.about-photo-section', // Utilise la section complète comme trigger
         start: 'top 85%', // Démarre quand la section arrive à 85% de la hauteur de fenêtre
-        end: 'top 25%', // Se termine quand la section arrive à 25% de la hauteur de fenêtre
-        scrub: 1.2, // Animation liée au scroll (1.2 = fluide et doux, comme un couvercle qui se soulève)
+        end: 'top 30%', // Se termine quand la section arrive à 30% de la hauteur de fenêtre
+        scrub: 1.5, // Animation liée au scroll (1.5 = fluide et doux)
         markers: false, // Mettre à true pour debug
         invalidateOnRefresh: true, // Recalcule les positions si la page change
       },
-      y: '0%', // Finit à sa position normale
-      clipPath: 'inset(0% 0 0 0)', // Finit complètement visible
-      ease: 'power1.out', // Courbe d'animation douce et naturelle
+      x: '0%', // Finit à sa position normale (centrée dans la div)
+      opacity: 1, // Finit complètement visible
+      ease: 'power2.out', // Courbe d'animation douce et naturelle
     }
   );
 

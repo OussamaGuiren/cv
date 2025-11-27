@@ -422,10 +422,10 @@
   box-shadow: none;
   background: none;
   position: relative;
-  will-change: transform, clip-path; /* Optimisation pour l'animation */
-  /* État initial : photo masquée en bas (sera animée par GSAP au scroll) */
-  transform: translateY(80%);
-  clip-path: inset(100% 0 0 0);
+  will-change: transform, opacity; /* Optimisation pour l'animation */
+  /* État initial : photo décalée vers la droite (sera animée par GSAP au scroll) */
+  transform: translateX(100%);
+  opacity: 0;
 }
 
 @media (max-width: 768px) {
