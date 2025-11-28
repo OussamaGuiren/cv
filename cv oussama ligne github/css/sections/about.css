@@ -366,6 +366,13 @@
   max-width: 100%;
   display: block;
 }
+
+.about-image-container .overlay {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  cursor: default;
+}
   
   .about-text {
     font-size: clamp(1rem, 1.5vw, 1.25rem);
@@ -432,6 +439,7 @@
   border-radius: 0;
   box-shadow: none;
   background: none;
+ 
 }
 
 @media (max-width: 768px) {

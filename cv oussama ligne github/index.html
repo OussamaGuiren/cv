@@ -57,7 +57,8 @@
 
   <!-- Ajout de la photo de profil dans le splash screen -->
   <div class="splash-portrait-container">
-    <img src="assets/moi2.png" alt="Oussama Guiren" width="866" height="864">
+    <img src="assets/moi2.png" alt="Oussama Guiren" width="866" height="864" oncontextmenu="return false;">
+    <div class="overlay-splash"></div>
   </div>
 
   <div class="text">
@@ -161,7 +162,9 @@
             <div class="about-image-container">
               <img src="./assets/2.png"
                    alt="Portrait de Oussama Guiren"
-                   class="about-photo-full">
+                   class="about-photo-full"
+                   oncontextmenu="return false;">
+                   <div class="overlay-about"></div>
             </div>
             <div class="test">
              <button class="about-learn-more-btn" id="aboutLearnMoreBtn">En savoir plus</button>
