@@ -433,6 +433,7 @@
     .about-content-wrapper {
       grid-template-columns: 1fr !important;
       /* gap: clamp(30px, 4vh, 40px) !important; */
+      
     }
 
     /* Centrer l'image et le bouton */
@@ -442,6 +443,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      height: 400px;
     }
 
     /* Réduire l'espacement du bouton */
