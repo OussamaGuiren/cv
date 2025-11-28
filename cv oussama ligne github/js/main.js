@@ -22,6 +22,21 @@ document.addEventListener('DOMContentLoaded', () => {
   initTimeline();
   initModals();
   initForm();
+  // Ensure galleries with 1/2 cards keep consistent column counts even if :has() is not supported
+  function normalizeGalleryColumns() {
+    document.querySelectorAll('.gallery').forEach(gallery => {
+      const projectCards = Array.from(gallery.children).filter(c => c.classList && c.classList.contains('project-card'));
+      const count = projectCards.length;
+      gallery.classList.remove('gallery-one','gallery-two','gallery-three');
+      if (count === 1) gallery.classList.add('gallery-one');
+      else if (count === 2) gallery.classList.add('gallery-two');
+      else gallery.classList.add('gallery-three');
+    });
+  }
+  normalizeGalleryColumns();
+  // Recompute on window load or if gallery content changes
+  window.addEventListener('load', normalizeGalleryColumns);
+  window.addEventListener('pageshow', normalizeGalleryColumns);
   
   // Animations de scroll désactivées pour un thème Microsoft épuré
   // setTimeout(() => {

@@ -87,7 +87,7 @@
   
   .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(3, minmax(320px, 1fr));
     /* Pour éviter qu'une seule carte ne prenne toute la largeur, on limite la largeur max des colonnes quand il y en a peu */
     grid-auto-rows: 1fr;
     gap: 30px;
@@ -97,11 +97,128 @@
     justify-content: center; /* Centre les cartes si elles ne remplissent pas la ligne */
   }
 
+  /* Keep consistent 3-column layout for the main projects gallery on wide
+     screens so the card width remains the same whether there are 1/2/3 cards. */
+  #tab-projects .gallery {
+    grid-template-columns: repeat(3, minmax(320px, 1fr));
+  }
+
+  /* Tablet: 2 columns for both galleries */
+  @media (max-width: 1100px) {
+    .gallery,
+    #tab-projects .gallery {
+      grid-template-columns: repeat(2, minmax(320px, 1fr));
+    }
+    .gallery:has(> :last-child:nth-child(1)) {
+      grid-template-columns: repeat(2, minmax(320px, 1fr));
+    }
+  }
+
   /* Si une seule carte, on limite sa largeur */
-  .gallery:has(> :last-child:nth-child(1)) {
+    .gallery:has(> :last-child:nth-child(1)) {
      grid-template-columns: minmax(320px, 400px);
      justify-content: center;
   }
+
+    /* Apply same grid layout to personal projects to keep cards consistent
+       Ensure a fixed column layout on desktop so cards keep same size whether
+       there is 1, 2 or 3 cards. Placeholder will be placed on the right-most
+       column with explicit grid-column rules below. */
+    #tab-personal-projects .gallery {
+     display: grid;
+     /* Desktop: 3 equal columns */
+     grid-template-columns: repeat(3, minmax(320px, 1fr));
+     grid-auto-rows: 1fr;
+     gap: 30px;
+     max-width: 1400px;
+     margin: 0 auto;
+     padding-bottom: 20px;
+     justify-content: center;
+    }
+
+    /* When the gallery only contains a single card, keep the same 3-column
+       visual but don't expand the single card to fill entire width. */
+    #tab-personal-projects .gallery:has(> :last-child:nth-child(1)) {
+      grid-template-columns: repeat(3, minmax(320px, 1fr));
+      justify-content: center;
+    }
+      /* When the gallery contains exactly 2 cards, use a 2-column layout so
+         the placeholder can sit to the right of the other card without leaving
+         a large empty column. */
+      #tab-personal-projects .gallery:has(> :nth-child(2):last-child) {
+        /* grid-template-columns: repeat(2, minmax(320px, 1fr)); */
+        justify-content: center;
+      }
+
+    /* Force the placeholder (coming soon) into the last column so it stays
+       at the right side even when there is 1 or 2 cards. */
+    #tab-personal-projects .gallery .project-card.is-placeholder {
+      grid-column: 3 / span 1;
+      justify-self: center;
+    }
+      /* For the 2-card case, keep the placeholder in the last column */
+      #tab-personal-projects .gallery:has(> :nth-child(2):last-child) .project-card.is-placeholder {
+        grid-column: 2 / span 1;
+      }
+
+      /* Mirror the same behavior for the main projects gallery */
+      #tab-projects .gallery:has(> :nth-child(2):last-child) {
+        grid-template-columns: repeat(2, minmax(320px, 1fr));
+        justify-content: center;
+      }
+      #tab-projects .gallery:has(> :nth-child(2):last-child) .project-card.is-placeholder {
+        grid-column: 2 / span 1;
+      }
+      /* Fallback classes for browsers that don't support :has() */
+      .gallery.gallery-two {
+        grid-template-columns: repeat(2, minmax(320px, 1fr));
+        justify-content: center;
+      }
+      .gallery.gallery-two .project-card.is-placeholder,
+      #tab-personal-projects .gallery.gallery-two .project-card.is-placeholder,
+      #tab-projects .gallery.gallery-two .project-card.is-placeholder {
+        grid-column: 2 / span 1;
+      }
+      /* Fallback: if only one card, show same 3-column visual centered */
+      .gallery.gallery-one {
+        grid-template-columns: repeat(3, minmax(320px, 1fr));
+        justify-content: center;
+      }
+
+    /* Also for the main projects gallery */
+    #tab-projects .gallery .project-card.is-placeholder {
+      grid-column: 3 / span 1;
+      justify-self: center;
+    }
+
+    /* Tablet: 2 columns, keep card sizes and place placeholder in right column */
+    @media (max-width: 1100px) {
+      #tab-personal-projects .gallery {
+        grid-template-columns: repeat(2, minmax(320px, 1fr));
+      }
+      #tab-personal-projects .gallery .project-card.is-placeholder {
+        grid-column: 2 / span 1;
+      }
+    }
+
+    /* Mobile: revert to the horizontal scroll behavior from responsive.css */
+    @media (max-width: 768px) {
+      #tab-personal-projects .gallery {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        width: 100%;
+        padding: 20px 0;
+        gap: 16px;
+        justify-content: flex-start;
+      }
+      /* keep the placeholder last in the DOM order and let it appear after
+         other cards (no grid positioning needed) */
+      #tab-personal-projects .gallery .project-card.is-placeholder {
+        grid-column: auto;
+        justify-self: auto;
+      }
+    }
   
   /* CARTES PROJETS (Fond blanc, texte sombre) */
   .project-card {
@@ -116,6 +233,13 @@
     height: 100%;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     color: #323130 !important; /* Force le texte gris foncé DANS la carte */
+  }
+
+  /* Force project cards in grid sections to fill grid cells (override base width:90%) */
+  #tab-projects .project-card,
+  #tab-personal-projects .project-card {
+    width: 100% !important;
+    max-width: none !important;
   }
   
   .project-card:hover {
@@ -391,58 +515,61 @@
     background: #106EBE;
   }
 
-  /* --- PLACEHOLDER CARD STYLING --- */
+  /* --- PLACEHOLDER CARD STYLING: unify with project-card --- */
   .project-card.is-placeholder {
+    /* keep original visual (dashed border) but use same sizing as other cards */
     background: #F8F9FA !important;
-    border: 2px dashed rgba(0, 120, 212, 0.3);
+    border: 2px dashed rgba(0, 120, 212, 0.3) !important;
     box-shadow: none !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%; /* fill grid cell */
+    display: flex;
+    flex-direction: column;
   }
 
   .project-card.is-placeholder:hover {
     background: #FFFFFF !important;
     border-color: #0078D4;
-    border-style: solid;
-    /* transform: translateY(-1px) !important; */
-    box-shadow: 0 12px 32px rgba(0, 120, 212, 0.15) !important;
+    border-style: dashed; /* keep dashed but color change on hover */
+    box-shadow: 0 12px 32px rgba(0, 120, 212, 0.12) !important;
+    transform: translateY(-4px);
   }
 
   .project-card.is-placeholder .card-image {
-    background: transparent;
+    background: transparent; /* original visual kept */
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 200px;
-    border-bottom: none;
-    overflow: visible; /* Allow icon animation */
+    height: 220px; /* ensure same height as other cards */
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    overflow: hidden;
   }
 
   .project-card.is-placeholder .card-image::after {
-    content: '\f0ad'; /* Icone Clé à molette/Wrench ou \f017 Clock */
+    content: '\f0ad'; /* wrench or similar */
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
-    font-size: 4rem;
-    color: rgba(0, 120, 212, 0.2);
+    font-size: 3.6rem;
+    color: rgba(0, 120, 212, 0.18);
     transition: all 0.4s ease;
   }
-  
-  /* Use Hourglass for the second placeholder if needed, but generic is fine */
-  
+
   .project-card.is-placeholder:hover .card-image::after {
     color: #0078D4;
-    transform: scale(1.1) rotate(15deg);
+    transform: scale(1.1) rotate(10deg);
     filter: drop-shadow(0 4px 8px rgba(0, 120, 212, 0.3));
   }
 
   .project-card.is-placeholder .card-content {
-    background: transparent !important;
-    align-items: center;
+    background: transparent !important; /* original: transparent so it feels different */
+    align-items: center; /* keep centered content like original */
     text-align: center;
+    padding: 24px;
   }
 
   .project-card.is-placeholder h3 {
-    color: #605E5C !important;
-    font-style: italic;
+    color: #605E5C !important; /* original softer color */
+    font-style: italic; /* original style */
   }
 
   .project-card.is-placeholder:hover h3 {
@@ -487,6 +614,9 @@
     }
     
     .mobile-scroll-indicator {
+      display: flex;
+    }
+    #tab-personal-projects .mobile-scroll-indicator {
       display: flex;
     }
   }
