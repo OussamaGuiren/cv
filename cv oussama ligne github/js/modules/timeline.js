@@ -20,19 +20,19 @@ export function initTimeline() {
       },
       {
         year: 2021,
-        duree: "Avril 2021 - Juillet 2021",
-        company: "CONCEPTEUR DEVELOPPEUR .NET STAGIAIRE chez Partner talent à Lille",
-        description: "Intégration d'OAuth2 via Gmail pour sécuriser les connexions utilisateur dans l'ERP, accompagnée d'une TMA incluant la modification des champs \"From\" et \"Sender\" des emails, l'amélioration de la page de configuration des paramètres de messagerie et l'ajustement de la base de données et des procédures stockées pour la journalisation des emails.",
-        techs: "C#, ASP.NET MVC, T-SQL, Visual Studio, SSMS, jQuery, AJAX",
+        duree: "Septembre 2021 - Mars 2024",
+        company: "DEVELOPPEUR .NET chez IBM à Lille",
+        description: "Migration de scripts VBScript vers Devbooster 4 (.NET Framework), création de pages intranet dynamiques avec formulaires complexes, conception de batches automatisés pour le traitement de fichiers CSV, optimisation des opérations CRUD en SQL (T-SQL et parfois EF Core) et maintenance applicative incluant correction de bugs et évolution des fonctionnalités.",
+        techs: "C#, LINQ, XAML, T-SQL, Visual Studio, EF Core, Devbooster 4",
         icon: "fa-laptop-code",
         era: "era-social-media"
       },
       {
         year: 2021,
-        duree: "Septembre 2021 - Mars 2024",
-        company: "DEVELOPPEUR .NET chez IBM à Lille",
-        description: "Migration de scripts VBScript vers Devbooster 4 (.NET Framework), création de pages intranet dynamiques avec formulaires complexes, conception de batches automatisés pour le traitement de fichiers CSV, optimisation des opérations CRUD en SQL (T-SQL et parfois EF Core) et maintenance applicative incluant correction de bugs et évolution des fonctionnalités.",
-        techs: "C#, LINQ, XAML, T-SQL, Visual Studio, EF Core, Devbooster 4",
+        duree: "Avril 2021 - Juillet 2021",
+        company: "CONCEPTEUR DEVELOPPEUR .NET STAGIAIRE chez Partner talent à Lille",
+        description: "Intégration d'OAuth2 via Gmail pour sécuriser les connexions utilisateur dans l'ERP, accompagnée d'une TMA incluant la modification des champs \"From\" et \"Sender\" des emails, l'amélioration de la page de configuration des paramètres de messagerie et l'ajustement de la base de données et des procédures stockées pour la journalisation des emails.",
+        techs: "C#, ASP.NET MVC, T-SQL, Visual Studio, SSMS, jQuery, AJAX",
         icon: "fa-laptop-code",
         era: "era-social-media"
       }

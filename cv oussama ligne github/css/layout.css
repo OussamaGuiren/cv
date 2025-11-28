@@ -302,13 +302,15 @@
   .et-hero-tab-slider {
     position: absolute;
     bottom: 0;
-    height: 3px;
+    height: 4px;
     width: 0;
-    background: #66B1F1;
+    /* background: #66B1F1; */
+    background: #ffffff;
     /* transition désactivée pour thème Microsoft épuré */
     pointer-events: none;
   }
   
+ 
   /* ===================== SLIDES ===================== */
   
   .et-main {
