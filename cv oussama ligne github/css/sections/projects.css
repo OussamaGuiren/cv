@@ -145,10 +145,10 @@
       /* When the gallery contains exactly 2 cards, use a 2-column layout so
          the placeholder can sit to the right of the other card without leaving
          a large empty column. */
-      #tab-personal-projects .gallery:has(> :nth-child(2):last-child) {
+      /* #tab-personal-projects .gallery:has(> :nth-child(2):last-child) {
         /* grid-template-columns: repeat(2, minmax(320px, 1fr)); */
-        justify-content: center;
-      }
+        /* justify-content: center; 
+      } */
 
     /* Force the placeholder (coming soon) into the last column so it stays
        at the right side even when there is 1 or 2 cards. */
