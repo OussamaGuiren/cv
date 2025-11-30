@@ -64,9 +64,9 @@
       max-width: 90vw;
     }
   
-    .container-quisuisje {
+    /* .container-quisuisje {
       padding: 60px 0;
-    }
+    } */
   
     /* Sections en hauteur automatique pour éviter les chevauchements */
     .et-slide {
@@ -86,8 +86,32 @@
     .about-photo-section {
       min-height: auto;
       height: auto;
-      padding-top: 80px;
-      padding-bottom: 80px;
+      /*padding-top: 80px;
+      padding-bottom: 80px; */
+    }
+    .about-image-container {
+      width: 100vw;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      overflow: hidden;
+      min-height: 570px;
+      max-height: 80vh;
+    }
+    .overlay-about {
+      justify-content: flex-end;
+      padding-bottom: 18px;
+    }
+    /* Show the overlay button and hide the text container on tablets too */
+    .about-learn-more-btn {
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+    .about-text-container.about-text-desktop {
+      display: none !important;
     }
   }
   
@@ -154,7 +178,7 @@
       /* Using standard color to match typical H1 if gradient is not desired on mobile fallback */
       /* OR keep gradient if that's the design intent */
       background: none; 
-      -webkit-background-clip: unset;
+      /* -webkit-background-clip: unset; */
       -webkit-text-fill-color: initial;
       
       display: block;
@@ -359,9 +383,7 @@
       margin-left: 0 !important;
     }
 
-    .about-photo-section img {
-      max-width: 25rem;
-    }
+    /* No fixed max width for the about-photo image on tablet, keep it fluid */
 
     /* ========== SECTION QUI SUIS-JE - MOBILE ========== */
     /* Cacher le texte en mobile - il sera affiché uniquement dans la popup */
@@ -401,6 +423,16 @@
       margin-bottom: 2rem;
     }
 
+    /* Also show the button for tablet devices up to 1024px */
+    @media (max-width: 1024px) {
+      .about-learn-more-btn {
+        display: inline-flex !important;
+      }
+      .about-text-container.about-text-desktop {
+        display: none !important;
+      }
+    }
+
     .about-learn-more-btn::before {
       content: '';
       position: absolute;
@@ -438,13 +470,26 @@
 
     /* Centrer l'image et le bouton */
     .about-image-container {
-      width: 100%;
+      
+      width: 100vw;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      width: 100vw;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 400px;
+      justify-content: flex-end; /* button at bottom */
+      height: 350px;
+      padding-bottom: 0;
     }
+    .overlay-about {
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: 16px;
+    }
+    .about-learn-more-btn { margin-bottom: 16px; }
 
     /* Réduire l'espacement du bouton */
     .hero-intro > div:last-child {
@@ -496,7 +541,7 @@
       position: relative !important;
       z-index: auto !important;
       isolation: isolate !important;
-      padding-top: 20px !important; /* Marge interne haut */
+     /* padding-top: 20px !important;  Marge interne haut */
       padding-bottom: 20px !important; /* Marge interne bas */
     }
   
@@ -539,10 +584,10 @@
       height: auto !important;
       max-height: none !important;
       margin: 0;
-      padding: clamp(10px, 1.5vh, 15px) clamp(12px, 3vw, 18px);
+      /* padding: clamp(10px, 1.5vh, 15px) clamp(12px, 3vw, 18px); */
       position: relative !important;
       z-index: 1 !important;
-      padding-top: 20px !important;
+      /* padding-top: 20px !important; */
       padding-bottom: 0 !important; /* Collé au ticker */
     }
 

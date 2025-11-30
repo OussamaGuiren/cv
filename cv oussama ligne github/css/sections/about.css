@@ -1,3 +1,89 @@
+/* === IMAGE FULL SECTION MOBILE & TABLET === */
+@media (max-width: 1024px) {
+  .about-image-container {
+    position: relative;
+    width: 100vw;
+    /* left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw; */
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    /* height: 100vh; */
+    min-height: 380px;
+    max-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* ensure content at bottom on mobile/tablet */
+    overflow: hidden;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .about-photo-full {
+    /* width: 100vw !important;
+    height: 100% !important;
+    object-fit: cover; */
+    width: 100vw !important;
+    height: 100% !important;
+    object-fit: cover;
+    filter: grayscale(0.5) brightness(0.9) contrast(1.1);
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
+  .overlay-about {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.45) 100%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* put content at the bottom */
+    flex-direction: column;
+  }
+  .about-download-btn-mobile,
+  .about-learn-more-btn {
+    display: block;
+    margin: 0 auto;
+    padding: clamp(12px, 2.5vh, 16px) clamp(24px, 6vw, 32px);
+    font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: #106EBE;
+    background: #ffffff;
+    border: #ffffff solid 2px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    cursor: pointer;
+    z-index: 3;
+    opacity: 0.95;
+    transition: background 0.2s;
+    text-transform: uppercase;
+  }
+  .about-learn-more-btn {
+    margin-bottom: 18px; /* spacing from bottom */
+  }
+  /* Ensure the text column is hidden on tablet and the grid becomes single-column */
+  .about-text-container.about-text-desktop {
+    display: none !important;
+  }
+  .about-content-wrapper {
+    grid-template-columns: 1fr !important;
+  }
+  .about-download-btn-mobile:hover,
+  .about-learn-more-btn:hover {
+    background: #106EBE;
+    opacity: 1;
+  }
+}
 /* ===================== SECTION ABOUT (QUI SUIS-JE) ===================== */
 
 /* Conteneur principal */
@@ -354,7 +440,7 @@
     /* max-width: 1400px; */
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: clamp(40px, 6vw, 80px);
+    /* gap: clamp(40px, 6vw, 80px); */
   align-items: stretch;
   justify-items: stretch;
   }
@@ -362,7 +448,7 @@
 /* Bloc image dans le bloc de droite */
 .about-image-container {
   width: 100%;
-  height: 500px;
+  height: 100%;
   max-width: 100%;
   display: block;
 }
@@ -375,7 +461,7 @@
 }
   
   .about-text {
-    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    font-size: clamp(1.45rem, 1.5vw, 1.25rem);
     line-height: 1.8;
     color: #ffffff; /* Blanc pur pour meilleure visibilité sur fond bleu */
     margin: 0;
@@ -434,12 +520,12 @@
 .about-photo-full {
   display: block;
   width: 100%;
-  /* height: 90%; */
+  height: 100%;
   object-fit: cover;
   border-radius: 0;
   box-shadow: none;
   background: none;
- 
+ max-height: 1000px;
 }
 
 @media (max-width: 768px) {
@@ -449,12 +535,14 @@
 }
   
   .about-text-container {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(24px, 3vh, 40px);
-    max-width: 100%;
-    padding-top: 10rem;
-    padding-left: 5rem;
+   display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3vh, 40px);
+  max-width: 100%;
+  /* padding-top: 5rem; */
+  padding-left: 5rem;
+  padding-bottom: 1rem;
+  padding-right: 2rem;
   }
   
   .about-text-content {
