@@ -1,11 +1,11 @@
 /* ===================== SECTION POWER PLATFORM (THEME MICROSOFT POWER PURPLE) ===================== */
 
 #tab-power {
-    /* Fond Clair légèrement teinté pour douceur */
     background: #F8F9FA; 
     background-image: radial-gradient(circle at 90% 10%, rgba(92, 45, 145, 0.05) 0%, transparent 40%);
     position: relative;
-    padding: 80px 20px;
+    min-height: 90vh;
+    padding: 40px 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,7 +17,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: 1200px;
+    max-width: min(1400px, 94vw);
     margin: 0 auto;
   }
   
@@ -38,7 +38,7 @@
   }
   
   #tab-power p.section-desc {
-    color: #605E5C !important;
+    color: #333333 !important;
     font-size: 1.2rem;
   }
   

@@ -42,8 +42,78 @@
 @media (max-width: 768px) {
   #tab-personal-projects {
     padding: 60px 15px;
+    }
   }
+
+/* ============ RÉALISATIONS UPDATED ============ */
+
+#tab-projects {
+  background: #F8F9FA;
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  color: #201F1E;
 }
+
+#tab-projects .section-header {
+  text-align: center;
+  max-width: min(1400px, 94vw);
+  margin: 0 auto 40px auto;
+}
+
+#tab-projects h2 {
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-weight: 700;
+  color: #0078D4;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  letter-spacing: -0.04em;
+}
+
+#tab-projects h2 img.section-icon {
+  width: clamp(3.6rem, 5vw, 4.4rem);
+  height: clamp(3.6rem, 5vw, 4.4rem);
+  opacity: 0.8;
+}
+
+#tab-projects p.slide-intro {
+  font-size: clamp(0.9rem, 1.1vw, 1rem);
+  font-weight: 400;
+  line-height: 1.6;
+  color: #333;
+}
+
+#tab-projects .project-card {
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: border-color 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+#tab-projects .project-card:hover { border-color: #0078D4; }
+
+#tab-projects .card-content { background: transparent !important; color: #323130 !important; }
+
+#tab-projects .project-card.is-placeholder {
+  grid-column: 1 / -1;
+  background: rgba(255,255,255,0.4);
+  border: 1px dashed #cbd5e1;
+  max-width: 600px;
+  justify-self: center;
+  width: 100%;
+}
+#tab-projects .project-card.is-placeholder .card-image { display: none; }
+#tab-projects .project-card.is-placeholder .card-content { text-align: center; padding: 48px 24px; }
+#tab-projects .project-card.is-placeholder h3 { color: #555; }
+#tab-projects .project-card.is-placeholder p { color: #555; font-size: 0.82rem; }
 
 
 #tab-projects {
@@ -568,7 +638,7 @@
   }
 
   .project-card.is-placeholder h3 {
-    color: #605E5C !important; /* original softer color */
+    color: #333333 !important; /* original softer color */
     font-style: italic; /* original style */
   }
 

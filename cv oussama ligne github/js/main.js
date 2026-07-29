@@ -43,11 +43,22 @@ document.addEventListener('DOMContentLoaded', () => {
   //   initScrollAnimations();
   // }, 100);
   
-  // Typewriter starts when hero is visible (event dispatched by splash)
+  // Typewriter starts immediately (now in splash screen)
+  setTimeout(startTypewriterSequence, 300);
+  
   window.addEventListener('hero-visible', () => {
-    try { 
-      document.body.classList.add('hero-visible');
-      setTimeout(startTypewriterSequence, 200);
-    } catch (e) { /* ignore */ }
+    document.body.classList.add('hero-visible');
   });
+
+  // Hero banner fade on scroll
+  const banner = document.querySelector('.hero-banner');
+  if (banner) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        banner.classList.add('banner-hidden');
+      } else {
+        banner.classList.remove('banner-hidden');
+      }
+    }, { passive: true });
+  }
 });

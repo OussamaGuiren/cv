@@ -71,8 +71,7 @@
     color: #0078D4;
     margin-bottom: 20px;
     display: block;
-    opacity: 0;
-    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s forwards;
+    opacity: 1;
   }
   
   /* Titre Principal H1 */
@@ -84,8 +83,18 @@
     margin-bottom: 40px;
     color: #201F1E;
     letter-spacing: -0.03em;
-    opacity: 0;
-    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s forwards;
+    opacity: 1;
+    transition: color 0.6s ease;
+  }
+
+  /* Typing state */
+  .et-hero-tabs h1.typing {
+    color: #201F1E;
+  }
+
+  /* Final state */
+  .et-hero-tabs h1.typed {
+    color: #201F1E;
   }
   
   .et-hero-tabs h1 span {

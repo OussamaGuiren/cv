@@ -86,12 +86,10 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   }
   
   .contact-card:hover {
-    transform: translateY(-1px);
     background: #3B3A39;
     border-color: #0078D4;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
@@ -109,7 +107,6 @@
     margin-bottom: 24px;
     font-size: 1.8rem;
     color: #0078D4;
-    transition: all 0.3s ease;
   }
   
   .contact-card:hover .contact-icon-wrapper {
@@ -140,7 +137,6 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-size: 0.9rem;
-    transition: all 0.2s ease;
     text-decoration: none;
     cursor: pointer;
     border: 1px solid transparent;

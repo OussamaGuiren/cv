@@ -429,8 +429,9 @@
         display: inline-flex !important;
       }
       .about-text-container.about-text-desktop {
-        display: none !important;
-      }
+    .et-hero-tabs-container {
+      display: none !important;
+    }
     }
 
     .about-learn-more-btn::before {

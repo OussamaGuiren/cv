@@ -26,17 +26,19 @@
   .et-hero-tabs-container {
     display: flex;
     flex-direction: row;
-    align-items: stretch;
-    position: absolute;
-    bottom: 0;
+    align-items: center;
+    position: fixed;
+    top: 0;
     left: 0;
     right: 0;
-    height: 72px;
-    /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); */
-    background: #0078D4; /* Microsoft Blue Theme for ALL devices */
+    height: 64px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
     z-index: 1100;
     pointer-events: auto;
-    /* border-bottom: 1px solid rgba(255, 255, 255, 0.2); */
+    padding: 0 24px;
   }
 
   /* .test{
@@ -68,6 +70,11 @@
     left: 0;
     right: 0;
     z-index: 1100;
+  }
+
+  .et-hero-tabs-container--top ~ .et-main,
+  .et-hero-tabs-container--top ~ main {
+    padding-top: 64px;
   }
   
   /* ===================== NAVBAR MOBILE FIXE EN HAUT ===================== */
@@ -271,14 +278,14 @@
     flex: 0 0 auto;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 0 18px;
-    font-weight: 800;
+    padding: 0 20px 0 0;
+    font-weight: 600;
     font-size: 0.95rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: #ffffff;
-    border-right: 1px solid rgba(148, 163, 184, 0.4);
+    letter-spacing: 0.05em;
+    color: #0078D4;
+    border-right: 1px solid #e0e0e0;
+    margin-right: 8px;
+    font-family: 'Segoe UI', sans-serif;
   }
   
   /* Tab items */
@@ -287,26 +294,26 @@
     justify-content: center;
     align-items: center;
     flex: 1;
-    color: #e2e8f0;
-    letter-spacing: 0.12rem;
-    /* transition désactivée pour thème Microsoft épuré */
-    font-size: 0.8rem;
-    text-transform: uppercase;
+    color: #605E5C;
+    letter-spacing: 0.05rem;
+    transition: color 0.2s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: none;
+    font-family: 'Segoe UI', sans-serif;
   }
   .et-hero-tab:hover {
-    background: rgba(102,177,241,0.18);
-    color: #fff;
+    color: #0078D4;
+    background: transparent;
   }
   
   /* Slider */
   .et-hero-tab-slider {
     position: absolute;
     bottom: 0;
-    height: 4px;
+    height: 3px;
     width: 0;
-    /* background: #66B1F1; */
-    background: #ffffff;
-    /* transition désactivée pour thème Microsoft épuré */
+    background: #0078D4;
     pointer-events: none;
   }
   
@@ -315,6 +322,34 @@
   
   .et-main {
     width: 100%;
+  }
+
+  .hero-banner {
+    margin-top: 64px;
+    background: #F8F9FA;
+    border-bottom: 1px solid #e8eaed;
+    text-align: center;
+    padding: 14px 20px;
+    transition: opacity 0.3s ease, max-height 0.3s ease, padding 0.3s ease, margin-top 0.3s ease;
+    overflow: hidden;
+  }
+
+  .hero-banner.banner-hidden {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    border-bottom: none;
+  }
+
+  .hero-banner p {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: #5a6377;
+    text-transform: uppercase;
   }
   
   .et-slide {

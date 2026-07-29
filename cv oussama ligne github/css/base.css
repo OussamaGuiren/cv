@@ -51,20 +51,9 @@
   }
   
   /* Scrollbar personnalisée (Style Microsoft Edge) */
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #F3F2F1;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #C8C6C4;
-    border-radius: 5px;
-    border: 2px solid #F3F2F1;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #8A8886;
-  }
+  ::-webkit-scrollbar { display: none; }
+  ::-webkit-scrollbar-track { display: none; }
+  ::-webkit-scrollbar-thumb { display: none; }
   
   body.splash-active {
     /* Le splash screen garde son fond sombre pour le contraste initial */
@@ -81,6 +70,17 @@
   ul {
     list-style: none;
   }
+
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
   
   /* Stage Background & Overlay */
   .stage {
@@ -93,16 +93,7 @@
   }
   
   .stage::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: 
-      linear-gradient(90deg, var(--stage-overlay) 1px, transparent 1px) 0 0 / 80px 80px,
-      linear-gradient(0deg, var(--stage-overlay) 1px, transparent 1px) 0 0 / 80px 80px;
-    mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
-    -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
-    z-index: -1;
-    pointer-events: none;
+    display: none;
   }
   
   /* ===================== ANIMATIONS DE TRANSITION DE SECTION (GSAP) ===================== */

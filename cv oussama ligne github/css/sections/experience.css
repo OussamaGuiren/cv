@@ -47,7 +47,7 @@
   font-weight: 400;
   opacity: 0;
   animation: fadeInUptTitle 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
-  color: #605E5C;
+  color: #333333;
   letter-spacing: 0;
 }
 
@@ -495,7 +495,7 @@
 .experience-popup-techs span {
   font-family: 'Segoe UI', sans-serif;
   font-size: 0.9375rem;
-  color: #605E5C;
+  color: #333333;
   line-height: 1.6;
 }
 
@@ -603,4 +603,90 @@
   .experience-popup-title {
     font-size: 1.5rem;
   }
+}
+
+/* ============ RÉFÉRENCES ============ */
+
+.references-container {
+  max-width: min(1400px, 94vw);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.references-header { text-align: center; margin-bottom: 36px; }
+
+.references-title {
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-weight: 700;
+  color: #0078D4;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  letter-spacing: -0.04em;
+}
+
+.references-title img.section-icon {
+  width: clamp(3.6rem, 5vw, 4.4rem);
+  height: clamp(3.6rem, 5vw, 4.4rem);
+  opacity: 0.8;
+}
+
+.references-subtitle {
+  font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+  font-weight: 400;
+  color: #333;
+  max-width: 650px;
+  margin: 0 auto 32px;
+  line-height: 1.6;
+}
+
+.references-logos-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.references-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+
+.ref-logo {
+  width: 220px;
+  height: 120px;
+  background: #fff;
+  border: 1px solid #eef0f2;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ref-logo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.ref-logo img {
+  max-width: 85%;
+  max-height: 85%;
+  object-fit: contain;
+}
+
+.ref-fallback {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  .references-logos { gap: 16px; }
+  .ref-logo { width: 180px; height: 100px; }
 }

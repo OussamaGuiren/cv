@@ -8,7 +8,7 @@
     left: 0;
     display: flex;
     overflow: hidden;
-    background-color: #191919;
+    background-color: #F3F2F1;
     z-index: 2000;
   }
   
@@ -604,4 +604,88 @@
       transform: translate(-50%, -190%);
     }
   }
-  
+
+/* ============ SPLASH HERO CONTENT ============ */
+
+.splash-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2010;
+  padding: 20px;
+  text-align: center;
+}
+
+.splash-kicker {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #0078D4;
+  margin-bottom: 12px;
+}
+
+.splash-title {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  color: #201F1E;
+  letter-spacing: -0.03em;
+}
+
+.splash-quote {
+  max-width: 800px;
+  margin-bottom: 30px;
+}
+
+.splash-quote p {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 400;
+  line-height: 1.6;
+  color: #323130;
+}
+
+.splash-highlight {
+  color: #005A9E;
+  font-weight: 600;
+  font-style: normal;
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 120, 212, 0.3);
+  text-underline-offset: 4px;
+}
+
+.splash-more-btn {
+  background: transparent;
+  color: #0078D4;
+  border: 2px solid #0078D4;
+  padding: 12px 34px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.splash-more-btn:hover {
+  background: #0078D4;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .splash-title {
+    font-size: 2rem;
+  }
+  .splash-quote p {
+    font-size: 0.9rem;
+  }
+}  

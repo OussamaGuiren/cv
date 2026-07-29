@@ -54,7 +54,7 @@ function typewriter(element, text, speed = 50, callback) {
     // Désactiver le typewriter en mobile
     if (window.innerWidth <= 767) {
       const kicker = document.querySelector('.hero-kicker[data-typewriter]');
-      const title = document.querySelector('.et-hero-tabs h1[data-typewriter]');
+    const title = document.querySelector('.et-hero-tabs h1[data-typewriter]') || document.querySelector('.splash-title[data-typewriter]');
       
       // Injecter le texte immédiatement en mobile pour éviter le glitch avec le ::before CSS
       if (kicker) {
@@ -76,7 +76,7 @@ function typewriter(element, text, speed = 50, callback) {
     }
     
     const kicker = document.querySelector('.hero-kicker[data-typewriter]');
-    const title = document.querySelector('.et-hero-tabs h1[data-typewriter]');
+    const title = document.querySelector('.et-hero-tabs h1[data-typewriter]') || document.querySelector('.splash-title[data-typewriter]');
     const subtitle = document.querySelector('.hero-subtitle[data-typewriter]');
     
     if (!kicker && !title && !subtitle) return;
@@ -88,7 +88,8 @@ function typewriter(element, text, speed = 50, callback) {
       }
       
       if (title) {
-        await typewriter(title, title.dataset.typewriter, 60);
+        await typewriter(title, title.dataset.typewriter, 150);
+        title.innerHTML = 'OG<span style="color:#0078D4;">Tech</span>';
         document.body.classList.add('hero-title-typed');
         await new Promise(resolve => setTimeout(resolve, 400));
       }

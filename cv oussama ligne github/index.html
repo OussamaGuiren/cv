@@ -36,44 +36,23 @@
 <body class="splash-active">
   <!-- Splash screen -->
   <div class="splash">
-    <div class="splash_logo">
-      OG
+    <div class="splash-content">
+      <p class="splash-kicker">Formation · Développement · Accompagnement</p>
+      <h1 class="splash-title" data-typewriter="OGTech"><!-- Le texte sera ajouté par JavaScript --></h1>
+      <div class="splash-quote">
+        <p>
+          Je <span class="splash-highlight">forme</span>, je <span class="splash-highlight">développe</span>.<br>Transformer les besoins métiers en solutions techniques.
+        </p>
+      </div>
+      <button type="button" class="splash-more-btn">Entrer</button>
     </div>
-
-    <div class="splash_svg">
-      <svg width="100%" height="100%">
-        <rect width="100%" height="100%"></rect>
-      </svg>
-    </div>
-
-    <div class="splash_minimize">
-      <svg width="100%" height="100%">
-        <rect width="100%" height="100%"></rect>
-      </svg>
-    </div>
-  </div>
-
-  <div class="splash-watermark">PORTFOLIO</div>
-
-  <!-- Ajout de la photo de profil dans le splash screen -->
-  <div class="splash-portrait-container">
-    <img src="assets/3.png" alt="Oussama Guiren" width="850" height="850" oncontextmenu="return false;">
-    <div class="overlay-splash"></div>
-  </div>
-
-  <div class="text">
-    <p>Dev .NET</p>
-    <p>Power Platform</p>
-    <p>Automatisation</p>
-    <p>Autres</p>
-    <button type="button" class="splash-more-btn">Entrer</button>
   </div>
 
   <div class="stage">
     <!-- HERO + NAV TABS -->
     <!-- Navbar mobile fixe en haut -->
     <nav class="mobile-navbar">
-      <div class="mobile-navbar-logo">OG</div>
+      <div class="mobile-navbar-logo">OGTech</div>
       <button class="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
@@ -83,15 +62,14 @@
     
     <nav class="mobile-menu" aria-hidden="true">
       <div class="mobile-menu-header">
-        <div class="mobile-menu-logo">OG</div>
+        <div class="mobile-menu-logo">OGTech</div>
         <button class="mobile-menu-close" aria-label="Fermer le menu">×</button>
       </div>
       <div class="mobile-menu-links">
-        <a class="mobile-menu-link" href="#tab-quisuisje">Qui suis-je ?</a>
-        <a class="mobile-menu-link" href="#tab-experience">Expériences</a>
-        <a class="mobile-menu-link" href="#tab-projects">Projets web</a>
-        <a class="mobile-menu-link" href="#tab-personal-projects">Projets Perso</a>
-        <a class="mobile-menu-link" href="#tab-power">Power Platform</a>
+        <a class="mobile-menu-link" href="#tab-apropos">À propos</a>
+        <a class="mobile-menu-link" href="#tab-quisuisje">Services</a>
+        <a class="mobile-menu-link" href="#tab-experience">Références</a>
+        <a class="mobile-menu-link" href="#tab-projects">Réalisations</a>
         <a class="mobile-menu-link" href="#tab-contact">Me contacter</a>
       </div>
       <div class="mobile-socials">
@@ -104,101 +82,85 @@
     </nav>
     <div class="mobile-menu-overlay" aria-hidden="true"></div>
 
-    <section class="et-hero-tabs" id="hero">
-      
-      
-      <div class="hero-intro">
-        <p class="hero-kicker" data-typewriter="Développeur .NET &amp; Power Platform"><!-- Le texte sera ajouté par JavaScript --></p>
-        <h1 data-typewriter="Oussama Guiren"><!-- Le texte sera ajouté par JavaScript --></h1>
-        <div class="blockquote-wrapper">
-          <div class="blockquote hero-quote-container">
-            <h1>
-              Je conçois des solutions <span class="text-white"> web, Power Platform</span> et d'<span class="text-white">automatisation</span> pour <span class="text-white">simplifier</span> vos processus métier et <span class="text-white">moderniser</span> vos <span class="text-white">applications</span> existantes.
-            </h1>
-            <!-- <h4>&mdash;MOI <i class="em em-sweat_smile" aria-role="presentation" aria-label="SMILING FACE WITH OPEN MOUTH AND COLD SWEAT"></i></h4> -->
-          </div>
-        </div>
-        <div>
-          <button type="button" class="btnMeContacter">Me contacter</button>
-        </div>
-      </div>
+    <div class="et-hero-tabs-container et-hero-tabs-container--top">
+      <div class="et-hero-logo">OGTech</div>
+      <a class="et-hero-tab" href="#tab-apropos">À propos</a>
+      <a class="et-hero-tab" href="#tab-quisuisje">Services</a>
+      <a class="et-hero-tab" href="#tab-experience">Références</a>
+      <a class="et-hero-tab" href="#tab-projects">Réalisations</a>
+      <a class="et-hero-tab" href="#tab-contact">Me contacter</a>
+      <span class="et-hero-tab-slider"></span>
+    </div>
 
-      <!-- Navbar sticky style "ET hero tabs" -->
-      <div class="et-hero-tabs-container">
-        <div class="et-hero-logo">OG</div>
-        <a class="et-hero-tab" href="#tab-quisuisje">Qui suis-je ?</a>
-        <a class="et-hero-tab" href="#tab-experience">Expériences</a>
-        <a class="et-hero-tab" href="#tab-projects">Projets web</a>
-        <a class="et-hero-tab" href="#tab-personal-projects">Projets Perso</a>
-        <a class="et-hero-tab" href="#tab-power">Power Platform</a>
-        <a class="et-hero-tab" href="#tab-contact">Me contacter</a>
-        <span class="et-hero-tab-slider"></span>
-      </div>
-    </section>
-
-    <!-- SECTIONS -->
+    <!-- SECTIONS 
+    <div class="hero-banner">
+      <p>Formation IT &nbsp;·&nbsp; Développement &nbsp;·&nbsp; Automatisation</p>
+    </div>-->
     <main class="et-main">
-      <!-- Qui suis-je -->
-      <div class="container-quisuisje" id="tab-quisuisje">
-        <!-- Section unique avec photo et texte -->
-        <section class="about-photo-section">
-          <div class="about-content-wrapper">
-            <!-- Version desktop : texte à côté -->
-            <div class="about-text-container about-text-desktop">
-              <h2 class="about-title">Qui suis-je ?</h2>
-              <div class="about-text-content">
-                <p class="about-text">
-                  Je suis <strong>Oussama Guiren</strong>, développeur passionné travaillant avec <strong>.NET</strong> et <strong>Power Platform</strong>. J’aime concevoir des applications fiables et modernes, en cherchant toujours à comprendre les besoins réels derrière chaque projet.
-                </p>
-                <p class="about-text">
-                  Mon parcours m’a permis de développer des solutions web avec <strong>.NET</strong> et d’explorer la création d’interfaces en <strong>Vue.js</strong>, tout en m’intéressant à l’automatisation des processus avec <strong>n8n</strong> et la <strong>Power Platform</strong>, afin de rendre les outils plus simples et plus efficaces.
-                </p>
-                <p class="about-text">
-                  Actuellement, je m’investis pleinement dans ma montée en compétences sur la <strong>Power Platform</strong>, avec la volonté de combiner mes connaissances en développement classique et mes apprentissages dans l’univers du <strong>no-code</strong> pour concevoir des solutions utiles, claires et accessibles.
-                </p>
+      <!-- À propos -->
+      <div class="container-quisuisje" id="tab-apropos">
+        <section class="about-section">
+          <div class="about-layout">
+            <div class="about-image">
+              <img src="assets/computer.jpg" alt="Espace de travail" onerror="this.style.background='#e8ecf1'; this.style.minHeight='320px'">
+            </div>
+            <div class="about-text">
+              <h2 class="about-title-main"><img src="assets/a_propos.png" alt=""> À propos</h2>
+              <p class="about-desc">Derrière OGTech, il y a <strong>Oussama Guiren</strong>, <span class="text-accent">développeur</span> et <span class="text-accent">formateur IT</span>.</p>
+              <p class="about-desc">OGTech rassemble deux domaines qui font aujourd'hui partie de mon quotidien : le <span class="text-accent">développement</span> et la <span class="text-accent">formation</span>.</p>
+              <p class="about-desc">Chaque mission est différente, mais l'approche reste la même : prendre le temps de comprendre le besoin avant de proposer une solution.</p>
+              <div class="about-highlights">
+                <div class="about-highlight"><img src="assets/comprendre_avant_agir.png" alt="" class="about-highlight-icon"><div><div class="about-highlight-title">Comprendre avant d'agir</div><div class="about-highlight-sub">Chaque projet commence par une bonne compréhension du besoin.</div></div></div>
+                <div class="about-highlight"><img src="assets/apprendre_en_faisant.png" alt="" class="about-highlight-icon"><div><div class="about-highlight-title">Apprendre en faisant</div><div class="about-highlight-sub">La pratique est au cœur de chaque formation.</div></div></div>
+                <div class="about-highlight"><img src="assets/rester_a_jour.png" alt="" class="about-highlight-icon"><div><div class="about-highlight-title">Rester à jour</div><div class="about-highlight-sub">Les technologies évoluent, nos compétences aussi.</div></div></div>
               </div>
             </div>
-            <!-- Colonne de droite : image plein cadre (sans marge interne) -->
-            <div class="about-image-container">
-                  <img src="./assets/3.png"
-                    alt="Portrait de Oussama Guiren"
-                    class="about-photo-full"
-                    oncontextmenu="return false;">
-                   
-                  <div class="overlay-about">
-                       <button class="about-learn-more-btn" id="aboutLearnMoreBtn">En savoir plus</button>
-                  </div>
-            </div>
-            <!-- <div class="test">
-          
-
-            </div> -->
-
           </div>
         </section>
       </div>
 
-      <!-- Popup "En savoir plus" -->
-      <div class="about-popup" id="aboutPopup" aria-hidden="true" role="dialog" aria-labelledby="aboutPopupTitle" aria-modal="true">
-        <div class="about-popup-overlay"></div>
-        <div class="about-popup-content">
-          <button class="about-popup-close" id="aboutPopupClose" aria-label="Fermer la popup">
-            <i class="fa-solid fa-times"></i>
-          </button>
-          <div class="about-popup-inner">
-            <h2 class="about-popup-title" id="aboutPopupTitle">Qui suis-je ?</h2>
-            <div class="about-popup-text-content">
-              <p class="about-popup-text">
-                Je suis <strong>Oussama Guiren</strong>, développeur passionné travaillant avec <strong>.NET</strong> et <strong>Power Platform</strong>. J’aime concevoir des applications fiables et modernes, en cherchant toujours à comprendre les besoins réels derrière chaque projet.
-              </p>
-              <p class="about-popup-text">
-                Mon parcours m’a permis de développer des solutions web avec <strong>.NET</strong> et d’explorer la création d’interfaces en <strong>Vue.js</strong>, tout en m’intéressant à l’automatisation des processus avec <strong>n8n</strong> et la <strong>Power Platform</strong>, afin de rendre les outils plus simples et plus efficaces.
-              </p>
-              <p class="about-popup-text">
-                Actuellement, je m’investis pleinement dans ma montée en compétences sur la <strong>Power Platform</strong>, avec la volonté de combiner mes connaissances en développement classique et mes apprentissages dans l’univers du <strong>no-code</strong> pour concevoir des solutions utiles, claires et accessibles.
-              </p>
+      <!-- Services -->
+      <div class="container-quisuisje" id="tab-quisuisje">
+        <section class="services-section">
+          <div class="services-header">
+            <h2 class="services-title"><img src="assets/comment_vous_accompagner.png" alt="" class="section-icon"> Comment puis-je vous accompagner ?</h2>
+            <p class="services-subtitle">Formation IT, développement et automatisation pour répondre à vos besoins.</p>
+          </div>
+          <div class="services-grid">
+            <div class="service-card">
+              <div class="service-icon">
+                <img src="assets/formation_it.png" alt="" class="service-card-icon">
+              </div>
+              <h3>Formation IT</h3>
+              <p>J'interviens auprès des entreprises, des centres de formation et des particuliers pour animer des formations IT, en présentiel ou à distance. Chaque formation est adaptée au public concerné, avec une approche simple, concrète et tournée vers la pratique.</p>
+              <div class="service-tags">
+                <span>Linux</span><span>GitLab</span><span>.NET</span><span>Python</span><span>Power Platform</span><span>Docker</span><span class="tag-more">&amp; plus</span>
+              </div>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">
+                <img src="assets/developpement.png" alt="" class="service-card-icon">
+              </div>
+              <h3>Développement</h3>
+              <p>Conception, développement et évolution de solutions logicielles. J'interviens sur la création de nouvelles applications, l'évolution de solutions existantes ainsi que leur maintenance, en m'adaptant aux besoins de chaque projet.</p>
+              <div class="service-tags">
+                <span>.NET</span><span>Vue.js</span><span>API REST</span><span>Power Apps</span><span>Base de données</span><span class="tag-more">&amp; plus</span>
+              </div>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">
+                <img src="assets/automatisation.png" alt="" class="service-card-icon">
+              </div>
+              <h3>Automatisation</h3>
+              <p>Simplifier les tâches répétitives grâce à l'automatisation. J'utilise différents outils pour automatiser des traitements, des workflows ou certaines opérations afin de faire gagner du temps et de limiter les manipulations manuelles.</p>
+              <div class="service-tags">
+                <span>Power Automate</span><span>Power Apps</span><span>Python</span><span>Bash</span><span>GitLab CI/CD</span><span>IA générative</span><span class="tag-more">&amp; plus</span>
+              </div>
             </div>
           </div>
+        </section>
+        <div class="section-cta">
+          <a href="#tab-contact" class="cta-btn">Discutons de votre projet <span>&rarr;</span></a>
         </div>
       </div>
 
@@ -250,172 +212,145 @@
         </div>
       </section>
 
-      <!-- Expérience -->
-      <section class="experience-section" id="tab-experience">
-        <div class="timeline-container" id="timelineContainer">
-          <div class="timeline-header">
-            <h1 class="timeline-title">Mon Parcours</h1>
-            <p class="timeline-subtitle">Une évolution à travers mes expériences professionnelles</p>
+      <!-- Découverte & Initiation (caché pour l'instant) -->
+      <!--
+      <section class="discovery-section" id="tab-premiers-pas">
+        <div class="discovery-layout">
+          <div class="discovery-left">
+            <p class="discovery-eyebrow">DÉCOUVERTE & INITIATION</p>
+            <h2 class="discovery-title">Commencer<br>simplement.<br>Apprendre en<br>créant.</h2>
+            <p class="discovery-text">Des séances accessibles aux enfants, adolescents et adultes débutants. Chacun avance à son rythme, avec des projets concrets et un accompagnement bienveillant.</p>
+            <button class="discovery-btn">Découvrir les parcours <span>&rarr;</span></button>
           </div>
-          <ul id="timeline">
-            <!-- Les expériences seront générées par JavaScript -->
-          </ul>
-        </div>
-      </section>
-
-      <!-- Popup pour les détails d'expérience -->
-      <div class="experience-popup" id="experiencePopup" aria-hidden="true" role="dialog" aria-labelledby="experiencePopupTitle" aria-modal="true">
-        <div class="experience-popup-overlay"></div>
-        <div class="experience-popup-content">
-          <button class="experience-popup-close" id="closeExperiencePopup" aria-label="Fermer la popup">
-            <i class="fa-solid fa-times"></i>
-          </button>
-          <div class="experience-popup-inner">
-            <h2 class="experience-popup-title" id="experiencePopupTitle"></h2>
-            <p class="experience-popup-subtitle" id="experiencePopupSubtitle"></p>
-            <div class="experience-popup-content-wrapper">
-              <p class="experience-popup-description" id="experiencePopupDescription"></p>
-              <div class="experience-popup-techs" id="experiencePopupTechs"></div>
+          <div class="discovery-right">
+            <div class="discovery-card">
+              <h3>Ce que vous pourrez réaliser</h3>
+              <ul class="discovery-list">
+                <li>Une première page web</li>
+                <li>Un petit jeu</li>
+                <li>Un premier programme</li>
+                <li>Découvrir l'IA</li>
+              </ul>
+              <div class="discovery-tags">
+                <span class="discovery-tag">HTML</span>
+                <span class="discovery-tag">C#</span>
+                <span class="discovery-tag">Unity</span>
+                <span class="discovery-tag">IA</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
+      -->
+      <!-- Références -->
+      <section class="experience-section" id="tab-experience">
+        <div class="references-container">
+          <div class="references-header">
+            <h2 class="references-title"><img src="assets/ils_nous_font_confiances.png" alt="" class="section-icon"> Au fil des missions</h2>
+            <p class="references-subtitle">J'ai eu l'occasion d'intervenir auprès de ces entreprises, centres de formation et organismes publics principalement sur des missions de formation IT.</p>
+          </div>
+          <div class="references-logos-wrapper">
+          <div class="references-logos">
+            <div class="ref-logo"><img src="assets/logo/damart.png" alt="Damart"></div>
+            <div class="ref-logo"><img src="assets/logo/laho.png" alt="Laho"></div>
+            <div class="ref-logo"><img src="assets/logo/m2i.png" alt="M2i"></div>
+            <div class="ref-logo"><img src="assets/logo/naval.png" alt="Naval"></div>
+            <div class="ref-logo"><img src="assets/logo/orsys.png" alt="Orsys"></div>
+            <div class="ref-logo"><img src="assets/logo/ovh.png" alt="OVH"></div>
+            <div class="ref-logo"><img src="assets/logo/region.jpg" alt="Région"></div>
+            <div class="ref-logo"><img src="assets/logo/sogeti.jpg" alt="Sogeti"></div>
+            <div class="ref-logo"><img src="assets/logo/utopios.jpg" alt="Utopios"></div>
+            <div class="ref-logo"><img src="assets/logo/ecoledouane.jpg" alt="École des Douanes"></div>
+          </div>
+          </div>
+        </div>
+      </section>
 
-      <!-- Projets web -->
+      <!-- Réalisations -->
       <section class="et-slide" id="tab-projects">
         <div class="slide-inner">
           <div class="section-header">
-            <p class="eyebrow">Web</p>
-            <h2>Projets web réalisés</h2>
-            <p class="slide-intro">
-              Quelques exemples de sites vitrine et de portfolios réalisés avec un souci
-              de performance, de lisibilité et d’autonomie pour le client.
-            </p>
+            <h2><img src="assets/realisations.png" alt="" class="section-icon"> Réalisations</h2>
+            <p class="slide-intro">Quelques exemples de projets développés au fil de notre parcours. Cette sélection ne représente qu'une partie de notre activité. D'autres développements réalisés en mission ne sont pas publics. De nouvelles réalisations s'ajouteront au fur et à mesure.</p>
           </div>
-
-          <section class="achievements">
-            <div class="gallery">
-              <!-- Card ILS ECO -->
-              <div class="project-card"
-                   data-title="Projet web – ILS ECO"
-                   data-description="Créatio d’un site vitrine professionnel pour ILS ECO, spécialisé dans les solutions d’économie d’énergie (solaire, chauffage, installations sanitaires). Site responsive avec formulaire de contact."
-                   data-tech="HTML, CSS, JavaScript, Google Sheet, Google Appscript"
-                   data-link="https://www.ils-eco.com/">
-                <div class="card-image">
-                  <img src="assets/ecran_accueil.jpg"
-                       loading="lazy"
-                       alt="Projet web – ILS ECO">
-                </div>
-                <div class="card-content">
-                  <h3>Projet web – ILS ECO</h3>
-                  <p class="card-excerpt">
-                    Site vitrine responsive, optimisé pour la prise de contact.
-                  </p>
-                  <button class="card-open" type="button">En savoir plus</button>
-                </div>
+          <div class="gallery">
+            <div class="project-card"
+                 data-title="ILS ECO : Site vitrine"
+                 data-description="Création d'un site vitrine professionnel pour ILS ECO, spécialisé dans les solutions d'économie d'énergie. Site responsive avec formulaire de contact."
+                 data-tech="HTML, CSS, JavaScript, Google Apps Script"
+                 data-link="https://www.ils-eco.com/">
+              <div class="card-image">
+                <img src="assets/ecran_accueil.jpg" loading="lazy" alt="ILS ECO">
               </div>
-
-              <!-- Card Soh cook -->
-              <div class="project-card"
-                   data-title="Projet web – Soh cook"
-                   data-description="Portfolio artistique pour une cake-designer avec galerie, blog et backoffice administrable. Mise en valeur du travail, gestion des contenus et évolutivité."
-                   data-tech="HTML, CSS, Vue.js(nuxt), Supabase, Google Appscript"
-                   data-link="https://sohcook.vercel.app/">
-                <div class="card-image">
-                  <img src="assets/ecran_accueil_sohcook.jpg"
-                       loading="lazy"
-                       alt="Projet web – Soh cook">
-                </div>
-                <div class="card-content">
-                  <h3>Projet web – Soh cook</h3>
-                  <p class="card-excerpt">
-                    Portfolio artistique avec backoffice pour gérer les contenus.
-                  </p>
-                  <button class="card-open" type="button">En savoir plus</button>
-                </div>
-              </div>
-
-              <!-- Placeholder -->
-              <div class="project-card is-placeholder">
-                <div class="card-image" aria-hidden="true"></div>
-                <div class="card-content">
-                  <h3>Prochainement...</h3>
-                  <p>De nouvelles réalisations seront ajoutées au fil des projets.</p>
-                </div>
+              <div class="card-content">
+                <h3>ILS ECO</h3>
+                <p class="card-excerpt">Site vitrine responsive, optimisé pour la prise de contact.</p>
+                <button class="card-open" type="button">En savoir plus</button>
               </div>
             </div>
-            <!-- Indication de scroll mobile -->
-            <div class="mobile-scroll-indicator">
-              <span>Swipe</span>
-              <i class="fa-solid fa-arrow-right-long animated-arrow"></i>
+            <div class="project-card"
+                 data-title="Soh cook : Portfolio artistique"
+                 data-description="Portfolio artistique pour une cake-designer avec galerie, blog et backoffice administrable."
+                 data-tech="HTML, CSS, Vue.js (Nuxt), Supabase, Google Apps Script"
+                 data-link="https://sohcook.vercel.app/">
+              <div class="card-image">
+                <img src="assets/ecran_accueil_sohcook.jpg" loading="lazy" alt="Soh cook">
+              </div>
+              <div class="card-content">
+                <h3>Soh cook</h3>
+                <p class="card-excerpt">Portfolio artistique avec backoffice de gestion de contenu.</p>
+                <button class="card-open" type="button">En savoir plus</button>
+              </div>
             </div>
-          </section>
-        </div>
-      </section>
-      
-    <!-- Projets Personnels -->
-      <section class="et-slide" id="tab-personal-projects">
-        <div class="slide-inner">
-          <div class="section-header">
-            <p class="eyebrow">En dehors du travail</p>
-            <h2>Projets Personnels & Cas d'Usage</h2>
-            <p class="slide-intro">
-             Cette section présente quelques projets que je réalise à titre personnel, dans le but d’apprendre, de progresser et d’explorer de nouvelles idées techniques à mon rythme.
-            </p>
+            <div class="project-card"
+                 data-title="DataViz 3D : Tableau de bord"
+                 data-description="Prototype d'un tableau de bord interactif en 3D, conçu avec Nuxt 4 et Three.js, pour visualiser les performances commerciales par département."
+                 data-tech="Nuxt 4, Three.js, GSAP, CSS"
+                 data-link="https://api-visualizer.ogtech.fr/">
+              <div class="card-image">
+                <img src="assets/ecran_france3d.jpg" loading="lazy" alt="DataViz 3D">
+              </div>
+              <div class="card-content">
+                <h3>DataViz 3D</h3>
+                <p class="card-excerpt">Tableau de bord interactif avec carte 3D et visualisation de données.</p>
+                <button class="card-open" type="button">En savoir plus</button>
+              </div>
+            </div>
+            <div class="project-card"
+              data-title="Vision 7'Event : Portefolio photographe"
+              data-description="Conception et développement d'une landing page moderne pour Vision 7'Event, permettant de regrouper les réseaux sociaux, les informations de contact et de mettre en valeur le travail du photographe à travers une interface fluide et responsive."
+              data-tech="HTML, CSS, JavaScript"
+              data-link="https://7event.ogtech.fr/">
+            <div class="card-image">
+              <img src="assets/vision7event.jpg" loading="lazy" alt="Vision 7'Event">
+            </div>
+            <div class="card-content">
+              <h3>Vision 7'Event</h3>
+              <p class="card-excerpt">Conception et intégration d'une landing page responsive avec animations et formulaire de contact pour un photographe</p>
+              <button class="card-open" type="button">En savoir plus</button>
+            </div>
           </div>
-
-          
-          <section class="achievements">
-            <div class="gallery">
-
-                <!-- Nouvelle Card : Projet Personnel (à modifier) -->
-              <div class="project-card"
-                   data-title="Visualisation des performances commerciales en 3D : Cas d’usage fictif"
-                   data-description="Ce cas d’usage fictif montre comment une entreprise pourrait suivre ses indicateurs clés par région à travers une carte 3D animée et une interface claire."
-                   data-tech="Nuxt4; Three.js, Gsap, CSS"
-                   data-link="https://api-visualizer.ogtech.fr/">
-                <div class="card-image">
-                  <img src="assets/ecran_france3d.jpg"
-                       loading="lazy"
-                       alt="Capture d'écran du projet personnel">
-                </div>
-                <div class="card-content">
-                  <h3>Visualisation des performances commerciales en 3D : Cas d’usage fictif</h3>
-                  <p class="card-excerpt">Prototype d’un tableau de bord interactif en 3D, conçu avec Nuxt 4 et Three.js, pour visualiser les performances commerciales par département.</p>
-                  <button class="card-open" type="button">En savoir plus</button>
-                </div>
+            <div class="project-card is-placeholder">
+              <div class="card-content">
+                <h3>D'autres réalisations à venir</h3>
+                <p>D'autres projets seront ajoutés prochainement.</p>
               </div>
-              <!-- Coming soon -->
-              <div class="project-card is-placeholder">
-                <div class="card-image" aria-hidden="true"></div>
-                <div class="card-content">
-                  <h3>Projets en cours...</h3>
-                  <p>D'autres expérimentations sont en développement dans mon labo.</p>
-                </div>
-              </div>
-
             </div>
-              
-            
-            <!-- Indication de scroll mobile -->
-            <div class="mobile-scroll-indicator">
-              <span>Swipe</span>
-              <i class="fa-solid fa-arrow-right-long animated-arrow"></i>
-            </div>
-          </section>
+          </div>
         </div>
       </section>
 
-      <!-- Power Platform -->
+      <!-- Power Platform (caché pour l'instant) -->
+      <!--
       <section class="et-slide" id="tab-power">
         <div class="slide-inner">
           <div class="section-header">
             <p class="eyebrow">Power Platform</p>
             <h2>Power Platform & automatisation</h2>
             <p class="slide-intro">
-              J’évolue avec plaisir dans l’écosystème Power Platform, où je conçois et expérimente des applications métier avec Power Apps et Power Automate, en m’appuyant sur Dataverse, SharePoint et Microsoft 365 pour rendre les processus plus fluides et collaboratifs.
+              J'évolue avec plaisir dans l'écosystème Power Platform, où je conçois et expérimente des applications métier avec Power Apps et Power Automate, en m'appuyant sur Dataverse, SharePoint et Microsoft 365 pour rendre les processus plus fluides et collaboratifs.
             </p>
-            <p>Je développe également mes compétences sur Power BI, afin d’élargir mon champ d’action vers la visualisation et l’analyse de données dans l’environnement Microsoft.</p>
+            <p>Je développe également mes compétences sur Power BI, afin d'élargir mon champ d'action vers la visualisation et l'analyse de données dans l'environnement Microsoft.</p>
           </div>
           <div class="two-columns">
             <ul class="check-list">
@@ -425,23 +360,22 @@
             </ul>
             <ul class="check-list">
               <li>Premiers tableaux de bord avec Power BI</li>
-              <li>Exploration de Copilot et de l’IA dans Microsoft 365</li>
+              <li>Exploration de Copilot et de l'IA dans Microsoft 365</li>
               <li>Prototypage rapide no-code/low-code pour valider vos idées</li>
             </ul>
           </div>
         </div>
       </section>
+      -->
 
       <!-- Contact mail -->
       <section class="et-slide" id="tab-contact">
         <div class="slide-inner">
           <div class="section-header">
             <p class="eyebrow">Contact</p>
-            <h2>Travaillons ensemble</h2>
-            <p class="slide-intro">
-              Vous avez une mission freelance, un besoin ponctuel ou un poste à pourvoir
-              autour de .NET ou de la Power Platform ? Choisissez le canal qui vous convient.
-            </p>
+            <h2><i class="fa-solid fa-envelope"></i> Travaillons ensemble</h2>
+            <p class="slide-intro">Échangeons sur votre projet</p>
+            <p class="slide-intro" style="font-size:0.95rem;margin-top:4px;">Que vous recherchiez une formation IT, un accompagnement technique ou une solution de développement, je serai ravi d'en discuter avec vous.</p>
           </div>
 
           <div class="contact-container">
@@ -487,7 +421,7 @@
             </div>
             
             <div class="contact-footer">
-              <p>Disponible pour des missions Freelance, CDD ou CDI.</p>
+              <p>Au plaisir d'échanger avec vous.</p>
             </div>
           </div>
         </div>
@@ -594,8 +528,15 @@
                   accept=".pdf,.doc,.docx,.txt,.md">
                 <div id="fileName" role="button" tabindex="0" aria-label="Choisir ou déposer un fichier">
                   Cliquer ou déposer un fichier (PDF, DOC/DOCX, TXT, MD)
-                </div>
+            </div>
+            <div class="project-card is-placeholder">
+              <div class="card-image" aria-hidden="true"></div>
+              <div class="card-content">
+                <h3>Et d'autres réalisations</h3>
+                <p>Ces exemples sont publics. D'autres projets sont disponibles en intranet et ne sont pas accessibles ici.</p>
               </div>
+            </div>
+          </div>
               <div class="hint">
                 Formats: PDF, DOC, DOCX, TXT, MD — Taille max: 10&nbsp;Mo
               </div>

@@ -115,6 +115,16 @@ export function initNavigation() {
         currentTab = newCurrentTab;
         setSliderCss(currentTab);
       }
+
+      // Fallback: if at page bottom, highlight last tab
+      if (scrollY + window.innerHeight >= document.body.scrollHeight - 10) {
+        const lastTab = tabs[tabs.length - 1];
+        if (lastTab && lastTab !== currentTab) {
+          currentTab = lastTab;
+          currentId = lastTab.getAttribute('href');
+          setSliderCss(currentTab);
+        }
+      }
     }
   
     function checkTabContainerPosition() {
