@@ -1,373 +1,302 @@
-import { showToast } from './utils.js';
+/** Formulaire de contact : validation côté client puis envoi au Web App Apps Script. */
 
-export function initForm() {
+import { showToast } from './toast.js?v=c089a5e8';
+import { initDefi } from './defi.js?v=9647ce21';
+import { closeModal } from './modals.js?v=7adfabd4';
+import { poster } from './backend.js?v=1cacc4b2';
+
+/* 5 Mo : l'encodage Base64 ajoute ~33 %, ce qui reste sous les limites d'Apps Script. */
+const MAX_FILE_BYTES = 5 * 1024 * 1024;
+const ALLOWED_EXT = ['pdf', 'doc', 'docx', 'txt', 'md'];
+
+const EMAIL_RE = /^[\w.!#$%&'*+/=?^`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,}$/;
+/* Un numéro de n'importe quel pays : les signes qu'on écrit autour, et entre
+   huit et quinze chiffres. Les missions ne s'arrêtent pas à la France, un
+   numéro belge, suisse ou luxembourgeois doit passer. Même règle côté serveur. */
+const PHONE_RE = /^[\d\s+.()-]{8,24}$/;
+const telOk = (v) => {
+  const chiffres = (v.match(/\d/g) || []).length;
+  return PHONE_RE.test(v.trim()) && chiffres >= 8 && chiffres <= 15;
+};
+
+const DEFAULT_FILE_LABEL =
+  '<svg class="ico" aria-hidden="true"><use href="#i-paperclip"/></svg> Cliquer ou déposer un fichier';
+
+/* Une règle par champ : évite cinq fonctions de validation quasi identiques. */
+const RULES = {
+  companyName: (v) =>
+    !v ? 'Le nom de la société est requis.'
+      : v.length < 2 ? 'Au moins 2 caractères.'
+      : '',
+  email: (v) =>
+    !v ? "L'e-mail est requis."
+      : !EMAIL_RE.test(v) ? 'E-mail invalide (ex : nom@domaine.fr).'
+      : '',
+  phone: (v) =>
+    v && !telOk(v) ? 'Numéro invalide (ex : 06 12 34 56 78, +32 470 12 34 56).' : '',
+  missionType: (v) => (!v ? 'Veuillez sélectionner un type de besoin.' : ''),
+  message: (v) =>
+    !v ? 'Merci de décrire votre besoin.'
+      : v.length < 10 ? 'Au moins 10 caractères.'
+      : ''
+};
+
+export function initContactForm() {
   const form = document.getElementById('contactForm');
-  const fileInput = document.getElementById('jobDescriptionFile');
-  const fileNameDisplay = document.getElementById('fileName');
-  const fileWrapper = document.querySelector('.file-upload-wrapper');
-  const fileErrorEl = document.getElementById('file-error');
+  if (!form) return;
 
-  // Selectors for fields
-  const els = form ? {
-    company: document.getElementById('companyName'),
-    email: document.getElementById('email'),
-    phone: document.getElementById('phone'),
-    mission: document.getElementById('missionType'),
-    message: document.getElementById('message'),
-    submit: document.getElementById('submitBtn'),
-    status: document.getElementById('formStatus')
-  } : {};
+  /* Horodatage d'ouverture : le serveur refuse les envois instantanés, qu'aucun
+     humain ne produit. Mesuré au chargement, donc il ne peut que surestimer le
+     temps de remplissage — jamais rejeter quelqu'un à tort. */
+  const ouvertureMs = Date.now();
 
-  const errs = form ? {
-    company: document.getElementById('companyName-error'),
-    email: document.getElementById('email-error'),
-    phone: document.getElementById('phone-error'),
-    mission: document.getElementById('missionType-error'),
-    message: document.getElementById('message-error')
-  } : {};
+  /* L'épreuve visuelle, la même que sur la demande de numéro. Elle est
+     retirée au sort à chaque ouverture de la fenêtre : sans cela, quelqu'un
+     qui l'a résolue une fois la retrouverait déjà faite. */
+  const defi = initDefi(form);
+  document.querySelectorAll('[data-open-contact]').forEach((btn) =>
+    btn.addEventListener('click', () => defi?.melanger())
+  );
 
-  const emailPattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
-  const frPhonePattern = /^(?:0[1-9]|(?:\+33|0033)[ .-]?[1-9])(?:[ .-]?\d{2}){4}$/;
-  const MAX_FILE_BYTES = 10 * 1024 * 1024;
-  const ALLOWED_EXT = ['pdf', 'doc', 'docx', 'txt', 'md'];
-  const ALLOWED_MIME = new Set([
-    'application/pdf',
-    'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    'text/plain',
-    'text/markdown'
-  ]);
+  const submitBtn = form.querySelector('#submitBtn');
+  const status = form.querySelector('#formStatus');
+  const fields = Object.keys(RULES)
+    .map((name) => [name, form.elements[name]])
+    .filter(([, el]) => el);
 
-  // Helper Functions
-  const formatBytes = (bytes) => {
-    if (bytes == null) return '';
-    const units = ['o', 'Ko', 'Mo', 'Go'];
-    let i = 0;
-    let v = bytes;
-    while (v >= 1024 && i < units.length - 1) {
-      v /= 1024;
-      i++;
-    }
-    return (Math.round(v * 10) / 10) + ' ' + units[i];
-  };
-
-  function setFileError(msg) {
-    if (!fileErrorEl) return;
-    fileErrorEl.textContent = msg || '';
-    if (msg) fileErrorEl.setAttribute('role', 'alert');
-    else fileErrorEl.removeAttribute('role');
+  /* ---------- Validation ---------- */
+  function validateField(name, el, { silent = false } = {}) {
+    const message = RULES[name]((el.value || '').trim());
+    if (!silent) setFieldError(el, message);
+    return !message;
   }
 
-  function fileExt(name) {
-    const m = String(name || '').toLowerCase().match(/\.([a-z0-9]+)$/);
-    return m ? m[1] : '';
+  function validateAll() {
+    return fields.map(([name, el]) => validateField(name, el)).every(Boolean);
   }
 
-  function isAllowedType(file) {
-    const extOk = ALLOWED_EXT.includes(fileExt(file.name));
-    const mimeOk = file.type ? ALLOWED_MIME.has(file.type) : extOk;
-    return extOk || mimeOk;
+  fields.forEach(([name, el]) => {
+    const event = el.tagName === 'SELECT' ? 'change' : 'blur';
+    el.addEventListener(event, () => validateField(name, el));
+
+    // Une fois le champ signalé en erreur, on corrige en direct.
+    el.addEventListener('input', () => {
+      if (el.closest('.field')?.classList.contains('is-invalid')) validateField(name, el);
+    });
+  });
+
+  /* ---------- Fichier joint ---------- */
+  const fileInput = form.querySelector('#jobDescriptionFile');
+  const dropzone = form.querySelector('#dropzone');
+  const fileLabel = form.querySelector('#fileName');
+  const fileError = form.querySelector('#file-error');
+
+  function setFileError(message) {
+    if (fileError) fileError.textContent = message || '';
   }
 
-  function validateSelectedFile(file) {
-    if (!file) return true;
-    if (file.size > MAX_FILE_BYTES) {
-      setFileError('Fichier trop volumineux (max 10 Mo).');
+  function validateFile(file) {
+    if (!file || !file.size) return true;
+
+    const ext = (file.name.toLowerCase().match(/\.([a-z0-9]+)$/) || [])[1] || '';
+    if (!ALLOWED_EXT.includes(ext)) {
+      setFileError('Format non autorisé. Utilisez PDF, DOC, DOCX, TXT ou MD.');
       return false;
     }
-    if (!isAllowedType(file)) {
-      setFileError('Format non autorisé. Utilisez PDF, DOC/DOCX, TXT ou MD.');
+    if (file.size > MAX_FILE_BYTES) {
+      setFileError(`Fichier trop volumineux (${formatBytes(file.size)}). Maximum 5 Mo.`);
       return false;
     }
     setFileError('');
     return true;
   }
 
-  function displaySelectedFile(file) {
-    if (!fileNameDisplay) return;
+  function renderFile(file) {
+    if (!fileLabel) return;
+
     if (!file) {
-      fileNameDisplay.textContent = 'Cliquer ou déposer un fichier (PDF, DOC/DOCX, TXT, MD)';
+      fileLabel.innerHTML = DEFAULT_FILE_LABEL;
       return;
     }
-    const icon = '📄';
-    fileNameDisplay.innerHTML =
-      `<span class="file-chip">${icon}<span class="file-meta">${file.name} • ${formatBytes(file.size)}</span>` +
-      `<button type="button" class="remove-file" aria-label="Retirer le fichier" title="Retirer">Retirer</button></span>`;
-    const removeBtn = fileNameDisplay.querySelector('.remove-file');
-    removeBtn?.addEventListener('click', (e) => {
-      e.stopPropagation(); // Prevent triggering file input
+
+    // textContent pour le nom du fichier : jamais d'injection via innerHTML.
+    fileLabel.replaceChildren();
+    const chip = document.createElement('span');
+    chip.className = 'file-chip';
+
+    const name = document.createElement('span');
+    name.textContent = `${file.name} · ${formatBytes(file.size)}`;
+
+    const remove = document.createElement('button');
+    remove.type = 'button';
+    remove.className = 'file-remove';
+    remove.textContent = 'Retirer';
+    remove.addEventListener('click', (e) => {
+      e.stopPropagation();
       if (fileInput) fileInput.value = '';
-      displaySelectedFile(null);
+      renderFile(null);
       setFileError('');
     });
+
+    chip.append(name, remove);
+    fileLabel.append(chip);
   }
 
-  function setFieldError(key, message) {
-    if (!errs[key]) return;
-    errs[key].textContent = message || '';
-    if (message) errs[key].setAttribute('role', 'alert');
-    else errs[key].removeAttribute('role');
-  }
-
-  // Validation logic
-  function validateCompany() {
-    const el = els.company; if (!el) return true;
-    const v = (el.value || '').trim();
-    let msg = '';
-    if (!v) msg = "Le nom de l’entreprise est requis.";
-    else if (el.minLength && v.length < el.minLength) msg = `Au moins ${el.minLength} caractères.`;
-    setFieldError('company', msg);
-    el.setCustomValidity?.(msg);
-    return !msg;
-  }
-
-  function validateEmail() {
-    const el = els.email; if (!el) return true;
-    const v = (el.value || '').trim();
-    let msg = '';
-    if (!v) msg = "L’email est requis.";
-    else if (!emailPattern.test(v)) msg = 'E-mail invalide (ex: nom@domaine.fr).';
-    setFieldError('email', msg);
-    el.setCustomValidity?.(msg);
-    return !msg;
-  }
-
-  function validatePhone() {
-    const el = els.phone; if (!el) return true;
-    const v = (el.value || '').trim();
-    let msg = '';
-    if (v && !frPhonePattern.test(v)) msg = 'Numéro FR invalide (ex: 06 12 34 56 78 ou +33 6 12 34 56 78).';
-    setFieldError('phone', msg);
-    el.setCustomValidity?.(msg);
-    return !msg;
-  }
-
-  function validateMission() {
-    const el = els.mission; if (!el) return true;
-    const v = el.value;
-    let msg = '';
-    if (!v) msg = 'Veuillez sélectionner un type de collaboration.';
-    setFieldError('mission', msg);
-    el.setCustomValidity?.(msg);
-    return !msg;
-  }
-
-  function validateMessage() {
-    const el = els.message; if (!el) return true;
-    const v = (el.value || '').trim();
-    let msg = '';
-    if (!v) msg = 'Le message est requis.';
-    else if (el.minLength && v.length < el.minLength) msg = `Au moins ${el.minLength} caractères.`;
-    setFieldError('message', msg);
-    el.setCustomValidity?.(msg);
-    return !msg;
-  }
-
-  function debounce(fn, delay = 220) {
-    let t;
-    return (...a) => {
-      clearTimeout(t);
-      t = setTimeout(() => fn(...a), delay);
-    };
-  }
-
-  // Setup listeners
-  if (fileInput && fileNameDisplay) {
+  if (fileInput) {
     fileInput.addEventListener('change', () => {
-      const f = fileInput.files && fileInput.files[0];
-      if (!validateSelectedFile(f)) {
-        displaySelectedFile(null);
+      const file = fileInput.files?.[0];
+      if (!validateFile(file)) {
+        fileInput.value = '';
+        renderFile(null);
         return;
       }
-      displaySelectedFile(f);
+      renderFile(file);
     });
+  }
 
-    fileNameDisplay.addEventListener('click', () => fileInput.click());
-    fileNameDisplay.addEventListener('keydown', (e) => {
+  if (fileLabel && fileInput) {
+    fileLabel.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         fileInput.click();
       }
     });
+  }
 
-    if (fileWrapper) {
-      ['dragenter', 'dragover'].forEach(evt =>
-        fileWrapper.addEventListener(evt, (e) => {
-          e.preventDefault();
-          fileWrapper.classList.add('drag-over');
-        })
-      );
-      ['dragleave', 'drop'].forEach(evt =>
-        fileWrapper.addEventListener(evt, (e) => {
-          if (evt === 'drop') return;
-          fileWrapper.classList.remove('drag-over');
-        })
-      );
-      fileWrapper.addEventListener('drop', (e) => {
+  if (dropzone && fileInput) {
+    ['dragenter', 'dragover'].forEach((type) =>
+      dropzone.addEventListener(type, (e) => {
         e.preventDefault();
-        fileWrapper.classList.remove('drag-over');
-        const f = e.dataTransfer?.files?.[0];
-        if (!f) return;
-        if (!validateSelectedFile(f)) {
-          displaySelectedFile(null);
-          return;
-        }
-        try {
-          const dt = new DataTransfer();
-          dt.items.add(f);
-          fileInput.files = dt.files;
-        } catch { /* ignore */ }
-        displaySelectedFile(f);
-      });
-    }
-  }
+        dropzone.classList.add('is-dragover');
+      })
+    );
 
-  if (form) {
-    const markTouched = (el) => el?.closest('.form-group')?.classList.add('touched');
+    dropzone.addEventListener('dragleave', () => dropzone.classList.remove('is-dragover'));
 
-    els.company?.addEventListener('input', debounce(validateCompany, 180));
-    els.email?.addEventListener('input', debounce(validateEmail, 220));
-    els.phone?.addEventListener('input', debounce(validatePhone, 220));
-    els.mission?.addEventListener('change', validateMission);
-    els.message?.addEventListener('input', debounce(validateMessage, 180));
-
-    els.company?.addEventListener('blur', () => { markTouched(els.company); validateCompany(); });
-    els.email?.addEventListener('blur', () => { markTouched(els.email); validateEmail(); });
-    els.phone?.addEventListener('blur', () => { markTouched(els.phone); validatePhone(); });
-    els.mission?.addEventListener('change', () => { markTouched(els.mission); validateMission(); });
-    els.message?.addEventListener('blur', () => { markTouched(els.message); validateMessage(); });
-
-    form.addEventListener('submit', (e) => {
+    dropzone.addEventListener('drop', (e) => {
       e.preventDefault();
-      const ok = [
-        validateCompany(),
-        validateEmail(),
-        validatePhone(),
-        validateMission(),
-        validateMessage()
-      ].every(Boolean);
+      dropzone.classList.remove('is-dragover');
 
-      if (!ok) {
-        form.classList.add('was-validated');
-        if (els.status) els.status.textContent = 'Merci de corriger les erreurs indiquées.';
-        form.reportValidity?.();
-        return;
-      }
+      const file = e.dataTransfer?.files?.[0];
+      if (!file || !validateFile(file)) return;
 
-      if (els.submit) {
-        els.submit.textContent = 'Envoi en cours...';
-        els.submit.disabled = true;
-      }
-      if (els.status) els.status.textContent = '';
-
-      const formData = new FormData(form);
-      const file = formData.get('jobDescriptionFile');
-
-      if (file && file.size > 0 && !validateSelectedFile(file)) {
-        if (els.submit) {
-          els.submit.textContent = 'Envoyer';
-          els.submit.disabled = false;
-        }
-        return;
-      }
-
-      if (file && file.size > 0) {
-        const reader = new FileReader();
-        reader.onloadend = function () {
-          const data = Object.fromEntries(formData.entries());
-          data.fileBase64 = reader.result.split(',')[1];
-          data.fileName = file.name;
-          data.fileType = file.type;
-          sendToGoogleScript(data, els, form, fileNameDisplay);
-        };
-        reader.readAsDataURL(file);
-      } else {
-        sendToGoogleScript(Object.fromEntries(formData.entries()), els, form, fileNameDisplay);
+      try {
+        const dt = new DataTransfer();
+        dt.items.add(file);
+        fileInput.files = dt.files;
+        renderFile(file);
+      } catch {
+        setFileError("Dépôt non pris en charge par ce navigateur, utilisez le sélecteur de fichier.");
       }
     });
   }
 
-  // Anti-Restoration logic
-  (function resetFormOnLoad() {
-    if (!form) return;
-    form.setAttribute('autocomplete', 'off');
-    ['companyName', 'email', 'phone'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.setAttribute('autocomplete', 'off');
-    });
+  /* ---------- Envoi ---------- */
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-    try { form.reset(); } catch { /* ignore */ }
-    form.classList.remove('was-validated');
-    document.querySelectorAll('#contactForm .form-group')
-      .forEach(g => g.classList.remove('touched'));
+    // Piège à robots : rempli = on simule un succès sans rien envoyer.
+    if (form.elements.website?.value) return;
 
-    Object.values(errs).forEach(el => { if(el) el.textContent = ''; });
-    Object.values(els).forEach(el => { 
-        if (el && el.setCustomValidity) el.setCustomValidity('');
-    });
+    if (defi && !defi.verifier()) {
+      status.textContent = "Le personnage n'est pas encore sur ses pieds.";
+      return;
+    }
 
-    window.addEventListener('pageshow', function (e) {
-      if (e.persisted) {
-        try { form.reset(); } catch { }
-        form.classList.remove('was-validated');
-        document.querySelectorAll('#contactForm .form-group')
-          .forEach(g => g.classList.remove('touched'));
-        Object.values(errs).forEach(el => { if(el) el.textContent = ''; });
-        Object.values(els).forEach(el => { 
-            if (el && el.setCustomValidity) el.setCustomValidity('');
-        });
+    const file = fileInput?.files?.[0];
+    if (!validateAll() || !validateFile(file)) {
+      status.textContent = 'Merci de corriger les erreurs indiquées.';
+      form.querySelector('.field.is-invalid input, .field.is-invalid select, .field.is-invalid textarea')?.focus();
+      return;
+    }
+
+    setBusy(true);
+    status.textContent = '';
+
+    try {
+      const data = Object.fromEntries(new FormData(form).entries());
+      delete data.jobDescriptionFile;   // objet File, non sérialisable
+
+      // `website` (le champ piège) part volontairement : le serveur le
+      // revérifie, car un robot qui ignore ce script n'est jamais passé par
+      // le test ci-dessus.
+      data.type = 'contact';               // l'autre type est la demande de numéro
+      data.elapsed = Date.now() - ouvertureMs;
+
+      if (file?.size) {
+        data.fileName = file.name;
+        data.fileType = file.type;
+        data.fileBase64 = await toBase64(file);
       }
-    });
-  })();
+
+      await poster(data);
+
+      form.reset();
+      renderFile(null);
+      form.querySelectorAll('.field').forEach((f) => f.classList.remove('is-invalid'));
+      form.querySelectorAll('.field-error').forEach((el) => { el.textContent = ''; });
+
+      // La fenetre se retire, puis la confirmation s'affiche sur la page.
+      closeModal();
+      showToast('Message envoyé, merci. Je reviens vers vous dès que possible.',
+                'success', { duration: 8000 });
+    } catch (error) {
+      // Le serveur ponctue ses messages, pas les nôtres : on égalise pour
+      // éviter le « invalide.. » de deux points cote a cote.
+      const raison = String(error.message || '').replace(/\.*$/, '');
+      showToast(
+        `L'envoi a échoué : ${raison}. Vous pouvez réessayer ou me joindre sur LinkedIn.`,
+        'error',
+        { duration: 8000 }
+      );
+    } finally {
+      setBusy(false);
+    }
+  });
+
+  function setBusy(busy) {
+    if (!submitBtn) return;
+    submitBtn.disabled = busy;
+    submitBtn.textContent = busy ? 'Envoi en cours…' : 'Envoyer ma demande';
+  }
+
+  // Empêche la restauration des valeurs au retour arrière (bfcache).
+  window.addEventListener('pageshow', (e) => {
+    if (!e.persisted) return;
+    form.reset();
+    renderFile(null);
+    form.querySelectorAll('.field').forEach((f) => f.classList.remove('is-invalid'));
+    form.querySelectorAll('.field-error').forEach((el) => { el.textContent = ''; });
+  });
 }
 
-function sendToGoogleScript(data, els, form, fileNameDisplay) {
-  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzkUjSMXl6hLf-hFHG-XdZvp92ciYzKJUCursVV3SjjSkYZM5oZ83OlQ4i2ejCwGrCK/exec';
+/* ---------------- Utilitaires ---------------- */
 
-  fetch(APPS_SCRIPT_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify(data)
-  })
-    .then(async res => {
-      const text = await res.text();
-      let json;
-      try { json = JSON.parse(text); } catch { json = null; }
+function setFieldError(el, message) {
+  const field = el.closest('.field');
+  const target = field?.querySelector('.field-error');
 
-      if (!res.ok) {
-        console.error('HTTP error', res.status, text);
-        throw new Error('HTTP ' + res.status + ': ' + (json?.error || text || 'Erreur inconnue'));
-      }
+  field?.classList.toggle('is-invalid', Boolean(message));
+  el.setAttribute('aria-invalid', message ? 'true' : 'false');
+  if (target) target.textContent = message;
+}
 
-      if (!json) {
-        console.error('Réponse non JSON:', text);
-        throw new Error('Réponse non JSON du serveur');
-      }
+function formatBytes(bytes) {
+  const units = ['o', 'Ko', 'Mo'];
+  let value = bytes;
+  let i = 0;
+  while (value >= 1024 && i < units.length - 1) {
+    value /= 1024;
+    i += 1;
+  }
+  return `${Math.round(value * 10) / 10} ${units[i]}`;
+}
 
-      if (json.ok !== true) {
-        console.error('Serveur a renvoyé une erreur:', json);
-        throw new Error(json.error || 'Erreur serveur');
-      }
-
-      showToast('Message envoyé avec succès !', 'success');
-      if (form) {
-        form.reset();
-        form.classList.remove('was-validated');
-        document.querySelectorAll('#contactForm .form-group')
-          .forEach(g => g.classList.remove('touched'));
-      }
-      if (fileNameDisplay) {
-        fileNameDisplay.textContent = 'Cliquer ou déposer un fichier (PDF, DOC/DOCX, TXT, MD)';
-      }
-    })
-    .catch(error => {
-      console.error('Erreur soumission formulaire:', error);
-      showToast('Une erreur est survenue: ' + (error?.message || 'voir console'), 'error', { duration: 6000 });
-    })
-    .finally(() => {
-      if (els.submit) {
-        els.submit.textContent = 'Envoyer';
-        els.submit.disabled = false;
-      }
-    });
+function toBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result).split(',')[1]);
+    reader.onerror = () => reject(new Error('Lecture du fichier impossible'));
+    reader.readAsDataURL(file);
+  });
 }

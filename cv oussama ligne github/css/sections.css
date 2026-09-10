@@ -1,0 +1,1542 @@
+/* ==========================================================================
+   SECTIONS — en-tête, hero, bandeau technos, logos, à propos, CTA, pied de page.
+   Un seul point de rupture (--bp-nav : 900px) pour basculer la navigation.
+   ========================================================================== */
+
+/* ---------------- En-tête ----------------
+   Fixe et transparent tant qu'on est en haut : il se pose sur la couverture
+   bleue, tout en blanc. Des qu'on defile, il prend un fond clair et repasse
+   en encre. */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  color: var(--ink);
+  transition: background-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.site-header.is-stuck {
+  background: rgba(247, 247, 245, 0.92);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--line);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-6);
+  min-height: var(--header-h);
+  padding-inline: var(--gutter);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+}
+.brand span { color: var(--brand); }
+
+/* Liens et contact, en capitales serif, avec un large ecart entre les deux :
+   les liens vers le milieu, le contact au bord, comme un sommaire. */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: clamp(2rem, 6vw, 6rem);
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+/* En haut de page, tout l'en-tete est pose sur le bleu : blanc, « Tech » en
+   bleu clair. Seulement au-dela de 900px — sur mobile l'en-tete a un fond
+   clair des le depart. */
+@media (min-width: 901px) {
+  .site-header:not(.is-stuck) { color: #fff; }
+  .site-header:not(.is-stuck) .brand,
+  .site-header:not(.is-stuck) .header-right { color: #fff; }
+  /* Sur le bleu, --brand-light tombe a 2:1 : le mot « Tech » disparaissait. */
+  .site-header:not(.is-stuck) .brand span { color: var(--brand-on-blue); }
+}
+
+.nav-desktop { display: flex; align-items: center; }
+
+/* Pleine couleur au repos ; au survol et pour la section en cours, un trait
+   dessous. Sur le fond clair, le survol passe en plus au bleu. */
+.nav-link,
+.header-cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: inherit;
+  white-space: nowrap;      /* un lien ne se replie jamais sur deux lignes */
+  text-decoration: none;
+  text-underline-offset: 0.4em;
+  text-decoration-thickness: 1.5px;
+  transition: color var(--dur-fast) var(--ease);
+}
+.nav-link:hover,
+.nav-link.is-active,
+.header-cta.is-active,
+.header-cta:hover { text-decoration: underline; }
+/* `color: inherit` ici est indispensable : sans lui, la regle generique
+   `a:hover` de base.css (plus specifique que `.nav-link`) peignait le lien
+   survole en bleu de marque — invisible sur la couverture du meme bleu. */
+.nav-link:hover { color: inherit; }
+.site-header.is-stuck .nav-link:hover,
+.site-header.is-stuck .header-cta:hover { color: var(--brand); }
+
+/* La barre entre les liens est un element a part : le survol d'un lien ne
+   la touche pas. */
+.nav-sep {
+  margin-inline: 0.65em;
+  opacity: 0.5;
+  user-select: none;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+/* « Contact » : un lien texte au bord, pas un bouton. */
+.header-cta {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+}
+
+/* Bouton hamburger */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0 0.6875rem;
+  border: 1px solid currentColor;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform var(--dur) var(--ease), opacity var(--dur-fast) var(--ease);
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---------------- Navigation mobile ---------------- */
+.mobile-nav {
+  position: fixed;
+  top: var(--header-h);
+  right: 0;
+  left: 0;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding: var(--sp-5) var(--gutter) var(--sp-7);
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  box-shadow: var(--sh-2);
+  animation: nav-drop var(--dur) var(--ease);
+}
+.mobile-nav[hidden] { display: none; }
+
+@keyframes nav-drop { from { opacity: 0; transform: translateY(-0.5rem); } }
+
+.mobile-nav-link {
+  padding: var(--sp-4) 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 500;
+  text-decoration: none;
+}
+.mobile-nav-link:hover { color: var(--brand); }
+
+.mobile-nav .btn { margin-top: var(--sp-3); }
+
+.mobile-nav-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+  padding: var(--sp-3);
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  text-decoration: none;
+}
+
+.nav-scrim {
+  position: fixed;
+  inset: var(--header-h) 0 0;
+  z-index: 98;
+  background: rgba(22, 24, 29, 0.4);
+  animation: fade-in var(--dur) var(--ease);
+}
+.nav-scrim[hidden] { display: none; }
+
+body.nav-open { overflow: hidden; }
+
+/* Bascule navigation : desktop ↔ mobile. Sur petit ecran l'en-tete garde un
+   fond clair en permanence : sans les liens, une barre transparente sur le
+   bleu ne dirait plus qu'elle est une barre. */
+@media (max-width: 900px) {
+  .site-header { background: var(--bg); box-shadow: 0 1px 0 var(--line); }
+  .nav-desktop,
+  .header-cta { display: none; }
+  .nav-toggle { display: flex; }
+}
+
+/* ---------------- Hero ----------------
+   Une couverture : un aplat bleu pleine largeur, et rien que du texte, compose
+   sur la grille de la page. Le titre en haut, les details au pied — accroche
+   et boutons a gauche, references a droite. L'en-tete fixe se pose dessus ;
+   la couverture lui reserve sa hauteur en marge interne. En dessous, la bande
+   de decor pixel art, comme au pied de chaque section. */
+.hero {
+  display: flex;
+  flex-direction: column;
+  min-height: min(100svh, 54rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero-cover {
+  position: relative;
+  isolation: isolate;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(2rem, 5vh, 3.5rem);
+  padding: calc(var(--header-h) + clamp(1.5rem, 4vh, 3rem)) 0 clamp(2.5rem, 5vh, 4rem);
+  color: #fff;
+  /* Une surface eclairee, pas un aplat. La lumiere est posee en haut a
+     DROITE, sur la nuee de pixels : au-dessus du titre, elle eclaircissait le
+     bleu juste sous le texte blanc et faisait tomber le contraste a 4,2:1.
+     Deplacee, elle eclaire une zone sans texte et peut meme etre plus franche.
+     Un grain tres leger par-dessus (bruit SVG en ligne, fondu en lumiere
+     douce) : le rendu d'un papier imprime plutot que d'un ecran. */
+  background-color: var(--brand-strong);
+  background-image:
+    var(--grain),
+    radial-gradient(52rem 34rem at 72% 26%, rgba(107, 182, 245, 0.20), transparent 64%),
+    linear-gradient(135deg, var(--brand) 0%, var(--brand-strong) 42%, var(--brand-deep) 100%);
+  background-size: 240px 240px, auto, auto;
+  background-blend-mode: soft-light, normal, normal;
+}
+
+/* La nuee de pixels du coin haut droit (tools/pixels.py) : ton sur ton, elle
+   se dissout vers le centre. Sous le contenu (z-index negatif dans le
+   contexte isole de la couverture), au-dessus du fond. */
+.hero-cover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  width: min(58vw, 48rem);
+  height: min(72%, 24rem);
+  background: url("../assets/img/pixels.svg") right top / contain no-repeat;
+  pointer-events: none;
+}
+
+/* -- Le haut : mention de couverture, puis le titre -- */
+.hero-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-5);
+}
+.hero-kicker {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  /* Blanc plein : a 85 % d'opacite, cette ligne tombait a 3,9:1 sur le bleu. */
+  color: #fff;
+}
+/* Le nom en pleine encre, la qualite un ton en dessous : une seule ligne,
+   deux niveaux de lecture. Sous le nom, un trait fait de carres ambre — les
+   memes pixels que la nuee, le decor et l'affiche « Niveau 1 ». Il se
+   dessine carre par carre au chargement (js/modules/hero-accent.js), puis
+   reste : c'est une marque, pas un effet de passage. */
+.hero-name {
+  position: relative;
+  color: #fff;
+}
+.px-rule {
+  position: absolute;
+  left: 0;
+  bottom: -0.5em;
+  width: calc(100% - 0.12em);   /* moins l'espacement qui suit la derniere lettre */
+  height: 3px;
+  background: repeating-linear-gradient(90deg, var(--accent) 0 3px, transparent 3px 6px);
+}
+.hero-title {
+  max-width: 11ch;
+  font-size: clamp(3.25rem, 2rem + 7vw, 9rem);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  color: #fff;
+}
+/* Le verbe en italique et en bleu clair : la seule couleur du titre. */
+.hero-title em { font-style: italic; color: var(--brand-on-blue); }
+
+/* -- Le pied : accroche et boutons a gauche, references a droite -- */
+.hero-foot {
+  display: grid;
+  grid-template-columns: minmax(0, 34rem) auto;
+  grid-template-areas:
+    "deck  proof"
+    "acts  proof";
+  justify-content: space-between;
+  align-items: end;
+  gap: var(--sp-6) var(--sp-8);
+}
+.hero-deck {
+  grid-area: deck;
+  font-size: clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.92);
+  text-wrap: pretty;
+}
+.hero-actions {
+  grid-area: acts;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+}
+
+/* Les references, en colonne sous un filet, comme un colophon. Ce sont les
+   noms qui portent la valeur : ils se lisent en pleine encre, un cran
+   au-dessus du corps courant, quand la mention qui les introduit reste
+   discrete. */
+.hero-proof {
+  grid-area: proof;
+  min-width: 16rem;
+  padding-left: var(--sp-5);
+  border-left: 1px solid rgba(255, 255, 255, 0.35);
+}
+.hero-proof-label {
+  display: block;
+  margin-bottom: var(--sp-3);
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);   /* ~4,8:1 sur le bleu, AA en petit corps */
+}
+/* Le pixel qui ouvre chaque reference : la meme ambre que le trait du nom. */
+.hero-proof-list .px {
+  display: inline-block;
+  width: 0.375rem;
+  height: 0.375rem;
+  margin-right: 0.5em;
+  background: var(--accent);
+  vertical-align: 0.08em;
+}
+.hero-proof-list li {
+  display: block;
+  padding-block: 0.1875rem;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.1875rem);
+  font-weight: 500;
+  line-height: 1.35;
+  color: #fff;
+}
+
+/* -- Entree sequencee : chaque bloc arrive apres le precedent -- */
+.hero-head,
+.hero-deck,
+.hero-actions,
+.hero-proof {
+  animation: hero-rise 800ms var(--ease) both;
+}
+.hero-head    { animation-delay: 120ms; }
+.hero-deck    { animation-delay: 380ms; }
+.hero-actions { animation-delay: 500ms; }
+.hero-proof   { animation-delay: 620ms; }
+
+@keyframes hero-rise {
+  from { opacity: 0; transform: translate3d(0, 1.25rem, 0); }
+}
+
+/* Ecrans larges mais peu hauts (portables 1366x768, 1280x720) : la
+   couverture se resserre pour que la bande pixel art reste visible sans
+   faire defiler. */
+@media (min-width: 901px) and (max-height: 50rem) {
+  .hero-cover {
+    gap: var(--sp-6);
+    padding-top: calc(var(--header-h) + var(--sp-5));
+    padding-bottom: var(--sp-6);
+  }
+  .hero-head { gap: var(--sp-4); }
+  .hero-title { font-size: clamp(3rem, 2rem + 5vw, 7rem); }
+  .hero-foot { gap: var(--sp-4) var(--sp-8); }
+}
+
+/* Sur une colonne : titre, accroche, boutons, puis les references en une
+   ligne qui s'ecoule — plus de colonne ni de filet. */
+@media (max-width: 900px) {
+  .hero { min-height: 0; }
+  .hero-cover {
+    gap: var(--sp-7);
+    padding: calc(var(--header-h) + var(--sp-7)) 0 var(--sp-8);
+  }
+  .hero-cover::before { width: 62vw; height: 9rem; }   /* la nuee s'arrete au-dessus de la mention */
+  .hero-foot {
+    grid-template-columns: 1fr;
+    grid-template-areas: "deck" "acts" "proof";
+  }
+  .hero-proof {
+    min-width: 0;
+    margin-top: var(--sp-2);
+    padding-left: 0;
+    border-left: 0;
+  }
+  .hero-proof-label { display: block; margin: 0 0 var(--sp-2); }
+  .hero-proof-list { display: inline; }
+  /* Les noms s'ecoulent en ligne, separes par leur propre pixel. `nowrap`
+     garde le pixel avec le nom qu'il ouvre : il ne peut pas finir seul en
+     bout de ligne. */
+  .hero-proof-list li {
+    display: inline;
+    padding: 0;
+    margin-right: 0.55em;
+    white-space: nowrap;
+  }
+}
+
+/* ==========================================================================
+   L'AFFICHE « NIVEAU 1 »
+   Un espace a part, entre deux sections claires : un panneau sombre, un « 1 »
+   dessine en pixels ambre qui rayonne comme une fenetre allumee dans le decor
+   de nuit. Le vocabulaire est celui du jeu a l'ancienne du personnage —
+   « niveau 1 » est un depart, pas une note.
+
+   Construite pour etre lue d'un regard, en cinq niveaux : le titre, la phrase
+   cle en citation, les intitules des engagements, l'accroche et la question,
+   puis le texte courant. Chaque chose importante a sa propre taille ; rien
+   d'important n'est enfoui dans un paragraphe. Aucune bande de decor : son
+   absence signale qu'on est sorti du fil numerote des sections.
+   ========================================================================== */
+.niveau {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(5.5rem, 4rem + 7vw, 10rem);
+  color: #fff;
+  background-color: var(--dark);
+  background-image:
+    var(--grain),
+    radial-gradient(40rem 32rem at 84% 30%, rgba(224, 164, 60, 0.20), transparent 62%);
+  background-size: 240px 240px, auto;
+  background-blend-mode: soft-light, normal;
+}
+
+.niveau-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "titre   chiffre"
+    "deck    chiffre"
+    "corps   chiffre"
+    "pull    pull"
+    "preuves preuves"
+    "cta     cta";
+  column-gap: clamp(2rem, 5vw, 6rem);
+  align-items: center;
+}
+
+/* -- Niveau 1 de lecture : le titre -- */
+.niveau-title {
+  grid-area: titre;
+  max-width: 17ch;
+  font-size: clamp(2.5rem, 1.5rem + 3.8vw, 4.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  color: #fff;
+}
+.niveau-deck {
+  grid-area: deck;
+  margin-top: var(--sp-5);
+  max-width: 32ch;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.625rem);
+  line-height: 1.25;
+  color: var(--brand-light);
+}
+
+/* -- Le corps, puis le public en etiquettes -- */
+.niveau-body {
+  grid-area: corps;
+  max-width: 38rem;
+  margin-top: var(--sp-6);
+  color: rgba(255, 255, 255, 0.78);
+  text-wrap: pretty;
+}
+.niveau-public-label {
+  margin-top: var(--sp-5);
+  font-size: var(--fs-sm);
+}
+.niveau-public {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3) var(--sp-5);
+  margin-top: var(--sp-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+}
+/* Le marqueur : un pixel ambre, comme le curseur d'un menu de jeu. */
+.niveau-public li::before,
+.niveau-proof li::before {
+  content: "";
+  display: inline-block;
+  width: 0.55em;
+  height: 0.55em;
+  margin-right: 0.6em;
+  background: var(--accent);
+  vertical-align: 0.05em;
+}
+
+/* -- Niveau 2 : la phrase cle, seule sur sa ligne -- */
+.niveau-pull {
+  grid-area: pull;
+  max-width: 30ch;
+  margin-top: clamp(3.5rem, 2.5rem + 4vw, 6rem);
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 1.25rem + 2vw, 2.75rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: #fff;
+  text-wrap: balance;
+}
+.niveau-pull span {
+  display: block;
+  max-width: 44ch;
+  margin-top: var(--sp-4);
+  font-family: var(--font);
+  font-size: var(--fs-lg);
+  line-height: 1.5;
+  letter-spacing: 0;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* -- Niveau 3 : les engagements, l'intitule en gros, l'explication en petit -- */
+.niveau-proof {
+  grid-area: preuves;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 1.5rem + 2vw, 3rem) clamp(2.5rem, 2rem + 4vw, 6rem);
+  max-width: 68rem;
+  margin-top: clamp(3rem, 2rem + 4vw, 5rem);
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.72);
+}
+.niveau-proof li {
+  padding-left: 1.4rem;
+  text-indent: -1.4rem;
+}
+.niveau-proof li::before { width: 0.8rem; height: 0.8rem; vertical-align: 0.1em; }
+.niveau-proof strong {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 500;
+  line-height: 1.2;
+  color: #fff;
+}
+.niveau-proof strong::after {
+  content: "";
+  display: block;
+  height: 0.35em;
+}
+
+/* -- La question, et le seul bouton de l'affiche -- */
+.niveau-cta {
+  grid-area: cta;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-5) var(--sp-8);
+  margin-top: clamp(3.5rem, 2.5rem + 4vw, 6rem);
+}
+.niveau-cta p {
+  flex: 1 1 24rem;
+  max-width: 30ch;
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 1rem + 1.4vw, 2rem);
+  line-height: 1.2;
+  color: #fff;
+  text-wrap: balance;
+}
+
+/* -- Le chiffre -- */
+.niveau-figure {
+  grid-area: chiffre;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);
+  margin: 0;
+  align-self: start;
+  padding-top: var(--sp-6);
+}
+.niveau-figure svg {
+  width: clamp(9rem, 15vw, 14rem);
+  height: auto;
+  color: var(--accent);
+  filter: drop-shadow(0 0 28px rgba(224, 164, 60, 0.45));
+}
+.niveau-figure figcaption {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+@media (max-width: 760px) {
+  .niveau { padding-block: 4.5rem; background-image: var(--grain), radial-gradient(24rem 20rem at 20% 10%, rgba(224, 164, 60, 0.18), transparent 62%); }
+  /* minmax(0, 1fr) et non 1fr : avec `1fr`, la colonne ne descend pas sous la
+     largeur minimale de son contenu, et le bouton (insecable) l'elargissait
+     au-dela de l'ecran — tout le bloc etait coupe a droite. */
+  .niveau-inner {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "chiffre" "titre" "deck" "corps" "pull" "preuves" "cta";
+  }
+  .niveau-figure { align-items: flex-start; margin-bottom: var(--sp-6); padding-top: 0; }
+  .niveau-figure svg { width: 6.5rem; }
+  .niveau-proof { grid-template-columns: minmax(0, 1fr); gap: var(--sp-6); }
+  /* Le bouton peut passer a la ligne : sa phrase est trop longue pour 375px. */
+  .niveau-cta .btn {
+    width: 100%;
+    white-space: normal;
+    line-height: 1.3;
+    padding-block: 0.875rem;
+  }
+}
+
+/* ==========================================================================
+   GALERIES HORIZONTALES
+   Services et Realisations sont des rails de diapositives : une
+   introduction (le titre), puis les cartes agrandies ; l'adresse est en
+   dessous, comme dans les autres sections. Le
+   comportement de base est natif — le rail se fait glisser au doigt ou a la
+   molette, avec accrochage diapositive par diapositive — et vaut partout :
+   mobile, sans GSAP, mouvement reduit. Sur grand ecran avec GSAP, la section
+   s'epingle a l'ecran et c'est le defilement vertical qui fait glisser le
+   rail (js/modules/motion.js). Le personnage marche en dessous pendant
+   ce temps.
+   ========================================================================== */
+.section-gallery {
+  display: flex;
+  flex-direction: column;
+}
+
+.gallery {
+  /* `position: relative` : les mentions .sr-only des liens « Voir le site »
+     sont en position absolue. Sans ancetre positionne dans le rail, leur
+     boite se posait au niveau de la page, au bout du rail, et la page
+     devenait plus large que l'ecran : sur telephone, une fois la derniere
+     carte atteinte, le glisse continuait dans le vide. Positionne, le rail
+     les garde en lui, avec le reste. */
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-height: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  /* Arrive au bout, le glisse s'arrete la : il ne se propage pas a la page,
+     et ne declenche pas le geste « page precedente » du telephone. */
+  overscroll-behavior-x: contain;
+}
+.gallery::-webkit-scrollbar { display: none; }
+
+.gallery-track {
+  display: flex;
+  align-items: stretch;
+  gap: clamp(1rem, 2vw, 2rem);
+  width: max-content;
+  padding-inline: var(--gutter);
+}
+.gallery-track > * {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  scroll-margin-inline-start: var(--gutter);
+}
+
+/* -- La diapositive d'introduction : le titre de la section, en grand -- */
+.gallery-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: clamp(20rem, 36vw, 42rem);
+  padding-block: var(--sp-6);
+}
+.gallery-intro .section-title { max-width: none; margin-bottom: var(--sp-4); }
+.gallery-intro .section-lead { max-width: none; }
+
+/* -- Les cartes, plus grandes qu'en grille. En proportion de l'ecran : sur
+   un ecran plus large, elles grandissent, et le rail continue de depasser. -- */
+.gallery-card { width: clamp(18rem, 33vw, 38rem); }
+.gallery-card.service-card { --pad: clamp(1.75rem, 1.25rem + 1.5vw, 2.75rem); }
+/* Une carte de galerie fait pres du double d'une carte en grille : son titre
+   suit, sinon il flotte au milieu du vide. */
+.gallery-card.service-card h3 { font-size: clamp(1.5rem, 1.35rem + 0.6vw, 1.9rem); }
+/* Le corps suit la carte, lui aussi : a 17px dans une carte de 475px, le
+   texte se lisait comme une legende. */
+.gallery-card.service-card > p {
+  max-width: none;
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+}
+/* L'icone, a l'echelle de la carte, et rapprochee du titre qu'elle annonce. */
+.gallery-card.service-card .card-icon {
+  margin-bottom: var(--sp-4);
+  font-size: 2.25rem;
+}
+.gallery-card.project-card { width: clamp(20rem, 34vw, 40rem); }
+
+/* -- Les cartes de complement : « Autre chose ? », « D'autres projets
+   arrivent ». En pointille, sans fond : elles n'ont pas le meme poids que
+   les cartes de contenu. -- */
+.gallery-card.card-more {
+  box-shadow: none;
+  border: 1.5px dashed var(--line-strong);
+  background: transparent;
+}
+.gallery-card.card-more .card-icon { color: var(--muted); }
+.gallery-card.card-more.project-card .card-body { justify-content: center; }
+
+/* -- Le titre hors du rail, sur petit ecran : gallery-nav.js le deplace ici,
+   ou il se lit comme le titre de n'importe quelle autre section. -- */
+.gallery-head[hidden] { display: none; }
+.gallery-head { margin-bottom: var(--sp-5); }
+.gallery-head .gallery-intro {
+  display: block;
+  width: auto;
+  padding-block: 0;
+}
+.gallery-head .section-lead { max-width: 40rem; }
+
+/* Sur petit ecran, les cartes prennent presque toute la largeur : la
+   suivante depasse du bord, ce qui montre que le rail continue. */
+@media (max-width: 900px) {
+  .gallery-intro { width: 88vw; }
+  .gallery-card,
+  .gallery-card.project-card { width: 80vw; }
+}
+
+/* -- Les reperes du glisse (js/modules/gallery-nav.js) : la mention a gauche,
+   un point par diapositive a droite, le courant en encre. Visibles seulement
+   quand le rail se fait glisser ; quand la section est epinglee, le
+   defilement vertical suffit et ils disparaissent. -- */
+.gallery-nav[hidden] { display: none; }
+.gallery-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  margin-top: var(--sp-4);
+}
+.gallery-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.gallery-dots { display: flex; }
+.gallery-dot {
+  display: grid;
+  place-items: center;
+  width: 2rem;                  /* la cible tactile ; le point lui-meme est petit */
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.gallery-dot::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--line-strong);
+  transition: background-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.gallery-dot[aria-current]::before {
+  background: var(--ink);
+  transform: scale(1.35);
+}
+@media (min-width: 901px) {
+  .gsap .section-gallery:not(.is-flat) .gallery-nav { display: none; }
+}
+
+/* -- L'adresse, sous le rail : la meme ligne qu'ailleurs, plus serree pour
+   tenir dans la section epinglee -- */
+.section-gallery .section-cta {
+  margin-top: var(--sp-5);
+  padding-top: var(--sp-4);
+}
+
+/* -- Sur grand ecran avec GSAP : la section prend l'ecran, le rail glisse -- */
+@media (min-width: 901px) {
+  /* `height`, pas `min-height` : les hauteurs en pourcentage du rail et des
+     cartes ne se resolvent que contre une hauteur definie. Avec min-height,
+     le rail prenait la hauteur de son contenu et une carte projet depassait
+     l'ecran epingle de 33px sur un portable 1366x768. */
+  .gsap .section-gallery {
+    height: 100svh;
+    padding-top: calc(var(--header-h) + var(--sp-5));
+  }
+  /* `clip` et non `hidden` : une boite en `hidden` n'affiche pas de barre
+     mais reste un conteneur de defilement. A la souris, une selection de
+     texte la faisait glisser de cote — le rail partait un peu a droite, un
+     peu a gauche, en desaccord avec la position que GSAP lui donne. `clip`
+     coupe le debordement sans creer de conteneur : plus rien a decaler. */
+  .gsap .gallery {
+    overflow: clip;
+    scroll-snap-type: none;
+  }
+  /* Le rail prend la hauteur disponible, plafonnee : des cartes trop hautes
+     seraient vides. */
+  .gsap .gallery-track { height: min(100%, 36rem); }
+  /* Chaque diapositive prend exactement la hauteur du rail : sans hauteur
+     definie, une carte projet prenait celle de son image et depassait
+     l'ecran de 33px sur un portable 1366x768. */
+  .gsap .gallery-track > * { height: 100%; }
+  .gsap .gallery-card.project-card .card-media {
+    flex: 0 0 46%;
+    aspect-ratio: auto;
+    min-height: 0;
+  }
+  .gsap .gallery-card.project-card .card-media img { height: 100%; }
+  .gsap .gallery-card .card-body { flex: 1; min-height: 0; }
+
+  /* Rail presque entier a l'ecran (tres grande largeur) : motion.js pose
+     `is-flat` et la section redevient une rangee simple, rien d'epingle. */
+  .gsap .section-gallery.is-flat { height: auto; }
+  .gsap .is-flat .gallery { overflow-x: auto; scroll-snap-type: x mandatory; }
+  .gsap .is-flat .gallery-track,
+  .gsap .is-flat .gallery-track > * { height: auto; }
+}
+
+/* Portables peu hauts : un cran plus serre pour que tout tienne epingle. */
+@media (min-width: 901px) and (max-height: 50rem) {
+  .gsap .section-gallery { padding-top: calc(var(--header-h) + var(--sp-3)); }
+  /* La marge interne, pas le `padding` : le socle s'aligne dessus pour
+     ressortir a fleur des bords. */
+  .gsap .gallery-card.service-card { --pad: var(--sp-5); }
+  .gsap .gallery-card.service-card > p { font-size: 1rem; }
+  /* Cartes projet : l'image cede de la place au texte, qui n'a que ~380px
+     de carte pour tenir titre, resume, etiquettes et deux liens. */
+  .gsap .gallery-card.project-card .card-media { flex-basis: 36%; }
+  .gsap .gallery-card.project-card .card-body { padding: var(--sp-4); gap: var(--sp-2); }
+  .gsap .gallery-intro .section-title { font-size: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem); }
+}
+
+/* ==========================================================================
+   PAGE LEGALE (mentions-legales.html)
+   Une page de lecture, pas une page de vente : une colonne etroite, des
+   intertitres qui se voient, rien qui bouge.
+   ========================================================================== */
+.legal-top {
+  padding-block: var(--sp-4);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+.legal-top-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+}
+
+.legal .container { max-width: 52rem; }
+.legal .section-lead { margin-bottom: var(--sp-7); }
+.legal section { margin-top: var(--sp-8); }
+.legal h2 {
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--line-strong);
+  font-size: clamp(1.5rem, 1.3rem + 0.8vw, 2rem);
+}
+.legal h3 {
+  margin-top: var(--sp-6);
+  margin-bottom: var(--sp-3);
+  font-size: var(--fs-xl);
+}
+.legal p { margin-bottom: var(--sp-4); }
+.legal a { text-decoration: underline; text-underline-offset: 0.2em; }
+
+/* Le sommaire : des reperes, pas un menu. */
+.legal-sommaire {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3) var(--sp-5);
+  padding: var(--sp-4) 0;
+  border-block: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Terme / definition : le terme en petites capitales, la reponse en dessous. */
+.legal-liste { margin-bottom: var(--sp-5); }
+.legal-liste dt {
+  margin-top: var(--sp-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.legal-liste dd { margin: var(--sp-2) 0 0; }
+
+.legal-puces {
+  margin: 0 0 var(--sp-4) 1.25rem;
+  list-style: disc;
+}
+.legal-puces li { margin-bottom: var(--sp-2); }
+
+/* Ce qui reste a completer : impossible a rater, et volontairement laid. */
+.legal-todo {
+  padding: 0.15em 0.4em;
+  background: #FFE9A8;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.legal-date {
+  margin-top: var(--sp-8);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--line);
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+
+/* Le numero de section reprend le bleu de marque, qui ne tient pas sur un
+   panneau sombre : 3,3:1. Sur ces fonds, il passe au bleu clair. */
+.section-dark .idx { color: var(--brand-light); }
+
+/* ---------------- Retour en haut ----------------
+   Un carre, comme tout ce qui touche au pixel ici. Cache tant qu'on est dans
+   le premier ecran : c'est js/modules/nav.js qui pose `is-visible`, sur un
+   repere invisible haut d'un ecran — pas d'ecouteur de defilement. */
+.to-top {
+  position: fixed;
+  /* Au plus pres du coin : plus la fleche s'en eloigne, plus elle se pose sur
+     un bouton ou une ligne de texte. Ici elle mord surtout sur les bandes de
+     decor qui ferment les sections. */
+  right: var(--sp-4);
+  bottom: var(--sp-4);
+  z-index: 90;              /* sous l'en-tete (100) et les fenetres (200) */
+  display: grid;
+  place-items: center;
+  width: 2.75rem;           /* la plus petite cible tactile confortable */
+  height: 2.75rem;
+  /* L'ambre, et non l'encre : le bouton flotte au-dessus de sections claires
+     comme du panneau sombre de contact et du pied de page. Une seule couleur
+     qui se detache sur les deux, sans avoir a deviner ce qu'il y a derriere. */
+  color: var(--ink);
+  background: var(--accent);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.5rem);
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease),
+              visibility var(--dur), background-color var(--dur-fast) var(--ease);
+}
+.to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+/* `color` explicite : la regle generique `a:hover` de base.css est plus
+   specifique que `.to-top`, et peindrait la fleche en bleu sur bleu. */
+.to-top:hover { color: var(--accent); background: var(--dark); }
+.to-top .ico { transform: rotate(-90deg); }
+
+/* Le repere du declencheur : un ecran de haut, sans effet sur la mise en page. */
+.to-top-sentinel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100svh;
+  pointer-events: none;
+}
+
+/* ---------------- Bandeau technos ---------------- */
+.marquee {
+  padding-block: var(--sp-5);
+  background: var(--dark);
+  /* `clip` et non `hidden`, pour la meme raison que la galerie epinglee :
+     le ruban fait deux fois la largeur de l'ecran, et une selection a la
+     souris faisait glisser le bandeau de cote. */
+  overflow: clip;
+  /* Estompe les bords : le défilement paraît infini */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  /* Le meme fond que la bande, repete sur le ruban : sans lui, un outil
+     d'audit qui lit la position du second groupe — decale hors de la boite
+     par l'animation, mais rogne donc invisible — croit lire du texte clair
+     sur le fond clair de la page, et signale un faux contraste de 1,48:1. */
+  background: var(--dark);
+  animation: marquee 55s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-7);
+  padding-right: var(--sp-7);
+}
+.marquee-group li {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  color: #C9CDD5;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.marquee-group .ico { color: var(--brand-light); font-size: 1em; }
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee { -webkit-mask-image: none; mask-image: none; }
+  .marquee-track { animation: none; flex-wrap: wrap; width: 100%; }
+  .marquee-group { flex-wrap: wrap; gap: var(--sp-4); }
+  .marquee-group[aria-hidden="true"] { display: none; }
+}
+
+/* ---------------- Grille de logos ---------------- */
+/* Seul endroit du site où le nombre de colonnes est fixé plutôt que fluide :
+   avec 12 références, il faut un diviseur de 12 pour que toutes les lignes
+   soient pleines. `auto-fit` donnait 5 + 5 + 2 selon la largeur. Les paliers
+   ci-dessous garantissent 2, 3, 4 ou 6 colonnes, donc jamais de ligne bancale. */
+.logo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 30rem)  { .logo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 45rem)  { .logo-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 64rem)  { .logo-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+
+.logo-grid li {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  padding: var(--sp-4);
+  background: var(--surface);
+}
+
+/* Les logos sont pré-recadrés sur une boîte optique 2:1 commune (assets/img/logo).
+   Le niveau de gris au repos unifie des marques d'origines très différentes. */
+.logo-grid picture { display: contents; }
+
+/* Positionnement absolu volontaire : les logos n'ont ni le même format ni le
+   même sens (celui des Douanes est un SVG en portrait). Laissés dans le flux,
+   ils imposent leur hauteur à la cellule et cassent l'alignement de la ligne.
+   Hors flux, la cellule garde son ratio et le logo se cale dedans. */
+.logo-grid img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: auto;
+  height: auto;
+  max-width: min(8.75rem, calc(100% - 2rem));
+  max-height: calc(100% - 1.5rem);
+  object-fit: contain;
+  /* Gris au repos pour que dix chartes graphiques ne se battent pas ; la
+     couleur d'origine revient au survol. C'est la seule reaction au pointeur
+     sur un element non cliquable du site, et elle est voulue : on reconnait
+     une marque a sa couleur. */
+  filter: grayscale(1);
+  opacity: 0.78;
+  transition: filter var(--dur) var(--ease), opacity var(--dur) var(--ease);
+}
+.logo-grid li:hover img { filter: none; opacity: 1; }
+
+/* Référence sans logo exploitable : rendu typographique, même poids visuel. */
+.logo-text {
+  padding-inline: var(--sp-2);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  line-height: 1.35;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.78;
+}
+
+/* ---------------- Appel à l'action de section ---------------- */
+.section-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4) var(--sp-6);
+  margin-top: clamp(2.5rem, 1.5rem + 3vw, 4rem);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--line-strong);
+}
+.section-cta p {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* ---------------- A propos ---------------- */
+#apropos { position: relative; overflow: hidden; }
+
+#apropos .container { position: relative; z-index: 1; }
+
+/* -- Declaration d'intention -- */
+.about-statement {
+  max-width: 54rem;
+  margin: 0 0 clamp(3rem, 2rem + 4vw, 5rem);
+}
+.about-statement p {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 1rem + 2.2vw, 2.625rem);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+/* Surlignage typographique : appuie le propos sans imiter un lien. */
+.about-statement mark {
+  background: linear-gradient(to top, var(--brand-soft) 42%, transparent 42%);
+  color: inherit;
+  padding-inline: 0.1em;
+}
+
+.about-statement footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  margin-top: var(--sp-6);
+}
+.about-sign { font-weight: 600; color: var(--ink); }
+.about-role { font-size: var(--fs-sm); color: var(--muted); }
+
+/* -- Trois principes -- */
+/* Trois reperes : une, deux puis trois colonnes, comme les cartes de contact.
+   Voir .card-grid dans components.css pour le pourquoi du compte explicite. */
+.value-grid { grid-template-columns: 1fr; }
+@media (min-width: 40rem) and (max-width: 61.99rem) {
+  .value-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 62rem) {
+  .value-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.value-card {
+  padding: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  background: var(--surface);
+}
+.value-card p { max-width: 52ch; }
+
+/* Le numero tient lieu de sur-titre de la carte. */
+.value-num {
+  display: block;
+  margin-bottom: var(--sp-5);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--brand);
+}
+
+.value-icon { display: none; }
+.value-card h3 { margin-bottom: var(--sp-2); }
+.value-card p  { font-size: var(--fs-sm); color: var(--muted); }
+
+/* ---------------- Pied de page ---------------- */
+.site-footer {
+  padding-block: var(--sp-8);
+  background: var(--dark);
+  color: #A7ACB6;
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-4) var(--sp-6);
+}
+.site-footer .brand { color: #fff; }
+.site-footer .brand span { color: var(--brand-light); }
+
+.footer-tagline { font-size: var(--fs-sm); }
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  margin-left: auto;
+}
+.footer-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  color: #A7ACB6;
+  font-size: var(--fs-sm);
+  text-decoration: none;
+}
+.footer-nav a:hover { color: #fff; }
+
+.footer-social {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--line-dark);
+  border-radius: var(--r-full);
+  color: #A7ACB6;
+  transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+.footer-social:hover { border-color: var(--brand-light); color: var(--brand-light); }
+
+/* Le territoire : une ligne a part, plus claire que les mentions legales —
+   c'est une information utile, pas une note de bas de page. */
+.footer-zone {
+  width: 100%;
+  max-width: 44rem;
+  font-size: var(--fs-sm);
+  color: #C9CDD5;
+}
+
+/* Les liens legaux, sur la meme ligne que la mention de droits. */
+.footer-legal a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.footer-legal a:hover { color: #fff; }
+
+.footer-legal {
+  width: 100%;
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--line-dark);
+  font-size: var(--fs-xs);
+}
+
+@media (max-width: 640px) {
+  .footer-nav { margin-left: 0; width: 100%; }
+}
+
+/* ---------------- Progression de lecture ---------------- */
+.scroll-progress {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(var(--progress, 0));
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--brand), var(--brand-light));
+  transition: transform 120ms linear;
+}
+
+/* ==========================================================================
+   BANDE DE DÉCOR
+   Chaque section se termine par une bande où le personnage marche. Le paysage
+   change d'une section à l'autre : en défilant, la bande s'en va avec sa
+   section et on retrouve le personnage plus bas, sur un autre terrain.
+   ========================================================================== */
+.hero,
+.section {
+  position: relative;
+  padding-bottom: var(--section-y);
+}
+
+/* Seules deux sections portent encore une bande : la ville sous le hero, la
+   nuit sous Contact. Le monde pixel encadre la page au lieu de la ponctuer.
+   Ces deux-la reservent la place de la bande, qui est en position absolue. Le
+   supplement couvre la bulle du personnage, qui depasse au-dessus : sa hauteur
+   est fixe, donc le plancher aussi (3,5rem), sinon elle venait froler le texte
+   sur mobile. */
+.has-scene {
+  padding-bottom: calc(var(--scene-h) + clamp(3.5rem, 4vw, 4.5rem));
+}
+
+.scene-strip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: clamp(0.75rem, 2.5vw, 2rem);
+  height: var(--scene-h);
+  pointer-events: none;     /* seul le personnage reste cliquable */
+}
+
+.scene-strip > span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  background-repeat: repeat-x;
+  background-position: left bottom;
+  image-rendering: pixelated;
+}
+
+/* Le ciel déborde vers le haut et s'éteint en fondu : la bande se pose sur la
+   page sans dessiner de bord franc. */
+.scene-sky {
+  height: calc(100% + 3rem);
+  background: linear-gradient(to top, var(--ciel, rgba(15, 108, 189, 0.12)), transparent 92%);
+}
+
+/* Les tuiles doivent etre agrandies : sans background-size elles s afficheraient
+   a leur taille native (200 px de large) et le decor serait minuscule. */
+.scene-far {
+  height: var(--far-h);
+  background-size: var(--far-w) var(--far-h);
+  opacity: 0.42;
+}
+.scene-near {
+  height: var(--near-h);
+  background-size: var(--near-w) var(--near-h);
+  opacity: 0.68;
+}
+
+.scene-ground {
+  height: 4px;
+  background: repeating-linear-gradient(90deg,
+    var(--sol, var(--brand)) 0 8px, transparent 8px 16px);
+  opacity: 0.2;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+/* -- Les six décors : une image et une couleur de ciel chacun -- */
+[data-scene="ville"]     { --ciel: rgba(15, 108, 189, 0.13); --sol: #0F6CBD; }
+[data-scene="nuit"]      { --ciel: rgba(28, 38, 66, 0.30);   --sol: #8FA6D6; }
+
+[data-scene="ville"]     .scene-far  { background-image: url("../assets/img/scene/ville-loin.png"); }
+[data-scene="ville"]     .scene-near { background-image: url("../assets/img/scene/ville-pres.png"); }
+[data-scene="nuit"]      .scene-far  { background-image: url("../assets/img/scene/nuit-loin.png"); }
+[data-scene="nuit"]      .scene-near { background-image: url("../assets/img/scene/nuit-pres.png"); }
+
+/* La nuit est plus dense : on la laisse s'affirmer un peu plus. */
+[data-scene="nuit"] .scene-far  { opacity: 0.55; }
+[data-scene="nuit"] .scene-near { opacity: 0.8; }
+
+/* ---------------- Le personnage ---------------- */
+.npc {
+  position: absolute;
+  pointer-events: auto;
+  left: 0;
+  bottom: 4px;                 /* pose sur le sol */
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  line-height: 0;
+  transform: translateX(0);    /* deplacement ecrit par npc.js */
+}
+
+.npc-sprite {
+  position: relative;
+  display: block;
+  width: var(--npc-w);
+  height: var(--npc-h);
+  background-image: url("../assets/img/walker.png");
+  background-repeat: no-repeat;
+  background-size: calc(var(--npc-w) * 4) var(--npc-h);
+  background-position: 0 0;
+  image-rendering: pixelated;
+}
+
+/* Ombre de contact : le detache du decor sans flou, pour rester dans le langage
+   pixel. Sans elle il se confond avec ce qu il croise. */
+.npc-sprite::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  translate: -50% 0;
+  width: 62%;
+  height: 3px;
+  background: rgba(26, 24, 22, 0.15);
+}
+
+/* Le retournement porte sur le sprite seul : la bulle ne doit jamais etre
+   mise en miroir, sinon le texte se lirait a l'envers. */
+.npc-sprite.is-facing-left { scale: -1 1; }
+.npc-sprite.is-walking { animation: npc-walk var(--npc-cycle) steps(4) infinite; }
+
+@keyframes npc-walk {
+  from { background-position: 0 0; }
+  to   { background-position: calc(var(--npc-w) * -4) 0; }
+}
+
+/* Petit sursaut quand on le survole : il vous a remarque. */
+.npc:hover .npc-sprite,
+.npc:focus-visible .npc-sprite { animation: npc-hop 0.45s var(--ease) infinite alternate; }
+
+@keyframes npc-hop {
+  to { translate: 0 -3px; }
+}
+
+.npc:focus-visible { outline: 2px solid var(--brand); outline-offset: 6px; }
+
+/* ---------------- Boite de dialogue ---------------- */
+.npc-bubble {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  translate: -50% 0;
+  display: block;
+  /* Taille fixe, comme une vraie boite de dialogue de jeu : la bulle reste
+     affichee en permanence, seul le texte change. Une largeur `max-content`
+     la ferait grandir et retrecir a chaque phrase. */
+  width: min(17rem, 58vw);
+  min-height: calc(2 * 1.4em + 1rem);
+  padding: 0.5rem 1.5rem 0.5rem 0.75rem;   /* place reservee au chevron */
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  /* Ombre pleine et decalee, sans flou : le rendu des jeux d epoque. */
+  box-shadow: 3px 3px 0 rgba(26, 26, 24, 0.18);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--ink);
+  text-align: left;
+  white-space: normal;
+  animation: npc-pop 160ms var(--ease);
+}
+/* Etat muet : `visibility` et non `display:none`, sinon la bulle perdrait sa
+   largeur et le calcul des bornes de marche se ferait sans elle. En revanche
+   `visibility` ne suspend pas les animations : sans la ligne suivante, les six
+   chevrons clignoteraient en continu, y compris sur les bulles masquees. */
+.npc-bubble.is-mute { visibility: hidden; }
+.npc-bubble.is-mute .npc-caret { animation-play-state: paused; }
+.npc-bubble[hidden] { display: none; }
+
+@keyframes npc-pop {
+  from { opacity: 0; transform: translateY(4px) scale(0.94); }
+}
+
+/* --tail permet de garder la pointe sur le personnage meme quand la bulle est
+   recadree pour ne pas sortir de l ecran (voir npc.js). */
+.npc-bubble::before,
+.npc-bubble::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: var(--tail, 50%);
+  translate: -50% 0;
+  border: 7px solid transparent;
+  border-top-color: var(--ink);
+}
+.npc-bubble::after {
+  border-width: 5px;
+  border-top-color: var(--surface);
+  margin-top: -2px;
+}
+
+.npc-text { display: block; }
+
+/* Le petit chevron clignotant des boites de dialogue de jeu, cale en bas a
+   droite comme il se doit. */
+.npc-caret {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  width: 0;
+  height: 0;
+  border: 4px solid transparent;
+  border-top-color: var(--brand);
+  animation: npc-blink 0.9s steps(1) infinite;
+}
+/* Pendant la frappe le chevron est invisible mais garde sa place : sans quoi la
+   bulle s elargirait a la fin et sortirait du recadrage. */
+.npc-bubble.is-typing .npc-caret { visibility: hidden; }
+
+@keyframes npc-blink { 50% { opacity: 0; } }
+
+/* ---------------- Tailles du bandeau ---------------- */
+:root {
+  --npc-w: 48px;    /* sprite 12 px x4 */
+  --npc-h: 64px;    /* sprite 16 px x4 */
+  --npc-cycle: 0.52s;   /* un cycle de marche ≈ sa largeur a 110 px/s */
+  /* Plan lointain : tuile 200x36 agrandie x3. Plan proche : 260x30 agrandie x4.
+     Les deux largeurs different, donc les motifs ne se resynchronisent pas. */
+  --far-w: 600px;   --far-h: 108px;
+  --near-w: 1040px; --near-h: 120px;
+  --scene-h: 124px;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --npc-w: 36px;   /* x3 */
+    --npc-h: 48px;
+    --npc-cycle: 0.39s;
+    --far-w: 400px;  --far-h: 72px;   /* x2 */
+    --near-w: 780px; --near-h: 90px;  /* x3 */
+    --scene-h: 94px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-strip { transition: none; }
+  .npc-sprite.is-walking,
+  .npc:hover .npc-sprite,
+  .npc:focus-visible .npc-sprite { animation: none; }
+  .npc-caret { animation: none; }
+}

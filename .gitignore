@@ -1,1 +1,12 @@
-*.md
+# Systeme
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editeurs
+.vscode/
+.idea/
+*.swp
+
+# Outils locaux
+.claude/

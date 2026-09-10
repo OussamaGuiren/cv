@@ -1,0 +1,11 @@
+#!/bin/sh
+# Repose les empreintes de cache avant chaque commit, puis les inclut au commit.
+# Sans ce crochet, il faut penser a lancer `python tools/stamp.py` a la main.
+# Reinstallation : cp tools/pre-commit ../.git/hooks/pre-commit && chmod +x ../.git/hooks/pre-commit
+
+cd "$(git rev-parse --show-toplevel)/cv oussama ligne github" || exit 0
+[ -f tools/stamp.py ] || exit 0
+
+python tools/stamp.py >/dev/null || exit 1
+git add index.html js/main.js js/modules/*.js
+exit 0

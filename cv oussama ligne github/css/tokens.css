@@ -1,0 +1,104 @@
+/* ==========================================================================
+   TOKENS — source unique de vérité pour couleurs, typo, espacements, formes.
+   Ne jamais écrire une valeur brute ailleurs : ajouter un token ici.
+   ========================================================================== */
+
+:root {
+  /* ---------- Couleurs ----------
+     Ratios vérifiés WCAG AA sur --bg (#F7F7F5) :
+     brand 5.02 · text 10.63 · muted 6.26 · ink 16.25                        */
+  --brand:          #0F6CBD;
+  --brand-strong:   #0B5FAB;   /* survol / actif */
+  --brand-deep:     #083A6E;   /* bas de la couverture (blanc dessus : 10.8) */
+  --brand-soft:     #E8F1FA;   /* fonds légers, pastilles d'icônes */
+  --brand-light:    #6BB6F5;   /* accent sur fond sombre (8.15 sur --dark) */
+  /* Le meme role, mais sur la couverture bleue : --brand-light n'y tient que
+     2,4:1, sous le seuil de 3 exige pour un grand texte. Celui-ci monte a 3,5
+     sans virer au blanc, donc le verbe du titre reste bleu. */
+  --brand-on-blue:  #BCDCFA;
+
+  --ink:            #1A1A18;   /* titres */
+  --text:           #3A3A38;   /* corps */
+  --muted:          #5C5C58;   /* secondaire, légendes */
+
+  --bg:             #F7F7F5;   /* fond général */
+  --bg-alt:         #FFFFFF;   /* sections alternées */
+  --surface:        #FFFFFF;   /* cartes */
+  --dark:           #16181D;   /* section contact + pied de page */
+  --dark-surface:   #1F2229;   /* cartes sur fond sombre */
+
+  --line:           #E4E4E0;   /* bordures */
+  --line-strong:    #D0D0CA;
+  --line-dark:      #2C3038;
+
+  --danger:         #B3261E;
+  --success:        #1B7F4B;
+
+  /* L'ambre des decors pixel art (la voiture, les fenetres de nuit). Seule
+     couleur chaude du site, reservee a l'affiche « Niveau 1 » (8.6 sur --dark). */
+  --accent:         #E0A43C;
+
+  /* ---------- Typographie ----------
+     Deux familles, deux voix. Newsreader, une serif de journal avec une vraie
+     italique, pour ce qui se lit en un coup d'oeil : titres, marque,
+     navigation et sur-titres en capitales. Instrument Sans pour le texte
+     courant et les boutons. Le mono systeme (aucune requete) reste aux
+     etiquettes techniques : index, tags, numeros. */
+  --font-display: "Newsreader", Georgia, "Times New Roman", serif;
+  --font: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+
+  --fs-xs:   0.8125rem;                              /* 13px  */
+  --fs-sm:   0.875rem;                               /* 14px  */
+  --fs-base: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --fs-lg:   clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+  --fs-xl:   clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --fs-h3:   clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
+  --fs-h2:   clamp(1.875rem, 1.4rem + 2.1vw, 2.875rem);
+  --fs-h1:   clamp(2.75rem, 1.5rem + 4.2vw, 5rem);
+
+  --lh-tight: 1.1;    /* titres */
+  --lh-snug:  1.35;   /* sous-titres */
+  --lh-base:  1.65;   /* corps */
+
+  --ls-wide:  0.06em;
+
+  /* ---------- Espacements (base 4px) ---------- */
+  --sp-1: 0.25rem;  --sp-2: 0.5rem;   --sp-3: 0.75rem;  --sp-4: 1rem;
+  --sp-5: 1.5rem;   --sp-6: 2rem;     --sp-7: 2.5rem;   --sp-8: 3rem;
+  --sp-9: 4rem;     --sp-10: 5rem;
+
+  /* Rythme vertical des sections : fluide, jamais tassé ni béant */
+  --section-y: clamp(3.5rem, 2rem + 7vw, 7.5rem);
+  /* Marges : jamais moins de 1,25rem, meme sur 320px, pour que le contenu
+     ne touche pas les bords. Sur grand ecran, la colonne s'elargit a 84rem
+     pour ne pas flotter au milieu. */
+  --gutter:    clamp(1.25rem, 0.75rem + 3vw, 3rem);
+  --max-w:     84rem;   /* 1344px */
+  --max-w-narrow: 46rem;
+
+  /* ---------- Formes ----------
+     Angles serres : la rondeur uniforme est ce qui fait "gabarit". Les blocs
+     de contenu sont a angle droit ; seuls les petits controles s'adoucissent. */
+  --r-sm:   3px;
+  --r-lg:   8px;
+  --r-full: 999px;
+
+  /* ---------- Élévation : reservee a ce qui flotte (menu, modale, toast) ---------- */
+  --sh-2: 0 2px 4px rgba(26, 26, 24, 0.06), 0 12px 24px rgba(26, 26, 24, 0.09);
+  --sh-3: 0 8px 16px rgba(26, 26, 24, 0.10), 0 32px 64px rgba(26, 26, 24, 0.18);
+
+  /* ---------- Mouvement ---------- */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur-fast: 150ms;
+  --dur:      250ms;
+
+  /* ---------- Matière ----------
+     Un bruit SVG en ligne (aucune requête), fondu en lumière douce sur les
+     fonds bleus : le rendu d'un papier imprimé plutôt que d'un écran. */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.3 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  /* ---------- Divers ---------- */
+  --header-h: 4.25rem;
+  --focus: 0 0 0 3px rgba(15, 108, 189, 0.35);
+}

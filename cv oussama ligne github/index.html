@@ -1,592 +1,960 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Oussama Guiren - Développeur .NET &amp; Power Platform</title>
-  <meta name="description" content="Portfolio de Oussama Guiren, développeur .NET et Power Platform" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Formation IT &amp; développement .NET / Power Platform — Oussama Guiren, freelance</title>
+  <meta name="description" content="Formateur IT et développeur freelance. Formation .NET, Power Platform, Linux et DevOps, développement d'applications métier et automatisation de vos processus.">
+  <link rel="canonical" href="https://ogtech.fr/">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Oussama Guiren">
+  <meta name="theme-color" content="#0F6CBD">
+
+  <!-- Open Graph / partage social -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="OGTech — Oussama Guiren">
+  <meta property="og:url" content="https://ogtech.fr/">
+  <meta property="og:title" content="Formation IT &amp; développement .NET / Power Platform">
+  <meta property="og:description" content="Formateur IT et développeur freelance. Je forme vos équipes, je développe vos applications métier et j'automatise vos processus.">
+  <meta property="og:image" content="https://ogtech.fr/assets/img/og-cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="OGTech — Formation IT et développement, Oussama Guiren freelance">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Formation IT &amp; développement .NET / Power Platform">
+  <meta name="twitter:description" content="Formateur IT et développeur freelance. Je forme vos équipes, je développe vos applications métier et j'automatise vos processus.">
+  <meta name="twitter:image" content="https://ogtech.fr/assets/img/og-cover.jpg">
+
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-  <link rel="preconnect" href="https://emoji-css.afeld.me" />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Barlow+Condensed:wght@400&display=swap" rel="stylesheet" />
-  <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  
-  <!-- New CSS Structure -->
-  <link rel="preload" as="image" href="assets/moi2.png">
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/layout.css" />
-  <link rel="stylesheet" href="css/components.css" />
-  <link rel="stylesheet" href="css/sections/splash.css" />
-  <link rel="stylesheet" href="css/sections/hero.css" />
-  <link rel="stylesheet" href="css/sections/about.css" />
-  <link rel="stylesheet" href="css/sections/experience.css" />
-  <link rel="stylesheet" href="css/sections/projects.css" />
-  <link rel="stylesheet" href="css/sections/power.css" />
-  <link rel="stylesheet" href="css/sections/contact.css" />
-  <link rel="stylesheet" href="css/sections/ticker.css" />
-  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="alternate icon" href="favicon.ico" sizes="any">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..500;1,6..72,400..500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/tokens.css?v=0babc659">
+  <link rel="stylesheet" href="css/base.css?v=c87650cc">
+  <link rel="stylesheet" href="css/components.css?v=77135c3a">
+  <link rel="stylesheet" href="css/sections.css?v=ecc923c2">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "OGTech — Oussama Guiren",
+    "url": "https://ogtech.fr/",
+    "image": "https://ogtech.fr/assets/img/og-cover.jpg",
+    "description": "Formateur IT et développeur freelance : formation .NET, Power Platform, Linux et DevOps, développement d'applications métier et automatisation.",
+    "founder": { "@type": "Person", "name": "Oussama Guiren", "jobTitle": "Formateur IT & développeur freelance" },
+    "areaServed": [
+      { "@type": "Country", "name": "France" },
+      { "@type": "Country", "name": "Belgique" },
+      { "@type": "Country", "name": "Suisse" },
+      { "@type": "Country", "name": "Luxembourg" }
+    ],
+    "availableLanguage": "fr",
+    "sameAs": ["https://www.linkedin.com/in/oussama-guiren"],
+    "knowsAbout": [".NET", "C#", "Power Platform", "Power Apps", "Power Automate", "Power BI", "Linux", "Docker", "GitLab CI/CD", "Python", "Vue.js", "Automatisation"],
+    "makesOffer": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Formation IT", "description": "Formations en présentiel ou à distance : .NET, Power Platform, Linux, Docker, GitLab, Python." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Développement", "description": "Conception, développement et maintenance d'applications métier .NET, Power Apps et web." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Automatisation", "description": "Automatisation de traitements et de workflows avec Power Automate, Python, Bash et GitLab CI/CD." } }
+    ]
+  }
+  </script>
 </head>
-<body class="splash-active">
-  <!-- Splash screen -->
-  <div class="splash">
-    <div class="splash-content">
-      <p class="splash-kicker">Formation · Développement · Accompagnement</p>
-      <h1 class="splash-title" data-typewriter="OGTech"><!-- Le texte sera ajouté par JavaScript --></h1>
-      <div class="splash-quote">
-        <p>
-          Je <span class="splash-highlight">forme</span>, je <span class="splash-highlight">développe</span>.<br>Transformer les besoins métiers en solutions techniques.
-        </p>
+
+<body>
+  <a class="skip-link" href="#main">Aller au contenu principal</a>
+
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="OGTech — accueil">OG<span>Tech</span></a>
+
+      <div class="header-right">
+        <nav class="nav-desktop" aria-label="Navigation principale">
+          <a class="nav-link" href="#services">Services</a>
+          <span class="nav-sep" aria-hidden="true">/</span>
+          <a class="nav-link" href="#references">Références</a>
+          <span class="nav-sep" aria-hidden="true">/</span>
+          <a class="nav-link" href="#realisations">Réalisations</a>
+          <span class="nav-sep" aria-hidden="true">/</span>
+          <a class="nav-link" href="#apropos">À propos</a>
+        </nav>
+
+        <div class="header-actions">
+          <a class="header-cta" href="#contact">Contact</a>
+          <button type="button" class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileNav">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
       </div>
-      <button type="button" class="splash-more-btn">Entrer</button>
     </div>
-  </div>
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  </header>
 
-  <div class="stage">
-    <!-- HERO + NAV TABS -->
-    <!-- Navbar mobile fixe en haut -->
-    <nav class="mobile-navbar">
-      <div class="mobile-navbar-logo">OGTech</div>
-      <button class="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-      </button>
-    </nav>
-    
-    <nav class="mobile-menu" aria-hidden="true">
-      <div class="mobile-menu-header">
-        <div class="mobile-menu-logo">OGTech</div>
-        <button class="mobile-menu-close" aria-label="Fermer le menu">×</button>
-      </div>
-      <div class="mobile-menu-links">
-        <a class="mobile-menu-link" href="#tab-apropos">À propos</a>
-        <a class="mobile-menu-link" href="#tab-quisuisje">Services</a>
-        <a class="mobile-menu-link" href="#tab-experience">Références</a>
-        <a class="mobile-menu-link" href="#tab-projects">Réalisations</a>
-        <a class="mobile-menu-link" href="#tab-contact">Me contacter</a>
-      </div>
-      <div class="mobile-socials">
-        <div class="flex-center">
-          <!--<a href="https://github.com/" target="_blank" class="social-link" aria-label="GitHub"><i class="fa-brands fa-github fa-3x icon-3d"></i></a>-->
-          <a href="https://www.linkedin.com/in/oussama-guiren" target="_blank" class="social-link" aria-label="LinkedIn"><i class="fa-brands fa-linkedin fa-3x icon-3d"></i></a>
-          <!--<a href="#tab-contact" class="social-link" aria-label="Contact"><i class="fa-solid fa-envelope fa-3x icon-3d"></i></a>-->
+  <nav class="mobile-nav" id="mobileNav" aria-label="Navigation mobile" hidden>
+    <a class="mobile-nav-link" href="#services">Services</a>
+    <a class="mobile-nav-link" href="#references">Références</a>
+    <a class="mobile-nav-link" href="#realisations">Réalisations</a>
+    <a class="mobile-nav-link" href="#apropos">À propos</a>
+    <a class="btn btn-primary btn-block" href="#contact">Contact</a>
+    <a class="mobile-nav-social" href="https://www.linkedin.com/in/oussama-guiren" target="_blank" rel="noopener noreferrer">
+      <svg class="ico" aria-hidden="true"><use href="#i-linkedin"/></svg> LinkedIn
+    </a>
+  </nav>
+  <div class="nav-scrim" id="navScrim" hidden></div>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero has-scene" id="top">
+      <!-- La couverture. `section-dark` lui donne les boutons clairs ; le bleu
+           est pose par .hero-cover. -->
+      <div class="hero-cover section-dark">
+        <div class="container hero-head">
+          <p class="hero-kicker"><span class="hero-name">Oussama Guiren<i class="px-rule" aria-hidden="true"></i></span> · Freelance</p>
+          <h1 class="hero-title">Je forme,<br>je <em>développe</em>.</h1>
         </div>
-      </div>
-    </nav>
-    <div class="mobile-menu-overlay" aria-hidden="true"></div>
 
-    <div class="et-hero-tabs-container et-hero-tabs-container--top">
-      <div class="et-hero-logo">OGTech</div>
-      <a class="et-hero-tab" href="#tab-apropos">À propos</a>
-      <a class="et-hero-tab" href="#tab-quisuisje">Services</a>
-      <a class="et-hero-tab" href="#tab-experience">Références</a>
-      <a class="et-hero-tab" href="#tab-projects">Réalisations</a>
-      <a class="et-hero-tab" href="#tab-contact">Me contacter</a>
-      <span class="et-hero-tab-slider"></span>
-    </div>
+        <div class="container hero-foot">
+          <p class="hero-deck">
+            Formation IT, développement et automatisation.
+            Je transforme vos besoins métiers en solutions techniques concrètes.
+          </p>
 
-    <!-- SECTIONS 
-    <div class="hero-banner">
-      <p>Formation IT &nbsp;·&nbsp; Développement &nbsp;·&nbsp; Automatisation</p>
-    </div>-->
-    <main class="et-main">
-      <!-- À propos -->
-      <div class="container-quisuisje" id="tab-apropos">
-        <section class="about-section">
-          <div class="about-layout">
-            <div class="about-image">
-              <img src="assets/computer.jpg" alt="Espace de travail" onerror="this.style.background='#e8ecf1'; this.style.minHeight='320px'">
-            </div>
-            <div class="about-text">
-              <h2 class="about-title-main"><img src="assets/a_propos.png" alt=""> À propos</h2>
-              <p class="about-desc">Derrière OGTech, il y a <strong>Oussama Guiren</strong>, <span class="text-accent">développeur</span> et <span class="text-accent">formateur IT</span>.</p>
-              <p class="about-desc">OGTech rassemble deux domaines qui font aujourd'hui partie de mon quotidien : le <span class="text-accent">développement</span> et la <span class="text-accent">formation</span>.</p>
-              <p class="about-desc">Chaque mission est différente, mais l'approche reste la même : prendre le temps de comprendre le besoin avant de proposer une solution.</p>
-              <div class="about-highlights">
-                <div class="about-highlight"><img src="assets/comprendre_avant_agir.png" alt="" class="about-highlight-icon"><div><div class="about-highlight-title">Comprendre avant d'agir</div><div class="about-highlight-sub">Chaque projet commence par une bonne compréhension du besoin.</div></div></div>
-                <div class="about-highlight"><img src="assets/apprendre_en_faisant.png" alt="" class="about-highlight-icon"><div><div class="about-highlight-title">Apprendre en faisant</div><div class="about-highlight-sub">La pratique est au cœur de chaque formation.</div></div></div>
-                <div class="about-highlight"><img src="assets/rester_a_jour.png" alt="" class="about-highlight-icon"><div><div class="about-highlight-title">Rester à jour</div><div class="about-highlight-sub">Les technologies évoluent, nos compétences aussi.</div></div></div>
-              </div>
-            </div>
+          <div class="hero-actions">
+            <button type="button" class="btn btn-primary btn-lg" data-open-contact>
+              Discutons de votre projet
+            </button>
+            <a class="btn btn-outline btn-lg" href="#services">Voir mes services</a>
           </div>
-        </section>
-      </div>
 
-      <!-- Services -->
-      <div class="container-quisuisje" id="tab-quisuisje">
-        <section class="services-section">
-          <div class="services-header">
-            <h2 class="services-title"><img src="assets/comment_vous_accompagner.png" alt="" class="section-icon"> Comment puis-je vous accompagner ?</h2>
-            <p class="services-subtitle">Formation IT, développement et automatisation pour répondre à vos besoins.</p>
+          <div class="hero-proof">
+            <p class="hero-proof-label">Déjà intervenu pour</p>
+            <ul class="hero-proof-list">
+              <li><i class="px" aria-hidden="true"></i>Capgemini</li>
+              <li><i class="px" aria-hidden="true"></i>Atos</li>
+              <li><i class="px" aria-hidden="true"></i>Sogeti</li>
+              <li><i class="px" aria-hidden="true"></i>OVH</li>
+              <li><i class="px" aria-hidden="true"></i>Damart</li>
+              <li><i class="px" aria-hidden="true"></i>Naval Group</li>
+              <li><i class="px" aria-hidden="true"></i>École des Douanes</li>
+            </ul>
           </div>
-          <div class="services-grid">
-            <div class="service-card">
-              <div class="service-icon">
-                <img src="assets/formation_it.png" alt="" class="service-card-icon">
-              </div>
-              <h3>Formation IT</h3>
-              <p>J'interviens auprès des entreprises, des centres de formation et des particuliers pour animer des formations IT, en présentiel ou à distance. Chaque formation est adaptée au public concerné, avec une approche simple, concrète et tournée vers la pratique.</p>
-              <div class="service-tags">
-                <span>Linux</span><span>GitLab</span><span>.NET</span><span>Python</span><span>Power Platform</span><span>Docker</span><span class="tag-more">&amp; plus</span>
-              </div>
-            </div>
-            <div class="service-card">
-              <div class="service-icon">
-                <img src="assets/developpement.png" alt="" class="service-card-icon">
-              </div>
-              <h3>Développement</h3>
-              <p>Conception, développement et évolution de solutions logicielles. J'interviens sur la création de nouvelles applications, l'évolution de solutions existantes ainsi que leur maintenance, en m'adaptant aux besoins de chaque projet.</p>
-              <div class="service-tags">
-                <span>.NET</span><span>Vue.js</span><span>API REST</span><span>Power Apps</span><span>Base de données</span><span class="tag-more">&amp; plus</span>
-              </div>
-            </div>
-            <div class="service-card">
-              <div class="service-icon">
-                <img src="assets/automatisation.png" alt="" class="service-card-icon">
-              </div>
-              <h3>Automatisation</h3>
-              <p>Simplifier les tâches répétitives grâce à l'automatisation. J'utilise différents outils pour automatiser des traitements, des workflows ou certaines opérations afin de faire gagner du temps et de limiter les manipulations manuelles.</p>
-              <div class="service-tags">
-                <span>Power Automate</span><span>Power Apps</span><span>Python</span><span>Bash</span><span>GitLab CI/CD</span><span>IA générative</span><span class="tag-more">&amp; plus</span>
-              </div>
-            </div>
-          </div>
-        </section>
-        <div class="section-cta">
-          <a href="#tab-contact" class="cta-btn">Discutons de votre projet <span>&rarr;</span></a>
         </div>
       </div>
 
-      <!-- Technologies Ticker -->
-      <section class="tech-ticker-section">
-        <div class="tech-ticker-wrapper">
-          <div class="tech-ticker-track">
-            <!-- Set 1 -->
-            <div class="tech-item"><i class="fa-brands fa-microsoft"></i> Power Platform</div>
-            <div class="tech-item"><i class="fa-solid fa-file-powerpoint"></i> Power Apps</div>
-            <div class="tech-item"><i class="fa-solid fa-chart-simple"></i> Power BI</div>
-            <div class="tech-item"><i class="fa-solid fa-robot"></i> Power Automate</div>
-            <div class="tech-item"><i class="fa-solid fa-database"></i> Dataverse/SharePoint</div>
-            <div class="tech-item"><i class="fa-solid fa-bolt"></i> N8n / Make / Zapier</div>
-            <div class="tech-item"><i class="fa-solid fa-table"></i> Airtable / TimeTonic</div>
-            <div class="tech-item"><i class="fa-solid fa-mobile-screen"></i> FlutterFlow</div>
-            <div class="tech-item"><i class="fa-solid fa-code"></i> C# / .NET Core</div>
-            <div class="tech-item"><i class="fa-solid fa-database"></i> EF Core / LINQ</div>
-            <!-- <div class="tech-item"><i class="fa-brands fa-python"></i> Python</div> -->
-            <div class="tech-item"><i class="fa-brands fa-git-alt"></i> Git</div>
-            <div class="tech-item"><i class="fa-solid fa-terminal"></i> VS Code</div>
-            <div class="tech-item"><i class="fa-brands fa-vuejs"></i> Vue.js 3</div>
-            <div class="tech-item"><i class="fa-brands fa-html5"></i> HTML5</div>
-            <div class="tech-item"><i class="fa-brands fa-css3-alt"></i> CSS3</div>
-            <div class="tech-item"><i class="fa-brands fa-bootstrap"></i> Bootstrap</div>
-            <div class="tech-item"><i class="fa-brands fa-wordpress"></i> WordPress</div>
-            <div class="tech-item"><i class="fa-brands fa-webflow"></i> Webflow</div>
-            <!-- Set 2 (Duplicate) -->
-            <div class="tech-item"><i class="fa-brands fa-microsoft"></i> Power Platform</div>
-            <div class="tech-item"><i class="fa-solid fa-file-powerpoint"></i> Power Apps</div>
-            <div class="tech-item"><i class="fa-solid fa-chart-simple"></i> Power BI</div>
-            <div class="tech-item"><i class="fa-solid fa-robot"></i> Power Automate</div>
-            <div class="tech-item"><i class="fa-solid fa-database"></i> Dataverse/SharePoint</div>
-            <div class="tech-item"><i class="fa-solid fa-bolt"></i> N8n / Make / Zapier</div>
-            <div class="tech-item"><i class="fa-solid fa-table"></i> Airtable / TimeTonic</div>
-            <div class="tech-item"><i class="fa-solid fa-mobile-screen"></i> FlutterFlow</div>
-            <div class="tech-item"><i class="fa-solid fa-code"></i> C# / .NET Core</div>
-            <div class="tech-item"><i class="fa-solid fa-database"></i> EF Core / LINQ</div>
-            <!-- <div class="tech-item"><i class="fa-brands fa-python"></i> Python</div> -->
-            <div class="tech-item"><i class="fa-brands fa-git-alt"></i> Git</div>
-            <div class="tech-item"><i class="fa-solid fa-terminal"></i> VS Code</div>
-            <div class="tech-item"><i class="fa-brands fa-vuejs"></i> Vue.js / nuxt</div>
-            <div class="tech-item"><i class="fa-brands fa-html5"></i> HTML5</div>
-            <div class="tech-item"><i class="fa-brands fa-css3-alt"></i> CSS3</div>
-            <div class="tech-item"><i class="fa-brands fa-bootstrap"></i> Bootstrap</div>
-            <div class="tech-item"><i class="fa-brands fa-wordpress"></i> WordPress</div>
-            <div class="tech-item"><i class="fa-brands fa-webflow"></i> Webflow</div>
-          </div>
-        </div>
-      </section>
+      <div class="scene-strip" data-scene="ville">
+        <span class="scene-sky" aria-hidden="true"></span>
+        <span class="scene-far" aria-hidden="true"></span>
+        <span class="scene-near" aria-hidden="true"></span>
+        <span class="scene-ground" aria-hidden="true"></span>
 
-      <!-- Découverte & Initiation (caché pour l'instant) -->
-      <!--
-      <section class="discovery-section" id="tab-premiers-pas">
-        <div class="discovery-layout">
-          <div class="discovery-left">
-            <p class="discovery-eyebrow">DÉCOUVERTE & INITIATION</p>
-            <h2 class="discovery-title">Commencer<br>simplement.<br>Apprendre en<br>créant.</h2>
-            <p class="discovery-text">Des séances accessibles aux enfants, adolescents et adultes débutants. Chacun avance à son rythme, avec des projets concrets et un accompagnement bienveillant.</p>
-            <button class="discovery-btn">Découvrir les parcours <span>&rarr;</span></button>
-          </div>
-          <div class="discovery-right">
-            <div class="discovery-card">
-              <h3>Ce que vous pourrez réaliser</h3>
-              <ul class="discovery-list">
-                <li>Une première page web</li>
-                <li>Un petit jeu</li>
-                <li>Un premier programme</li>
-                <li>Découvrir l'IA</li>
-              </ul>
-              <div class="discovery-tags">
-                <span class="discovery-tag">HTML</span>
-                <span class="discovery-tag">C#</span>
-                <span class="discovery-tag">Unity</span>
-                <span class="discovery-tag">IA</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      -->
-      <!-- Références -->
-      <section class="experience-section" id="tab-experience">
-        <div class="references-container">
-          <div class="references-header">
-            <h2 class="references-title"><img src="assets/ils_nous_font_confiances.png" alt="" class="section-icon"> Au fil des missions</h2>
-            <p class="references-subtitle">J'ai eu l'occasion d'intervenir auprès de ces entreprises, centres de formation et organismes publics principalement sur des missions de formation IT.</p>
-          </div>
-          <div class="references-logos-wrapper">
-          <div class="references-logos">
-            <div class="ref-logo"><img src="assets/logo/damart.png" alt="Damart"></div>
-            <div class="ref-logo"><img src="assets/logo/laho.png" alt="Laho"></div>
-            <div class="ref-logo"><img src="assets/logo/m2i.png" alt="M2i"></div>
-            <div class="ref-logo"><img src="assets/logo/naval.png" alt="Naval"></div>
-            <div class="ref-logo"><img src="assets/logo/orsys.png" alt="Orsys"></div>
-            <div class="ref-logo"><img src="assets/logo/ovh.png" alt="OVH"></div>
-            <div class="ref-logo"><img src="assets/logo/region.jpg" alt="Région"></div>
-            <div class="ref-logo"><img src="assets/logo/sogeti.jpg" alt="Sogeti"></div>
-            <div class="ref-logo"><img src="assets/logo/utopios.jpg" alt="Utopios"></div>
-            <div class="ref-logo"><img src="assets/logo/ecoledouane.jpg" alt="École des Douanes"></div>
-          </div>
-          </div>
-        </div>
-      </section>
+        <button type="button" class="npc" data-npc data-open-contact aria-label="Me contacter">
+          <span class="npc-bubble" data-npc-bubble hidden>
+            <span class="npc-text" data-npc-text></span>
+            <span class="npc-caret" aria-hidden="true"></span>
+          </span>
+          <span class="npc-sprite" data-npc-sprite aria-hidden="true"></span>
+        </button>
+      </div>
+    </section>
 
-      <!-- Réalisations -->
-      <section class="et-slide" id="tab-projects">
-        <div class="slide-inner">
-          <div class="section-header">
-            <h2><img src="assets/realisations.png" alt="" class="section-icon"> Réalisations</h2>
-            <p class="slide-intro">Quelques exemples de projets développés au fil de notre parcours. Cette sélection ne représente qu'une partie de notre activité. D'autres développements réalisés en mission ne sont pas publics. De nouvelles réalisations s'ajouteront au fur et à mesure.</p>
-          </div>
-          <div class="gallery">
-            <div class="project-card"
-                 data-title="ILS ECO : Site vitrine"
-                 data-description="Création d'un site vitrine professionnel pour ILS ECO, spécialisé dans les solutions d'économie d'énergie. Site responsive avec formulaire de contact."
-                 data-tech="HTML, CSS, JavaScript, Google Apps Script"
-                 data-link="https://www.ils-eco.com/">
-              <div class="card-image">
-                <img src="assets/ecran_accueil.jpg" loading="lazy" alt="ILS ECO">
-              </div>
-              <div class="card-content">
-                <h3>ILS ECO</h3>
-                <p class="card-excerpt">Site vitrine responsive, optimisé pour la prise de contact.</p>
-                <button class="card-open" type="button">En savoir plus</button>
-              </div>
-            </div>
-            <div class="project-card"
-                 data-title="Soh cook : Portfolio artistique"
-                 data-description="Portfolio artistique pour une cake-designer avec galerie, blog et backoffice administrable."
-                 data-tech="HTML, CSS, Vue.js (Nuxt), Supabase, Google Apps Script"
-                 data-link="https://sohcook.vercel.app/">
-              <div class="card-image">
-                <img src="assets/ecran_accueil_sohcook.jpg" loading="lazy" alt="Soh cook">
-              </div>
-              <div class="card-content">
-                <h3>Soh cook</h3>
-                <p class="card-excerpt">Portfolio artistique avec backoffice de gestion de contenu.</p>
-                <button class="card-open" type="button">En savoir plus</button>
-              </div>
-            </div>
-            <div class="project-card"
-                 data-title="DataViz 3D : Tableau de bord"
-                 data-description="Prototype d'un tableau de bord interactif en 3D, conçu avec Nuxt 4 et Three.js, pour visualiser les performances commerciales par département."
-                 data-tech="Nuxt 4, Three.js, GSAP, CSS"
-                 data-link="https://api-visualizer.ogtech.fr/">
-              <div class="card-image">
-                <img src="assets/ecran_france3d.jpg" loading="lazy" alt="DataViz 3D">
-              </div>
-              <div class="card-content">
-                <h3>DataViz 3D</h3>
-                <p class="card-excerpt">Tableau de bord interactif avec carte 3D et visualisation de données.</p>
-                <button class="card-open" type="button">En savoir plus</button>
-              </div>
-            </div>
-            <div class="project-card"
-              data-title="Vision 7'Event : Portefolio photographe"
-              data-description="Conception et développement d'une landing page moderne pour Vision 7'Event, permettant de regrouper les réseaux sociaux, les informations de contact et de mettre en valeur le travail du photographe à travers une interface fluide et responsive."
-              data-tech="HTML, CSS, JavaScript"
-              data-link="https://7event.ogtech.fr/">
-            <div class="card-image">
-              <img src="assets/vision7event.jpg" loading="lazy" alt="Vision 7'Event">
-            </div>
-            <div class="card-content">
-              <h3>Vision 7'Event</h3>
-              <p class="card-excerpt">Conception et intégration d'une landing page responsive avec animations et formulaire de contact pour un photographe</p>
-              <button class="card-open" type="button">En savoir plus</button>
-            </div>
-          </div>
-            <div class="project-card is-placeholder">
-              <div class="card-content">
-                <h3>D'autres réalisations à venir</h3>
-                <p>D'autres projets seront ajoutés prochainement.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    <!-- ============ SERVICES ============ -->
+    <section class="section section-gallery" id="services" aria-labelledby="services-title">
+      <div class="container">
+        <p class="eyebrow"><span class="idx">01</span> Services</p>
+      </div>
 
-      <!-- Power Platform (caché pour l'instant) -->
-      <!--
-      <section class="et-slide" id="tab-power">
-        <div class="slide-inner">
-          <div class="section-header">
-            <p class="eyebrow">Power Platform</p>
-            <h2>Power Platform & automatisation</h2>
-            <p class="slide-intro">
-              J'évolue avec plaisir dans l'écosystème Power Platform, où je conçois et expérimente des applications métier avec Power Apps et Power Automate, en m'appuyant sur Dataverse, SharePoint et Microsoft 365 pour rendre les processus plus fluides et collaboratifs.
+      <!-- Le rail : une diapositive d'introduction, les cartes, puis l'adresse.
+           Sur grand ecran avec GSAP la section s'epingle et le rail glisse au
+           defilement (js/modules/motion.js) ; sinon il se fait glisser. -->
+      <div class="gallery">
+        <div class="gallery-track">
+          <div class="gallery-intro">
+            <h2 class="section-title" id="services-title">Comment puis-je vous accompagner&nbsp;?</h2>
+            <p class="section-lead">
+            Trois domaines dans lesquels j'interviens. Un seul ou plusieurs, selon votre besoin.
+          </p>
+          </div>
+          <article class="card service-card gallery-card">
+            <span class="card-icon" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#i-chalkboard-user"/></svg></span>
+            <h3>Formation IT</h3>
+            <p>
+              J'interviens auprès des entreprises, des centres de formation et des particuliers, en présentiel
+              ou à distance. Chaque session est adaptée au public, avec une approche concrète et tournée
+              vers la pratique.
             </p>
-            <p>Je développe également mes compétences sur Power BI, afin d'élargir mon champ d'action vers la visualisation et l'analyse de données dans l'environnement Microsoft.</p>
-          </div>
-          <div class="two-columns">
-            <ul class="check-list">
-              <li>Applications Canvas pour digitaliser formulaires & demandes</li>
-              <li>Workflows Power Automate pour limiter les tâches répétitives</li>
-              <li>Connecteurs avec Microsoft 365 et vos systèmes existants</li>
-            </ul>
-            <ul class="check-list">
-              <li>Premiers tableaux de bord avec Power BI</li>
-              <li>Exploration de Copilot et de l'IA dans Microsoft 365</li>
-              <li>Prototypage rapide no-code/low-code pour valider vos idées</li>
-            </ul>
-          </div>
+            <div class="card-tools">
+              <ul class="tag-list">
+                <li>Linux</li><li>GitLab</li><li>.NET</li><li>Python</li><li>Power Platform</li><li>Docker</li>
+                <li class="tag-more">&amp; plus</li>
+              </ul>
+            </div>
+          </article>
+          <article class="card service-card gallery-card">
+            <span class="card-icon" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#i-code"/></svg></span>
+            <h3>Développement</h3>
+            <p>
+              Conception, développement et évolution de solutions logicielles. J'interviens sur la création
+              d'applications, l'évolution de l'existant et la maintenance, en m'adaptant aux contraintes
+              de chaque projet. Les sites vitrines et les applications web en font partie&nbsp;: quatre
+              sont en ligne, plus bas dans mes réalisations.
+            </p>
+            <div class="card-tools">
+              <ul class="tag-list">
+                <li>.NET</li><li>Vue.js</li><li>Nuxt</li><li>API REST</li><li>Power Apps</li><li>Bases de données</li>
+                <li class="tag-more">&amp; plus</li>
+              </ul>
+            </div>
+          </article>
+          <article class="card service-card gallery-card">
+            <span class="card-icon" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#i-wand-magic-sparkles"/></svg></span>
+            <h3>Automatisation</h3>
+            <p>
+              Simplifier les tâches répétitives. J'automatise vos traitements, vos workflows et vos
+              opérations manuelles pour faire gagner du temps à vos équipes et limiter les erreurs.
+            </p>
+            <div class="card-tools">
+              <ul class="tag-list">
+                <li>Power Automate</li><li>Power Apps</li><li>Python</li><li>Bash</li><li>GitLab CI/CD</li>
+                <li class="tag-more">&amp; plus</li>
+              </ul>
+            </div>
+          </article>
+          <article class="card service-card gallery-card card-more">
+            <span class="card-icon" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#i-circle-info"/></svg></span>
+            <h3>Autre chose&nbsp;?</h3>
+            <p>
+              Si votre besoin ne rentre dans aucune de ces trois cases, décrivez-le-moi&nbsp;:
+              on verra ensemble ce qui est possible.
+            </p>
+            <div class="card-tools">
+              <button type="button" class="btn btn-link" data-open-contact>
+                Décrire mon besoin <svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+              </button>
+            </div>
+          </article>
         </div>
-      </section>
-      -->
+      </div>
 
-      <!-- Contact mail -->
-      <section class="et-slide" id="tab-contact">
-        <div class="slide-inner">
-          <div class="section-header">
-            <p class="eyebrow">Contact</p>
-            <h2><i class="fa-solid fa-envelope"></i> Travaillons ensemble</h2>
-            <p class="slide-intro">Échangeons sur votre projet</p>
-            <p class="slide-intro" style="font-size:0.95rem;margin-top:4px;">Que vous recherchiez une formation IT, un accompagnement technique ou une solution de développement, je serai ravi d'en discuter avec vous.</p>
+      <div class="container">
+        <div class="section-cta">
+
+          <p>Un besoin qui ressemble à l'un de ces trois cas&nbsp;?</p>
+          <button type="button" class="btn btn-primary" data-open-contact>
+            Discutons de votre projet <svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BANDEAU TECHNOS ============ -->
+    <!-- Encart : ni un chapitre numerote ni une carte, un espace a part.
+         Pas de bande de decor ici — les six paysages sont deja pris, et son
+         absence marque justement qu'on est sorti du fil des sections. -->
+    <section class="niveau section-dark" id="pedagogie" aria-labelledby="pedagogie-title">
+      <div class="container niveau-inner">
+        <h2 class="niveau-title" id="pedagogie-title">
+          Si vous partez de zéro, je pars de zéro <em>avec vous</em>.
+        </h2>
+        <p class="niveau-deck">
+          Rendre accessibles des sujets techniques à des personnes qui ne les
+          maîtrisent pas encore.
+        </p>
+
+        <div class="niveau-body">
+          <p>
+            Il existe beaucoup de professionnels très compétents dans leur domaine, capables
+            d'animer des formations de haut niveau. Mais former des personnes qui débutent
+            demande autre chose. C'est précisément le type de formation que j'aime animer.
+          </p>
+          <p class="niveau-public-label">Je travaille particulièrement avec</p>
+          <ul class="niveau-public">
+            <li>des débutants</li>
+            <li>des personnes en reconversion</li>
+            <li>des équipes qui découvrent un nouveau sujet</li>
+          </ul>
+        </div>
+
+        <figure class="niveau-figure">
+          <svg viewBox="0 0 7 10" fill="currentColor" shape-rendering="crispEdges" aria-hidden="true"><rect x="3" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="3" y="8" width="1" height="1"/><rect x="0" y="9" width="1" height="1"/><rect x="1" y="9" width="1" height="1"/><rect x="2" y="9" width="1" height="1"/><rect x="3" y="9" width="1" height="1"/><rect x="4" y="9" width="1" height="1"/><rect x="5" y="9" width="1" height="1"/><rect x="6" y="9" width="1" height="1"/></svg>
+          <figcaption>Niveau 1</figcaption>
+        </figure>
+
+        <!-- La phrase cle, seule sur sa ligne : c'est elle qu'on retient. -->
+        <p class="niveau-pull">
+          Mon objectif n'est pas de montrer tout ce que je sais.
+          <span>C'est de faire en sorte que vous puissiez avancer, même si vous partez
+          avec très peu de bases.</span>
+        </p>
+
+        <ul class="niveau-proof">
+          <li>
+            <strong>Je pars de ce que vous savez vraiment.</strong>
+            Pas de ce que vous êtes censé savoir.
+          </li>
+          <li>
+            <strong>Je traduis avant de nommer.</strong>
+            On comprend d'abord l'idée avec des mots simples. Le terme technique vient ensuite.
+          </li>
+          <li>
+            <strong>Je ralentis quand c'est nécessaire.</strong>
+            Ce qui paraît évident pour quelqu'un qui pratique depuis dix ans ne l'est pas
+            forcément pour quelqu'un qui commence aujourd'hui.
+          </li>
+          <li>
+            <strong>Je reprends sans compter.</strong>
+            Une question posée deux fois n'est jamais une question de trop.
+          </li>
+          <li>
+            <strong>Je change d'explication si la première ne fonctionne pas.</strong>
+            Si vous n'avez pas compris, mon rôle est de trouver une autre manière de vous
+            l'expliquer.
+          </li>
+        </ul>
+
+        <div class="niveau-cta">
+          <p>Vous devez former un public débutant, en reconversion ou peu à l'aise avec la technique&nbsp;?</p>
+          <button type="button" class="btn btn-primary btn-lg" data-open-contact>
+            Parlons de votre projet de formation
+          </button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============ RÉFÉRENCES ============ -->
+    <section class="section section-alt" id="references" aria-labelledby="references-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow"><span class="idx">02</span> Références</p>
+          <h2 class="section-title" id="references-title">Au fil des missions</h2>
+          <p class="section-lead">
+            J'ai eu l'occasion d'intervenir auprès de ces entreprises, centres de formation et organismes
+            publics, principalement sur des missions de formation IT.
+          </p>
+        </header>
+
+        <ul class="logo-grid">
+          <li>
+            <picture>
+              <source srcset="assets/img/logo/capgemini.avif" type="image/avif">
+              <img src="assets/img/logo/capgemini.webp" alt="Capgemini" loading="lazy"
+                   decoding="async" width="320" height="160">
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source srcset="assets/img/logo/atos-worldline.avif" type="image/avif">
+              <img src="assets/img/logo/atos-worldline.webp" alt="Atos Worldline" loading="lazy"
+                   decoding="async" width="320" height="160">
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source srcset="assets/img/logo/sogeti.avif" type="image/avif">
+              <img src="assets/img/logo/sogeti.webp" alt="Sogeti" loading="lazy"
+                   decoding="async" width="320" height="160">
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source srcset="assets/img/logo/ovh.avif" type="image/avif">
+              <img src="assets/img/logo/ovh.webp" alt="OVHcloud" loading="lazy"
+                   decoding="async" width="320" height="160">
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source srcset="assets/img/logo/damart.avif" type="image/avif">
+              <img src="assets/img/logo/damart.webp" alt="Damart" loading="lazy"
+                   decoding="async" width="320" height="160">
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source srcset="assets/img/logo/naval.avif" type="image/avif">
+              <img src="assets/img/logo/naval.webp" alt="Naval Group" loading="lazy"
+                   decoding="async" width="320" height="160">
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source srcset="assets/img/logo/orsys.avif" type="image/avif">
+              <img src="assets/img/logo/orsys.webp" alt="Orsys Formation" loading="lazy"
+                   decoding="async" width="320" height="160">
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source srcset="assets/img/logo/m2i.avif" type="image/avif">
+              <img src="assets/img/logo/m2i.webp" alt="M2i Formation" loading="lazy"
+                   decoding="async" width="320" height="160">
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source srcset="assets/img/logo/laho.avif" type="image/avif">
+              <img src="assets/img/logo/laho.webp" alt="Laho Formation" loading="lazy"
+                   decoding="async" width="320" height="160">
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source srcset="assets/img/logo/utopios.avif" type="image/avif">
+              <img src="assets/img/logo/utopios.webp" alt="Utopios" loading="lazy"
+                   decoding="async" width="320" height="160">
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source srcset="assets/img/logo/region.avif" type="image/avif">
+              <img src="assets/img/logo/region.webp" alt="Région Hauts-de-France" loading="lazy"
+                   decoding="async" width="320" height="160">
+            </picture>
+          </li>
+          <li>
+            <img src="assets/img/logo/ecole-douanes.svg" alt="École nationale des Douanes"
+                 loading="lazy" decoding="async" width="320" height="160">
+          </li>
+        </ul>
+
+        <div class="section-cta">
+          <p>Vous cherchez un formateur ou un développeur pour votre équipe&nbsp;?</p>
+          <button type="button" class="btn btn-primary" data-open-contact>
+            Parlons de votre besoin <svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="marquee" aria-label="Technologies maîtrisées">
+      <div class="marquee-track">
+        <ul class="marquee-group">
+          <li><svg class="ico" aria-hidden="true"><use href="#i-microsoft"/></svg> Power Platform</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-table-cells-large"/></svg> Power Apps</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-chart-simple"/></svg> Power BI</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-robot"/></svg> Power Automate</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-database"/></svg> Dataverse / SharePoint</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-bolt"/></svg> n8n / Make / Zapier</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-code"/></svg> C# / .NET Core</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-layer-group"/></svg> EF Core / LINQ</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-python"/></svg> Python</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-linux"/></svg> Linux</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-docker"/></svg> Docker</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-gitlab"/></svg> GitLab CI/CD</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-vuejs"/></svg> Vue.js / Nuxt</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-html5"/></svg> HTML5 / CSS3</li>
+        </ul>
+        <ul class="marquee-group" aria-hidden="true">
+          <li><svg class="ico" aria-hidden="true"><use href="#i-microsoft"/></svg> Power Platform</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-table-cells-large"/></svg> Power Apps</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-chart-simple"/></svg> Power BI</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-robot"/></svg> Power Automate</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-database"/></svg> Dataverse / SharePoint</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-bolt"/></svg> n8n / Make / Zapier</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-code"/></svg> C# / .NET Core</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-layer-group"/></svg> EF Core / LINQ</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-python"/></svg> Python</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-linux"/></svg> Linux</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-docker"/></svg> Docker</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-gitlab"/></svg> GitLab CI/CD</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-vuejs"/></svg> Vue.js / Nuxt</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-html5"/></svg> HTML5 / CSS3</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ RÉALISATIONS ============ -->
+    <section class="section section-gallery" id="realisations" aria-labelledby="realisations-title">
+      <div class="container">
+        <p class="eyebrow"><span class="idx">03</span> Réalisations</p>
+      </div>
+
+      <!-- Le rail : une diapositive d'introduction, les cartes, puis l'adresse.
+           Sur grand ecran avec GSAP la section s'epingle et le rail glisse au
+           defilement (js/modules/motion.js) ; sinon il se fait glisser. -->
+      <div class="gallery">
+        <div class="gallery-track">
+          <div class="gallery-intro">
+            <h2 class="section-title" id="realisations-title">Quelques projets livrés</h2>
+            <p class="section-lead">
+            Quelques sites en ligne, que vous pouvez visiter. En entreprise, j'ai aussi travaillé
+            sur des sites et outils internes, par nature confidentiels.
+          </p>
           </div>
-
-          <div class="contact-container">
-            <div class="contact-grid">
-              <!-- Email Card -->
-              <div class="contact-card">
-                <div class="contact-icon-wrapper">
-                  <i class="fa-solid fa-envelope"></i>
-                </div>
-                <h3>Par Email</h3>
-                <p>Décrivez votre projet via le formulaire dédié.</p>
-                <button type="button" class="contact-card-btn" id="btnContactMail">
-                  Me contacter
-                </button>
-              </div>
-
-              <!-- Phone Card -->
-              <div class="contact-card">
-                <div class="contact-icon-wrapper">
-                  <i class="fa-solid fa-phone"></i>
-                </div>
-                <h3>Par Téléphone</h3>
-                <p>Échange direct pour vos besoins urgents.</p>
-                <a href="#" class="contact-card-btn secondary" id="phoneBtn">
-                  Afficher le numéro
-                </a>
-              </div>
-
-              <!-- LinkedIn Card -->
-              <div class="contact-card">
-                <div class="contact-icon-wrapper">
-                  <i class="fa-brands fa-linkedin-in"></i>
-                </div>
-                <h3>Sur LinkedIn</h3>
-                <p>Consultez mon parcours complet.</p>
-                <a href="https://www.linkedin.com/in/oussama-guiren" 
-                   target="_blank" 
-                   rel="noopener noreferrer" 
-                   class="contact-card-btn secondary">
-                  Voir mon profil
+          <article class="card project-card gallery-card"
+                   data-title="ILS ECO — Site vitrine"
+                   data-description="Création d'un site vitrine professionnel pour ILS ECO, spécialisé dans les solutions d'économie d'énergie. Site responsive, optimisé pour la prise de contact, avec formulaire relié à une notification par e-mail."
+                   data-tech="HTML, CSS, JavaScript, Google Apps Script"
+                   data-link="https://www.ils-eco.com/">
+            <div class="card-media">
+              <picture>
+                <source srcset="assets/img/proj-ilseco.avif" type="image/avif">
+                <img src="assets/img/proj-ilseco.webp" alt="Page d'accueil du site ILS ECO" loading="lazy" decoding="async" width="720" height="405">
+              </picture>
+            </div>
+            <div class="card-body">
+              <h3>ILS ECO</h3>
+              <p>Site vitrine responsive, optimisé pour la prise de contact.</p>
+              <ul class="tag-list tag-list-sm"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+              <div class="card-actions">
+                <button type="button" class="btn btn-link card-open">
+                En savoir plus <svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+              </button>
+                <a class="btn btn-link card-visit" href="https://www.ils-eco.com/" target="_blank" rel="noopener noreferrer">
+                  Voir le site<span class="sr-only"> ILS ECO, nouvel onglet</span> <svg class="ico" aria-hidden="true"><use href="#i-arrow-up-right-from-square"/></svg>
                 </a>
               </div>
             </div>
-            
-            <div class="contact-footer">
-              <p>Au plaisir d'échanger avec vous.</p>
+          </article>
+          <article class="card project-card gallery-card"
+                   data-title="Soh Cook — Portfolio artistique"
+                   data-description="Portfolio artistique pour une cake-designer : galerie de créations, blog et back-office administrable permettant de gérer le contenu sans intervention technique."
+                   data-tech="Vue.js (Nuxt), Supabase, HTML, CSS, Google Apps Script"
+                   data-link="https://sohcook.vercel.app/">
+            <div class="card-media">
+              <picture>
+                <source srcset="assets/img/proj-sohcook.avif" type="image/avif">
+                <img src="assets/img/proj-sohcook.webp" alt="Page d'accueil du portfolio Soh Cook" loading="lazy" decoding="async" width="720" height="405">
+              </picture>
             </div>
-          </div>
+            <div class="card-body">
+              <h3>Soh Cook</h3>
+              <p>Portfolio artistique avec back-office de gestion de contenu.</p>
+              <ul class="tag-list tag-list-sm"><li>Nuxt</li><li>Supabase</li><li>Vue.js</li></ul>
+              <div class="card-actions">
+                <button type="button" class="btn btn-link card-open">
+                En savoir plus <svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+              </button>
+                <a class="btn btn-link card-visit" href="https://sohcook.vercel.app/" target="_blank" rel="noopener noreferrer">
+                  Voir le site<span class="sr-only"> Soh Cook, nouvel onglet</span> <svg class="ico" aria-hidden="true"><use href="#i-arrow-up-right-from-square"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+          <article class="card project-card gallery-card"
+                   data-title="DataViz 3D — Tableau de bord"
+                   data-description="Prototype de tableau de bord interactif en 3D, conçu avec Nuxt 4 et Three.js, pour visualiser les performances commerciales par département sur une carte de France animée."
+                   data-tech="Nuxt 4, Three.js, GSAP, CSS"
+                   data-link="https://api-visualizer.ogtech.fr/">
+            <div class="card-media">
+              <picture>
+                <source srcset="assets/img/proj-dataviz.avif" type="image/avif">
+                <img src="assets/img/proj-dataviz.webp" alt="Tableau de bord DataViz 3D avec carte de France" loading="lazy" decoding="async" width="720" height="405">
+              </picture>
+            </div>
+            <div class="card-body">
+              <h3>DataViz 3D</h3>
+              <p>Tableau de bord interactif avec carte 3D et visualisation de données.</p>
+              <ul class="tag-list tag-list-sm"><li>Nuxt 4</li><li>Three.js</li><li>GSAP</li></ul>
+              <div class="card-actions">
+                <button type="button" class="btn btn-link card-open">
+                En savoir plus <svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+              </button>
+                <a class="btn btn-link card-visit" href="https://api-visualizer.ogtech.fr/" target="_blank" rel="noopener noreferrer">
+                  Voir le site<span class="sr-only"> DataViz 3D, nouvel onglet</span> <svg class="ico" aria-hidden="true"><use href="#i-arrow-up-right-from-square"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+          <article class="card project-card gallery-card"
+                   data-title="Vision 7'Event — Landing page photographe"
+                   data-description="Conception et développement d'une landing page pour Vision 7'Event : regroupement des réseaux sociaux, informations de contact et mise en valeur du travail du photographe à travers une interface fluide et responsive."
+                   data-tech="HTML, CSS, JavaScript"
+                   data-link="https://7event.ogtech.fr/">
+            <div class="card-media">
+              <picture>
+                <source srcset="assets/img/proj-7event.avif" type="image/avif">
+                <img src="assets/img/proj-7event.webp" alt="Landing page du photographe Vision 7'Event" loading="lazy" decoding="async" width="720" height="405">
+              </picture>
+            </div>
+            <div class="card-body">
+              <h3>Vision 7'Event</h3>
+              <p>Landing page responsive avec animations et formulaire de contact.</p>
+              <ul class="tag-list tag-list-sm"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+              <div class="card-actions">
+                <button type="button" class="btn btn-link card-open">
+                En savoir plus <svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+              </button>
+                <a class="btn btn-link card-visit" href="https://7event.ogtech.fr/" target="_blank" rel="noopener noreferrer">
+                  Voir le site<span class="sr-only"> Vision 7'Event, nouvel onglet</span> <svg class="ico" aria-hidden="true"><use href="#i-arrow-up-right-from-square"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+          <article class="card project-card gallery-card card-more">
+            <div class="card-body">
+              <h3>D'autres projets arrivent</h3>
+              <p>Des projets sont en cours. Je les ajouterai ici dès qu'ils seront en ligne.</p>
+            </div>
+          </article>
         </div>
-      </section>
-    </main>
-  </div>
+      </div>
 
-  <!-- Toast notifications root -->
-  <div id="toast-root" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+      <div class="container">
+        <div class="section-cta">
 
-  <!-- Contact Popup (Style "about-popup") -->
-  <div class="about-popup" id="contactPopup" aria-hidden="true" role="dialog" aria-labelledby="contactPopupTitle" aria-modal="true">
-    <div class="about-popup-overlay"></div>
-    <div class="about-popup-content">
-      <button class="about-popup-close" id="closeContactPopup" aria-label="Fermer la popup">
-        <i class="fa-solid fa-times"></i>
+          <p>Vous avez un projet similaire en tête&nbsp;?</p>
+          <button type="button" class="btn btn-primary" data-open-contact>
+            Décrivez-le moi <svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ À PROPOS ============ -->
+    <section class="section section-alt" id="apropos" aria-labelledby="apropos-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow"><span class="idx">04</span> À propos</p>
+          <h2 class="section-title" id="apropos-title">Derrière OGTech</h2>
+        </header>
+
+        <!-- Déclaration d'intention : le cœur du positionnement, traité en grand. -->
+        <blockquote class="about-statement">
+          <p>
+        Chaque mission est différente, mais mon approche reste la même&nbsp;:
+        <mark>prendre le temps de comprendre le besoin</mark> avant de proposer une solution.
+          </p>
+          <footer>
+        <span class="about-sign">Oussama Guiren</span>
+        <span class="about-role">Développeur &amp; formateur IT, freelance</span>
+          </footer>
+        </blockquote>
+
+        <ul class="value-grid">
+          <li class="value-card">
+            <span class="value-num" aria-hidden="true">01</span>
+            <span class="value-icon" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#i-magnifying-glass"/></svg></span>
+            <h3>Comprendre avant d'agir</h3>
+            <p>Chaque projet commence par une bonne compréhension du besoin réel.</p>
+          </li>
+          <li class="value-card">
+            <span class="value-num" aria-hidden="true">02</span>
+            <span class="value-icon" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#i-screwdriver-wrench"/></svg></span>
+            <h3>Apprendre en faisant</h3>
+            <p>La pratique est au cœur de chacune de mes formations.</p>
+          </li>
+          <li class="value-card">
+            <span class="value-num" aria-hidden="true">03</span>
+            <span class="value-icon" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#i-arrow-trend-up"/></svg></span>
+            <h3>Rester à jour</h3>
+            <p>Les technologies évoluent, mes compétences aussi.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section section-dark has-scene" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow"><span class="idx">05</span> Contact</p>
+          <h2 class="section-title" id="contact-title">Travaillons ensemble</h2>
+          <p class="section-lead">
+            Que vous cherchiez une formation IT, un accompagnement technique ou une solution de
+            développement, je serai ravi d'en discuter avec vous.
+          </p>
+        </header>
+
+        <div class="card-grid card-grid-3">
+          <article class="card contact-card">
+            <span class="card-icon" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#i-envelope"/></svg></span>
+            <h3>Par e-mail</h3>
+            <p>Le plus simple pour un premier contact. Décrivez votre projet via le formulaire.</p>
+            <button type="button" class="btn btn-primary btn-block" data-open-contact>Me contacter</button>
+          </article>
+
+          <article class="card contact-card">
+            <span class="card-icon" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg></span>
+            <h3>Par téléphone</h3>
+            <p>Pour un échange direct. Le numéro s'affiche après trois informations.</p>
+            <button type="button" class="btn btn-outline btn-block" data-open-phone>Obtenir mon numéro</button>
+          </article>
+
+          <article class="card contact-card">
+            <span class="card-icon" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#i-linkedin-in"/></svg></span>
+            <h3>Sur LinkedIn</h3>
+            <p>Consultez mon parcours complet et mes publications.</p>
+            <a class="btn btn-outline btn-block" href="https://www.linkedin.com/in/oussama-guiren"
+               target="_blank" rel="noopener noreferrer">Voir mon profil</a>
+          </article>
+        </div>
+      </div>
+
+      <div class="scene-strip" data-scene="nuit">
+        <span class="scene-sky" aria-hidden="true"></span>
+        <span class="scene-far" aria-hidden="true"></span>
+        <span class="scene-near" aria-hidden="true"></span>
+        <span class="scene-ground" aria-hidden="true"></span>
+
+        <button type="button" class="npc" data-npc data-open-contact tabindex="-1" aria-hidden="true">
+          <span class="npc-bubble" data-npc-bubble hidden>
+            <span class="npc-text" data-npc-text></span>
+            <span class="npc-caret" aria-hidden="true"></span>
+          </span>
+          <span class="npc-sprite" data-npc-sprite aria-hidden="true"></span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="brand" href="#top" aria-label="OGTech — retour en haut">OG<span>Tech</span></a>
+      <p class="footer-tagline">Formation IT · Développement · Automatisation</p>
+      <nav class="footer-nav" aria-label="Navigation de pied de page">
+        <a href="#services">Services</a>
+        <a href="#references">Références</a>
+        <a href="#realisations">Réalisations</a>
+        <a href="#apropos">À propos</a>
+      </nav>
+      <a class="footer-social" href="https://www.linkedin.com/in/oussama-guiren" target="_blank"
+         rel="noopener noreferrer" aria-label="Profil LinkedIn d'Oussama Guiren">
+        <svg class="ico" aria-hidden="true"><use href="#i-linkedin-in"/></svg>
+      </a>
+      <p class="footer-zone">
+        Missions en France, Belgique, Suisse et Luxembourg, sur site comme à distance.
+      </p>
+      <p class="footer-legal">
+        © <span id="year">2026</span> OGTech, Oussama Guiren ·
+        <a href="mentions-legales.html">Mentions légales</a> ·
+        <a href="mentions-legales.html#donnees">Données personnelles</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- ============ MODALE PROJET ============ -->
+  <div class="modal" id="projectModal" hidden role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+    <div class="modal-scrim" data-close-modal></div>
+    <div class="modal-panel modal-panel-wide">
+      <button type="button" class="modal-close" data-close-modal aria-label="Fermer">
+        <svg class="ico" aria-hidden="true"><use href="#i-xmark"/></svg>
       </button>
-      <div class="about-popup-inner">
-        <h2 class="about-popup-title" id="contactPopupTitle">Contactez-moi</h2>
-        <div class="contact-form-wrapper" style="width: 100%;">
-          <form id="contactForm" novalidate autocomplete="off">
-            <div class="form-group">
-              <label for="companyName">Nom de la société*</label>
-              <input
-                type="text"
-                id="companyName"
-                name="companyName"
-                required
-                minlength="2"
-                maxlength="120"
-                autocomplete="organization"
-                aria-describedby="companyName-error"
-                pattern="^[A-Za-zÀ-ÖØ-öø-ÿ0-9][A-Za-zÀ-ÖØ-öø-ÿ0-9 .'’&()\\-]{1,}$"
-                placeholder="">
-              <div class="error" id="companyName-error" aria-live="polite"></div>
-            </div>
-
-            <div class="form-group">
-              <label for="email">Email*</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                inputmode="email"
-                autocomplete="email"
-                autocapitalize="off"
-                spellcheck="false"
-                aria-describedby="email-error"
-                placeholder=""
-                pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}$">
-              <div class="hint">Format attendu : nom@domaine.tld</div>
-              <div class="error" id="email-error" aria-live="polite"></div>
-            </div>
-
-            <div class="form-group">
-              <label for="phone">Téléphone (optionnel)</label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                inputmode="tel"
-                autocomplete="tel"
-                aria-describedby="phone-error"
-                placeholder=""
-                title="Numéro FR: 0X XX XX XX XX, +33 X XX XX XX XX, ou 0033 X XX XX XX XX"
-                pattern="^(?:0[1-9]|(?:\\+33|0033)[ .-]?[1-9])(?:[ .-]?\\d{2}){4}$"
-                maxlength="20">
-              <div class="error" id="phone-error" aria-live="polite"></div>
-            </div>
-
-            <div class="form-group">
-              <label for="missionType">Type de collaboration*</label>
-              <select id="missionType" name="missionType" required aria-describedby="missionType-error">
-                <option value="" disabled selected>— Sélectionner —</option>
-                <option value="freelance">Mission Freelance</option>
-                <option value="cdd_cdi">CDI / CDD</option>
-                <option value="other">Autre</option>
-              </select>
-              <div class="error" id="missionType-error" aria-live="polite"></div>
-            </div>
-
-            <div class="form-group">
-              <label for="message">Message*</label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                minlength="10"
-                maxlength="5000"
-                rows="6"
-                aria-describedby="message-error"
-                placeholder="Décrivez votre besoin…"></textarea>
-              <div class="error" id="message-error" aria-live="polite"></div>
-            </div>
-
-            <div class="form-group">
-              <label for="jobDescriptionFile">Fiche de poste (optionnel)</label>
-              <div class="file-upload-wrapper">
-                <input
-                  type="file"
-                  id="jobDescriptionFile"
-                  name="jobDescriptionFile"
-                  accept=".pdf,.doc,.docx,.txt,.md">
-                <div id="fileName" role="button" tabindex="0" aria-label="Choisir ou déposer un fichier">
-                  Cliquer ou déposer un fichier (PDF, DOC/DOCX, TXT, MD)
-            </div>
-            <div class="project-card is-placeholder">
-              <div class="card-image" aria-hidden="true"></div>
-              <div class="card-content">
-                <h3>Et d'autres réalisations</h3>
-                <p>Ces exemples sont publics. D'autres projets sont disponibles en intranet et ne sont pas accessibles ici.</p>
-              </div>
-            </div>
-          </div>
-              <div class="hint">
-                Formats: PDF, DOC, DOCX, TXT, MD — Taille max: 10&nbsp;Mo
-              </div>
-              <div class="error" id="file-error" aria-live="polite"></div>
-            </div>
-
-            <button type="submit" id="submitBtn">Envoyer</button>
-            <div id="formStatus" role="status" aria-live="polite" class="hint"></div>
-          </form>
+      <div class="project-detail">
+        <div class="project-detail-media">
+          <img id="projectModalImage" alt="" hidden>
+        </div>
+        <div class="project-detail-body">
+          <h2 class="modal-title" id="projectModalTitle">Détail du projet</h2>
+          <p id="projectModalDescription"></p>
+          <p class="project-detail-tech">
+            <span class="label">Technologies</span>
+            <span id="projectModalTech"></span>
+          </p>
+          <a id="projectModalLink" class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">
+            Voir le site <svg class="ico" aria-hidden="true"><use href="#i-arrow-up-right-from-square"/></svg>
+          </a>
         </div>
       </div>
     </div>
   </div>
-  <!-- Project Popup (Style "about-popup") -->
-  <div class="about-popup" id="projectModal" aria-hidden="true" role="dialog" aria-labelledby="projectModalTitle" aria-modal="true">
-    <div class="about-popup-overlay"></div>
-    <div class="about-popup-content project-popup-content">
-      <button class="about-popup-close" id="closeProjectModal" aria-label="Fermer la popup">
-        <i class="fa-solid fa-times"></i>
+
+  <!-- ============ MODALE CONTACT ============ -->
+  <div class="modal" id="contactModal" hidden role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+    <div class="modal-scrim" data-close-modal></div>
+    <div class="modal-panel">
+      <button type="button" class="modal-close" data-close-modal aria-label="Fermer">
+        <svg class="ico" aria-hidden="true"><use href="#i-xmark"/></svg>
       </button>
-      <div class="about-popup-inner">
-        <div class="project-details-grid">
-          <div class="project-media-wrapper">
-            <img id="modalImage" src="" alt="" class="project-popup-image" />
-          </div>
-          <div class="project-info-wrapper">
-            <h2 class="about-popup-title" id="projectModalTitle"></h2>
-            <div class="about-popup-text-content">
-              <p class="about-popup-text" id="projectModalDescription"></p>
-              <div class="project-tech-stack">
-                <strong>Technologies :</strong>
-                <span id="projectModalTech"></span>
-              </div>
-            </div>
-            <div class="project-popup-actions">
-              <a id="projectModalLink" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary">
-                Voir le site  <i class="fa-solid fa-external-link-alt" style="padding-left: 1rem;"></i>
-              </a>
-            </div>
-          </div>
+
+      <h2 class="modal-title" id="contactModalTitle">Parlons de votre projet</h2>
+      <p class="modal-lead">Décrivez votre besoin en quelques lignes.</p>
+
+      <form id="contactForm" novalidate autocomplete="off">
+        <div class="field">
+          <label for="companyName">Nom de la société <span class="req" aria-hidden="true">*</span></label>
+          <input type="text" id="companyName" name="companyName" required minlength="2" maxlength="120"
+                 autocomplete="organization" aria-describedby="companyName-error">
+          <p class="field-error" id="companyName-error" aria-live="polite"></p>
         </div>
-      </div>
+
+        <div class="field">
+          <label for="email">E-mail <span class="req" aria-hidden="true">*</span></label>
+          <input type="email" id="email" name="email" required inputmode="email" autocomplete="email"
+                 autocapitalize="off" spellcheck="false" aria-describedby="email-hint email-error">
+          <p class="field-hint" id="email-hint">Format attendu : nom@domaine.fr</p>
+          <p class="field-error" id="email-error" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="phone">Téléphone <span class="opt">(optionnel)</span></label>
+          <input type="tel" id="phone" name="phone" inputmode="tel" autocomplete="tel" maxlength="20"
+                 aria-describedby="phone-error">
+          <p class="field-error" id="phone-error" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="missionType">Type de besoin <span class="req" aria-hidden="true">*</span></label>
+          <select id="missionType" name="missionType" required aria-describedby="missionType-error">
+            <option value="" disabled selected>Sélectionner…</option>
+            <option value="formation">Formation IT</option>
+            <option value="developpement">Développement</option>
+            <option value="automatisation">Automatisation</option>
+            <option value="other">Autre / je ne sais pas encore</option>
+          </select>
+          <p class="field-error" id="missionType-error" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="message">Votre besoin <span class="req" aria-hidden="true">*</span></label>
+          <textarea id="message" name="message" required minlength="10" maxlength="5000" rows="5"
+                    placeholder="Contexte, objectif, échéance…" aria-describedby="message-error"></textarea>
+          <p class="field-error" id="message-error" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="jobDescriptionFile">Cahier des charges <span class="opt">(optionnel)</span></label>
+          <div class="dropzone" id="dropzone">
+            <input type="file" id="jobDescriptionFile" name="jobDescriptionFile" accept=".pdf,.doc,.docx,.txt,.md">
+            <div class="dropzone-label" id="fileName" role="button" tabindex="0"
+                 aria-label="Choisir ou déposer un fichier">
+              <svg class="ico" aria-hidden="true"><use href="#i-paperclip"/></svg>
+              Cliquer ou déposer un fichier
+            </div>
+          </div>
+          <p class="field-hint">PDF, DOC, DOCX, TXT ou MD. 5&nbsp;Mo maximum.</p>
+          <p class="field-error" id="file-error" aria-live="polite"></p>
+        </div>
+
+        <!-- Piège à robots : invisible pour les humains -->
+        <div class="hp-field" aria-hidden="true">
+          <label for="website">Ne pas remplir</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <!-- Épreuve visuelle, la même que sur la demande de numéro
+             (js/modules/defi.js). -->
+        <div class="field defi">
+          <p class="defi-consigne" id="contact-defi-consigne">
+            Dernière étape&nbsp;: remettez le personnage sur ses pieds.
+          </p>
+          <div class="defi-scene">
+            <span class="defi-sujet" data-defi-sujet aria-hidden="true"></span>
+          </div>
+          <button type="button" class="btn btn-outline defi-tourner" data-defi-tourner
+                  aria-describedby="contact-defi-consigne">
+            Tourner d'un quart de tour
+          </button>
+          <p class="field-error" aria-live="polite"></p>
+          <p class="field-hint">
+            Vous ne voyez pas l'image&nbsp;?
+            <a href="https://www.linkedin.com/in/oussama-guiren" target="_blank" rel="noopener noreferrer">Écrivez-moi sur LinkedIn</a>.
+          </p>
+        </div>
+
+        <p class="form-privacy">
+          Ces informations me servent à répondre à votre demande, à rien d'autre. Conservées
+          trois ans, supprimées sur simple demande,
+          <a href="mentions-legales.html#donnees" target="_blank" rel="noopener">en savoir plus</a>.
+        </p>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg" id="submitBtn">Envoyer ma demande</button>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
     </div>
   </div>
 
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
-  <!-- New JS Loader -->
-  <script type="module" src="js/main.js"></script>
+
+  <a class="to-top" id="toTop" href="#top" aria-label="Revenir en haut de la page">
+    <svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+  </a>
+
+
+  <div class="modal" id="phoneModal" hidden role="dialog" aria-modal="true" aria-labelledby="phoneModalTitle">
+    <div class="modal-scrim" data-close-modal></div>
+    <div class="modal-panel">
+      <button type="button" class="modal-close" data-close-modal aria-label="Fermer">
+        <svg class="ico" aria-hidden="true"><use href="#i-xmark"/></svg>
+      </button>
+
+      <h2 class="modal-title" id="phoneModalTitle">Obtenir mon numéro</h2>
+      <p class="modal-lead">
+        Pour un premier contact, je préfère l'e-mail. Si vous souhaitez m'appeler,
+        dites-moi qui vous êtes et le numéro s'affiche.
+      </p>
+
+      <form id="phoneForm" novalidate autocomplete="off">
+        <div class="field">
+          <label for="phoneCompany">Société <span class="req" aria-hidden="true">*</span></label>
+          <input type="text" id="phoneCompany" name="company" required minlength="2" maxlength="120"
+                 autocomplete="organization" aria-describedby="phoneCompany-error">
+          <p class="field-error" id="phoneCompany-error" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="phoneRole">Votre rôle <span class="req" aria-hidden="true">*</span></label>
+          <input type="text" id="phoneRole" name="role" required minlength="2" maxlength="120"
+                 autocomplete="organization-title" aria-describedby="phoneRole-error">
+          <p class="field-error" id="phoneRole-error" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="phoneNumber">Votre téléphone <span class="req" aria-hidden="true">*</span></label>
+          <input type="tel" id="phoneNumber" name="phone" required inputmode="tel" autocomplete="tel"
+                 maxlength="24" aria-describedby="phoneNumber-error">
+          <p class="field-error" id="phoneNumber-error" aria-live="polite"></p>
+        </div>
+
+        <!-- Épreuve visuelle : remettre le personnage d'aplomb. Le sens de
+             départ change à chaque ouverture (js/modules/modals.js). -->
+        <div class="field defi">
+          <p class="defi-consigne" id="phone-defi-consigne">
+            Dernière étape&nbsp;: remettez le personnage sur ses pieds.
+          </p>
+          <div class="defi-scene">
+            <span class="defi-sujet" data-defi-sujet aria-hidden="true"></span>
+          </div>
+          <button type="button" class="btn btn-outline defi-tourner" data-defi-tourner
+                  aria-describedby="phone-defi-consigne">
+            Tourner d'un quart de tour
+          </button>
+          <p class="field-error" aria-live="polite"></p>
+          <p class="field-hint">
+            Vous ne voyez pas l'image&nbsp;?
+            <a href="https://www.linkedin.com/in/oussama-guiren" target="_blank" rel="noopener noreferrer">Écrivez-moi sur LinkedIn</a>.
+          </p>
+        </div>
+
+        <!-- Piège à robots : invisible pour les humains -->
+        <div class="hp-field" aria-hidden="true">
+          <label for="phoneWebsite">Ne pas remplir</label>
+          <input type="text" id="phoneWebsite" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <p class="form-privacy">
+          Ces trois informations me disent qui a demandé mon numéro. Elles ne servent à rien
+          d'autre,
+          <a href="mentions-legales.html#donnees" target="_blank" rel="noopener">en savoir plus</a>.
+        </p>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg">Afficher le numéro</button>
+        <p class="form-status" id="phoneStatus" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="phone-reveal" id="phoneReveal" hidden></div>
+    </div>
+  </div>
+
+
+  <div id="toastRoot" class="toast-root" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Sprite des icones, genere par tools/icons.py. Ne pas editer a la main. -->
+  <!-- ICONES:DEBUT --><svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-arrow-right" viewBox="0 0 448 512"><path d="M439 279Q448 269 448 256Q448 243 439 233L279 73Q269 64 256 64Q243 64 233 73Q224 83 224 96Q224 109 233 119L339 224H32Q18 224 9 233Q0 242 0 256Q0 270 9 279Q18 288 32 288H339L233 393Q224 403 224 416Q224 429 233 439Q243 448 256 448Q269 448 279 439L439 279Z"/></symbol><symbol id="i-arrow-trend-up" viewBox="0 0 576 512"><path d="M384 160Q370 160 361 151Q352 142 352 128Q352 114 361 105Q370 96 384 96H544Q558 96 567 105Q576 114 576 128V288Q576 302 567 311Q558 320 544 320Q530 320 521 311Q512 302 512 288V205L343 375Q333 384 320 384Q307 384 297 375L192 269L55 407Q45 416 32 416Q19 416 9 407Q0 397 0 384Q0 371 9 361L169 201Q179 192 192 192Q205 192 215 201L320 307L467 160H384Z"/></symbol><symbol id="i-arrow-up-right-from-square" viewBox="0 0 512 512"><path d="M320 0Q306 0 297 9Q288 18 288 32Q288 46 297 55Q306 64 320 64H403L201 265Q192 275 192 288Q192 301 201 311Q211 320 224 320Q237 320 247 311L448 109V192Q448 206 457 215Q466 224 480 224Q494 224 503 215Q512 206 512 192V32Q512 18 503 9Q494 0 480 0H320ZM80 32Q46 33 23 55Q1 78 0 112V432Q1 466 23 489Q46 511 80 512H400Q434 511 457 489Q479 466 480 432V320Q480 306 471 297Q462 288 448 288Q434 288 425 297Q416 306 416 320V432Q415 447 400 448H80Q65 447 64 432V112Q65 97 80 96H192Q206 96 215 87Q224 78 224 64Q224 50 215 41Q206 32 192 32H80Z"/></symbol><symbol id="i-bolt" viewBox="0 0 448 512"><path d="M349 45Q358 22 339 6Q318 -7 299 8L43 232Q27 247 34 267Q43 287 64 288H176L99 467Q90 490 109 506Q130 519 149 504L405 280Q421 265 414 245Q406 225 384 224H273L349 45Z"/></symbol><symbol id="i-chalkboard-user" viewBox="0 0 640 512"><path d="M160 64Q161 37 179 19Q197 1 224 0H576Q603 1 621 19Q639 37 640 64V352Q639 379 621 397Q603 415 576 416H337Q319 377 284 352H384V320Q384 306 393 297Q402 288 416 288H480Q494 288 503 297Q512 306 512 320V352H576V64H224V113Q195 96 160 96V64ZM160 128Q186 128 208 141Q230 154 243 176Q256 199 256 224Q256 249 243 272Q230 294 208 307Q186 320 160 320Q134 320 112 307Q90 294 77 272Q64 249 64 224Q64 199 77 176Q90 154 112 141Q134 128 160 128ZM133 352H187Q243 353 281 391Q319 429 320 485Q318 510 293 512H27Q2 510 0 485Q1 429 39 391Q77 353 133 352Z"/></symbol><symbol id="i-chart-simple" viewBox="0 0 448 512"><path d="M160 80Q161 60 174 46Q188 33 208 32H240Q260 33 274 46Q287 60 288 80V432Q287 452 274 466Q260 479 240 480H208Q188 479 174 466Q161 452 160 432V80ZM0 272Q1 252 14 238Q28 225 48 224H80Q100 225 114 238Q127 252 128 272V432Q127 452 114 466Q100 479 80 480H48Q28 479 14 466Q1 452 0 432V272ZM368 96H400Q420 97 434 110Q447 124 448 144V432Q447 452 434 466Q420 479 400 480H368Q348 479 334 466Q321 452 320 432V144Q321 124 334 110Q348 97 368 96Z"/></symbol><symbol id="i-circle-check" viewBox="0 0 512 512"><path d="M256 512Q326 511 384 478Q442 444 478 384Q512 323 512 256Q512 189 478 128Q442 68 384 34Q326 1 256 0Q186 1 128 34Q70 68 34 128Q0 189 0 256Q0 323 34 384Q70 444 128 478Q186 511 256 512ZM369 209 241 337Q224 351 207 337L143 273Q129 256 143 239Q160 225 177 239L224 286L335 175Q352 161 369 175Q383 192 369 209Z"/></symbol><symbol id="i-circle-exclamation" viewBox="0 0 512 512"><path d="M256 512Q326 511 384 478Q442 444 478 384Q512 323 512 256Q512 189 478 128Q442 68 384 34Q326 1 256 0Q186 1 128 34Q70 68 34 128Q0 189 0 256Q0 323 34 384Q70 444 128 478Q186 511 256 512ZM256 128Q278 130 280 152V264Q278 286 256 288Q234 286 232 264V152Q234 130 256 128ZM224 352Q224 338 233 329Q242 320 256 320Q270 320 279 329Q288 338 288 352Q288 366 279 375Q270 384 256 384Q242 384 233 375Q224 366 224 352Z"/></symbol><symbol id="i-circle-info" viewBox="0 0 512 512"><path d="M256 512Q326 511 384 478Q442 444 478 384Q512 323 512 256Q512 189 478 128Q442 68 384 34Q326 1 256 0Q186 1 128 34Q70 68 34 128Q0 189 0 256Q0 323 34 384Q70 444 128 478Q186 511 256 512ZM216 336H240V272H216Q194 270 192 248Q194 226 216 224H264Q286 226 288 248V336H296Q318 338 320 360Q318 382 296 384H216Q194 382 192 360Q194 338 216 336ZM256 128Q270 128 279 137Q288 146 288 160Q288 174 279 183Q270 192 256 192Q242 192 233 183Q224 174 224 160Q224 146 233 137Q242 128 256 128Z"/></symbol><symbol id="i-code" viewBox="0 0 640 512"><path d="M393 1Q380 -2 368 4Q357 10 353 23L225 471Q222 484 228 496Q234 507 247 511Q260 514 272 508Q283 502 287 489L415 41Q418 28 412 16Q406 5 393 1ZM473 121Q464 131 464 144Q464 157 473 167L563 256L473 345Q464 355 464 368Q464 381 473 391Q483 400 496 400Q509 400 519 391L631 279Q640 269 640 256Q640 243 631 233L519 121Q509 112 496 112Q483 112 473 121ZM167 121Q157 112 144 112Q131 112 121 121L9 233Q0 243 0 256Q0 269 9 279L121 391Q131 400 144 400Q157 400 167 391Q176 381 176 368Q176 355 167 345L77 256L167 167Q176 157 176 144Q176 131 167 121Z"/></symbol><symbol id="i-database" viewBox="0 0 448 512"><path d="M448 80V128Q446 162 382 185Q319 207 224 208Q129 207 66 185Q2 162 0 128V80Q2 46 66 23Q129 1 224 0Q319 1 382 23Q446 46 448 80ZM393 215Q425 204 448 186V288Q446 322 382 345Q319 367 224 368Q129 367 66 345Q2 322 0 288V186Q23 204 55 215Q125 239 224 240Q323 239 393 215ZM0 346Q23 364 55 375Q125 399 224 400Q323 399 393 375Q425 364 448 346V432Q446 466 382 489Q319 511 224 512Q129 511 66 489Q2 466 0 432V346Z"/></symbol><symbol id="i-envelope" viewBox="0 0 512 512"><path d="M48 64Q28 65 14 78Q1 92 0 112Q1 136 19 150L237 314Q256 326 275 314L493 150Q511 136 512 112Q511 92 498 78Q484 65 464 64H48ZM0 176V384Q1 411 19 429Q37 447 64 448H448Q475 447 493 429Q511 411 512 384V176L294 339Q277 352 256 352Q235 352 218 339L0 176Z"/></symbol><symbol id="i-layer-group" viewBox="0 0 576 512"><path d="M265 5Q288 -5 312 5L530 106Q543 113 544 128Q543 143 530 150L311 251Q288 261 264 251L46 150Q33 143 32 128Q33 113 46 106L265 5ZM477 210 530 234Q543 241 544 256Q543 271 530 278L311 379Q288 389 264 379L46 278Q33 271 32 256Q33 241 46 234L99 210L251 280Q288 296 325 280L477 210ZM325 408 477 338 530 362Q543 369 544 384Q543 399 530 406L311 507Q288 517 264 507L46 406Q33 399 32 384Q33 369 46 362L99 338L251 408Q288 424 325 408Z"/></symbol><symbol id="i-magnifying-glass" viewBox="0 0 512 512"><path d="M416 208Q415 278 376 331L503 457Q512 467 512 480Q512 493 503 503Q493 512 480 512Q467 512 457 503L331 376Q278 415 208 416Q120 414 61 355Q2 296 0 208Q2 120 61 61Q120 2 208 0Q296 2 355 61Q414 120 416 208ZM208 352Q247 352 280 333Q313 314 333 280Q352 246 352 208Q352 170 333 136Q313 102 280 83Q247 64 208 64Q169 64 136 83Q103 102 83 136Q64 170 64 208Q64 246 83 280Q103 314 136 333Q169 352 208 352Z"/></symbol><symbol id="i-paperclip" viewBox="0 0 448 512"><path d="M364 84Q345 65 320 66Q295 66 276 84L92 268Q60 301 60 344Q60 387 92 420Q125 452 168 452Q211 452 244 420L396 268Q405 260 416 260Q427 260 436 268Q444 277 444 288Q444 299 436 308L284 460Q233 508 168 508Q103 508 52 460Q4 409 4 344Q4 279 52 228L236 44Q273 9 320 9Q367 9 404 44Q439 81 439 128Q439 175 404 212L228 388Q205 409 176 409Q147 409 124 388Q103 365 103 336Q103 307 124 284L268 140Q277 132 288 132Q299 132 308 140Q316 149 316 160Q316 171 308 180L164 324Q154 336 164 348Q176 358 188 348L364 172Q383 153 383 128Q383 103 364 84Z"/></symbol><symbol id="i-phone" viewBox="0 0 512 512"><path d="M165 25Q159 10 146 4Q132 -2 117 1L29 25Q2 35 0 64Q1 189 61 290Q121 391 222 451Q323 511 448 512Q477 510 487 483L511 395Q514 380 508 366Q502 353 487 347L391 307Q364 298 345 319L305 368Q252 343 210 302Q169 260 144 207L193 167Q214 148 205 121L165 25Z"/></symbol><symbol id="i-robot" viewBox="0 0 640 512"><path d="M320 0Q334 0 343 9Q352 18 352 32V96H472Q503 97 523 117Q543 137 544 168V440Q543 471 523 491Q503 511 472 512H168Q137 511 117 491Q97 471 96 440V168Q97 137 117 117Q137 97 168 96H288V32Q288 18 297 9Q306 0 320 0ZM208 384Q193 385 192 400Q193 415 208 416H240Q255 415 256 400Q255 385 240 384H208ZM304 384Q289 385 288 400Q289 415 304 416H336Q351 415 352 400Q351 385 336 384H304ZM400 384Q385 385 384 400Q385 415 400 416H432Q447 415 448 400Q447 385 432 384H400ZM264 256Q263 233 244 221Q224 211 204 221Q185 233 184 256Q185 279 204 291Q224 301 244 291Q263 279 264 256ZM416 296Q439 295 451 276Q461 256 451 236Q439 217 416 216Q393 217 381 236Q371 256 381 276Q393 295 416 296ZM48 224H64V416H48Q28 415 14 402Q1 388 0 368V272Q1 252 14 238Q28 225 48 224ZM592 224Q612 225 626 238Q639 252 640 272V368Q639 388 626 402Q612 415 592 416H576V224H592Z"/></symbol><symbol id="i-screwdriver-wrench" viewBox="0 0 512 512"><path d="M79 5Q62 -6 47 7L7 47Q-6 62 5 79L85 183Q92 192 104 192H158L267 301Q256 323 260 348Q263 372 281 391L393 503Q403 512 416 512Q429 512 439 503L503 439Q512 429 512 416Q512 403 503 393L391 281Q372 263 348 260Q323 256 301 267L192 158V104Q192 92 183 85L79 5ZM20 396Q0 416 0 444Q1 473 20 492Q39 511 68 512Q96 512 116 492L234 374Q222 342 230 309L168 247L20 396ZM512 144Q512 128 509 114Q506 105 499 103Q491 102 485 108L421 171Q416 176 409 176H352Q337 175 336 160V103Q336 96 341 91L405 27Q411 21 409 13Q407 6 399 3Q384 0 368 0Q307 2 266 42Q226 83 224 144V145L309 230Q337 223 364 230Q392 238 413 259L429 275Q466 257 489 222Q511 188 512 144ZM56 432Q58 410 80 408Q102 410 104 432Q102 454 80 456Q58 454 56 432Z"/></symbol><symbol id="i-table-cells-large" viewBox="0 0 512 512"><path d="M448 96V224H288V96H448ZM448 288V416H288V288H448ZM224 224H64V96H224V224ZM64 288H224V416H64V288ZM64 32Q37 33 19 51Q1 69 0 96V416Q1 443 19 461Q37 479 64 480H448Q475 479 493 461Q511 443 512 416V96Q511 69 493 51Q475 33 448 32H64Z"/></symbol><symbol id="i-wand-magic-sparkles" viewBox="0 0 576 512"><path d="M235 43 197 57Q192 59 192 64Q192 69 197 71L235 85L249 123Q251 128 256 128Q261 128 263 123L277 85L315 71Q320 69 320 64Q320 59 315 57L277 43L263 5Q261 0 256 0Q251 0 249 5L235 43ZM46 395Q32 410 32 429Q32 448 46 463L81 498Q95 512 115 512Q134 512 149 498L530 117Q544 102 544 83Q544 63 530 49L495 14Q481 0 461 0Q442 0 427 14L46 395ZM485 83 380 188 356 164 461 59 485 83ZM8 117Q0 120 0 128Q0 136 8 139L64 160L85 217Q88 224 96 224Q104 224 107 217L128 160L185 139Q192 136 192 128Q192 120 185 117L128 96L107 40Q104 32 96 32Q88 32 85 40L64 96L8 117ZM360 373Q352 376 352 384Q352 392 360 395L416 416L437 473Q440 480 448 480Q456 480 459 473L480 416L537 395Q544 392 544 384Q544 376 537 373L480 352L459 296Q456 288 448 288Q440 288 437 296L416 352L360 373Z"/></symbol><symbol id="i-xmark" viewBox="0 0 384 512"><path d="M343 151Q352 141 352 128Q352 115 343 105Q333 96 320 96Q307 96 297 105L192 211L87 105Q77 96 64 96Q51 96 41 105Q32 115 32 128Q32 141 41 151L147 256L41 361Q32 371 32 384Q32 397 41 407Q51 416 64 416Q77 416 87 407L192 301L297 407Q307 416 320 416Q333 416 343 407Q352 397 352 384Q352 371 343 361L237 256L343 151Z"/></symbol><symbol id="i-docker" viewBox="0 0 640 512"><path d="M350 236H284V177H350V236ZM350 32H284V93H350V32ZM428 177H362V236H428V177ZM272 105H206V165H272V105ZM350 105H284V165H350V105ZM627 205Q615 197 594 195Q574 193 554 196Q549 161 513 133L499 123L489 137Q475 159 473 188Q471 217 486 241Q472 250 437 252H2Q-4 291 7 335Q18 379 46 414Q102 480 212 480Q331 480 415 427Q499 375 540 276Q558 278 585 270Q612 263 631 231Q634 226 639 216Q639 215 640 214L627 205ZM116 177H50V236H116V177ZM194 177H128V236H194V177ZM272 177H206V236H272V177ZM194 105H128V165H194V105Z"/></symbol><symbol id="i-gitlab" viewBox="0 0 512 512"><path d="M504 205 503 203 433 21Q431 16 426 12Q422 10 418 10Q414 9 410 11Q405 12 402 15Q400 19 398 23L351 167H161L114 23Q112 19 110 15Q107 12 103 11Q98 9 94 10Q90 10 86 12Q81 16 79 21L9 203V205Q-7 245 5 287Q17 328 51 354H52V355L158 434L211 474L243 498Q243 498 243 498Q249 502 256 503Q263 502 269 498Q269 498 269 498L301 474L354 434L460 354H461Q495 328 506 287Q519 245 504 205Z"/></symbol><symbol id="i-html5" viewBox="0 0 384 512"><path d="M0 32 35 428 192 480 349 428 384 32H0ZM308 160H124L129 209H304L291 358L193 385H192L93 358L87 282H135L138 320L192 335L245 320L251 258H84L72 112H313L308 160Z"/></symbol><symbol id="i-linkedin" viewBox="0 0 448 512"><path d="M416 32H32Q18 32 9 41Q0 51 0 64V448Q0 461 9 471Q18 480 32 480H416Q430 480 439 471Q448 461 448 448V64Q448 51 439 41Q430 32 416 32ZM135 416H69V202H136V416ZM102 173Q86 173 75 162Q64 151 64 135Q64 118 75 107Q86 96 102 96Q119 96 129 107Q140 118 141 135Q140 151 129 162Q119 173 102 173ZM384 416H318V312Q319 292 313 274Q308 257 283 255Q258 256 250 272Q243 288 244 310V416H177V202H241V231H242Q248 218 264 208Q280 197 305 197Q354 198 370 226Q386 255 384 299V416Z"/></symbol><symbol id="i-linkedin-in" viewBox="0 0 448 512"><path d="M100 448H7V149H100ZM54 108Q31 107 16 92Q1 77 0 54Q1 23 27 7Q54 -7 81 7Q107 23 108 54Q107 77 92 92Q77 107 54 108ZM448 448H355V302Q357 275 349 250Q341 225 307 223Q272 224 261 247Q250 270 251 300V448H158V149H248V190H249Q258 171 280 157Q303 142 337 141Q405 143 428 182Q450 222 448 284V448Z"/></symbol><symbol id="i-linux" viewBox="0 0 448 512"><path d="M221 123Q221 124 222 124Q223 125 224 125Q226 125 227 124Q226 122 224 121Q224 121 224 121Q221 119 218 121Q217 121 217 122Q218 123 219 123Q220 123 221 123ZM199 125Q200 125 201 124Q201 124 202 123Q203 123 203 123Q205 123 205 122Q206 121 205 121Q202 119 199 121Q199 121 199 121Q196 122 196 124Q197 125 199 125ZM420 404Q415 397 413 385Q413 384 413 384Q411 371 402 362Q400 360 398 359Q396 358 394 357Q406 315 390 278Q382 255 369 236Q356 217 344 203Q344 203 343 202Q330 187 320 170Q311 153 311 131Q311 129 311 126Q312 101 309 72Q305 43 289 22Q273 1 235 0Q192 1 175 21Q158 41 156 67Q154 94 156 116Q157 128 157 135Q156 168 134 200Q120 217 103 242Q86 268 76 297Q67 324 70 350Q65 355 60 362Q57 367 54 370Q48 375 39 377Q38 378 37 378Q26 381 18 393Q15 399 15 405Q15 411 16 417Q17 418 17 419Q19 430 17 438Q9 459 15 470Q21 480 35 482Q43 483 53 484Q75 486 94 494Q125 510 150 505Q168 501 176 485Q185 484 195 482Q207 479 224 478Q235 478 248 480Q262 482 280 482Q280 486 282 489Q296 514 322 512Q348 510 371 484Q386 468 407 460Q415 456 422 452Q434 445 435 433Q436 422 420 404ZM224 87Q232 71 246 71Q259 71 268 87Q276 111 263 127Q261 126 251 122Q251 122 252 121Q254 120 255 118Q258 108 255 100Q252 91 246 91Q240 90 236 97Q232 104 234 114Q227 110 221 109Q219 98 224 87ZM183 76Q191 76 197 85Q203 95 202 109Q197 111 192 114Q193 107 190 101Q187 94 182 94Q176 96 175 106Q175 116 181 122Q181 123 181 123Q183 122 175 128Q163 115 166 96Q169 78 183 76ZM169 137Q172 134 175 132Q182 127 184 126Q184 125 185 125Q192 115 211 112Q222 111 237 121Q242 124 248 126Q253 127 260 130Q274 135 270 148Q266 160 248 166Q242 168 237 172Q227 181 210 181Q204 181 200 179Q194 176 189 171Q185 167 180 164Q167 157 165 149Q163 141 169 136ZM173 471Q169 496 146 499Q122 501 97 489Q75 478 53 478Q28 477 21 467Q17 460 23 440Q26 430 23 419Q23 417 23 416Q20 404 24 396Q29 387 39 385Q41 384 43 383Q51 381 58 375Q62 370 66 365Q69 361 73 357Q79 348 90 350Q102 352 112 366L132 402Q138 413 149 426Q159 438 166 449Q173 461 173 471ZM171 445Q165 434 157 425Q169 426 174 416Q177 406 166 391Q155 377 142 368Q129 359 128 359Q128 359 128 359Q108 346 103 329Q99 312 103 294Q107 276 115 261Q123 245 130 234Q135 230 122 255Q114 268 109 292Q104 315 119 338Q120 306 133 276Q136 269 140 260Q150 239 160 213Q170 187 172 163Q175 165 178 168Q182 170 186 174Q188 176 191 178Q211 192 233 179Q236 177 239 175Q245 172 249 170Q264 165 271 155Q278 179 289 206Q299 234 309 251Q314 259 321 276Q328 293 332 315Q337 315 343 317Q352 289 341 265Q330 241 320 232Q313 225 317 225Q327 234 337 250Q347 265 352 284Q357 302 353 320Q366 325 376 334Q387 342 384 355Q381 355 380 355Q380 355 379 355Q384 341 357 329Q341 322 331 324Q320 326 318 341Q301 349 297 369Q293 385 292 408Q291 420 286 436Q286 437 286 437Q261 455 231 459Q200 463 171 445ZM429 433Q426 445 405 453Q384 461 366 480Q344 503 322 505Q300 507 288 486Q283 469 289 450Q291 443 293 437Q298 422 299 409Q300 386 303 370Q307 355 317 349Q318 349 318 349Q319 371 337 378Q347 380 358 374Q369 369 375 362Q376 362 377 362Q389 360 398 367Q405 374 407 387Q408 399 415 409Q430 426 429 433ZM173 149Q173 149 174 149Q177 152 181 156Q191 165 209 166Q226 165 240 156Q240 156 240 156Q249 151 255 145Q262 140 258 139Q256 139 255 141Q254 142 252 144Q251 145 249 146Q243 151 238 154Q226 162 209 164Q193 163 184 154Q179 150 176 147Q176 147 176 147Q175 146 175 145Q174 143 172 142Q169 143 173 149Z"/></symbol><symbol id="i-microsoft" viewBox="0 0 448 512"><path d="M0 32H215V247H0V32ZM233 32H448V247H233V32ZM0 265H215V480H0V265ZM233 265H448V480H233V265Z"/></symbol><symbol id="i-python" viewBox="0 0 448 512"><path d="M440 201Q434 177 422 162Q409 147 386 146H346V194Q345 222 326 241Q307 261 280 262H173Q150 262 135 278Q120 293 119 316V418Q120 439 135 453Q151 466 173 472Q221 488 280 472Q300 466 316 453Q332 440 333 418V377H226V363H386Q409 363 421 348Q432 334 440 309Q456 262 440 200ZM286 404Q305 406 306 424Q305 443 286 445Q268 443 266 424Q268 406 286 404ZM168 248H275Q297 248 312 232Q327 217 328 194V92Q327 70 312 55Q297 40 275 36Q218 28 168 36Q135 42 124 56Q113 69 114 92V133H221V146H74Q51 146 32 160Q14 174 8 201Q0 230 0 254Q0 278 8 309Q13 333 27 348Q41 363 64 363H101V315Q102 287 121 268Q140 249 168 248ZM161 106Q143 104 141 85Q143 67 161 65Q179 67 181 85Q179 104 161 106Z"/></symbol><symbol id="i-vuejs" viewBox="0 0 448 512"><path d="M357 64H280L224 153L176 64H0L224 448L448 64H357ZM56 96H109L224 295L338 96H392L224 385L56 96Z"/></symbol></svg><!-- ICONES:FIN -->
+
+  <!-- GSAP + ScrollTrigger : les galeries horizontales (js/modules/motion.js).
+       Charges en differe avant le module, qui s'execute apres eux. S'ils
+       manquent, les galeries se font glisser nativement. -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"
+          integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"
+          integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous"></script>
+  <script type="module" src="js/main.js?v=4cdc49fd"></script>
 </body>
 </html>

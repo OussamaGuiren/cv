@@ -1,276 +1,264 @@
-import { showToast } from './utils.js';
+import { initDefi } from './defi.js?v=9647ce21';
+import { poster } from './backend.js?v=1cacc4b2';
+
+/**
+ * Modales accessibles : piège de focus, fermeture Escape / clic sur le voile,
+ * restitution du focus à l'élément déclencheur.
+ */
+
+const FOCUSABLE =
+  'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+let openModal = null;
+let lastTrigger = null;
 
 export function initModals() {
-  initAboutPopup();
   initProjectModal();
-  initContactPopup();
-  initPhoneButton();
-}
+  initContactModal();
+  initPhoneGate();
 
-function initAboutPopup() {
-  const aboutPopup = document.getElementById('aboutPopup');
-  const aboutPopupBtn = document.getElementById('aboutLearnMoreBtn');
-  const aboutPopupClose = document.getElementById('aboutPopupClose');
-  const body = document.body;
-
-  let aboutPopupOriginalParent = null;
-  let aboutPopupNextSibling = null;
-
-  function ensureAboutPopupInBody() {
-    if (!aboutPopup) return;
-    if (aboutPopup.parentNode !== document.body) {
-      aboutPopupOriginalParent = aboutPopup.parentNode;
-      aboutPopupNextSibling = aboutPopup.nextSibling;
-      document.body.appendChild(aboutPopup);
-    }
-  }
-
-  function restoreAboutPopupOriginalPosition() {
-    if (!aboutPopup || !aboutPopupOriginalParent) return;
-    if (aboutPopupNextSibling) {
-      aboutPopupOriginalParent.insertBefore(aboutPopup, aboutPopupNextSibling);
-    } else {
-      aboutPopupOriginalParent.appendChild(aboutPopup);
-    }
-    aboutPopupOriginalParent = null;
-    aboutPopupNextSibling = null;
-  }
-
-  function openAboutPopup() {
-    if (aboutPopup) {
-      ensureAboutPopupInBody();
-      aboutPopup.setAttribute('aria-hidden', 'false');
-      body.style.overflow = 'hidden';
-      setTimeout(() => {
-        aboutPopupClose?.focus();
-      }, 100);
-    }
-  }
-
-  function closeAboutPopup() {
-    if (aboutPopup) {
-      aboutPopup.setAttribute('aria-hidden', 'true');
-      body.style.overflow = '';
-      setTimeout(() => {
-        restoreAboutPopupOriginalPosition();
-        aboutPopupBtn?.focus();
-      }, 300);
-    }
-  }
-
-  aboutPopupBtn?.addEventListener('click', openAboutPopup);
-  aboutPopupClose?.addEventListener('click', closeAboutPopup);
-
-  aboutPopup?.addEventListener('click', (e) => {
-    if (e.target === aboutPopup || e.target.classList.contains('about-popup-overlay')) {
-      closeAboutPopup();
-    }
+  document.addEventListener('keydown', (e) => {
+    if (!openModal) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'Tab') trapFocus(e);
   });
 
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && aboutPopup && aboutPopup.getAttribute('aria-hidden') === 'false') {
-      closeAboutPopup();
-    }
-  });
+  document.querySelectorAll('[data-close-modal]').forEach((el) =>
+    el.addEventListener('click', close)
+  );
 }
 
+function open(modal, trigger) {
+  if (openModal) close();
+
+  lastTrigger = trigger ?? document.activeElement;
+  openModal = modal;
+
+  modal.hidden = false;
+  document.body.classList.add('modal-open');
+
+  // Le premier champ utile, sinon le bouton de fermeture.
+  // Focus synchrone : requestAnimationFrame ne se déclenche pas si l'onglet
+  // est en arrière-plan, le focus ne serait alors jamais posé.
+  const first = modal.querySelector('input:not([type="file"]), textarea, select') ??
+                modal.querySelector('.modal-close');
+  first?.focus();
+}
+
+/** Ferme la fenetre ouverte, depuis l'exterieur du module. Le formulaire s'en
+    sert quand l'envoi a reussi : rester devant un formulaire vide ne dit pas
+    que c'est parti, ca ressemble a une remise a zero. */
+export function closeModal() {
+  close();
+}
+
+function close() {
+  if (!openModal) return;
+
+  openModal.hidden = true;
+  openModal = null;
+  document.body.classList.remove('modal-open');
+
+  lastTrigger?.focus();
+  lastTrigger = null;
+}
+
+function trapFocus(e) {
+  const items = [...openModal.querySelectorAll(FOCUSABLE)].filter(
+    (el) => el.offsetParent !== null
+  );
+  if (!items.length) return;
+
+  const first = items[0];
+  const last = items[items.length - 1];
+
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
+}
+
+/* ---------------- Modale projet ---------------- */
 function initProjectModal() {
-  const projectModal = document.getElementById('projectModal');
-  const closeProjectModalBtn = document.getElementById('closeProjectModal');
-  const modalTitleEl = document.getElementById('projectModalTitle');
-  const modalDescEl = document.getElementById('projectModalDescription');
-  const modalTechEl = document.getElementById('projectModalTech');
-  const modalLinkEl = document.getElementById('projectModalLink');
-  const modalImageEl = document.getElementById('modalImage');
-  const body = document.body;
+  const modal = document.getElementById('projectModal');
+  if (!modal) return;
 
-  let projectModalOriginalParent = null;
-  let projectModalNextSibling = null;
+  const els = {
+    title: modal.querySelector('#projectModalTitle'),
+    description: modal.querySelector('#projectModalDescription'),
+    tech: modal.querySelector('#projectModalTech'),
+    link: modal.querySelector('#projectModalLink'),
+    image: modal.querySelector('#projectModalImage')
+  };
 
-  function ensureProjectModalInBody() {
-    if (!projectModal) return;
-    if (projectModal.parentNode !== document.body) {
-      projectModalOriginalParent = projectModal.parentNode;
-      projectModalNextSibling = projectModal.nextSibling;
-      document.body.appendChild(projectModal);
-    }
-  }
+  document.querySelectorAll('.project-card .card-open').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.project-card');
+      if (!card) return;
 
-  function restoreProjectModalOriginalPosition() {
-    if (!projectModal || !projectModalOriginalParent) return;
-    if (projectModalNextSibling) {
-      projectModalOriginalParent.insertBefore(projectModal, projectModalNextSibling);
-    } else {
-      projectModalOriginalParent.appendChild(projectModal);
-    }
-    projectModalOriginalParent = null;
-    projectModalNextSibling = null;
-  }
+      const { title = '', description = '', tech = '', link = '' } = card.dataset;
+      const img = card.querySelector('.card-media img');
 
-  function openProjectModalFromCard(card) {
-    if (!card) return;
-    const title = card.dataset.title || card.querySelector('h3')?.textContent || '';
-    const description = card.dataset.description || '';
-    const tech = card.dataset.tech || '';
-    const link = card.dataset.link || '#';
-    const img = card.querySelector('.card-image img')?.getAttribute('src') || '';
+      els.title.textContent = title;
+      els.description.textContent = description;
+      els.tech.textContent = tech;
 
-    modalTitleEl.textContent = title;
-    modalDescEl.textContent = description;
-    modalTechEl.textContent = tech;
-    modalLinkEl.href = link;
-    
-    if (link === '#') {
-      modalLinkEl.classList.add('disabled');
-      modalLinkEl.removeAttribute('target');
-    } else {
-      modalLinkEl.classList.remove('disabled');
-      modalLinkEl.setAttribute('target', '_blank');
-    }
-
-    if (img) {
-      modalImageEl.src = img;
-      modalImageEl.alt = title;
-      modalImageEl.style.display = 'block';
-    } else {
-      modalImageEl.style.display = 'none';
-    }
-
-    ensureProjectModalInBody();
-    projectModal?.setAttribute('aria-hidden', 'false');
-    body.classList.add('modal-open');
-    body.style.overflow = 'hidden';
-    
-    setTimeout(() => closeProjectModalBtn?.focus(), 100);
-  }
-
-  function closeProjectModal() {
-    if (projectModal) {
-      projectModal.setAttribute('aria-hidden', 'true');
-      body.classList.remove('modal-open');
-      body.style.overflow = '';
-      setTimeout(() => {
-        restoreProjectModalOriginalPosition();
-      }, 300);
-    }
-  }
-
-  document.querySelectorAll('.card-open').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const card = e.currentTarget.closest('.project-card');
-      openProjectModalFromCard(card);
-    });
-  });
-
-  closeProjectModalBtn?.addEventListener('click', closeProjectModal);
-
-  projectModal?.addEventListener('click', (e) => {
-    if (e.target === projectModal || e.target.classList.contains('about-popup-overlay')) {
-      closeProjectModal();
-    }
-  });
-
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && projectModal && projectModal.getAttribute('aria-hidden') === 'false') {
-      closeProjectModal();
-    }
-  });
-}
-
-function initContactPopup() {
-  const contactPopup = document.getElementById('contactPopup');
-  const btnContactMail = document.getElementById('btnContactMail');
-  const closeContactPopupBtn = document.getElementById('closeContactPopup');
-  
-  let contactPopupOriginalParent = null;
-  let contactPopupNextSibling = null;
-
-  function ensureContactPopupInBody() {
-    if (!contactPopup) return;
-    if (contactPopup.parentNode !== document.body) {
-      contactPopupOriginalParent = contactPopup.parentNode;
-      contactPopupNextSibling = contactPopup.nextSibling;
-      document.body.appendChild(contactPopup);
-    }
-  }
-
-  function restoreContactPopupOriginalPosition() {
-    if (!contactPopup || !contactPopupOriginalParent) return;
-    if (contactPopupNextSibling) {
-      contactPopupOriginalParent.insertBefore(contactPopup, contactPopupNextSibling);
-    } else {
-      contactPopupOriginalParent.appendChild(contactPopup);
-    }
-    contactPopupOriginalParent = null;
-    contactPopupNextSibling = null;
-  }
-
-  function openContactPopup() {
-    if (contactPopup) {
-      ensureContactPopupInBody();
-      contactPopup.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('modal-open');
-      document.body.style.overflow = 'hidden';
-      
-      setTimeout(() => {
-        const firstInput = contactPopup.querySelector('input');
-        if (firstInput) firstInput.focus();
-        else closeContactPopupBtn?.focus();
-      }, 100);
-    }
-  }
-
-  function closeContactPopup() {
-    if (contactPopup) {
-      contactPopup.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('modal-open');
-      document.body.style.overflow = '';
-      
-      setTimeout(() => {
-        restoreContactPopupOriginalPosition();
-        btnContactMail?.focus();
-      }, 300);
-    }
-  }
-
-  btnContactMail?.addEventListener('click', openContactPopup);
-  closeContactPopupBtn?.addEventListener('click', closeContactPopup);
-
-  contactPopup?.addEventListener('click', (e) => {
-    if (e.target === contactPopup || e.target.classList.contains('about-popup-overlay')) {
-      closeContactPopup();
-    }
-  });
-
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && contactPopup && contactPopup.getAttribute('aria-hidden') === 'false') {
-      closeContactPopup();
-    }
-  });
-}
-
-function initPhoneButton() {
-  const phoneBtn = document.getElementById('phoneBtn');
-  if (phoneBtn) {
-    const codes = [43, 51, 51, 54, 56, 51, 48, 50, 51, 52, 52, 52]; // +33683023444
-    const e164 = String.fromCharCode.apply(null, codes);
-    const national = '0' + e164.slice(3);
-    const display = national.replace(/(\d{2})(?=\d)/g, '$1 ').trim();
-
-    phoneBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      if (!phoneBtn.dataset.revealed) {
-        phoneBtn.dataset.revealed = '1';
-        phoneBtn.textContent = display;
-        phoneBtn.setAttribute('href', 'tel:' + e164);
-        phoneBtn.setAttribute('aria-label', 'Appeler ' + display);
-        phoneBtn.setAttribute('title', 'Cliquer à nouveau pour appeler');
-        return;
+      if (img) {
+        els.image.src = img.currentSrc || img.src;
+        els.image.alt = img.alt;
+        els.image.hidden = false;
+        els.image.parentElement.hidden = false;
+      } else {
+        els.image.hidden = true;
+        els.image.parentElement.hidden = true;
       }
 
-      window.location.href = 'tel:' + e164;
+      els.link.href = link || '#';
+      els.link.hidden = !link;
+
+      open(modal, btn);
     });
-  }
+  });
+}
+
+/* ---------------- Modale contact ---------------- */
+function initContactModal() {
+  const modal = document.getElementById('contactModal');
+  if (!modal) return;
+
+  document.querySelectorAll('[data-open-contact]').forEach((btn) =>
+    btn.addEventListener('click', () => open(modal, btn))
+  );
+}
+
+/* ---------------- Le numéro, sur présentation ----------------
+   Le numéro n'est pas en clair dans le HTML : il se recompose à partir de
+   codes de caractères, et ne s'affiche qu'après trois informations. Les
+   robots qui moissonnent les pages ne remplissent pas de formulaire, les
+   démarcheurs automatisés non plus.
+
+   Les trois informations partent au serveur AVANT que le numéro s'affiche
+   (apps-script/Code.gs, type « numero ») : la porte n'a de sens que si elle
+   tient. Un numéro affiché sans que la demande soit enregistrée, ce serait une
+   porte peinte sur un mur.
+
+   Le prix à payer est l'attente : Apps Script répond en une seconde et demie
+   en général, mais monte à dix ou trente secondes sans prévenir. D'où le
+   bouton qui annonce ce qu'il fait pendant ce temps, le plafond par tentative
+   posé dans backend.js, et un message d'échec qui laisse réessayer plutôt que
+   de laisser quelqu'un devant un bouton mort. */
+function initPhoneGate() {
+  const modal = document.getElementById('phoneModal');
+  const form = document.getElementById('phoneForm');
+  const reveal = document.getElementById('phoneReveal');
+  if (!modal || !form || !reveal) return;
+
+  // L'épreuve visuelle, commune aux deux formulaires (js/modules/defi.js).
+  const defi = initDefi(form);
+
+  // L'heure d'ouverture sert de garde-fou : le serveur refuse un envoi trop
+  // rapide pour être humain.
+  let ouvertureMs = Date.now();
+  document.querySelectorAll('[data-open-phone]').forEach((btn) =>
+    btn.addEventListener('click', () => {
+      ouvertureMs = Date.now();
+      defi?.melanger();
+      open(modal, btn);
+    })
+  );
+
+  const e164 = String.fromCharCode(43, 51, 51, 54, 56, 51, 48, 50, 51, 52, 52, 52);
+  const lisible = ('0' + e164.slice(3)).replace(/(\d{2})(?=\d)/g, '$1 ').trim();
+
+  // Un numéro de n'importe quel pays : huit chiffres au moins, et les signes
+  // qu'on écrit autour. La France n'est pas le seul terrain.
+  const REGLES = {
+    company: (v) => (v.trim().length >= 2 ? '' : 'Indiquez le nom de votre société.'),
+    role: (v) => (v.trim().length >= 2 ? '' : 'Indiquez votre rôle.'),
+    phone: (v) =>
+      (v.match(/\d/g) || []).length >= 8 && /^[\d\s+.()-]+$/.test(v.trim())
+        ? ''
+        : 'Indiquez un numéro où vous joindre.',
+  };
+
+  const marquer = (champ, message) => {
+    const bloc = champ.closest('.field');
+    bloc?.classList.toggle('is-invalid', Boolean(message));
+    const cible = bloc?.querySelector('.field-error');
+    if (cible) cible.textContent = message;
+  };
+
+  // On ne corrige qu'un champ déjà signalé : personne n'aime être repris
+  // pendant qu'il tape.
+  form.addEventListener('input', (e) => {
+    const champ = e.target;
+    if (REGLES[champ.name] && champ.closest('.field')?.classList.contains('is-invalid')) {
+      marquer(champ, REGLES[champ.name](champ.value));
+    }
+  });
+
+  const bouton = form.querySelector('button[type="submit"]');
+  const libelle = bouton.textContent;
+  const statut = form.querySelector('.form-status');
+
+  const afficher = () => {
+    const lien = document.createElement('a');
+    lien.className = 'btn btn-primary btn-block btn-lg';
+    lien.href = `tel:${e164}`;
+    lien.textContent = lisible;
+    lien.setAttribute('aria-label', `Appeler le ${lisible}`);
+
+    const note = document.createElement('p');
+    note.className = 'phone-note';
+    note.textContent = "Si je ne décroche pas, laissez un message ou écrivez-moi.";
+
+    reveal.replaceChildren(lien, note);
+    form.hidden = true;
+    reveal.hidden = false;
+    lien.focus();
+  };
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    let premier = null;
+    for (const [nom, regle] of Object.entries(REGLES)) {
+      const champ = form.elements[nom];
+      const message = regle(champ.value);
+      marquer(champ, message);
+      if (message && !premier) premier = champ;
+    }
+    if (premier) {
+      premier.focus();
+      return;
+    }
+
+    if (defi && !defi.verifier()) return;
+
+    // Le champ piège rempli : on n'envoie rien, et on n'affiche rien non plus.
+    if (form.elements.website?.value) return;
+
+    bouton.disabled = true;
+    bouton.textContent = 'Vérification…';
+    statut.textContent = '';
+
+    try {
+      await poster({
+        type: 'numero',
+        company: form.elements.company.value.trim(),
+        role: form.elements.role.value.trim(),
+        phone: form.elements.phone.value.trim(),
+        elapsed: Date.now() - ouvertureMs,
+      });
+      afficher();
+    } catch (err) {
+      statut.textContent = `Impossible d'enregistrer votre demande : ${String(err.message || '').replace(/\.*$/, '')}. Réessayez, ou passez par le formulaire de contact.`;
+    } finally {
+      bouton.disabled = false;
+      bouton.textContent = libelle;
+    }
+  });
 }

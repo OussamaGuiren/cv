@@ -1,237 +1,599 @@
-/* ===================== COMPONENTS ===================== */
+/* ==========================================================================
+   COMPONENTS — boutons, cartes, tags, formulaire, modales, toasts.
+   ========================================================================== */
 
-/* Buttons hero */
-.btn-primary,
-.btn-secondary,
-.btn-link {
-  font-family: inherit;
-  font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: var(--ui-letter-spacing);
-  text-transform: uppercase;
-  border-radius: 999px;
-  padding: 10px 18px;
-  cursor: pointer;
-  border: 1px solid transparent;
-  /* transition désactivée pour thème Microsoft épuré */
-}
+/* ---------------- Boutons ---------------- */
+.btn {
+  --btn-bg: transparent;
+  --btn-fg: var(--ink);
+  --btn-bd: transparent;
 
-.btn-primary {
-  background: var(--accent-gradient);
-  color: #fff;
-  border-color: rgba(25, 25, 25, 0.9);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-.btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 14px 36px rgba(0,0,0,0.6);
-}
-
-.btn-secondary {
-  background: rgba(25, 25, 25, 0.8);
-  color: #e2e8f0;
-  border-color: rgba(148, 163, 184, 0.6);
-}
-.btn-secondary:hover {
-  background: rgba(25, 25, 25,1);
-  transform: translateY(-1px);
-}
-
-/* Badge status */
-.status-badge {
-  position: absolute;
-  top: 24px;
-  right: clamp(24px, 7vw, 80px);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  background: rgba(255, 152, 0, 0.15);
-  backdrop-filter: blur(10px);
-  color: #ffb84d;
+  gap: var(--sp-2);
+  padding: 0.8125rem 1.5rem;
+  min-height: 2.75rem;              /* cible tactile confortable */
+  border: 1px solid var(--btn-bd);
+  border-radius: var(--r-sm);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  /* Capitales espacees, comme les legendes d'une revue. */
+  font-family: var(--font);
+  font-size: 0.8125rem;
   font-weight: 600;
-  border-radius: 12px;
-  padding: 10px 16px;
-  font-size: 13px;
-  border: 1.5px solid rgba(255, 152, 0, 0.4);
-  white-space: nowrap;
-  z-index: 100;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 20px rgba(255, 152, 0, 0.1);
-  /* animation et transition désactivées pour thème Microsoft épuré */
-}
-
-.status-badge:hover {
-  background: rgba(255, 152, 0, 0.2);
-  border-color: rgba(255, 152, 0, 0.6);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 152, 0, 0.2);
-}
-
-.status-icon {
-  font-size: 16px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   line-height: 1;
-  /* animation désactivée pour thème Microsoft épuré */
-}
-
-.status-text {
-  letter-spacing: 0.5px;
-}
-
-@keyframes status-pulse {
-  0%, 100% {
-    opacity: 1;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 20px rgba(255, 152, 0, 0.1);
-  }
-  50% {
-    opacity: 0.9;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 25px rgba(255, 152, 0, 0.2);
-  }
-}
-
-@keyframes status-icon-rotate {
-  0%, 100% {
-    transform: rotate(0deg);
-  }
-  25% {
-    transform: rotate(-10deg);
-  }
-  75% {
-    transform: rotate(10deg);
-  }
-}
-
-/* ========== BOUTON ME CONTACTER ========== */
-.btnMeContacter {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 32px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: #ffffff;
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
-  border: 2px solid rgba(0, 120, 212, 0.5);
-  border-radius: 50px;
+  text-align: center;
+  text-decoration: none;
   cursor: pointer;
-  /* transition désactivée pour thème Microsoft épuré */
-  box-shadow: 0 4px 15px rgba(0, 120, 212, 0.3),
-              0 0 20px rgba(0, 120, 212, 0.1);
-  position: relative;
-  overflow: hidden;
-  margin-top: 20px;
-  z-index: 1;
+  white-space: nowrap;
+  /* Le bouton change de couleur, pas de position : la seule chose qui bouge
+     est l'enfoncement au clic, qui correspond a un geste reel. */
+  transition:
+    background-color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
 }
 
-.btnMeContacter::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  /* transition désactivée pour thème Microsoft épuré */
+.btn:active { translate: 0 1px; }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.btn .ico { font-size: 0.9em; }
+
+/* Le bouton principal est noir : le bleu reste aux liens et au personnage.
+   Au survol il passe au bleu — un seul changement, franc. */
+.btn-primary {
+  --btn-bg: var(--ink);
+  --btn-fg: #fff;
+  --btn-bd: var(--ink);
+}
+.btn-primary:hover { --btn-bg: var(--brand-strong); --btn-bd: var(--brand-strong); color: #fff; }
+
+/* Le secondaire est le negatif du principal : filet noir, et il se remplit. */
+.btn-outline,
+.btn-ghost {
+  --btn-fg: var(--ink);
+  --btn-bd: var(--ink);
+}
+.btn-ghost { background: var(--surface); }
+.btn-outline:hover,
+.btn-ghost:hover { --btn-bg: var(--ink); --btn-fg: #fff; }
+
+.btn-link {
+  --btn-fg: var(--ink);
+  /* Padding vertical conservé : sans lui la cible tactile tombe à ~14px.
+     44px = seuil confortable WCAG 2.5.5. */
+  padding: var(--sp-3) 0;
+  min-height: 2.75rem;
+  border: 0;
+}
+/* Un lien se souligne. La fleche indique la direction, elle ne s'ecarte pas. */
+.btn-link:hover { --btn-fg: var(--brand); text-decoration: underline; text-underline-offset: 0.3em; }
+
+.btn-sm  { padding: 0.5rem 1rem; min-height: 2.25rem; }
+.btn-lg  { padding: 1rem 1.875rem; min-height: 3.25rem; font-size: 0.875rem; }
+.btn-block { display: flex; width: 100%; }
+
+/* Sur fond sombre, les roles s'inversent : le principal est blanc. */
+.section-dark .btn-primary {
+  --btn-bg: #fff;
+  --btn-fg: var(--ink);
+  --btn-bd: #fff;
+}
+.section-dark .btn-primary:hover { --btn-bg: var(--brand-light); --btn-bd: var(--brand-light); color: var(--ink); }
+.section-dark .btn-outline {
+  --btn-fg: #fff;
+  --btn-bd: rgba(255, 255, 255, 0.55);
+}
+.section-dark .btn-outline:hover { --btn-bg: #fff; --btn-fg: var(--ink); --btn-bd: #fff; }
+.section-dark .btn-link { --btn-fg: #fff; }
+.section-dark .btn-link:hover { --btn-fg: var(--brand-light); }
+
+/* ---------------- Cartes ---------------- */
+/* Grille a filets : chaque cellule porte son propre contour de 1px, et
+   l'ecart d'un pixel entre cellules fait se superposer deux contours voisins.
+   Le trait partage est donc dessine par les cartes, jamais par le fond du
+   conteneur : une ligne incomplete ne laisse aucun bloc gris. C'etait le
+   defaut sur iPad, ou trois cartes tombaient sur deux colonnes et la cellule
+   restante affichait un rectangle gris de la taille d'une carte. */
+.card-grid,
+.value-grid,
+.logo-grid { display: grid; gap: 1px; }
+
+.card,
+.value-card,
+.logo-grid li { box-shadow: 0 0 0 1px var(--line-strong); }
+.section-dark .card { box-shadow: 0 0 0 1px var(--line-dark); }
+
+/* Nombre de colonnes explicite plutot qu'auto-fit : il doit diviser le
+   nombre de cartes, sinon la derniere reste seule sur sa ligne. Trois cartes
+   -> une colonne, puis trois ; jamais deux. */
+.card-grid { grid-template-columns: 1fr; }
+
+/* Bande tablette : deux colonnes, et la troisieme carte occupe la ligne
+   entiere plutot que de laisser la moitie droite vide. Le nombre de colonnes
+   etant fixe ici, `:last-child:nth-child(odd)` ne peut pas se declencher a
+   tort — il ne vise que le cas « impair sur deux colonnes ». */
+@media (min-width: 40rem) and (max-width: 61.99rem) {
+  .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .card-grid > :last-child:nth-child(odd),
+  .value-grid > :last-child:nth-child(odd) { grid-column: 1 / -1; }
 }
 
-.btnMeContacter:hover::before {
-  left: 100%;
+@media (min-width: 62rem) {
+  .card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
-.btnMeContacter:hover {
-  background: linear-gradient(135deg, var(--accent-2) 0%, var(--accent) 100%);
-  border-color: rgba(0, 120, 212, 0.8);
-  box-shadow: 0 6px 25px rgba(0, 120, 212, 0.5),
-              0 0 30px rgba(0, 120, 212, 0.2);
-  transform: translateY(-2px);
+/* Les quatre projets : une, deux, puis quatre colonnes — jamais trois. */
+#realisations .card-grid { grid-template-columns: 1fr; }
+@media (min-width: 40rem) {
+  #realisations .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 78rem) {
+  #realisations .card-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
-.btnMeContacter:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 10px rgba(0, 120, 212, 0.4);
-}
-
-/* ===================== TOASTS ===================== */
-
-.toast-container {
-  position: fixed;
-  z-index: 9999;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
+.card {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  width: min(92vw, 420px);
-  pointer-events: none;
+  background: var(--surface);
 }
-.toast {
-  pointer-events: auto;
-  display: grid;
-  grid-template-columns: 24px 1fr auto;
+
+/* Quand une carte occupe la ligne entiere, son texte ne doit pas s'etirer
+   avec elle. Mesure faite dans Instrument Sans : le `ch` (largeur du zero)
+   vaut 11,25px alors qu'un signe moyen en fait 8,5 — 52ch donnent donc une
+   ligne d'environ 68 signes, contre 73 sans plafond. En trois colonnes la
+   carte est bien plus etroite et la regle ne s'applique jamais. */
+.service-card > p,
+.card-body > p { max-width: 52ch; }
+
+/* L'icone est posee a meme la carte : pas de pastille coloree, mais le bleu de
+   marque. Les sections claires n'avaient plus une seule couleur depuis que les
+   bandes de decor ont disparu ; l'icone est l'endroit ou la couleur a un role,
+   celui d'annoncer le sujet de la carte, plutot qu'un ornement de plus. */
+.card-icon {
+  display: inline-block;
+  margin-bottom: var(--sp-5);
+  color: var(--brand);
+  font-size: 1.625rem;
+  line-height: 1;
+}
+
+/* -- Carte service -- */
+.service-card {
+  /* La marge interne est nommee : le socle s'en sert pour ressortir a fleur
+     des bords, sans repeter la valeur. */
+  --pad: clamp(1.75rem, 1.25rem + 1.5vw, 2.5rem);
+  padding: var(--pad);
+}
+.service-card h3 { margin-bottom: var(--sp-3); }
+.service-card > p { color: var(--muted); margin-bottom: var(--sp-5); }
+
+/* Le socle : les technos, ou le lien, sur un fond un ton plus bas, a fleur
+   des bords. Les textes n'ont pas tous la meme longueur — d'une carte a
+   l'autre l'espace qui restait sous le dernier paragraphe allait de 24 a
+   130px, et cet ecart se voyait. Le socle lui donne un bord : ce n'est plus
+   un reste, c'est une respiration entre deux blocs. */
+.card-tools {
+  margin-top: auto;
+  margin-inline: calc(var(--pad) * -1);
+  margin-bottom: calc(var(--pad) * -1);
+  padding: var(--sp-4) var(--pad);
+  /* Le fond de la page, pas `--bg-alt` : celui-la vaut blanc, la meme
+     couleur que la carte, et le socle ne se serait pas vu. */
+  background: var(--bg);
+}
+/* Sur ce fond, les etiquettes n'ont plus besoin de leur trait : le fond
+   clair suffit a les detacher. */
+.card-tools .tag-list li {
+  border-color: transparent;
+  background: var(--surface);
+}
+.card-tools .tag-list .tag-more {
+  background: transparent;
+  border-color: var(--line-strong);
+}
+
+/* La carte « Autre chose ? » n'a pas de fond : c'est son socle qui prend le
+   blanc, pour que son lien repose sur quelque chose comme ailleurs. */
+.card-more .card-tools { background: var(--surface); }
+.card-more .card-icon { color: var(--muted); }
+
+/* -- Carte projet -- */
+.project-card { padding: 0; }
+
+.card-media {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line-strong);
+}
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  padding: var(--sp-5);
+  flex: 1;
+}
+.card-body > p { color: var(--muted); font-size: var(--fs-sm); flex: 1; }
+
+/* Deux actions par carte : le détail, et le site lui-même. */
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
-  padding: 12px 14px;
-  border-radius: 10px;
-  background:
-    linear-gradient(135deg, rgba(0, 120, 212, 0.28), rgba(43, 136, 216, 0.28)),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04)),
-    rgba(25, 25, 25, 0.88);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.35);
-  color: #eef4ff;
-  /* animation désactivée pour thème Microsoft épuré */
+  gap: var(--sp-2) var(--sp-5);
+  margin-top: var(--sp-2);
 }
-.toast-icon {
-  width: 24px;
-  height: 24px;
+.card-visit { --btn-fg: var(--muted); font-weight: 500; }
+
+/* -- Carte contact (fond sombre) -- */
+.contact-card {
+  padding: clamp(1.75rem, 1.25rem + 1.5vw, 2.5rem);
+  background: var(--dark-surface);
+  text-align: center;
+  align-items: center;
+}
+.contact-card .card-icon { color: #fff; }
+.contact-card h3 { margin-bottom: var(--sp-3); }
+.contact-card > p { color: #A7ACB6; font-size: var(--fs-sm); margin-bottom: var(--sp-5); flex: 1; }
+
+/* ---------------- Tags ---------------- */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+/* Etiquettes techniques : mono, angles nets, comme une nomenclature. */
+.tag-list li {
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--line-strong);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+}
+.tag-list .tag-more {
+  background: transparent;
+  border-style: dashed;
+}
+.tag-list-sm li { padding: 0.125rem 0.4375rem; font-size: 0.75rem; }
+
+/* La mention de confidentialite, juste avant le bouton d'envoi : elle doit se
+   lire avant de cliquer, pas apres. */
+.form-privacy {
+  margin-bottom: var(--sp-4);
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+.form-privacy a { text-decoration: underline; text-underline-offset: 0.2em; }
+
+/* ---------------- L'epreuve visuelle de la porte ----------------
+   Le personnage du site plutot qu'une image generique : c'est deja son monde,
+   et il n'y a rien a telecharger de plus. Le bouton fait pivoter d'un quart de
+   tour ; l'envoi n'est accepte que quand il est d'aplomb.
+
+   Ce que ca vaut : une friction de plus devant un robot qui remplirait le
+   formulaire. Ce n'est pas un verrou — la verification vit dans le navigateur,
+   donc contournable. Les vrais garde-fous restent cote serveur : le jeton, le
+   champ piege, le delai de remplissage et le quota. */
+.defi-consigne {
+  margin-bottom: var(--sp-3);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.defi-scene {
   display: grid;
   place-items: center;
-  font-size: 16px;
+  height: 8.5rem;
+  margin-bottom: var(--sp-3);
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
 }
-.toast-message {
-  font-size: 14px;
-  line-height: 1.45;
+
+.defi-sujet {
+  width: 4.5rem;                 /* 12 pixels du sprite, fois six */
+  height: 6rem;                  /* 16 pixels, fois six */
+  background-image: url("../assets/img/walker.png");
+  background-repeat: no-repeat;
+  background-size: 18rem 6rem;   /* les quatre images de la feuille */
+  background-position: 0 0;
+  image-rendering: pixelated;
+  transition: rotate var(--dur) var(--ease);
 }
+
+.defi-tourner { width: 100%; }
+.defi.is-invalid .defi-scene { border-color: var(--danger); }
+
+/* Un bouton qui se lit comme un lien : pour la porte de sortie de l'epreuve. */
+.lien-nu {
+  border: 0;
+  padding: 0;
+  background: none;
+  font: inherit;
+  color: var(--brand);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+/* ---------------- Le numero, une fois la porte franchie ---------------- */
+.phone-reveal .btn {
+  font-family: var(--font-mono);
+  font-size: var(--fs-lg);
+  letter-spacing: 0.08em;
+  text-transform: none;
+}
+.phone-note {
+  margin-top: var(--sp-3);
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ---------------- Formulaire ---------------- */
+.field { margin-bottom: var(--sp-5); }
+
+.field label {
+  display: block;
+  margin-bottom: var(--sp-2);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--ink);
+}
+.field .req { color: var(--brand); }
+.field .opt { font-weight: 400; color: var(--muted); }
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 0.75rem 0.875rem;
+  min-height: 2.75rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: var(--fs-base);
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.field textarea { resize: vertical; min-height: 7rem; line-height: var(--lh-base); }
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: var(--focus);
+}
+
+.field-hint  { margin-top: var(--sp-2); font-size: var(--fs-xs); color: var(--muted); }
+.field-error { margin-top: var(--sp-2); font-size: var(--fs-xs); color: var(--danger); font-weight: 500; }
+.field-error:empty { display: none; }
+
+.field.is-invalid input,
+.field.is-invalid select,
+.field.is-invalid textarea { border-color: var(--danger); }
+
+/* Piège à robots : hors écran, jamais annoncé */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form-status { margin-top: var(--sp-3); font-size: var(--fs-sm); text-align: center; }
+.form-status:empty { display: none; }
+
+/* -- Zone de dépôt de fichier -- */
+.dropzone { position: relative; }
+.dropzone input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.dropzone-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: var(--sp-5);
+  border: 1.5px dashed var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--bg);
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+.dropzone-label:hover,
+.dropzone.is-dragover .dropzone-label {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+  color: var(--brand);
+}
+
+.file-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+  justify-content: center;
+  color: var(--ink);
+}
+.file-remove {
+  border: 0;
+  background: transparent;
+  color: var(--danger);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ---------------- Modales ---------------- */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  padding: var(--gutter);
+}
+.modal[hidden] { display: none; }
+
+.modal-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(22, 24, 29, 0.6);
+  backdrop-filter: blur(3px);
+  animation: fade-in var(--dur) var(--ease);
+}
+
+.modal-panel {
+  position: relative;
+  width: min(100%, 34rem);
+  max-height: min(88vh, 60rem);
+  overflow-y: auto;
+  padding: clamp(1.75rem, 1rem + 3vw, 2.75rem);
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-3);
+  animation: modal-in var(--dur) var(--ease);
+}
+.modal-panel-wide { width: min(100%, 58rem); }
+
+.modal-close {
+  position: absolute;
+  top: var(--sp-4);
+  right: var(--sp-4);
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+  transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+.modal-close:hover { background: var(--bg); color: var(--ink); }
+
+.modal-title { margin-bottom: var(--sp-3); padding-right: var(--sp-8); }
+.modal-lead  { margin-bottom: var(--sp-6); color: var(--muted); }
+
+@keyframes fade-in { from { opacity: 0; } }
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(1rem) scale(0.98); }
+}
+
+
+/* -- Contenu de la modale projet -- */
+.project-detail {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+  gap: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  align-items: start;
+}
+.project-detail-media {
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+}
+.project-detail-media img { width: 100%; }
+.project-detail-body { display: flex; flex-direction: column; align-items: flex-start; gap: var(--sp-4); }
+.project-detail-body > p { color: var(--muted); }
+
+.project-detail-tech { display: flex; flex-direction: column; gap: var(--sp-1); }
+.project-detail-tech .label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+/* ---------------- Toasts ---------------- */
+/* La confirmation arrive apres la fermeture de la fenetre : elle est le seul
+   signe que l'envoi a marche, donc elle se place au milieu du bas de l'ecran
+   et non dans un coin, sur un panneau plein plutot qu'une carte blanche de
+   plus. Une petite carte claire en bas a droite passait inapercue. */
+.toast-root {
+  position: fixed;
+  left: 50%;
+  bottom: var(--sp-6);
+  transform: translateX(-50%);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  width: min(100% - (var(--gutter) * 2), 34rem);
+  pointer-events: none;
+}
+
+/* Le fond porte l'etat, et rien d'autre : vert quand c'est parti, rouge quand
+   ca a echoue. Le panneau sombre d'avant prenait la couleur du pied de page et
+   s'y fondait quand la confirmation s'affichait a cet endroit. Le vert et le
+   rouge n'existent nulle part ailleurs sur le site : ils ne peuvent se
+   confondre avec aucun fond. Le lisere clair detache le panneau du reste. */
+.toast {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-4) var(--sp-5);
+  border: 0;
+  background: var(--dark);
+  color: #fff;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18), 0 14px 36px rgba(0, 0, 0, 0.35);
+  font-size: var(--fs-base);
+  pointer-events: auto;
+  animation: toast-in var(--dur) var(--ease);
+}
+.toast--success { background: var(--success); }   /* blanc dessus : 5,02:1 */
+.toast--error   { background: var(--danger); }    /* blanc dessus : 6,54:1 */
+
+.toast-icon {
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  color: #fff;
+}
+.toast-message { flex: 1; color: inherit; }
 .toast-close {
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: 8px;
-  padding: 4px 8px;
-  font-size: 12px;
+  flex-shrink: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
+  padding: 0 var(--sp-1);
 }
+.toast-close:hover { color: #fff; }
+.toast.is-leaving { animation: toast-out 200ms var(--ease) forwards; }
 
-/* Toast animations */
-@keyframes toast-in {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes toast-out {
-  to {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-}
+@keyframes toast-in  { from { opacity: 0; transform: translateY(1rem); } }
+@keyframes toast-out { to   { opacity: 0; transform: translateY(0.5rem); } }
 
-/* ===================== PANEL CLOSE ===================== */
-.panel-close {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 24px;
-  padding: 8px 14px;
-  font-weight: 700;
-  cursor: pointer;
-}
-.panel-close:hover {
-  transform: translateY(-1px);
-}
+/* Verrou de défilement quand une modale est ouverte */
+body.modal-open { overflow: hidden; }
+
+/* <picture> doit remplir .card-media comme le ferait un <img> seul */
+.card-media picture { display: block; width: 100%; height: 100%; }

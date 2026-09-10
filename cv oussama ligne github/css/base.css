@@ -1,106 +1,174 @@
-:root {
-    --ease-push: cubic-bezier(.25, .8, .25, 1);
-    --dur-open: 900ms;
-    --dur-close: 700ms;
-  
-    /* Couleurs du splash screen (Conservées) */
-    --bg-a: #191919;
-    --bg-b: #252525;
-    --bg-c: #2a2a2a;
-    
-    /* Microsoft Brand Colors (Clarté & Professionnel) */
-    --accent: #0078D4;       /* Microsoft Blue */
-    --accent-2: #005A9E;     /* Darker Blue */
-    --accent-dark: #004578;
-    --accent-foreground: #ffffff;
-    
-    /* Microsoft Gradient */
-    --accent-gradient: linear-gradient(135deg, #0078D4 0%, #50E6FF 100%);
-    
-    /* Thème Clair/Moderne Microsoft (Fluent Design inspired) */
-    --splash-bg: #F3F2F1;    /* Light gray / Off-white background (Surface) */
-    --splash-text: #201F1E;  /* Dark gray text (almost black) for readability */
-    --splash-lines: #8A8886; /* Neutral gray for lines */
-    --splash-dark: #FFFFFF;  /* Cards background (White) */
-  
-    --stage-overlay: rgba(0, 120, 212, 0.05);
-    --stage-overlay-2: rgba(0, 120, 212, 0.02);
-  
-    --ui-letter-spacing: 1px;
-  }
-  
+/* ==========================================================================
+   BASE — reset, typographie, accessibilité, utilitaires.
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+* { margin: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + var(--sp-4));
+  /* Ceinture, en plus de celle de body : si une boite deborde a nouveau a
+     droite, la page ne s'elargit pas et ne se laisse pas glisser de cote. */
+  overflow-x: clip;
+  /* Un balayage lateral ne fait plus rien : ni le rebond elastique du
+     navigateur, qui pousse la page d'un cote puis de l'autre, ni le geste
+     « page precedente » qu'il declenche au passage. Le site est une page
+     unique : ce geste n'y a aucun role. */
+  overscroll-behavior-x: none;
+}
+
+body {
+  font-family: var(--font);
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* clip et non hidden : hidden ferait passer overflow-y a auto et creerait
+     un second conteneur de defilement sur body. */
+  overflow-x: clip;
+}
+
+/* Empêche tout débordement horizontal quel que soit l'écran */
+img, picture, svg, video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input, button, textarea, select { font: inherit; color: inherit; }
+
+/* ---------- Titres ---------- */
+/* Une serif se serre a peine : les approches de Newsreader sont deja justes. */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--ink);
+  line-height: var(--lh-tight);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  font-weight: 500;
+}
+
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); line-height: var(--lh-snug); }
+
+p { text-wrap: pretty; }
+
+strong { font-weight: 600; color: var(--ink); }
+
+a { color: var(--brand); text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+a:hover { color: var(--brand-strong); }
+
+ul, ol { list-style: none; padding: 0; }
+
+/* ---------- Icônes ----------
+   Sprite SVG en ligne (tools/icons.py) : les 28 glyphes réellement utilisés,
+   à la place des 270 Ko de Font Awesome. `currentColor` fait suivre la couleur
+   du texte, comme le faisait la police d'icônes. */
+.ico {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  flex-shrink: 0;
+  vertical-align: -0.125em;
+}
+
+/* ---------- Accessibilité ---------- */
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--sp-4);
+  top: -4rem;
+  z-index: 200;
+  padding: var(--sp-3) var(--sp-5);
+  background: var(--ink);
+  color: #fff;
+  font-weight: 600;
+  border-radius: var(--r-sm);
+  text-decoration: none;
+  transition: top var(--dur) var(--ease);
+}
+.skip-link:focus { top: var(--sp-4); color: #fff; }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Mise en page ---------- */
+.container {
+  width: min(100% - (var(--gutter) * 2), var(--max-w));
+  margin-inline: auto;
+}
+
+/* Seul le haut est fixé ici : le bas est réservé par la bande de décor
+   (voir .hero, .section dans sections.css). */
+.section { padding-top: var(--section-y); }
+.section-alt  { background: var(--bg-alt); }
+.section-dark { background: var(--dark); color: #C9CDD5; }
+
+.section-dark h2,
+.section-dark h3 { color: #fff; }
+.section-dark .eyebrow { color: #A7ACB6; }
+
+/* En-tête de section, cale a gauche. Ce qui separe deux sections est le blanc
+   entre elles et l'alternance des fonds, pas un filet. */
+.section-head {
+  margin-bottom: clamp(2.5rem, 1.5rem + 3vw, 4rem);
+}
+/* Le titre garde une largeur de lecture confortable. */
+.section-head .section-title { max-width: var(--max-w-narrow); }
+
+/* Capitales serif espacees : le meme registre que la navigation. */
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: var(--sp-4);
+}
+
+.section-title { margin-bottom: var(--sp-4); }
+
+.section-lead {
+  max-width: 40rem;
+  font-size: var(--fs-lg);
+  color: var(--muted);
+}
+.section-dark .section-lead { color: #A7ACB6; }
+
+/* ---------- Numéro d'index de section ---------- */
+.idx {
+  margin-right: 0.6em;
+  color: var(--brand);
+}
+
+/* ---------- Préférence de mouvement réduit ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
   *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  body {
-    font-family: 'Segoe UI', 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif; /* Segoe UI first for Microsoft feel */
-    background: var(--splash-bg);
-    background-color: var(--splash-bg);
-    background-attachment: fixed;
-    min-height: 100vh;
-    color: var(--splash-text);
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-  
-  /* Scrollbar personnalisée (Style Microsoft Edge) */
-  ::-webkit-scrollbar { display: none; }
-  ::-webkit-scrollbar-track { display: none; }
-  ::-webkit-scrollbar-thumb { display: none; }
-  
-  body.splash-active {
-    /* Le splash screen garde son fond sombre pour le contraste initial */
-    background: #191919 !important; 
-    color: #ffffff;
-    overflow: hidden;
-  }
-  
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  ul {
-    list-style: none;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 
-  .scroll-reveal {
-    opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-  }
-
-  .scroll-reveal.revealed {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  
-  /* Stage Background & Overlay */
-  .stage {
-    position: relative;
-    width: 100%;
-    isolation: isolate;
-    background: var(--splash-bg); /* Fond clair */
-    color: var(--splash-text);   /* Texte sombre */
-    /* transition désactivée pour thème Microsoft épuré */
-  }
-  
-  .stage::before {
-    display: none;
-  }
-  
-  /* ===================== ANIMATIONS DE TRANSITION DE SECTION (GSAP) ===================== */
-  /* Les animations sont gérées par JS/GSAP. */
-  /* On garde une visibilité par défaut pour le cas où JS est désactivé ou avant le chargement */
-  .fluent-section-hidden, 
-  .fluent-section-visible {
-      /* Classes conservées pour compatibilité rétroactive si besoin, mais vidées de leurs styles conflictuels */
-  }
-  
+}

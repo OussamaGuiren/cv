@@ -1,0 +1,8 @@
+# https://ogtech.fr — site vitrine
+User-agent: *
+Allow: /
+
+# Rien à explorer ici : sources de régénération et outils.
+Disallow: /tools/
+
+Sitemap: https://ogtech.fr/sitemap.xml
