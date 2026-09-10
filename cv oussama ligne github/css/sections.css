@@ -1313,6 +1313,20 @@ body.nav-open { overflow: hidden; }
   padding-bottom: calc(var(--scene-h) + clamp(3.5rem, 4vw, 4.5rem));
 }
 
+/* La meme reserve, deduite du contenu au lieu d'une classe. Le HTML servi peut
+   etre plus ancien que la feuille — c'est le seul fichier que les empreintes
+   `?v=` ne protegent pas, puisque c'est lui qui les porte. Sans cette regle, un
+   index.html d'hier avec le CSS d'aujourd'hui perdait la reserve : la
+   couverture bleue descendait par-dessus la bande et coupait la ville en deux.
+
+   Regle separee et non ajoutee a la liste ci-dessus : un navigateur qui ne
+   connait pas `:has()` ignore celle-ci et garde celle du dessus, au lieu de
+   jeter les deux. */
+.hero:has(> .scene-strip),
+.section:has(> .scene-strip) {
+  padding-bottom: calc(var(--scene-h) + clamp(3.5rem, 4vw, 4.5rem));
+}
+
 .scene-strip {
   position: absolute;
   left: 0;
