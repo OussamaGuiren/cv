@@ -2,7 +2,7 @@
 
 import { showToast } from './toast.js?v=c089a5e8';
 import { initDefi } from './defi.js?v=9647ce21';
-import { closeModal } from './modals.js?v=7adfabd4';
+import { closeModal } from './modals.js?v=9ef4a1b4';
 import { poster } from './backend.js?v=1cacc4b2';
 
 /* 5 Mo : l'encodage Base64 ajoute ~33 %, ce qui reste sous les limites d'Apps Script. */

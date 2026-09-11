@@ -4,8 +4,8 @@ import { initGalleryNav } from './modules/gallery-nav.js?v=cde42612';
 import { initHeroAccent } from './modules/hero-accent.js?v=56e00700';
 import { initAmbient } from './modules/ambient.js?v=96390cda';
 import { initNpc } from './modules/npc.js?v=ae405782';
-import { initModals } from './modules/modals.js?v=7adfabd4';
-import { initContactForm } from './modules/contact-form.js?v=a1388e67';
+import { initModals } from './modules/modals.js?v=9ef4a1b4';
+import { initContactForm } from './modules/contact-form.js?v=b8528ca5';
 
 function init() {
   initNav();

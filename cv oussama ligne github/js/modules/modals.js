@@ -91,6 +91,7 @@ function initProjectModal() {
     description: modal.querySelector('#projectModalDescription'),
     tech: modal.querySelector('#projectModalTech'),
     link: modal.querySelector('#projectModalLink'),
+    linkLabel: modal.querySelector('#projectModalLinkLabel'),
     image: modal.querySelector('#projectModalImage')
   };
 
@@ -99,7 +100,8 @@ function initProjectModal() {
       const card = btn.closest('.project-card');
       if (!card) return;
 
-      const { title = '', description = '', tech = '', link = '' } = card.dataset;
+      const { title = '', description = '', tech = '', link = '',
+              linkLabel = 'Voir le site' } = card.dataset;
       const img = card.querySelector('.card-media img');
 
       els.title.textContent = title;
@@ -118,6 +120,9 @@ function initProjectModal() {
 
       els.link.href = link || '#';
       els.link.hidden = !link;
+      // « Voir la demo » quand la version en ligne n'est pas le produit livre
+      // mais une demonstration ; « Voir le site » pour les autres.
+      if (els.linkLabel) els.linkLabel.textContent = linkLabel;
 
       open(modal, btn);
     });

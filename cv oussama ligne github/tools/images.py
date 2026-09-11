@@ -38,12 +38,23 @@ from PIL import Image, ImageChops
 SOURCES = Path('../sources')          # hors du dossier servi
 SORTIE = Path('assets/img')
 
+# Source (dans ../sources, quelle que soit son extension) -> nom servi.
+# `atlas commercial` remplace `ecran_france3d` : c'est la meme realisation,
+# refaite depuis. L'ancienne capture reste dans ../sources, hors du dossier
+# servi, si jamais il fallait y revenir.
 PROJETS = {
     'ecran_accueil': 'proj-ilseco',
     'ecran_accueil_sohcook': 'proj-sohcook',
-    'ecran_france3d': 'proj-dataviz',
+    'atlas commercial': 'proj-dataviz',
     'vision7event': 'proj-7event',
 }
+
+# Extensions acceptees pour une source, dans l'ordre d'essai.
+EXTENSIONS_SOURCE = ('.jpg', '.jpeg', '.png', '.webp')
+
+# Recadrage ancre a gauche plutot qu'au centre, la ou le nom du produit occupe
+# le coin haut gauche de l'interface. Les autres restent centrees.
+ANCRAGE = {'atlas commercial': 'gauche'}
 TAILLE_PROJET = (720, 405)            # 16:9
 BOITE_LOGO = (320, 160)               # boîte optique commune aux logos
 
@@ -53,12 +64,19 @@ Q_LOGO_AVIF = 70
 Q_LOGO_WEBP = 90
 
 
-def recadrer(im, ratio):
-    """Recadre au ratio demandé, en gardant le haut de l'image."""
+def recadrer(im, ratio, ancrage='centre'):
+    """Recadre au ratio demandé, en gardant toujours le haut.
+
+    Les quatre captures sont plus larges que 16:9, donc c'est la largeur qui est
+    rognée. Par défaut au centre. `gauche` sert quand le nom du produit est posé
+    en haut à gauche de l'interface et qu'un recadrage centré le couperait : sur
+    une vignette, c'est la première chose qu'on doit reconnaître.
+    """
     w, h = im.size
     if w / h > ratio:
         nw = int(h * ratio)
-        return im.crop(((w - nw) // 2, 0, (w + nw) // 2, h))
+        x = 0 if ancrage == 'gauche' else (w - nw) // 2
+        return im.crop((x, 0, x + nw, h))
     return im.crop((0, 0, w, int(w / ratio)))
 
 
@@ -85,15 +103,24 @@ def ecrire(im, chemin_sans_ext, q_avif, q_webp):
     return avif.stat().st_size, webp.stat().st_size
 
 
+def source_de(nom):
+    """Le fichier source, quelle que soit son extension."""
+    for ext in EXTENSIONS_SOURCE:
+        chemin = SOURCES / f'{nom}{ext}'
+        if chemin.exists():
+            return chemin
+    return None
+
+
 def projets():
     print('Captures de projets (AVIF q60 + WebP q82)')
     total = 0
     for source, nom in PROJETS.items():
-        src = SOURCES / f'{source}.jpg'
-        if not src.exists():
-            print(f'  {nom:16} source absente : {src}')
+        src = source_de(source)
+        if src is None:
+            print(f'  {nom:16} source absente : {SOURCES / source}.*')
             continue
-        im = recadrer(Image.open(src).convert('RGB'), 16 / 9)
+        im = recadrer(Image.open(src).convert('RGB'), 16 / 9, ANCRAGE.get(source, 'centre'))
         im = im.resize(TAILLE_PROJET, Image.LANCZOS)
         a, w = ecrire(im, SORTIE / nom, Q_PROJET_AVIF, Q_PROJET_WEBP)
         total += a
